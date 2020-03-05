@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+// Aleksandr Ivanov
 const mongoose = require('mongoose');
 
 const personSchema = new mongoose.Schema({
@@ -6,10 +6,9 @@ const personSchema = new mongoose.Schema({
   email: String,
   email: String,
   password: String,
-  birthday: Date,
   profileId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Profile'
+    ref: 'Profile',
   }
 },
   {
