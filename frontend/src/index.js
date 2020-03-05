@@ -1,3 +1,4 @@
+import Slider from "../src/components/slider/Slider"
 
 import React from 'react';
 import ReactDOM from 'react-dom';

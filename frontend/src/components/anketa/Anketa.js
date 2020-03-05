@@ -1,4 +1,6 @@
 import React from 'react';
+import Slider from "../slider/Slider"
+
 import axios from "axios"
 // import "./anketaJS"
 import './anketa.css';
@@ -83,11 +85,13 @@ nextButton(){
   
   render() {    
     return (
-      <React.Fragment>
+      <>
+          <React.Fragment>
+ <Slider/>
      
-      <p>Step {this.state.currentStep} </p> 
 
       <form onSubmit={this.handleSubmit}>
+      <p>Step {this.state.currentStep} </p> 
       {/* 
         render the form steps and pass required props in
       */}
@@ -113,7 +117,9 @@ nextButton(){
         {this.nextButton()}
 
       </form>
+   
       </React.Fragment>
+      </>
     );
   }
 }
