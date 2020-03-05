@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 
 function Login(props) {
   const [error, setError] = useState('')
-  const {LogIn } = props
+  const {user,LogIn } = props
   const [cookies, setCookie] = useCookies(['userName']);
 
   function PutData(event) {
@@ -19,7 +19,12 @@ function Login(props) {
       password,
     }).then((response) => {
       if (response.data.success) {
-        LogIn(response.data.date.id, response.data.date.nickname);
+        console.log(response.data.date.profileId)
+        if(response.data.date.profileId){
+          LogIn(response.data.date.id, response.data.date.nickname, response.data.date.profileId, );
+          setCookie('userName', 'sdckdsncn')
+        }
+        LogIn(response.data.date.id, response.data.date.nickname,response.data.date.profileId,);
         setCookie('userName', 'sdckdsncn')
       } else {
         setError(response.data.err)
@@ -32,7 +37,8 @@ function Login(props) {
   return (
     <>
       {cookies.userName ?
-        <Redirect from='/login' to='/home' />
+      (user.profileId ?<Redirect from='/login' to='/home' />: <Redirect to='/profile'/> )
+        
         : <div>
           <form onSubmit={PutData}>
            
@@ -59,10 +65,12 @@ function Login(props) {
   )
 }
 
-
-
-const mapDispatchToProps = (dispatch) => ({
-  LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
+const mapStateToProps = (state) => ({
+user:state,
 });
 
-export default connect(null,mapDispatchToProps)(Login)
+const mapDispatchToProps = (dispatch) => ({
+  LogIn: (id, nickname,profileId ) => dispatch(LogIn(id, nickname,profileId))
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login)
