@@ -19,14 +19,14 @@ router.get('/', async function (req, res, next) {
  */
 router.post('/registration', async (req, res) => {
   const {
-    name,
+    nickname,
     email,
     password,
   } = req.body;
   const user = await Person.findOne({ email });
   if (!user) {
     userNew = await Person.create({
-      name,
+      nickname,
       email,
       password
     });
