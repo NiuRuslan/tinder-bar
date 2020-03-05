@@ -49,7 +49,7 @@ function Regist(props) {
             <button className="red" type="submit"><i className="icon ion-md-lock"></i>Create</button>
             <br />
             <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
- 
+
             <Link to='/login'><button className="green" >LogIn</button></Link>
           </form>
 

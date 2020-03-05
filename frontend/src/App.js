@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Login from './components/Login/Login'
 import Regist from './components/Regist/Regist'
+import ListUsers from './components/ListUsers/ListUsers' //add A.I.
 import {
   Link, 
   BrowserRouter as Router,
@@ -17,6 +18,7 @@ function App() {
     <Switch>
       <Route exact path='/regist' component={Regist}/>
       <Route exact path='/login' component={Login}/>
+      <Route exact path='/listUser' component={ListUsers}/>{/* add A.I. */}
     </Switch>
     </Router>
     </>
