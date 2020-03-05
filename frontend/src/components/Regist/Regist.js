@@ -45,12 +45,11 @@ function Regist() {
 }
 
 const mapStateToProps = (state) => ({
-  todos: state.todos,
+  login: state.login,
 });
-const mapDispatchToProps = {
-  requestFetchAdd: requestFetchAdd,
-  requestFetchAddItem:requestFetchAddItem,
-};
+const mapDispatchToProps = (dispatch) => ({
+  LogIn: () => dispatch(LogIn())
+});
 
 
 export default connect()(Regist)
