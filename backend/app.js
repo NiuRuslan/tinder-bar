@@ -3,11 +3,22 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
+require('dotenv').config();
+
+// A.I> подключил монгоДБ из облака
+const mongoose = require('mongoose');
+
+mongoose.connect(
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-bajz8.mongodb.net/TinderBar?retryWrites=true&w=majority`,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

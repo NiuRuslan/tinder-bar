@@ -10,7 +10,7 @@ const profileSchema = new mongoose.Schema({
     required: true,
     minlength: 2,
   },
-  dob: {
+  DoB: {
     type: Date,
     required: true,
   },
@@ -23,14 +23,19 @@ const profileSchema = new mongoose.Schema({
     type: String,
     minlength: 3,
   },
-  preferences: [String],
+  topics: [String],
+  dricks: [String],
   avatar: {
     data: Buffer,
-    contentType: String
-  };
+    contentType: String,
+  },
+  geolocation: {
+    latitude: Number,
+    longitude: Number,
+  },
 },
-  {
-    versionKey: false,
-  });
+{
+  versionKey: false,
+});
 
 module.exports = mongoose.model('Profile', profileSchema);

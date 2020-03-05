@@ -1,7 +1,8 @@
+// Aleksandr Ivanov
 const mongoose = require('mongoose');
 
 const personSchema = new mongoose.Schema({
-  email: String,
+  nickname: String,
   email: String,
   password: String,
   profileId: {
