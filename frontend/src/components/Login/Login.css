@@ -89,6 +89,11 @@ button.red {
   width: 100%;
   color: #AE1100;
 }
+button.green {
+  display: block;
+  width: 100%;
+  color: rgb(45, 160, 45);
+}
 
 .input-group {
   display: flex;
