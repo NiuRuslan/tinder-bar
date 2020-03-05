@@ -63,12 +63,16 @@ const requestListUsers = (setError) => {
       console.log(response);
       //LogIn(response.data.date.id, response.data.date.nickname);
     } else {
-      setError(response.data.err)
-      setTimeout(setError, 2000, '')
+      return {
+        success: false,
+        err: '',
+      }
     }
-  }).catch(() => { 
-    setError('Неизвестная Ошибка регистрации'); 
-    setTimeout(setError, 2000, '') 
+  }).catch(() => {
+    return {
+      success: false,
+      err: 'Runtime error',
+    }
   })
 }
 
@@ -77,11 +81,12 @@ const requestListUsers = (setError) => {
 
 /**
  * Александр Иванов
- * Коомпонент отрисовывает список зарегистрированных пользователей
+ * Коомпонент отрисовывает список пользователей в заданном радиусе
  */
 const listUsers = () => {
-  const [error, setError] = useState('')
-  requestListUsers(setError);
+  const list = requestListUsers();
+  console.log("list>>>", list);
+  
   return (
     <div>
       <h1>List Users</h1>

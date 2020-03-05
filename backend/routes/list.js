@@ -28,11 +28,11 @@ router.post('/users', async (req, res) => {
   const list = await Profile.find({
     latitude: {
       $gte: latitude - radius,
-      $ls: latitude + radius
+      $lt: latitude + radius
     },
     longitude: {
       $gte: longitude - radius,
-      $ls: longitude + radius
+      $lt: longitude + radius
     }
   });
   if (list) {
