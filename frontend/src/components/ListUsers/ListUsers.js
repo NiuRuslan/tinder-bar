@@ -1,81 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
-// import './Login.css'
-// import { Link, Redirect } from 'react-router-dom'
-// import { LogIn } from '../../redux/action'
-
-
-// function Login(props) {
-//   const [error, setError] = useState('')
-//   const { login, LogIn } = props
 
 
 
 
-//   return (
-//     <>
-//       {login ?
-//         <Redirect from='/login' to='/home' />
-//         : <div>
-//           <form onSubmit={PutData}>
-//             <div className="segment">
-//               <h1>Sign up</h1>
-//             </div>
+// const geoFindLocation = () => {
+//   const status = document.querySelector('#status');
+//   const mapLink = document.querySelector('#map-link');
 
-//             <label>
-//               <input name='mail' type="email" placeholder="Email Address" required/>
-//             </label>
-//             <label>
-//               <input name='pasword' type="password" placeholder="Password" minLength='5' required/>
-//             </label>
-//             <button className="red" type="submit"><i className="icon ion-md-lock"></i> Log in</button>
-//             <br />
-//             <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
-//   <Link to='/regist'><button className="green">Create Account</button></Link>
-//           </form>
+//   mapLink.href = '';
+//   mapLink.textContent = '';
 
+//   function success(position) {
+//     const latitude = position.coords.latitude;
+//     const longitude = position.coords.longitude;
 
-//         </div>
-//       }
+//     status.textContent = '';
+//     mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+//     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+//   }
 
-//     </>
-//   )
+//   function error() {
+//     status.textContent = 'Unable to retrieve your location';
+//   }
+
+//   if (!navigator.geolocation) {
+//     status.textContent = 'Geolocation is not supported by your browser';
+//   } else {
+//     status.textContent = 'Locating…';
+//     navigator.geolocation.getCurrentPosition(success, error);
+//   }
 // }
-/**
- * Александр Иванов
- * Делает запрос на сервер:
- * @latitude - координата пользователя
- * @longitude - координата пользователя
- * @radius - размер радиуса поиска пользователей
- * Получает:
- * @success - флаг выполнения запроса
- * @list - список найденых пользователей
- * @err - Расшифровка ошибки
- */
-const requestListUsers = (setError) => {
-  axios.post('/list/users', {
-    latitude: 0,
-    longitude: 0,
-    radius: 0,
-  }).then((response) => {
-    if (response.data.success) {
-      console.log(response);
-      //LogIn(response.data.date.id, response.data.date.nickname);
-    } else {
-      return {
-        success: false,
-        err: '',
-      }
-    }
-  }).catch(() => {
-    return {
-      success: false,
-      err: 'Runtime error',
-    }
-  })
-}
-
 
 
 
@@ -83,19 +40,91 @@ const requestListUsers = (setError) => {
  * Александр Иванов
  * Коомпонент отрисовывает список пользователей в заданном радиусе
  */
-const listUsers = () => {
-  const list = requestListUsers();
-  console.log("list>>>", list);
+function ListUsers(props) {
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [radius, setRadius] = useState(null);
+  const [list, setList] = useState(null);
+
+  /**
+   * Делает запрос на сервер:
+   * @latitude - координата пользователя
+   * @longitude - координата пользователя
+   * @radius - размер радиуса поиска пользователей
+   * Получает:
+   * @success - флаг выполнения запроса
+   * @list - список найденых пользователей
+   * @err - Расшифровка ошибки
+   */
+  const requestListUsers = (latitude, longitude, radius) => {
+    geoFindLocation();
+    axios.post('/list/users', {
+      latitude,
+      longitude,
+      radius,
+    }).then((response) => {
+      if (response.data.success) {
+        setList({
+          success: true,
+          list: response.data.list,
+        })
+      } else {
+        setList({
+          success: false,
+          err: '',
+        })
+      }
+    }).catch(() => {
+      setList({
+        success: false,
+        err: 'Runtime error',
+      })
+    })
+  }
+
+  const geoFindLocation = () => {
+    const success = (position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    }
+
+    const error = () => {
+      setList({
+        success: false,
+        err: 'Unable to retrieve your location',
+      })
+    }
+
+    if (!navigator.geolocation) {
+      setList({
+        success: false,
+        err: 'Geolocation is not supported by your browser',
+      })
+    } else {
+      //status.textContent = 'Locating…';
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
+
+
+  console.log('list>>', list);
+  console.log('id>>', props.id);
+  
   
   return (
-    <div>
-      <h1>List Users</h1>
-    </div>
+    <React.Fragment>
+      <h1>123</h1>
+      <button id="find-me" onClick={() => requestListUsers()}>Show my location</button><br />
+      {latitude}
+      {/* <p id="status"></p>
+      <Link id="map-link" target="_blank"></Link> */}
+    </React.Fragment>
   )
 }
 
 const mapStateToProps = (state) => ({
   login: state.login,
+  id: state.id,
 });
 
-export default connect(mapStateToProps)(listUsers)
+export default connect(mapStateToProps)(ListUsers)
