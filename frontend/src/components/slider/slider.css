@@ -41,6 +41,8 @@
 	z-index: 0;
 }
 
+
+
 @keyframes kenburns-1 {
 	0% {
 		opacity: 1;
@@ -145,6 +147,7 @@
 	}
 }
 
+/* 
 h1 {
 	position: absolute;
 	top: 50%;
@@ -175,7 +178,7 @@ h1 small:first-child {
 h1 small:last-child {
 	border-top: 1px solid rgba(0, 0, 0, 0.25);
 	padding-top: .5em;
-}
+} */
  /* .slide1 { 
   background: url("https://images.unsplash.com/photo-1571466624999-cd63a7fc3de9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
   animation-delay: 7.5s;

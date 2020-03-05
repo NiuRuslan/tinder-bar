@@ -314,7 +314,7 @@ input.invalid {
 	}
 }
 
-h1 {
+/* h1 {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -345,5 +345,5 @@ h1 small:last-child {
 	border-top: 1px solid rgba(0, 0, 0, 0.25);
 	padding-top: .5em;
 }
-
+ */
 

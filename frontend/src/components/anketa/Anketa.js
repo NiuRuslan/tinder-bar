@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from "../slider/Slider"
+import Slider2 from "../slider/Slider2"
 
 import axios from "axios"
 // import "./anketaJS"
@@ -14,8 +15,16 @@ class Anketa extends React.Component {
       activity: '', 
       topics: '',
       drinks: '',
-      about:''
+      about:'',
+      random: 0
     }
+  }
+  componentDidMount() { 
+    // let random = (Math.floor(Math.random() * 10))
+    this.setState({
+      ...this.state,
+      random: (Math.floor(Math.random() * 10))
+    })
   }
 
   handleChange = event => {
@@ -87,7 +96,8 @@ nextButton(){
     return (
       <>
           <React.Fragment>
- <Slider/>
+           {this.state.random > 5 ?
+                (<Slider/> ): (<Slider2/>)} 
      
 
       <form onSubmit={this.handleSubmit}>

@@ -1,18 +1,17 @@
-import {LOGIN, LOGOUT } from './action-types'
+import {LOGIN } from './action-types'
 
-const init ={login:false};
+const init ={id:'',nickname:'',profildId:'',};
 
 export default (state=init, action) => {
 switch (action.type){
   case LOGIN:
     return {
       ...state,
-      login:!state.login
+      id:action.id,
+      nickname:action.nickname,
+      profildId:action.profildId
     }
-    case LOGOUT:
-    return {
-      ...state,
-      login:!state.login
-    }
+    default:
+      return state;
 }
 }

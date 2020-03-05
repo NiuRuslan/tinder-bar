@@ -17,15 +17,11 @@ function Slider() {
 
   <img className="slideshow-image" src="/imgs/john-fornander-SiKzrE3ywSc-unsplash.jpg"></img> */}
 
-<div className="slideshow-image" style={{backgroundImage: "url('./imgs/sam-barber-Dp1oeulGWYU-unsplash.jpg')"}}></div>
+<div className="slideshow-image" style={{backgroundImage: "url('./imgs/1.jpg')"}}></div>
+  <div className="slideshow-image" style={{backgroundImage: "url('./imgs/2.jpg')"}}></div>
+  <div className="slideshow-image" style={{backgroundImage: "url('./imgs/6.jpg')"}}></div> 
+  <div className="slideshow-image" style={{backgroundImage: "url('./imgs/8.jpg')"}}></div>
 
-  <div className="slideshow-image" style={{backgroundImage: "url('./imgs/wil-stewart-UErWoQEoMrc-unsplash.jpg')"}}></div>
-  {/* <div className="slideshow-image" style={{backgroundImage: "url('./imgs/elevate-UoPNA8I-_p0-unsplash.jpg)"}}></div>  */}
-
-  {/* <div className="slideshow-image" style={{backgroundImage: "url('./imgs/sam-barber-Dp1oeulGWYU-unsplash.jpg)"}}></div> */}
-  <div className="slideshow-image" style={{backgroundImage: "url('./imgs/jinsoo-choi-Ydp9jXqr1cI-unsplash.jpg)"}}></div>
-  <div className="slideshow-image" style={{backgroundImage: "url('./imgs/elevate-UoPNA8I-_p0-unsplash.jpg)"}}></div> 
-   <div className="slideshow-image" style={{backgroundImage: "url('./imgs/elevate-UoPNA8I-_p0-unsplash.jpg)"}}></div>
 
 
 </div>

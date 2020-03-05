@@ -1,7 +1,10 @@
  import {LOGIN, LOGOUT} from './action-types'
 
- export const LogIn = () =>({
-   type:LOGIN
+ export const LogIn = (id,nickname,profildId) =>({
+   type:LOGIN,
+   id,
+   nickname,
+   profildId,
  })
 
  export const LogOut = () =>({
