@@ -4,10 +4,13 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { LogIn } from '../../redux/action'
 import { Link, Redirect } from 'react-router-dom'
+import { useCookies } from 'react-cookie';
+
 
 function Regist(props) {
+  const [cookies, setCookie] = useCookies(['userName']);
   const [error, setError] = useState('')
-  const { login, LogIn } = props
+  const { LogIn } = props
 
   function PutData(event) {
     event.preventDefault();
@@ -19,6 +22,7 @@ function Regist(props) {
     }).then((response) => {
       if (response.data.success) {
         LogIn(response.data.data, nickname);
+        setCookie('userName', response.data.date.id)
       } else {
         setError(response.data.err)
         setTimeout(setError, 2000, '')
@@ -29,13 +33,12 @@ function Regist(props) {
 
   return (
     <>
-      \{login ?
+      \{cookies.userName ?
         <Redirect from='/regist' to='/home' />
         : <div>
           <form onSubmit={PutData}>
-            <div className="segment">
-              <h1>Create Account</h1>
-            </div>
+            <h1 className="segment">Create Account</h1>
+
 
             <label>
               <input name='nick' type="text" placeholder="NickName" required />
@@ -59,12 +62,10 @@ function Regist(props) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  login: state.login,
-});
+
 const mapDispatchToProps = (dispatch) => ({
   LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Regist)
+export default connect(null, mapDispatchToProps)(Regist)

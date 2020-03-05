@@ -1,5 +1,4 @@
 const router = require('express').Router();
-
 const Person = require('../models/modelPerson'); // A.I. подключил модель монгоДБ
 const Profile = require('../models/modelProfile');
 
@@ -10,7 +9,7 @@ router.get('/', async (req, res, next) => {
 
 /**
  *  Aleksandr Ivanov
- * Проверяю данные пользователя: 
+ * Проверяю данные пользователя:
  * @email
  * @password
  * Отдаю объект:
@@ -26,20 +25,22 @@ router.post('/login', async (req, res) => {
     password,
   } = req.body;
   const user = await Person.findOne({ email, password });
+  const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
+  console.log(profileId)
   if (user) {
     return res.send({
       success: true,
       date: {
         nickname: user.nickname,
         id: user._id,
-      }
+        profileId,
+      },
     });
-  } else {
-    return res.send({
-      success: false,
-      err: 'No such user or incorrect pair login password'
-    })
   }
+  return res.send({
+    success: false,
+    err: 'No such user or incorrect pair login password',
+  });
 });
 
 /**
@@ -60,9 +61,9 @@ router.post('/registration', async (req, res) => {
   if (nickname === '' || email === '' || password === '') {
     return res.send({
       success: false,
-      err: 'Wrong data'
-    })
-  };
+      err: 'Wrong data',
+    });
+  }
   const user = await Person.findOne({ email });
   if (!user) {
     const userNew = await Person.create({
@@ -86,6 +87,7 @@ router.post('/profile', async (req, res) => {
     email,
     name,
     DoB,
+    activity,
     topics,
     about,
     drinks,
@@ -93,8 +95,7 @@ router.post('/profile', async (req, res) => {
   } = req.body;
   const user = await Person.findOne({ email });
   if (!user.profileId) {
-    const newProfile = new Profile({
-      email,
+    const newProfile = await Profile.create({
       name,
       DoB,
       activity,
@@ -103,11 +104,10 @@ router.post('/profile', async (req, res) => {
       drinks,
       avatar,
     });
-    await Person.updateOne({ user }, { $set: { profileId: newProfile._id } });
 
+    await Person.updateOne(user, { $set: { profileId: newProfile._id } });
     return res.send({
       success: true,
-      date: userNew._id,
     });
   }
   await Person.updateOne({ _id: user.profileId }, {

@@ -4,11 +4,12 @@ import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { LogIn } from '../../redux/action'
-
+import { useCookies } from 'react-cookie';
 
 function Login(props) {
   const [error, setError] = useState('')
-  const { login, LogIn } = props
+  const {user,LogIn } = props
+  const [cookies, setCookie] = useCookies(['userName']);
 
   function PutData(event) {
     event.preventDefault();
@@ -18,24 +19,31 @@ function Login(props) {
       password,
     }).then((response) => {
       if (response.data.success) {
-        LogIn(response.data.date.id, response.data.date.nickname);
+        console.log(response.data.date.profileId)
+        if(response.data.date.profileId){
+          LogIn(response.data.date.id, response.data.date.nickname, response.data.date.profileId, );
+          setCookie('userName', 'sdckdsncn')
+        }
+        LogIn(response.data.date.id, response.data.date.nickname,response.data.date.profileId,);
+        setCookie('userName', 'sdckdsncn')
       } else {
         setError(response.data.err)
         setTimeout(setError, 2000, '')
       }
-    }).catch(() => { setError('Неизвестная Ошибка регистрации'); setTimeout(setError, 2000, '') })
+    }).catch(() => { setError('Неизвестная Ошибка авторизации'); setTimeout(setError, 2000, '') })
   }
 
 
   return (
     <>
-      {login ?
-        <Redirect from='/login' to='/home' />
+      {cookies.userName ?
+      (user.profileId ?<Redirect from='/login' to='/home' />: <Redirect to='/profile'/> )
+        
         : <div>
           <form onSubmit={PutData}>
-            <div className="segment">
-              <h1>Sign up</h1>
-            </div>
+           
+              <h1 className="segment">Sign up</h1>
+           
 
             <label>
               <input name='mail' type="email" placeholder="Email Address" required/>
@@ -57,12 +65,12 @@ function Login(props) {
   )
 }
 
-
 const mapStateToProps = (state) => ({
-  login: state.login,
-});
-const mapDispatchToProps = (dispatch) => ({
-  LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
+user:state,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+const mapDispatchToProps = (dispatch) => ({
+  LogIn: (id, nickname,profileId ) => dispatch(LogIn(id, nickname,profileId))
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login)
