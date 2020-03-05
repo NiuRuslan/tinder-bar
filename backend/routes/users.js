@@ -25,12 +25,15 @@ router.post('/login', async (req, res) => {
     password,
   } = req.body;
   const user = await Person.findOne({ email, password });
+  const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
+  console.log(profileId)
   if (user) {
     return res.send({
       success: true,
       date: {
         nickname: user.nickname,
         id: user._id,
+        profileId,
       },
     });
   }
@@ -92,7 +95,7 @@ router.post('/profile', async (req, res) => {
   } = req.body;
   const user = await Person.findOne({ email });
   if (!user.profileId) {
-    const newProfile = Profile.create({
+    const newProfile = await Profile.create({
       name,
       DoB,
       activity,
