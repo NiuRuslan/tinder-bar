@@ -1,17 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Regist.css'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {LogIn} from '../../redux/action'
 
 function Regist() {
+  const [error,setError] = useState('')
+
 
  function PutData(event){
    event.preventDefault();
    const {nick:{value:nickname},mail:{value:email},pasword:{value:password}} = event.target; 
- axios.post('http://localhost:4000/users/Regist',{
+ axios.post('http://localhost:4000/users/registration',{
   nickname,
   email,
   password,
- }).then((response)=>{console.log(response)}).catch((error)=>{console.log(error)})
+ }).then((response)=>{
+
+
+ }).catch((error)=>{})
  }
 
 
@@ -37,4 +44,13 @@ function Regist() {
   )
 }
 
-export default Regist
+const mapStateToProps = (state) => ({
+  todos: state.todos,
+});
+const mapDispatchToProps = {
+  requestFetchAdd: requestFetchAdd,
+  requestFetchAddItem:requestFetchAddItem,
+};
+
+
+export default connect()(Regist)
