@@ -4,11 +4,12 @@ import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { LogIn } from '../../redux/action'
-
+import { useCookies } from 'react-cookie';
 
 function Login(props) {
   const [error, setError] = useState('')
-  const { login, LogIn } = props
+  const {LogIn } = props
+  const [cookies, setCookie] = useCookies(['userName']);
 
   function PutData(event) {
     event.preventDefault();
@@ -19,23 +20,24 @@ function Login(props) {
     }).then((response) => {
       if (response.data.success) {
         LogIn(response.data.date.id, response.data.date.nickname);
+        setCookie('userName', 'sdckdsncn')
       } else {
         setError(response.data.err)
         setTimeout(setError, 2000, '')
       }
-    }).catch(() => { setError('Неизвестная Ошибка регистрации'); setTimeout(setError, 2000, '') })
+    }).catch(() => { setError('Неизвестная Ошибка авторизации'); setTimeout(setError, 2000, '') })
   }
 
 
   return (
     <>
-      {login ?
+      {cookies.userName ?
         <Redirect from='/login' to='/home' />
         : <div>
           <form onSubmit={PutData}>
-            <div className="segment">
-              <h1>Sign up</h1>
-            </div>
+           
+              <h1 className="segment">Sign up</h1>
+           
 
             <label>
               <input name='mail' type="email" placeholder="Email Address" required/>
@@ -58,11 +60,9 @@ function Login(props) {
 }
 
 
-const mapStateToProps = (state) => ({
-  login: state.login,
-});
+
 const mapDispatchToProps = (dispatch) => ({
   LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(null,mapDispatchToProps)(Login)
