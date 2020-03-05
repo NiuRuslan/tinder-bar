@@ -44,20 +44,31 @@ import axios from 'axios'
 // }
 /**
  * Александр Иванов
- * функция делает запрос на сервер и возвращает список участников
+ * Делает запрос на сервер:
+ * @latitude - координата пользователя
+ * @longitude - координата пользователя
+ * @radius - размер радиуса поиска пользователей
+ * Получает:
+ * @success - флаг выполнения запроса
+ * @list - список найденых пользователей
+ * @err - Расшифровка ошибки
  */
-const requestListUsers = () => {
-  axios.post('/list/login').then((response) => {
+const requestListUsers = (setError) => {
+  axios.post('/list/users', {
+    latitude: 0,
+    longitude: 0,
+    radius: 0,
+  }).then((response) => {
     if (response.data.success) {
       console.log(response);
       //LogIn(response.data.date.id, response.data.date.nickname);
     } else {
-      // setError(response.data.err)
-      // setTimeout(setError, 2000, '')
+      setError(response.data.err)
+      setTimeout(setError, 2000, '')
     }
   }).catch(() => { 
-    // setError('Неизвестная Ошибка регистрации'); 
-    // setTimeout(setError, 2000, '') 
+    setError('Неизвестная Ошибка регистрации'); 
+    setTimeout(setError, 2000, '') 
   })
 }
 
@@ -69,7 +80,8 @@ const requestListUsers = () => {
  * Коомпонент отрисовывает список зарегистрированных пользователей
  */
 const listUsers = () => {
-  //requestListUsers();
+  const [error, setError] = useState('')
+  requestListUsers(setError);
   return (
     <div>
       <h1>List Users</h1>
@@ -77,28 +89,8 @@ const listUsers = () => {
   )
 }
 
-
-//   function PutData(event) {
-//     event.preventDefault();
-//     const { mail: { value: email }, pasword: { value: password } } = event.target;
-//     axios.post('/users/login', {
-//       email,
-//       password,
-//     }).then((response) => {
-//       if (response.data.success) {
-//         LogIn(response.data.date.id, response.data.date.nickname);
-//       } else {
-//         setError(response.data.err)
-//         setTimeout(setError, 2000, '')
-//       }
-//     }).catch(() => { setError('Неизвестная Ошибка регистрации'); setTimeout(setError, 2000, '') })
-//   }
-
 const mapStateToProps = (state) => ({
   login: state.login,
 });
-// const mapDispatchToProps = (dispatch) => ({
-//   LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
-// });
 
 export default connect(mapStateToProps)(listUsers)

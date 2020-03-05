@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const Person = require('../models/modelPerson'); // A.I. подключил модель монгоДБ
 const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
 /* GET users listing. */
@@ -10,82 +9,41 @@ router.get('/', async function (req, res, next) {
 });
 
 /**
- *  Aleksandr Ivanov
- * 
- * @email
- * @password
+ * Aleksandr Ivanov
+ * Получаем запрос с координатами и радиусом поиска
+ * @latitude
+ * @longitude
+ * @radius
  * Отдаю объект:
  * @success - флаг выполнения запроса
- * @data - объект с данными пользователя
- *    @nickname
- *    @id
+ * @list - массив объектов - анкеты пользователей
  * @err - Расшифровка ошибки
  */
 router.post('/users', async (req, res) => {
-  
-
-
-
-
-
-
   const {
-    email,
-    password,
+    latitude,
+    longitude,
+    radius,
   } = req.body;
-  const user = await Person.findOne({ email, password });
-  if (user) {
+  const list = await Profile.find({
+    latitude: {
+      $gte: latitude - radius,
+      $ls: latitude + radius
+    },
+    longitude: {
+      $gte: longitude - radius,
+      $ls: longitude + radius
+    }
+  });
+  if (list) {
     return res.send({
       success: true,
-      date: {
-        nickname: user.nickname,
-        id: user._id,
-      }
+      list
     });
   } else {
     return res.send({
       success: false,
-      err: 'No such user or incorrect pair login password'
-    })
-  }
-});
-
-/**
- *  Aleksandr Ivanov
- * Проверяю на уникальность поле: email
- * Вношу нового пользователя в базу
- * Отдаю объект:
- * @success - флаг выполнения запроса
- * @data - Айди созданного пользователя
- * @err - Расшифровка ошибки
- */
-router.post('/registration', async (req, res) => {
-  const {
-    nickname,
-    email,
-    password,
-  } = req.body;
-  if (nickname === '' || email === '' || password === '') {
-    return res.send({
-      success: false,
-      err: 'Wrong data'
-    })
-  };
-  const user = await Person.findOne({ email });
-  if (!user) {
-    const userNew = await Person.create({
-      nickname,
-      email,
-      password
-    });
-    return res.send({
-      success: true,
-      date: userNew._id,
-    });
-  } else {
-    return res.send({
-      success: false,
-      err: 'Email is already registered'
+      err: 'No such user from this geolocation'
     })
   }
 });
