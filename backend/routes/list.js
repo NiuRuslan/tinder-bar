@@ -1,15 +1,17 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
+
 const Person = require('../models/modelPerson'); // A.I. подключил модель монгоДБ
-const Profile = require('../models/modelProfile');
+const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/', async function (req, res, next) {
   res.send('respond with a resource');
 });
 
 /**
  *  Aleksandr Ivanov
- * Проверяю данные пользователя:
+ * 
  * @email
  * @password
  * Отдаю объект:
@@ -19,7 +21,14 @@ router.get('/', async (req, res, next) => {
  *    @id
  * @err - Расшифровка ошибки
  */
-router.post('/login', async (req, res) => {
+router.post('/users', async (req, res) => {
+  
+
+
+
+
+
+
   const {
     email,
     password,
@@ -31,13 +40,14 @@ router.post('/login', async (req, res) => {
       date: {
         nickname: user.nickname,
         id: user._id,
-      },
+      }
     });
+  } else {
+    return res.send({
+      success: false,
+      err: 'No such user or incorrect pair login password'
+    })
   }
-  return res.send({
-    success: false,
-    err: 'No such user or incorrect pair login password',
-  });
 });
 
 /**
@@ -58,64 +68,26 @@ router.post('/registration', async (req, res) => {
   if (nickname === '' || email === '' || password === '') {
     return res.send({
       success: false,
-      err: 'Wrong data',
-    });
-  }
+      err: 'Wrong data'
+    })
+  };
   const user = await Person.findOne({ email });
   if (!user) {
     const userNew = await Person.create({
       nickname,
       email,
-      password,
+      password
     });
     return res.send({
       success: true,
       date: userNew._id,
     });
-  }
-  return res.send({
-    success: false,
-    err: 'Email is already registered',
-  });
-});
-
-router.post('/profile', async (req, res) => {
-  const {
-    email,
-    name,
-    DoB,
-    activity,
-    topics,
-    about,
-    drinks,
-    avatar,
-  } = req.body;
-  const user = await Person.findOne({ email });
-  if (!user.profileId) {
-    const newProfile = Profile.create({
-      name,
-      DoB,
-      activity,
-      topics,
-      about,
-      drinks,
-      avatar,
-    });
-
-    await Person.updateOne(user, { $set: { profileId: newProfile._id } });
+  } else {
     return res.send({
-      success: true,
-    });
+      success: false,
+      err: 'Email is already registered'
+    })
   }
-  await Person.updateOne({ _id: user.profileId }, {
-    $set: {
-      activity,
-      topics,
-      about,
-      drinks,
-      avatar,
-    },
-  });
 });
 
 module.exports = router;
