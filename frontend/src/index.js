@@ -3,5 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import store from './redux/store'
 import {Provider} from 'react-redux'
+import { CookiesProvider } from 'react-cookie';
 
-ReactDOM.render(<Provider store={store}><App /> </Provider>, document.getElementById('root'));
+ReactDOM.render( <CookiesProvider><Provider store={store}><App /> </Provider></CookiesProvider>, document.getElementById('root'));
