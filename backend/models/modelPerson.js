@@ -8,11 +8,10 @@ const personSchema = new mongoose.Schema({
   profileId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Profile',
-  }
+  },
 },
-  {
-    versionKey: false,
-  }
-);
+{
+  versionKey: false,
+});
 
 module.exports = mongoose.model('Person', personSchema);

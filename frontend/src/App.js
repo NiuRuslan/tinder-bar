@@ -18,7 +18,7 @@ function App() {
     <Switch>
       <Route exact path='/regist' component={Regist}/>
       <Route exact path='/login' component={Login}/>
-      <Route exact path='/listUser' component={ListUsers}/>{/* add A.I. */}
+      <Route exact path='/listUsers' component={ListUsers}/>{/* add A.I. */}
     </Switch>
     </Router>
     </>

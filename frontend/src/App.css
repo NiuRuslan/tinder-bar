@@ -18,14 +18,14 @@ body {
 }
 
 .App-header {
-  background-color: #282c34;
+  color: #C8493A;
+  background-color: #161616;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -39,4 +39,14 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.main {
+  width: 100%;
+  height: 100px;
+}
+
+.second {
+  width: 100%;
+  height: 100px;
 }
