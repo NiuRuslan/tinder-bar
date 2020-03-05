@@ -8,7 +8,7 @@ class Anketa extends React.Component {
     this.state = {
       currentStep: 1,
       name:  '',
-      DOB: '',
+      DoB: '',
       activity: '', 
       topics: '',
       drinks: '',
@@ -25,10 +25,12 @@ class Anketa extends React.Component {
    
   handleSubmit = async event => {
     event.preventDefault()
-    const { name, DOB, activity, topics, drinks, about} = this.state
-    const { data } = await axios.post("http://localhost:3000/addTodo", {
-      name, DOB, activity, topics, drinks, about
+    const { name, DoB, activity, topics, drinks, about} = this.state
+    const { data } = await axios.post("http://localhost:4000/users/profile", {
+      name, DoB, activity, topics, drinks, about, email:"ioioio@mail.ru"
     });
+    console.log(data);
+    
   
   }
   
@@ -93,7 +95,7 @@ nextButton(){
           currentStep={this.state.currentStep} 
           handleChange={this.handleChange}
           name={this.state.name}
-          DOB={this.state.DOB}
+          DoB={this.state.DoB}
           activity={this.state.activity}
         />
         <Step2 
@@ -127,8 +129,8 @@ function Step1(props) {
         onChange={props.handleChange} className="form-control"type="text" name="name" placeholder="Name" oninput="this.className" />
          </label>
          <label>
-           <input value={props.DOB}
-        onChange={props.handleChange} className="form-control"type="date" name="BOD" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" />
+           <input value={props.DoB}
+        onChange={props.handleChange} className="form-control"type="date" name="DoB" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" />
          </label>
          <label>
            <input  value={props.activity}
@@ -182,136 +184,4 @@ function Step3(props) {
   );
 }
 export default Anketa
-// function Anketa() {
-//   const SendHandler = async event => {
-//     // event.preventDefault();
-//     const name = event.target.name.value;
-//     console.log(name);
 
-//     event.target.reset();
-//     // const { data } = await axios.post("http://localhost:3000/addTodo", {
-
-//     // });
-//   };
-//   return (
-//     <>
-//       <form id="regForm" action="">
-
-//         <h1>Your information:</h1>
-
-//         <div className="tab">
-//           <label>
-//             <input type="text" name="name" placeholder="Name" oninput="this.className" />
-//           </label>
-//           <label>
-//             <input type="date" name="birthDay" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" />
-//           </label>
-//           <label>
-//             <input type="text" name="placeOfWorkOrStudy" placeholder="Place of work or study" oninput="this.className" />
-//           </label>
-//         </div>
-
-//         <div className="tab">
-//           <label>
-//             <input type="text" oninput="this.className" name="topics" placeholder="Favorite topics: politic, humor.." />
-//           </label>
-//           <label>
-//             <input type="text" oninput="this.className" name="alchogol" placeholder="Favorite alchogol: beer, wine, wiskey.." />
-//           </label>
-//         </div>
-
-//         <div className="tab">
-//           <label>
-//             <input type="text" oninput="this.className" placeholder="Describe yourself" />
-//           </label>
-//         </div>
-
-
-
-//         <div style={{ overflow: "auto" }}>
-//           <div style={{ float: "right" }}>
-//             <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-//             <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-//           </div>
-//         </div>
-
-//         <div style={{ textAlign: "center", marginTop: "40px" }}>
-//           <span className="step"></span>
-//           <span className="step"></span>
-//           <span className="step"></span>
-//           <span className="step"></span>
-//         </div>
-
-//       </form>
-//     </>
-//   );
-// }
-
-// export default Anketa;
-{/* //<form onSubmit={SendHandler}>
-// <div className="segment">
-//     <h1>Sign up</h1>
-//   </div> 
-// <ol className="stepper">
-//   <li className="step current" id="one">
-//     <header className="step_header">
-//         <h2 className="step__title">Step One</h2>
-//         <a href="#one" className="step__edit"><i class="fa fa-pencil-square-o"></i> </a>
-//     </header>
-    
-//     <div className="card">
-//       <a href="#" className="close">x</a>
-//       <label>
-//     <input type="text" name="name"placeholder="Name"/>
-//   </label>
-//   <label>
-//     <input type="date" name="birthDay"placeholder="Date of Birth" max="2001-12-31"/>
-//   </label>
-//   <label>
-//     <input type="text" name="placeOfWorkOrStudy"placeholder="Place of work or study"/>
-//   </label>
-//     </div>
-  
-//     <div className="step__actions"> 
-//       <button formAction="/#two" type="submit" className="step__next unit"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-//     </div>
-
-//   </li>
-//   <li className="step" id="two">
-//     <header className="step_header">
-//         <h2 className="step__title">Step Two</h2>
-//         <a href="#two" className="step__edit"> <i class="fa fa-pencil-square-o"></i> </a>
-//     </header>
-
-//     <div className="card">
-//       <a href="#" className="close">x</a>
-//       <label>
-//     <input type="text"  name="topics"placeholder="Favorite topics: politic, humor.."/>
-//   </label>  
-//   {/* <label>
-//    <input type="text" placeholder="Favorite places: bars, pubs.."/>
-//   </label>  
-//   <label>
-//     <input type="text"  name="alchogol"placeholder="Favorite alchogol: beer, wine, wiskey.."/>
-//   </label>
-//    </div>
-//     <div className="step__actions"> 
-//       <button formAction="/#three"  className="step__next unit"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
-//     </div>
-//   </li>
-//   <li className="step" id="three">
-//     <header className="step_header">
-//         <h2 className="step__title">Step Three</h2>
-//         <a href="#three" className="step__edit"> <i class="fa fa-pencil-square-o"></i> </a>
-//     </header>
-//     <div className="card">
-//       <a href="#" className="close">x</a>
-//       <label>
-//     <input type="text" placeholder="Describe yourself"/>
-//   </label>    </div>
-//       <div className="step__actions"> 
-//         <button formAction="/#two" type="submit" className="step__next unit"><i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
-//       </div>
-//   </li>
-// </ol>
-// </form> */}

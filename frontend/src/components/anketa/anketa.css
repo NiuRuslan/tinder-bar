@@ -1,9 +1,7 @@
-body, html {
-  background-image: linear-gradient(15deg, #0f4667 0%, #2a6973 150%);
+html{
+  background-color: #0f4667;
 
 }
-
-
 body, p, input, select, textarea, button , a{
 	font-family: 'Montserrat', sans-serif;
 	letter-spacing: -0.2px;
