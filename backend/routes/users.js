@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
     return res.send({
       success: true,
       date: {
-        nickname: user.nickname, 
+        nickname: user.nickname,
         id: user._id,
       }
     });
@@ -57,9 +57,15 @@ router.post('/registration', async (req, res) => {
     email,
     password,
   } = req.body;
+  if (nickname === '' || email === '' || password === '') {
+    return res.send({
+      success: false,
+      err: 'Wrong data'
+    })
+  };
   const user = await Person.findOne({ email });
   if (!user) {
-    userNew = await Person.create({
+    const userNew = await Person.create({
       nickname,
       email,
       password
