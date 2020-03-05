@@ -24,7 +24,7 @@ const profileSchema = new mongoose.Schema({
     minlength: 3,
   },
   topics: [String],
-  dricks: [String],
+  drinks: [String],
   avatar: {
     data: Buffer,
     contentType: String,

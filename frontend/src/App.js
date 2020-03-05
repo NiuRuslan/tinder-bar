@@ -1,4 +1,5 @@
 import React from 'react';
+import Anketa from "./components/anketa/Anketa"
 import './App.css';
 import Login from './components/Login/Login'
 import Regist from './components/Regist/Regist'
@@ -16,9 +17,10 @@ function App() {
     <Router>
       {/* <Home/> */}
     <Switch>
-      <Route exact path='/regist' component={Regist}/>
-      <Route exact path='/login' component={Login}/>
       <Route exact path='/listUsers' component={ListUsers}/>{/* add A.I. */}
+      <Route exact path='/profile' component={Anketa}/>
+      <Route exact path='/regist' component={Regist}/>
+      <Route path='/' component={Login}/>
     </Switch>
     </Router>
     </>
