@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Map from './Map';
+import Profile from '../Modal/Modal';
+
 
 /**
  * Александр Иванов
@@ -16,6 +18,12 @@ const ListUsers = (props) => {
   });
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongituse] = useState(null);
+
+  const [isShow, setIsShow] = useState(null);
+  const showHandle = (event) => {
+    setIsShow(event.target.innerText);
+    console.log(event.target.profile);
+  };
 
   /**
    * Делает запрос на сервер:
@@ -74,8 +82,6 @@ const ListUsers = (props) => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
-  console.log('list', list);
-
   return (
     <div>
       <div>
@@ -84,10 +90,22 @@ const ListUsers = (props) => {
         <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button>
         <br />
         <ul>
-          {list.success ? list.list.map((obj) => <li key={obj._id}>{obj.name}</li>) : ''}
+          {list.success ? list.list.map((obj) => (
+            <h2>
+              <a href="#" onClick={showHandle}>
+                {(isShow === obj.name) && (
+                <Profile
+                  profile={obj}
+                  key={obj._id}
+                />
+                )}
+                {obj.name}
+              </a>
+            </h2>
+          )) : ''}
         </ul>
       </div>
-      <Map latitude={+latitude} longitude={+longitude} />
+      <Map latitude={latitude} longitude={longitude} />
     </div>
   );
 };

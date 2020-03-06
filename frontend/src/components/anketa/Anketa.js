@@ -152,8 +152,7 @@ function Step1(props) {
         <input value={props.activity}
           onChange={props.handleChange} className="form-control" type="text" name="activity" placeholder="Place of work or study" oninput="this.className" required />
       </label>
-
-    </div >
+    </div>
   );
 }
 
@@ -195,7 +194,7 @@ function Step3(props) {
 }
 
 const mapStateToProps = (state) => ({
-  user: state,
+  user: state.user,
 });
 const mapDispatchToProps = (dispatch) => ({
   LogIn: (id, nickname, profileId) => dispatch(LogIn(id, nickname, profileId))
