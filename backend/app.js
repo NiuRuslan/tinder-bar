@@ -8,7 +8,6 @@ require('dotenv').config();
 
 // A.I> подключил монгоДБ из облака
 const mongoose = require('mongoose');
-
 mongoose.connect(
   `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0-bajz8.mongodb.net/TinderBar?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -16,6 +15,7 @@ mongoose.connect(
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const listRouter = require('./routes/list'); // add A.I.
 
 const app = express();
 app.use(cors());
@@ -32,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/list', listRouter); // add A.I.
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
