@@ -12,6 +12,7 @@ function Regist(props) {
   const [error, setError] = useState('')
   const { LogIn } = props
 
+
   function PutData(event) {
     event.preventDefault();
     const { nick: { value: nickname }, mail: { value: email }, pasword: { value: password } } = event.target;
@@ -21,7 +22,7 @@ function Regist(props) {
       password,
     }).then((response) => {
       if (response.data.success) {
-        LogIn(response.data.data, nickname);
+          LogIn(response.data.date, nickname,);
         setCookie('userName', response.data.date.id)
       } else {
         setError(response.data.err)
@@ -34,7 +35,7 @@ function Regist(props) {
   return (
     <>
       \{cookies.userName ?
-        <Redirect from='/regist' to='/home' />
+        <Redirect to='/profile' />
         : <div>
           <form onSubmit={PutData}>
             <h1 className="segment">Create Account</h1>
@@ -64,7 +65,7 @@ function Regist(props) {
 
 
 const mapDispatchToProps = (dispatch) => ({
-  LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
+  LogIn: (id, nickname,profileId ) => dispatch(LogIn(id, nickname,profileId))
 });
 
 

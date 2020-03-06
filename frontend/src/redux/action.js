@@ -1,10 +1,10 @@
  import {LOGIN, LOGOUT} from './action-types'
 
- export const LogIn = (id,nickname,profildId) =>({
+ export const LogIn = (id,nickname,profileId) =>({
    type:LOGIN,
    id,
    nickname,
-   profildId,
+   profileId,
  })
 
  export const LogOut = () =>({
