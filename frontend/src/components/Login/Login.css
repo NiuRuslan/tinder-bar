@@ -2,7 +2,7 @@ body, html {
   background-color: #EBECF0;
 }
 
-body, p, input, select, textarea, button {
+body, p, input, select, textarea, button, a {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: -0.2px;
   font-size: 16px;
@@ -14,6 +14,8 @@ div, p {
 }
 
 form {
+  background-color: #0f45679c;
+  border-radius: 2%;
   padding: 16px;
   width: 320px;
   margin: 0 auto;
@@ -23,15 +25,20 @@ form {
   padding: 32px 0;
   text-align: center;
 }
-
+.segment, h1 {
+  padding: 32px 0;
+  text-align: center;
+  color:#FFF;
+  text-shadow: 3px 3px 2 #0f4567; 
+}
 button, input {
   border: 0;
   outline: 0;
   font-size: 16px;
   border-radius: 320px;
   padding: 16px;
-  background-color: #EBECF0;
-  text-shadow: 1px 1px 0 #FFF;
+  /* background-color: #EBECF0;*/
+  text-shadow: 1px 1px 0 #FFF; 
 }
 
 label {
@@ -54,7 +61,7 @@ input:focus {
 }
 
 button {
-  color: #61677C;
+  color: #0f4667;
   font-weight: bold;
   box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
   transition: all 0.2s ease-in-out;
@@ -87,12 +94,12 @@ button.unit .icon {
 button.red {
   display: block;
   width: 100%;
-  color: #AE1100;
+  /* color: #AE1100; */
 }
 button.green {
   display: block;
   width: 100%;
-  color: rgb(45, 160, 45);
+  /* color: rgb(45, 160, 45); */
 }
 
 .input-group {

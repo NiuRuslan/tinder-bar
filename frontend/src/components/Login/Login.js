@@ -41,15 +41,16 @@ function Login(props) {
             <form onSubmit={PutData}>
               <h1 className="segment">Sign up</h1>
               <label>
-                <input name="mail" type="email" placeholder="Email Address" required />
+                <input name='mail' type="email" placeholder="Email Address" required />
               </label>
               <label>
-                <input name="pasword" type="password" placeholder="Password" minLength="5" required />
+                <input name='pasword' type="password" placeholder="Password" minLength='5' required />
               </label>
-              <button className="red" type="submit"> Log in </button>
-              <br />
+              <button className="red" type="submit" style={{ color: "#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667" }}> Log in</button>
               <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
-              <Link to="/regist"><button className="green">Create Account</button></Link>
+              <Link to='/regist' style={{ width: "100%", alignSelf: "center" }}>
+                <button className="green" style={{ color: "#0f4667", backgroundColor: "#FFF", textShadow: "1px 1px 1px #0f4667" }}>Create Account</button>
+              </Link>
             </form>
           </div>
         )}

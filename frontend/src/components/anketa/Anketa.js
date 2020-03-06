@@ -1,4 +1,7 @@
 import React from 'react';
+import Slider from "../slider/Slider"
+import Slider2 from "../slider/Slider2"
+
 import axios from "axios"
 // import "./anketaJS"
 import './anketa.css';
@@ -14,8 +17,16 @@ class Anketa extends React.Component {
       activity: '',
       topics: '',
       drinks: '',
-      about: ''
+      about: '',
+      random: 0
     }
+  }
+  componentDidMount() {
+    // let random = (Math.floor(Math.random() * 10))
+    this.setState({
+      ...this.state,
+      random: (Math.floor(Math.random() * 10))
+    })
   }
 
   handleChange = event => {
@@ -90,13 +101,11 @@ class Anketa extends React.Component {
   render() {
     return (
       <>
-
-        <p>Step {this.state.currentStep} </p>
-
+        {this.state.random > 5 ?
+          (<Slider />) : (<Slider2 />)}
         <form onSubmit={this.handleSubmit}>
-          {/* 
-        render the form steps and pass required props in
-      */}
+          <p >Step {this.state.currentStep} </p>
+          {/* render the form steps and pass required props in */}
           <Step1
             currentStep={this.state.currentStep}
             handleChange={this.handleChange}
@@ -117,7 +126,6 @@ class Anketa extends React.Component {
           />
           {this.previousButton()}
           {this.nextButton()}
-
         </form>
       </>
     );
@@ -143,7 +151,7 @@ function Step1(props) {
           onChange={props.handleChange} className="form-control" type="text" name="activity" placeholder="Place of work or study" oninput="this.className" required />
       </label>
 
-    </div>
+    </div >
   );
 }
 
@@ -178,7 +186,8 @@ function Step3(props) {
             onChange={props.handleChange} className="form-control" type="text" name="about" oninput="this.className" placeholder="Describe yourself" />
         </label>
       </div>
-      <button className="btn btn-success btn-block" style={{ color: "red" }}>Save it</button>
+      <button className="btn btn-success btn-block" style={{ marginBottom: "25px", color: "#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667" }}>Save it</button>
+      {/* <button className="btn btn-success btn-block" style={{ color: "red" }}>Save it</button> */}
     </>
   );
 }
@@ -190,6 +199,3 @@ const mapDispatchToProps = (dispatch) => ({
   LogIn: (id, nickname, profileId) => dispatch(LogIn(id, nickname, profileId))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Anketa)
-
-
-
