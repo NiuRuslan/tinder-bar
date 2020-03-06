@@ -29,13 +29,11 @@ const profileSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String,
   },
-  geolocation: {
-    latitude: Number,
-    longitude: Number,
-  },
+  latitude: Number,
+  longitude: Number,
 },
-{
-  versionKey: false,
-});
+  {
+    versionKey: false,
+  });
 
 module.exports = mongoose.model('Profile', profileSchema);

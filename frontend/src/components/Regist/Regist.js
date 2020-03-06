@@ -6,7 +6,6 @@ import { LogIn } from '../../redux/action'
 import { Link, Redirect } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
 
-
 function Regist(props) {
   const [cookies, setCookie] = useCookies(['userName']);
   const [error, setError] = useState('')
@@ -33,13 +32,11 @@ function Regist(props) {
 
   return (
     <>
-      \{cookies.userName ?
-        <Redirect from='/regist' to='/home' />
+      {cookies.userName ?
+        <Redirect from='/regist' to='/startpage' />
         : <div>
           <form onSubmit={PutData}>
             <h1 className="segment">Create Account</h1>
-
-
             <label>
               <input name='nick' type="text" placeholder="NickName" required />
             </label>
@@ -49,10 +46,9 @@ function Regist(props) {
             <label>
               <input name='pasword' type="password" placeholder="Password" minLength='5' required />
             </label>
-            <button className="red" type="submit"><i className="icon ion-md-lock"></i>Create</button>
+            <div style={{ color: 'red', textAlign: 'center',  }}>{error} <br /> </div>
+            <button className="red" type="submit">Create</button>
             <br />
-            <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
-
             <Link to='/login'><button className="green" >LogIn</button></Link>
           </form>
 
