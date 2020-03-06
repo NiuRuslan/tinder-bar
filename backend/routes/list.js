@@ -10,6 +10,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/users', async (req, res) => {
   const {
+    id,
     latitude,
     longitude,
     radius,
@@ -28,14 +29,17 @@ router.post('/users', async (req, res) => {
     latitude: {$gte: la1, $lte: la2},
     longitude: {$gte: lo1, $lte: lo2},
   });
-  
+
   // Записываю текущие координаты пользователя
-  await Profile.updateOne({_id: '5e6102bf79e480d766a5911c'}, {$set: {
-    geolocation: {
-      latitude: +latitude,
-      longitude: +longitude,
+  await Profile.updateOne({
+    _id: id
+  }, {$set: {
+    latitude: +latitude,
+    longitude: +longitude,
     },
-  }});
+  });
+  console.log('list', list);
+  
   if (list) {
     return res.send({
       success: true,

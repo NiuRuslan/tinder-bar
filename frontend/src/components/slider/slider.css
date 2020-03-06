@@ -1,5 +1,5 @@
 .slideshow {
-
+  filter: opacity(70%);
   margin-top: 0;
 	position: absolute;
 	width: 100vw;
