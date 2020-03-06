@@ -3,7 +3,8 @@ import Anketa from "./components/anketa/Anketa"
 import './App.css';
 import Login from './components/Login/Login'
 import Regist from './components/Regist/Regist'
-import ListUsers from './components/ListUsers/ListUsers' //add A.I.
+import ListUsers from './components/ListUsers/ListUsers' 
+import {createBrowserHistory} from 'history'
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,10 +16,11 @@ import { useCookies } from 'react-cookie';
 import NotFound from './components/notFound/notFound'
 
 function App() {
+  const history = createBrowserHistory()
   const [cookies, setCookie] = useCookies(['userName', 'chacked']);
   return (
     <>
-      <Router>
+      <Router history={history}>
         {cookies.chacked === 'true' ? (cookies.userName ? null : <Redirect to='/login' />) : <Redirect to='/startpage' />}
         <Switch>
           <Route exact path='/listUsers' component={ListUsers} />
