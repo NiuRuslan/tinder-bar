@@ -1,4 +1,3 @@
-
 body, p, input, select, textarea, button {
 	font-family: 'Montserrat', sans-serif;
 	letter-spacing: -0.2px;
@@ -22,7 +21,6 @@ div, p {
 }
 
 form {
-  background-color: #0f45679c;
   border-radius: 2%;
   display: flex;
   flex-direction: column;

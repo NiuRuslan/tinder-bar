@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import { MyMapComponent } from './Map'
 import Map from './Map'
+import Profile from "../Modal/Modal"
 
 
 /**
@@ -12,7 +13,17 @@ import Map from './Map'
  */
 const ListUsers = (props) => {
   const [radius, setRadius] = useState(null);
-  const [list, setList] = useState(null);
+  const [list, setList] = useState({
+    success: false,
+    err: '',
+  });
+
+  const [isShow, setIsShow] = useState(null);
+  const showHandle = (event) => {
+    setIsShow(event.target.innerText)
+console.log(event.target.profile);
+
+  }
 
   /**
    * Делает запрос на сервер:
@@ -24,8 +35,9 @@ const ListUsers = (props) => {
    * @list - список найденых пользователей
    * @err - Расшифровка ошибки
    */
-  const requestListUsers = (latitude, longitude, radius) => {
+  const requestListUsers = (id, latitude, longitude, radius) => {
     axios.post('/list/users', {
+      id,
       latitude,
       longitude,
       radius,
@@ -51,7 +63,7 @@ const ListUsers = (props) => {
 
   const geoFindLocation = () => {
     const success = (position) => {
-      requestListUsers(position.coords.latitude, position.coords.longitude, radius);
+      requestListUsers(props.id, position.coords.latitude, position.coords.longitude, radius);
     }
 
     const error = () => {
@@ -72,22 +84,29 @@ const ListUsers = (props) => {
     }
   }
 
+  
   return (
     <div>
 
-      <div>
-        <h1>123</h1>
-        <input onChange={(event) => { setRadius(event.target.value) }}></input>
-        <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button><br />
-      </div>
-      <Map />
+    <div>
+      <h1>{props.name}</h1>
+      <input onChange={(event) => {setRadius(event.target.value)}}></input>
+      <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button><br />
+      <ul>
+        {list.success ? list.list.map(obj => {
+          return <h2><a href="#" onClick={showHandle}>{(isShow === obj.name)&& (<Profile profile={obj} 
+        key={obj._id} />)}{obj.name}</a></h2>
+        }) : ''}
+      </ul>
+    </div> 
+    <Map />
     </div>
   );
 }
 
-  const mapStateToProps = (state) => ({
-    login: state.login,
-    id: state.id,
-  });
+const mapStateToProps = (state) => ({
+  ...state,
+});
 
 export default connect(mapStateToProps)(ListUsers)
+

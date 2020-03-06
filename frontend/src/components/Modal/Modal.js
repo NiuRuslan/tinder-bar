@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import './modal.css';
 
 
-function Modal() {
-  // const [profiles, setProfiles] = useState([]);
+function Modal(props) {
+  
 const profile = props.profile
   return (
     <>
