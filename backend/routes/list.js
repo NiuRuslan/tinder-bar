@@ -19,6 +19,9 @@ router.get('/', async function (req, res, next) {
  * @list - массив объектов - анкеты пользователей
  * @err - Расшифровка ошибки
  */
+
+
+
 router.post('/users', async (req, res) => {
   const {
     id,
