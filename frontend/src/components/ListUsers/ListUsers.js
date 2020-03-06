@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
-import axios from 'axios'
-import { MyMapComponent } from './Map'
-import Map from './Map'
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import Map from './Map';
 
 
 /**
@@ -38,68 +36,67 @@ const ListUsers = (props) => {
         setList({
           success: true,
           list: response.data.list,
-        })
+        });
       } else {
         setList({
           success: false,
           err: '',
-        })
+        });
       }
     }).catch(() => {
       setList({
         success: false,
         err: 'Runtime error',
-      })
-    })
-  }
+      });
+    });
+  };
 
   const geoFindLocation = () => {
     const success = (position) => {
       requestListUsers(props.id, position.coords.latitude, position.coords.longitude, radius);
-    }
+    };
 
     const error = () => {
       setList({
         success: false,
         err: 'Unable to retrieve your location',
-      })
-    }
+      });
+    };
 
     if (!navigator.geolocation) {
       setList({
         success: false,
         err: 'Geolocation is not supported by your browser',
-      })
+      });
     } else {
-      //status.textContent = 'Locating…';
+      // status.textContent = 'Locating…';
       navigator.geolocation.getCurrentPosition(success, error);
     }
-  }
+  };
   console.log('list', list);
-  
+
   return (
     <div>
 
-    <div>
-      <h1>{props.name}</h1>
-      <input onChange={(event) => {setRadius(event.target.value)}}></input>
-      <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button><br />
-      <ul>
-        {list.success ? list.list.map(obj => {
-          return <li key={obj._id}>{obj.name}</li>
-        }) : ''}
-      </ul>
-    </div> 
-    <Map />
+      <div>
+        <h1>{props.name}</h1>
+        <input onChange={(event) => { setRadius(event.target.value); }} />
+        <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button>
+        <br />
+        <ul>
+          {list.success ? list.list.map((obj) => <li key={obj._id}>{obj.name}</li>) : ''}
+        </ul>
+      </div>
+      <Map />
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   ...state,
 });
 
-export default connect(mapStateToProps)(ListUsers)
+export default connect(mapStateToProps)(ListUsers);
 
 // list [
 //   {

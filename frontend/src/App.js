@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Anketa from "./components/anketa/Anketa"
+import Anketa from './components/anketa/Anketa';
 import './App.css';
 import Login from './components/Login/Login';
 import Regist from './components/Regist/Regist';
@@ -17,15 +17,12 @@ import { useCookies } from 'react-cookie';
 import NotFound from './components/notFound/notFound';
 
 function App() {
-
- 
-
   const history = createBrowserHistory();
   const [cookies, setCookie] = useCookies(['userName', 'chacked']);
   return (
     <>
       <Router>
-        {cookies.chacked === 'true' ? (cookies.userName ? null : <Redirect to='/login' />) : <Redirect to='/startpage' />}
+        {cookies.chacked === 'true' ? (cookies.userName ? null : <Redirect to="/login" />) : <Redirect to="/startpage" />}
         <Switch>
           <Route exact path="/listUsers" component={ListUsers} />
           <Route exact path="/profile" component={Anketa} />

@@ -32,12 +32,13 @@ router.post('/users', async (req, res) => {
 
   // Записываю текущие координаты пользователя
   await Profile.updateOne({
-    _id: id
+    person: id
   }, {$set: {
-    latitude: +latitude,
-    longitude: +longitude,
+    latitude,
+    longitude,
     },
   });
+  
   console.log('list', list);
   
   if (list) {
