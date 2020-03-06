@@ -4,7 +4,7 @@ body, p, input, select, textarea, button , a{
 
 	font-family: 'Montserrat', sans-serif;
 	letter-spacing: -0.2px;
-  font-size: 16px;
+  font-size: 20px;
   text-decoration-line: none;
   color: black;
   margin-left: 2px;
@@ -13,7 +13,11 @@ body, p, input, select, textarea, button , a{
 
 div, p {
 	color: #BABECC;
-	text-shadow: 1px 1px 1px #FFF;
+  text-shadow: 1px 1px 1px #FFF;
+
+}
+.date {
+  color: #0f4667;
 }
 
 form {
@@ -38,8 +42,8 @@ button, input, a{
 	font-size: 16px;
 	border-radius: 320px;
 	padding: 16px;
-	background-color: #EBECF0;
-	text-shadow: 1px 1px 0 #FFF;
+	/* background-color: #EBECF0;*/
+	text-shadow: 1px 1px 0 #FFF; 
 }
 
 label {

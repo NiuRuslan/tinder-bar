@@ -4,7 +4,8 @@
 	position: absolute;
 	width: 100vw;
 	height: 100vh;
-	overflow: hidden;
+  overflow: hidden;
+
 }
 
 .slideshow-image {
@@ -18,7 +19,11 @@
 	animation-iteration-count: infinite;
 	animation-duration: 16s;
 	opacity: 1;
-	transform: scale(1.2);
+  transform: scale(1.2);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .slideshow-image:nth-child(1) {

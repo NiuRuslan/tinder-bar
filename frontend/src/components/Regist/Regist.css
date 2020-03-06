@@ -2,7 +2,7 @@ body, html {
   background-color: #EBECF0;
 }
 
-body, p, input, select, textarea, button {
+body, p, input, select, textarea, button, a {
   font-family: 'Montserrat', sans-serif;
   letter-spacing: -0.2px;
   font-size: 16px;
@@ -27,16 +27,16 @@ form {
 .segment, h1 {
   padding: 32px 0;
   text-align: center;
-  color:red;
+  color:#0f4667;
 }
 
 button, input {
   border: 0;
   outline: 0;
   font-size: 16px;
-  border-radius: 320px;
+ border-radius: 320px;
   padding: 16px;
-  background-color: #EBECF0;
+  /*  background-color: #EBECF0; */
   text-shadow: 1px 1px 0 #FFF;
 }
 
@@ -60,7 +60,7 @@ input:focus {
 }
 
 button {
-  color: #61677C;
+  color: #0f4667;
   font-weight: bold;
   box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
   transition: all 0.2s ease-in-out;
@@ -68,10 +68,10 @@ button {
   font-weight: 600;
 }
 button:hover {
-  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+  box-shadow: -2px -2px 5px #0f4667, 2px 2px 5px #BABECC;
 }
 button:active {
-  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  box-shadow: inset 1px 1px 2px #0f4667, inset -1px -1px 2px #FFF;
 }
 button .icon {
   margin-right: 8px;
@@ -93,14 +93,16 @@ button.unit .icon {
 button.green {
   display: block;
   width: 100%;
-  color: rgb(45, 160, 45);
+  /* color: rgb(45, 160, 45); */
 }
 button.red {
   display: block;
   width: 100%;
-  color: #AE1100;
+  /* color: #AE1100; */
 }
-
+::placeholder{
+  color: #0f4667;
+}
 .input-group {
   display: flex;
   align-items: center;

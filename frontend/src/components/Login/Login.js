@@ -51,10 +51,10 @@ function Login(props) {
             <label>
               <input name='pasword' type="password" placeholder="Password" minLength='5' required/>
             </label>
-            <button className="red" type="submit"><i className="icon ion-md-lock"></i> Log in</button>
+            <button className="red" type="submit" style={{color:"#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667"}}> Log in</button>
             <br />
             <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
-  <Link to='/regist'><button className="green">Create Account</button></Link>
+  <Link to='/regist'><button className="green"style={{color:"#0f4667", backgroundColor: "#FFF", textShadow: "1px 1px 1px #0f4667"}}>Create Account</button></Link>
           </form>
          
           

@@ -32,6 +32,7 @@ function Regist(props) {
 
 
   return (
+    
     <>
       {cookies.userName ?
         <Redirect from='/regist' to='/home' />
@@ -49,10 +50,9 @@ function Regist(props) {
             <label>
               <input name='pasword' type="password" placeholder="Password" minLength='5' required />
             </label>
-            <button className="red" type="submit"><i className="icon ion-md-lock"></i>Create</button>
+            <button  type="submit" style={{color:"#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667"}}>Create</button>
             <br />
             <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
-
             <Link to='/login'><button className="green" >LogIn</button></Link>
           </form>
 

@@ -68,11 +68,14 @@ previousButton() {
   let currentStep = this.state.currentStep;
   if(currentStep !==1){
     return (
+      <>
       <button 
-        className="btn btn-secondary" 
+        className="btn btn-secondary"
         type="button" onClick={this._prev}>
       Previous
       </button>
+      <br/>
+      </>
     )
   }
   return null;
@@ -82,7 +85,7 @@ nextButton(){
   let currentStep = this.state.currentStep;
   if(currentStep <3){
     return (
-      <button 
+      <button style={{color:"#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667"}}
         className="btn btn-primary float-right" 
         type="button" onClick={this._next}>
       Next
@@ -101,7 +104,7 @@ nextButton(){
      
 
       <form onSubmit={this.handleSubmit}>
-      <p>Step {this.state.currentStep} </p> 
+      <p >Step {this.state.currentStep} </p> 
       {/* 
         render the form steps and pass required props in
       */}
@@ -146,7 +149,7 @@ function Step1(props) {
          </label>
          <label>
            <input value={props.DoB}
-        onChange={props.handleChange} className="form-control"type="date" name="DoB" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" />
+        onChange={props.handleChange} className="form-control date"type="date" name="DoB" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" />
          </label>
          <label>
            <input  value={props.activity}
@@ -193,7 +196,7 @@ function Step3(props) {
 
   
     </div>
-    <button className="btn btn-success btn-block" style={{color:"red"}}>Save it</button>
+    <button className="btn btn-success btn-block" style={{marginBottom: "25px",color:"#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667"}}>Save it</button>
 
     </React.Fragment>
      
