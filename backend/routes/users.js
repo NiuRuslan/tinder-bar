@@ -3,7 +3,7 @@ const Person = require('../models/modelPerson'); // A.I. подключил мо
 const Profile = require('../models/modelProfile');
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   res.send('respond with a resource');
 });
 
@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
   } = req.body;
   const user = await Person.findOne({ email, password });
   if (user) {
-    const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
+    const { profileId } = await Person.findOne({ email, password }).populate('profileId');
     return res.send({
       success: true,
       nickname: user.nickname,

@@ -142,15 +142,15 @@ function Step1(props) {
     <div className="form-group">
       <label>
         <input value={props.name}
-          onChange={props.handleChange} className="form-control" type="text" name="name" placeholder="Name" oninput="this.className" required />
+          onChange={props.handleChange} className="form-control" type="text" name="name" placeholder="Name" onInput="this.className" required />
       </label>
       <label>
         <input value={props.DoB}
-          onChange={props.handleChange} className="form-control" type="date" name="DoB" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" min="1920-12-31" required />
+          onChange={props.handleChange} className="form-control" type="date" name="DoB" placeholder="Date of Birth" onInput="this.className" max="2001-12-31" min="1920-12-31" required />
       </label>
       <label>
         <input value={props.activity}
-          onChange={props.handleChange} className="form-control" type="text" name="activity" placeholder="Place of work or study" oninput="this.className" required />
+          onChange={props.handleChange} className="form-control" type="text" name="activity" placeholder="Place of work or study" onInput="this.className" required />
       </label>
     </div>
   );

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Slider from '../slider/Slider';
-import Slider2 from '../slider/Slider2';
 import './Regist.css';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { requestFetchRegist } from '../../redux/action';
+import Slider from '../slider/Slider';
+import Slider2 from '../slider/Slider2';
 
 function Regist(props) {
   const [cookies, setCookie] = useCookies(['userName']);

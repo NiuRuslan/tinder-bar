@@ -4,7 +4,7 @@ const router = express.Router();
 
 const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   res.send('respond with a resource');
 });
 
