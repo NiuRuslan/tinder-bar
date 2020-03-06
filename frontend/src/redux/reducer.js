@@ -1,6 +1,6 @@
 import {LOGIN } from './action-types'
 
-const init ={id:'',nickname:'',profildId:'',};
+const init ={id:'',nickname:'',profileId:'',};
 
 export default (state=init, action) => {
 switch (action.type){
@@ -9,7 +9,7 @@ switch (action.type){
       ...state,
       id:action.id,
       nickname:action.nickname,
-      profildId:action.profildId
+      profileId:action.profileId
     }
     default:
       return state;

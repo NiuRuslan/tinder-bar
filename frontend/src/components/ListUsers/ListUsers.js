@@ -68,7 +68,7 @@ const ListUsers = (props) => {
       })
     } else {
       //status.textContent = 'Locating…';
-      navigator.geolgitocation.getCurrentPosition(success, error);
+      navigator.geolocation.getCurrentPosition(success, error);
     }
   }
 
