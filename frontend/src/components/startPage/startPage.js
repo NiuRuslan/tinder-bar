@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './startPage.css'
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 

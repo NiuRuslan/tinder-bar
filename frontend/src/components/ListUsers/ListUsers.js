@@ -1,104 +1,93 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
-// import './Login.css'
-// import { Link, Redirect } from 'react-router-dom'
-// import { LogIn } from '../../redux/action'
+import { MyMapComponent } from './Map'
+import Map from './Map'
 
 
-// function Login(props) {
-//   const [error, setError] = useState('')
-//   const { login, LogIn } = props
-
-
-
-
-//   return (
-//     <>
-//       {login ?
-//         <Redirect from='/login' to='/home' />
-//         : <div>
-//           <form onSubmit={PutData}>
-//             <div className="segment">
-//               <h1>Sign up</h1>
-//             </div>
-
-//             <label>
-//               <input name='mail' type="email" placeholder="Email Address" required/>
-//             </label>
-//             <label>
-//               <input name='pasword' type="password" placeholder="Password" minLength='5' required/>
-//             </label>
-//             <button className="red" type="submit"><i className="icon ion-md-lock"></i> Log in</button>
-//             <br />
-//             <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
-//   <Link to='/regist'><button className="green">Create Account</button></Link>
-//           </form>
-
-
-//         </div>
-//       }
-
-//     </>
-//   )
-// }
 /**
  * Александр Иванов
- * функция делает запрос на сервер и возвращает список участников
+ * Коомпонент отрисовывает список пользователей в заданном радиусе
  */
-const requestListUsers = () => {
-  axios.post('/list/login').then((response) => {
-    if (response.data.success) {
-      console.log(response);
-      //LogIn(response.data.date.id, response.data.date.nickname);
-    } else {
-      // setError(response.data.err)
-      // setTimeout(setError, 2000, '')
+const ListUsers = (props) => {
+  const [radius, setRadius] = useState(null);
+  const [list, setList] = useState(null);
+
+  /**
+   * Делает запрос на сервер:
+   * @latitude - координата пользователя
+   * @longitude - координата пользователя
+   * @radius - размер радиуса поиска пользователей
+   * Получает:
+   * @success - флаг выполнения запроса
+   * @list - список найденых пользователей
+   * @err - Расшифровка ошибки
+   */
+  const requestListUsers = (latitude, longitude, radius) => {
+    axios.post('/list/users', {
+      latitude,
+      longitude,
+      radius,
+    }).then((response) => {
+      if (response.data.success) {
+        setList({
+          success: true,
+          list: response.data.list,
+        })
+      } else {
+        setList({
+          success: false,
+          err: '',
+        })
+      }
+    }).catch(() => {
+      setList({
+        success: false,
+        err: 'Runtime error',
+      })
+    })
+  }
+
+  const geoFindLocation = () => {
+    const success = (position) => {
+      requestListUsers(position.coords.latitude, position.coords.longitude, radius);
     }
-  }).catch(() => { 
-    // setError('Неизвестная Ошибка регистрации'); 
-    // setTimeout(setError, 2000, '') 
-  })
-}
 
+    const error = () => {
+      setList({
+        success: false,
+        err: 'Unable to retrieve your location',
+      })
+    }
 
+    if (!navigator.geolocation) {
+      setList({
+        success: false,
+        err: 'Geolocation is not supported by your browser',
+      })
+    } else {
+      //status.textContent = 'Locating…';
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
 
-
-/**
- * Александр Иванов
- * Коомпонент отрисовывает список зарегистрированных пользователей
- */
-const listUsers = () => {
-  //requestListUsers();
   return (
     <div>
-      <h1>List Users</h1>
+
+      <div>
+        <h1>123</h1>
+        <input onChange={(event) => { setRadius(event.target.value) }}></input>
+        <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button><br />
+      </div>
+      <Map />
     </div>
-  )
+  );
 }
 
+  const mapStateToProps = (state) => ({
+    login: state.login,
+    id: state.id,
+  });
 
-//   function PutData(event) {
-//     event.preventDefault();
-//     const { mail: { value: email }, pasword: { value: password } } = event.target;
-//     axios.post('/users/login', {
-//       email,
-//       password,
-//     }).then((response) => {
-//       if (response.data.success) {
-//         LogIn(response.data.date.id, response.data.date.nickname);
-//       } else {
-//         setError(response.data.err)
-//         setTimeout(setError, 2000, '')
-//       }
-//     }).catch(() => { setError('Неизвестная Ошибка регистрации'); setTimeout(setError, 2000, '') })
-//   }
-
-const mapStateToProps = (state) => ({
-  login: state.login,
-});
-// const mapDispatchToProps = (dispatch) => ({
-//   LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
-// });
-
-export default connect(mapStateToProps)(listUsers)
+export default connect(mapStateToProps)(ListUsers)

@@ -1,72 +1,67 @@
-import React, { useState } from 'react'
-import './Regist.css'
-import axios from 'axios'
-import { connect } from 'react-redux'
-import { LogIn } from '../../redux/action'
-import { Link, Redirect } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import './Regist.css';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-
+import { requestFetchRegist } from '../../redux/action';
 
 function Regist(props) {
   const [cookies, setCookie] = useCookies(['userName']);
-  const [error, setError] = useState('')
-  const { LogIn } = props
+  const { requestFetchRegist,err,user } = props;
 
 
   function PutData(event) {
     event.preventDefault();
     const { nick: { value: nickname }, mail: { value: email }, pasword: { value: password } } = event.target;
-    axios.post('http://localhost:4000/users/registration', {
-      nickname,
-      email,
-      password,
-    }).then((response) => {
-      if (response.data.success) {
-          LogIn(response.data.date, nickname,);
-        setCookie('userName', response.data.date.id)
-      } else {
-        setError(response.data.err)
-        setTimeout(setError, 2000, '')
-      }
-    }).catch(() => { setError('Неизвестная Ошибка регистрации'); setTimeout(setError, 2000, '') })
+    requestFetchRegist(nickname,email,password)
   }
+  useEffect(()=>{
+if(user.id){
+  setCookie('userName', user.id)
+}
+  },[user.id,setCookie])
 
 
   return (
     <>
-      \{cookies.userName ?
-        <Redirect to='/profile' />
-        : <div>
-          <form onSubmit={PutData}>
-            <h1 className="segment">Create Account</h1>
-
-
-            <label>
-              <input name='nick' type="text" placeholder="NickName" required />
-            </label>
-            <label>
-              <input name='mail' type="email" placeholder="Email Address" required />
-            </label>
-            <label>
-              <input name='pasword' type="password" placeholder="Password" minLength='5' required />
-            </label>
-            <button className="red" type="submit"><i className="icon ion-md-lock"></i>Create</button>
-            <br />
-            <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
-
-            <Link to='/login'><button className="green" >LogIn</button></Link>
-          </form>
-
-        </div>
-      }
+      {cookies.userName
+        ? <Redirect to="/profile" />
+        : (
+          <div>
+            <form onSubmit={PutData}>
+              <h1 className="segment">Create Account</h1>
+              <label>
+                <input name="nick" type="text" placeholder="NickName" required />
+              </label>
+              <label>
+                <input name="mail" type="email" placeholder="Email Address" required />
+              </label>
+              <label>
+                <input name="pasword" type="password" placeholder="Password" minLength="5" required />
+              </label>
+              <div style={{ color: 'red', textAlign: 'center' }}>
+                {err.title}
+                {' '}
+                <br />
+                {' '}
+              </div>
+              <button className="red" type="submit">Create</button>
+              <br />
+              <Link to="/login"><button className="green">LogIn</button></Link>
+            </form>
+          </div>
+        )}
     </>
-  )
+  );
 }
-
-
-const mapDispatchToProps = (dispatch) => ({
-  LogIn: (id, nickname,profileId ) => dispatch(LogIn(id, nickname,profileId))
+const mapStateToProps = (state) => ({
+  user: state.user,
+  err: state.error,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  requestFetchRegist: (nickname,email, password) => dispatch(requestFetchRegist(nickname,email, password)),
+})
 
-export default connect(null, mapDispatchToProps)(Regist)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Regist);

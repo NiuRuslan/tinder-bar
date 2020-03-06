@@ -1,91 +1,50 @@
 const express = require('express');
+
 const router = express.Router();
 
-const Person = require('../models/modelPerson'); // A.I. подключил модель монгоДБ
 const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
-/* GET users listing. */
-router.get('/', async function (req, res, next) {
+router.get('/', async (req, res, next) => {
   res.send('respond with a resource');
 });
 
-/**
- *  Aleksandr Ivanov
- * 
- * @email
- * @password
- * Отдаю объект:
- * @success - флаг выполнения запроса
- * @data - объект с данными пользователя
- *    @nickname
- *    @id
- * @err - Расшифровка ошибки
- */
 router.post('/users', async (req, res) => {
+  const {
+    latitude,
+    longitude,
+    radius,
+  } = req.body;
+  /**
+   * Расчитываем поправку к координатам (очень грубое вычисление)
+   * @coeff - 1m in degree = 1 / 111320m = 0.000008983
+   */
+  const coeff = 0.000008983;  
+  const la1 = +latitude - radius * coeff;
+  const la2 = +latitude + radius * coeff;
+  const lo1 = +longitude - radius * coeff;
+  const lo2 = +longitude + radius * coeff;
   
-
-
-
-
-
-
-  const {
-    email,
-    password,
-  } = req.body;
-  const user = await Person.findOne({ email, password });
-  if (user) {
+  const list = await Profile.find({
+    latitude: {$gte: la1, $lte: la2},
+    longitude: {$gte: lo1, $lte: lo2},
+  });
+  
+  // Записываю текущие координаты пользователя
+  await Profile.updateOne({_id: '5e6102bf79e480d766a5911c'}, {$set: {
+    geolocation: {
+      latitude: +latitude,
+      longitude: +longitude,
+    },
+  }});
+  if (list) {
     return res.send({
       success: true,
-      date: {
-        nickname: user.nickname,
-        id: user._id,
-      }
+      list
     });
   } else {
     return res.send({
       success: false,
-      err: 'No such user or incorrect pair login password'
-    })
-  }
-});
-
-/**
- *  Aleksandr Ivanov
- * Проверяю на уникальность поле: email
- * Вношу нового пользователя в базу
- * Отдаю объект:
- * @success - флаг выполнения запроса
- * @data - Айди созданного пользователя
- * @err - Расшифровка ошибки
- */
-router.post('/registration', async (req, res) => {
-  const {
-    nickname,
-    email,
-    password,
-  } = req.body;
-  if (nickname === '' || email === '' || password === '') {
-    return res.send({
-      success: false,
-      err: 'Wrong data'
-    })
-  };
-  const user = await Person.findOne({ email });
-  if (!user) {
-    const userNew = await Person.create({
-      nickname,
-      email,
-      password
-    });
-    return res.send({
-      success: true,
-      date: userNew._id,
-    });
-  } else {
-    return res.send({
-      success: false,
-      err: 'Email is already registered'
+      err: 'No such user from this geolocation'
     })
   }
 });

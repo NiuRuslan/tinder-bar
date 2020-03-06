@@ -18,7 +18,6 @@ class Anketa extends React.Component {
     }
   }
 
-
   handleChange = event => {
     const { name, value } = event.target
     this.setState({
@@ -31,7 +30,7 @@ class Anketa extends React.Component {
     const { user } = this.props
     const { name, DoB, activity, topics, drinks, about } = this.state
 
-    const { data } = await axios.post("http://localhost:4000/users/profile", {
+    await axios.post("http://localhost:4000/users/profile", {
       name, DoB, activity, topics, drinks, about, id: user.id
     });
     const profileId = {
@@ -90,7 +89,7 @@ class Anketa extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
 
         <p>Step {this.state.currentStep} </p>
 
@@ -120,7 +119,7 @@ class Anketa extends React.Component {
           {this.nextButton()}
 
         </form>
-      </React.Fragment>
+      </>
     );
   }
 }
@@ -133,15 +132,15 @@ function Step1(props) {
     <div className="form-group">
       <label>
         <input value={props.name}
-          onChange={props.handleChange} className="form-control" type="text" name="name" placeholder="Name" oninput="this.className" />
+          onChange={props.handleChange} className="form-control" type="text" name="name" placeholder="Name" oninput="this.className" required />
       </label>
       <label>
         <input value={props.DoB}
-          onChange={props.handleChange} className="form-control" type="date" name="DoB" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" />
+          onChange={props.handleChange} className="form-control" type="date" name="DoB" placeholder="Date of Birth" oninput="this.className" max="2001-12-31" min="1920-12-31" required />
       </label>
       <label>
         <input value={props.activity}
-          onChange={props.handleChange} className="form-control" type="text" name="activity" placeholder="Place of work or study" oninput="this.className" />
+          onChange={props.handleChange} className="form-control" type="text" name="activity" placeholder="Place of work or study" oninput="this.className" required />
       </label>
 
     </div>
@@ -172,7 +171,7 @@ function Step3(props) {
     return null
   }
   return (
-    <React.Fragment>
+    <>
       <div className="form-group">
         <label>
           <input value={props.about}
@@ -180,7 +179,7 @@ function Step3(props) {
         </label>
       </div>
       <button className="btn btn-success btn-block" style={{ color: "red" }}>Save it</button>
-    </React.Fragment>
+    </>
   );
 }
 
