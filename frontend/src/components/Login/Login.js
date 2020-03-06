@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Slider from "../slider/Slider"
+import Slider2 from "../slider/Slider2"
 import './Login.css';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
@@ -10,6 +12,12 @@ function Login(props) {
   const [error, setError] = useState('');
   const { user, LogIn } = props;
   const [cookies, setCookie] = useCookies(['userName']);
+
+  const [slider, setSlider] = useState();
+  useEffect(() => {
+    let slider = (Math.floor(Math.random() * 10))
+    setSlider(slider);
+  }, [0]);
 
   function PutData(event) {
     event.preventDefault();
@@ -34,6 +42,8 @@ function Login(props) {
 
   return (
     <>
+     {slider > 5 ?
+        (<Slider />) : (<Slider2 />)}
       {cookies.userName
         ? (user.profileId ? <Redirect from="/login" to="/listUsers" /> : <Redirect to="/profile" />)
         : (
@@ -48,9 +58,11 @@ function Login(props) {
               </label>
               <button className="red" type="submit" style={{ color: "#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667" }}> Log in</button>
               <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
+              <br/>
               <Link to='/regist' style={{ width: "100%", alignSelf: "center" }}>
                 <button className="green" style={{ color: "#0f4667", backgroundColor: "#FFF", textShadow: "1px 1px 1px #0f4667" }}>Create Account</button>
               </Link>
+             
             </form>
           </div>
         )}

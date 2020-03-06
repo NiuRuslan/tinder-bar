@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Slider from "../slider/Slider"
+import Slider2 from "../slider/Slider2"
 import './Regist.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -10,7 +12,11 @@ function Regist(props) {
   const [cookies, setCookie] = useCookies(['userName']);
   const [error, setError] = useState('');
   const { LogIn } = props;
-
+  const [slider, setSlider] = useState();
+  useEffect(() => {
+    let slider = (Math.floor(Math.random() * 10))
+    setSlider(slider);
+  }, [0]);
 
   function PutData(event) {
     event.preventDefault();
@@ -33,7 +39,8 @@ function Regist(props) {
 
   return (
 
-    <>
+    <>     {slider > 5 ?
+      (<Slider />) : (<Slider2 />)}
       {cookies.userName
         ? <Redirect to="/profile" />
         : (
@@ -51,7 +58,9 @@ function Regist(props) {
               </label>
               <button type="submit" style={{ color: "#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667" }}>Create</button>
               <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
+              <br/>
               <Link to='/login' style={{ width: "100%", alignSelf: "center" }}><button className="green" style={{ color: "#0f4667", backgroundColor: "#FFF", textShadow: "1px 1px 1px #0f4667" }} >LogIn</button></Link>
+             
             </form>
           </div>
         )}
