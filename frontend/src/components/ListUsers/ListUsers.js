@@ -3,27 +3,26 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import Map from './Map';
 
-
 /**
  * Александр Иванов
  * Коомпонент отрисовывает список пользователей в заданном радиусе
  */
+
 const ListUsers = (props) => {
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
     err: '',
   });
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongituse] = useState(null);
 
   /**
    * Делает запрос на сервер:
-   * @latitude - координата пользователя
-   * @longitude - координата пользователя
-   * @radius - размер радиуса поиска пользователей
-   * Получает:
-   * @success - флаг выполнения запроса
-   * @list - список найденых пользователей
-   * @err - Расшифровка ошибки
+   * @param {String} id - пользователя в бд
+   * @param {Number} latitude - широта в радинах
+   * @param {Number} longitude - долгота в радианах
+   * @param {Number} radius - радиус поиска
    */
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios.post('/list/users', {
@@ -53,6 +52,8 @@ const ListUsers = (props) => {
 
   const geoFindLocation = () => {
     const success = (position) => {
+      setLatitude(position.coords.latitude);
+      setLongituse(position.coords.longitude);
       requestListUsers(props.id, position.coords.latitude, position.coords.longitude, radius);
     };
 
@@ -77,7 +78,6 @@ const ListUsers = (props) => {
 
   return (
     <div>
-
       <div>
         <h1>{props.name}</h1>
         <input onChange={(event) => { setRadius(event.target.value); }} />
@@ -87,7 +87,7 @@ const ListUsers = (props) => {
           {list.success ? list.list.map((obj) => <li key={obj._id}>{obj.name}</li>) : ''}
         </ul>
       </div>
-      <Map />
+      <Map latitude={+latitude} longitude={+longitude} />
     </div>
   );
 };
@@ -97,32 +97,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(ListUsers);
-
-// list [
-//   {
-//     geolocation: { latitude: 55.734973, longitude: 37.619144 },
-//     topics: [ 'swimming', 'singing' ],
-//     drinks: [ 'beer' ],
-//     _id: 5e62000f11ac59f32d8556e3,
-//     name: 'Olyaa',
-//     DoB: 1998-06-01T00:00:00.000Z,
-//     activity: 'teacher',
-//     about: 'playing',
-//     person: 5e62000f11ac59f32d8556e3,
-//     latitude: 55.734973,
-//     longitude: 37.619144
-//   },
-//   {
-//     geolocation: { latitude: 55.736879, longitude: 37.483627 },
-//     topics: [ 'cooking', 'swimming' ],
-//     drinks: [ 'winw' ],
-//     _id: 5e62001011ac59f32d8556e5,
-//     name: 'Sanya',
-//     DoB: 1987-06-01T00:00:00.000Z,
-//     activity: 'doctor',
-//     about: 'dancing',
-//     person: 5e62001011ac59f32d8556e5,
-//     latitude: 55.734973,
-//     longitude: 37.619144
-//   }
-// ]
