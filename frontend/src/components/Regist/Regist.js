@@ -21,8 +21,8 @@ function Regist(props) {
       password,
     }).then((response) => {
       if (response.data.success) {
-        LogIn(response.data.date, nickname);
-        setCookie('userName', response.data.date.id);
+        LogIn(response.data.id, nickname);
+        setCookie('userName', response.data.id);
       } else {
         setError(response.data.err);
         setTimeout(setError, 2000, '');
@@ -33,7 +33,6 @@ function Regist(props) {
 
   return (
     <>
-      \
       {cookies.userName
         ? <Redirect to="/profile" />
         : (
@@ -59,7 +58,6 @@ function Regist(props) {
               <br />
               <Link to="/login"><button className="green">LogIn</button></Link>
             </form>
-
           </div>
         )}
     </>

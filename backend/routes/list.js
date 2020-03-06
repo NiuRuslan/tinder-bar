@@ -4,29 +4,10 @@ const router = express.Router();
 
 const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
-/* GET users listing. */
 router.get('/', async (req, res, next) => {
   res.send('respond with a resource');
 });
 
-/**
-<<<<<<< HEAD
- *  Aleksandr Ivanov
- *
- * @email
- * @password
-=======
- * Aleksandr Ivanov
- * Получаем запрос с координатами и радиусом поиска
- * @latitude
- * @longitude
- * @radius
->>>>>>> b1f8c2f55af6e12bb0f22c31a70fa5721cd334b9
- * Отдаю объект:
- * @success - флаг выполнения запроса
- * @list - массив объектов - анкеты пользователей
- * @err - Расшифровка ошибки
- */
 router.post('/users', async (req, res) => {
   const {
     latitude,
@@ -66,10 +47,6 @@ router.post('/users', async (req, res) => {
       err: 'No such user from this geolocation'
     })
   }
-  return res.send({
-    success: false,
-    err: 'Email is already registered',
-  });
 });
 
 module.exports = router;

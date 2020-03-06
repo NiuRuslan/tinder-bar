@@ -7,34 +7,19 @@ router.get('/', async (req, res, next) => {
   res.send('respond with a resource');
 });
 
-/**
- *  Aleksandr Ivanov
- * Проверяю данные пользователя:
- * @email
- * @password
- * Отдаю объект:
- * @success - флаг выполнения запроса
- * @data - объект с данными пользователя
- *    @nickname
- *    @id
- * @err - Расшифровка ошибки
- */
 router.post('/login', async (req, res) => {
   const {
     email,
     password,
   } = req.body;
   const user = await Person.findOne({ email, password });
+  const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
   if (user) {
-    const profile = await Profile.findById({ person: user._id });
-    const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
     return res.send({
       success: true,
-      date: {
-        nickname: user.nickname,
-        id: user._id,
-        profileId: user.profileId,
-      },
+      nickname: user.nickname,
+      id: user._id,
+      profileId,
     });
   }
   return res.send({
@@ -43,15 +28,6 @@ router.post('/login', async (req, res) => {
   });
 });
 
-/**
- *  Aleksandr Ivanov
- * Проверяю на уникальность поле: email
- * Вношу нового пользователя в базу
- * Отдаю объект:
- * @success - флаг выполнения запроса
- * @data - Айди созданного пользователя
- * @err - Расшифровка ошибки
- */
 router.post('/registration', async (req, res) => {
   const {
     nickname,
@@ -73,7 +49,7 @@ router.post('/registration', async (req, res) => {
     });
     return res.send({
       success: true,
-      date: userNew._id,
+      id: userNew._id,
     });
   }
   return res.send({

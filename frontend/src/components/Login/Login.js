@@ -19,12 +19,12 @@ function Login(props) {
       password,
     }).then((response) => {
       if (response.data.success) {
-        if (response.data.date.profileId) {
-          LogIn(response.data.date.id, response.data.date.nickname, response.data.date.profileId);
+        if (response.data.profileId) {
+          LogIn(response.data.id, response.data.nickname, response.data.profileId);
         } else {
-          LogIn(response.data.date.id, response.data.date.nickname);
+          LogIn(response.data.id, response.data.nickname);
         }
-        setCookie('userName', response.data.date.id);
+        setCookie('userName', response.data.id);
       } else {
         setError(response.data.err);
         setTimeout(setError, 2000, '');
