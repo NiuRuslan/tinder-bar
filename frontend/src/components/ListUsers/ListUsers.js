@@ -2,47 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import axios from 'axios'
-
-
-
-
-// const geoFindLocation = () => {
-//   const status = document.querySelector('#status');
-//   const mapLink = document.querySelector('#map-link');
-
-//   mapLink.href = '';
-//   mapLink.textContent = '';
-
-//   function success(position) {
-//     const latitude = position.coords.latitude;
-//     const longitude = position.coords.longitude;
-
-//     status.textContent = '';
-//     mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-//     mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
-//   }
-
-//   function error() {
-//     status.textContent = 'Unable to retrieve your location';
-//   }
-
-//   if (!navigator.geolocation) {
-//     status.textContent = 'Geolocation is not supported by your browser';
-//   } else {
-//     status.textContent = 'Locating…';
-//     navigator.geolocation.getCurrentPosition(success, error);
-//   }
-// }
-
+import { MyMapComponent } from './Map'
+import Map from './Map'
 
 
 /**
  * Александр Иванов
  * Коомпонент отрисовывает список пользователей в заданном радиусе
  */
-function ListUsers(props) {
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+const ListUsers = (props) => {
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState(null);
 
@@ -57,7 +25,6 @@ function ListUsers(props) {
    * @err - Расшифровка ошибки
    */
   const requestListUsers = (latitude, longitude, radius) => {
-    geoFindLocation();
     axios.post('/list/users', {
       latitude,
       longitude,
@@ -84,8 +51,7 @@ function ListUsers(props) {
 
   const geoFindLocation = () => {
     const success = (position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
+      requestListUsers(position.coords.latitude, position.coords.longitude, radius);
     }
 
     const error = () => {
@@ -102,23 +68,20 @@ function ListUsers(props) {
       })
     } else {
       //status.textContent = 'Locating…';
-      navigator.geolocation.getCurrentPosition(success, error);
+      navigator.geolgitocation.getCurrentPosition(success, error);
     }
   }
 
-
-  console.log('list>>', list);
-  console.log('id>>', props.id);
-  
-  
   return (
-    <React.Fragment>
+    <div>
+
+    <div>
       <h1>123</h1>
-      <button id="find-me" onClick={() => requestListUsers()}>Show my location</button><br />
-      {latitude}
-      {/* <p id="status"></p>
-      <Link id="map-link" target="_blank"></Link> */}
-    </React.Fragment>
+      <input onChange={(event) => {setRadius(event.target.value)}}></input>
+      <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button><br />
+    </div> 
+    <Map />
+    </div>
   )
 }
 

@@ -25,15 +25,16 @@ router.post('/login', async (req, res) => {
     password,
   } = req.body;
   const user = await Person.findOne({ email, password });
-  const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
-  console.log(profileId)
   if (user) {
+    //const profile = await Profile.findById({person: user._id});
+ //   const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
+ //   console.log(profileId)
     return res.send({
       success: true,
       date: {
         nickname: user.nickname,
         id: user._id,
-        profileId,
+        profileId: user.profileId,
       },
     });
   }

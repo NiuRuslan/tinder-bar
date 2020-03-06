@@ -27,7 +27,7 @@ class Anketa extends React.Component {
     event.preventDefault()
     const { name, DoB, activity, topics, drinks, about} = this.state
     const { data } = await axios.post("http://localhost:4000/users/profile", {
-      name, DoB, activity, topics, drinks, about, email:"ioioio@mail.ru"
+      name, DoB, activity, topics, drinks, about, email:"store@mail.ru"
     });
     console.log(data);
     

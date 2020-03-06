@@ -25,16 +25,28 @@ router.post('/users', async (req, res) => {
     longitude,
     radius,
   } = req.body;
+  /**
+   * Расчитываем поправку к координатам (очень грубое вычисление)
+   * @coeff - 1m in degree = 1 / 111320m = 0.000008983
+   */
+  const coeff = 0.000008983;  
+  const la1 = +latitude - radius * coeff;
+  const la2 = +latitude + radius * coeff;
+  const lo1 = +longitude - radius * coeff;
+  const lo2 = +longitude + radius * coeff;
+  
   const list = await Profile.find({
-    latitude: {
-      $gte: latitude - radius,
-      $lt: latitude + radius
-    },
-    longitude: {
-      $gte: longitude - radius,
-      $lt: longitude + radius
-    }
+    latitude: {$gte: la1, $lte: la2},
+    longitude: {$gte: lo1, $lte: lo2},
   });
+  
+  // Записываю текущие координаты пользователя
+  await Profile.updateOne({_id: '5e6102bf79e480d766a5911c'}, {$set: {
+    geolocation: {
+      latitude: +latitude,
+      longitude: +longitude,
+    },
+  }});
   if (list) {
     return res.send({
       success: true,
