@@ -14,6 +14,8 @@ div, p {
 }
 
 form {
+  background-color: #0f45679c;
+  border-radius: 2%;
   padding: 16px;
   width: 320px;
   margin: 0 auto;
@@ -23,7 +25,12 @@ form {
   padding: 32px 0;
   text-align: center;
 }
-
+.segment, h1 {
+  padding: 32px 0;
+  text-align: center;
+  color:#FFF;
+  text-shadow: 3px 3px 2 #0f4567; 
+}
 button, input {
   border: 0;
   outline: 0;

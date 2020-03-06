@@ -68,14 +68,13 @@ previousButton() {
   let currentStep = this.state.currentStep;
   if(currentStep !==1){
     return (
-      <>
+ 
       <button 
         className="btn btn-secondary"
         type="button" onClick={this._prev}>
       Previous
       </button>
-      <br/>
-      </>
+  
     )
   }
   return null;

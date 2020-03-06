@@ -33,7 +33,10 @@ const profileSchema = new mongoose.Schema({
     latitude: Number,
     longitude: Number,
   },
+  latitude: Number,
+  longitude: Number,
 },
+
 {
   versionKey: false,
 });

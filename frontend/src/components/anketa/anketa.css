@@ -21,9 +21,11 @@ div, p {
 }
 
 form {
+  background-color: #0f45679c;
+  border-radius: 2%;
   display: flex;
-    flex-direction: column;
-    text-align: center;
+  flex-direction: column;
+  text-align: center;
   position: relative;
   z-index: 100;
 	padding: 16px;
@@ -35,7 +37,11 @@ form {
 	padding: 32px 0;
 	text-align: center;
 }
-
+.segment, h1 {
+  padding: 32px 0;
+  text-align: center;
+  color:#FFF;
+}
 button, input, a{
 	border: 0;
 	outline: 0;
