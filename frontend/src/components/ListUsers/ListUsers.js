@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import axios from 'axios'
+import React from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 // import './Login.css'
 // import { Link, Redirect } from 'react-router-dom'
 // import { LogIn } from '../../redux/action'
@@ -9,8 +9,6 @@ import axios from 'axios'
 // function Login(props) {
 //   const [error, setError] = useState('')
 //   const { login, LogIn } = props
-
-
 
 
 //   return (
@@ -50,32 +48,29 @@ const requestListUsers = () => {
   axios.post('/list/login').then((response) => {
     if (response.data.success) {
       console.log(response);
-      //LogIn(response.data.date.id, response.data.date.nickname);
+      // LogIn(response.data.date.id, response.data.date.nickname);
     } else {
       // setError(response.data.err)
       // setTimeout(setError, 2000, '')
     }
-  }).catch(() => { 
-    // setError('Неизвестная Ошибка регистрации'); 
-    // setTimeout(setError, 2000, '') 
-  })
-}
-
-
+  }).catch(() => {
+    // setError('Неизвестная Ошибка регистрации');
+    // setTimeout(setError, 2000, '')
+  });
+};
 
 
 /**
  * Александр Иванов
  * Коомпонент отрисовывает список зарегистрированных пользователей
  */
-const listUsers = () => {
-  //requestListUsers();
-  return (
+const listUsers = () =>
+  // requestListUsers();
+  (
     <div>
       <h1>List Users</h1>
     </div>
-  )
-}
+  );
 
 
 //   function PutData(event) {
@@ -101,4 +96,4 @@ const mapStateToProps = (state) => ({
 //   LogIn: (id, nickname, ) => dispatch(LogIn(id, nickname))
 // });
 
-export default connect(mapStateToProps)(listUsers)
+export default connect(mapStateToProps)(listUsers);

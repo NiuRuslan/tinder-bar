@@ -1,17 +1,18 @@
 const express = require('express');
+
 const router = express.Router();
 
 const Person = require('../models/modelPerson'); // A.I. подключил модель монгоДБ
 const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
 /* GET users listing. */
-router.get('/', async function (req, res, next) {
+router.get('/', async (req, res, next) => {
   res.send('respond with a resource');
 });
 
 /**
  *  Aleksandr Ivanov
- * 
+ *
  * @email
  * @password
  * Отдаю объект:
@@ -22,13 +23,6 @@ router.get('/', async function (req, res, next) {
  * @err - Расшифровка ошибки
  */
 router.post('/users', async (req, res) => {
-  
-
-
-
-
-
-
   const {
     email,
     password,
@@ -40,14 +34,13 @@ router.post('/users', async (req, res) => {
       date: {
         nickname: user.nickname,
         id: user._id,
-      }
+      },
     });
-  } else {
-    return res.send({
-      success: false,
-      err: 'No such user or incorrect pair login password'
-    })
   }
+  return res.send({
+    success: false,
+    err: 'No such user or incorrect pair login password',
+  });
 });
 
 /**
@@ -68,26 +61,25 @@ router.post('/registration', async (req, res) => {
   if (nickname === '' || email === '' || password === '') {
     return res.send({
       success: false,
-      err: 'Wrong data'
-    })
-  };
+      err: 'Wrong data',
+    });
+  }
   const user = await Person.findOne({ email });
   if (!user) {
     const userNew = await Person.create({
       nickname,
       email,
-      password
+      password,
     });
     return res.send({
       success: true,
       date: userNew._id,
     });
-  } else {
-    return res.send({
-      success: false,
-      err: 'Email is already registered'
-    })
   }
+  return res.send({
+    success: false,
+    err: 'Email is already registered',
+  });
 });
 
 module.exports = router;
