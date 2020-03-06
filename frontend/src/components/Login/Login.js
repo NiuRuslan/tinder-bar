@@ -1,36 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './Login.css';
-import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import { LogIn } from '../../redux/action';
+import { requestFetchLogin } from '../../redux/action';
 
 function Login(props) {
-  const [error, setError] = useState('');
-  const { user, LogIn } = props;
+  const { user, err, requestFetchLogin } = props;
   const [cookies, setCookie] = useCookies(['userName']);
 
   function PutData(event) {
     event.preventDefault();
     const { mail: { value: email }, pasword: { value: password } } = event.target;
-    axios.post('http://localhost:4000/users/login', {
-      email,
-      password,
-    }).then((response) => {
-      if (response.data.success) {
-        if (response.data.profileId) {
-          LogIn(response.data.id, response.data.nickname, response.data.profileId);
-        } else {
-          LogIn(response.data.id, response.data.nickname);
-        }
-        setCookie('userName', response.data.id);
-      } else {
-        setError(response.data.err);
-        setTimeout(setError, 2000, '');
-      }
-    }).catch(() => { setError('Неизвестная Ошибка авторизации'); setTimeout(setError, 2000, ''); });
+    requestFetchLogin(email, password)
+    
   }
+
+  useEffect(() => {
+    if (user.id) {
+      setCookie('userName', user.id)
+    }
+  }, [user.id, setCookie])
 
   return (
     <>
@@ -48,7 +38,7 @@ function Login(props) {
               </label>
               <button className="red" type="submit"> Log in </button>
               <br />
-              <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
+              <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
               <Link to="/regist"><button className="green">Create Account</button></Link>
             </form>
           </div>
@@ -58,11 +48,11 @@ function Login(props) {
 }
 
 const mapStateToProps = (state) => ({
-  user: state,
+  user: state.user,
+  err: state.error,
 });
-
 const mapDispatchToProps = (dispatch) => ({
-  LogIn: (id, nickname, profileId) => dispatch(LogIn(id, nickname, profileId)),
-});
+  requestFetchLogin: (email, password) => dispatch(requestFetchLogin(email, password)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

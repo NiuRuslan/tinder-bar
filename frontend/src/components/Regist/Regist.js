@@ -1,34 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './Regist.css';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { LogIn } from '../../redux/action';
+import { requestFetchRegist } from '../../redux/action';
 
 function Regist(props) {
   const [cookies, setCookie] = useCookies(['userName']);
-  const [error, setError] = useState('');
-  const { LogIn } = props;
+  const { requestFetchRegist,err,user } = props;
 
 
   function PutData(event) {
     event.preventDefault();
     const { nick: { value: nickname }, mail: { value: email }, pasword: { value: password } } = event.target;
-    axios.post('http://localhost:4000/users/registration', {
-      nickname,
-      email,
-      password,
-    }).then((response) => {
-      if (response.data.success) {
-        LogIn(response.data.id, nickname);
-        setCookie('userName', response.data.id);
-      } else {
-        setError(response.data.err);
-        setTimeout(setError, 2000, '');
-      }
-    }).catch(() => { setError('Неизвестная Ошибка регистрации'); setTimeout(setError, 2000, ''); });
+    requestFetchRegist(nickname,email,password)
   }
+  useEffect(()=>{
+if(user.id){
+  setCookie('userName', user.id)
+}
+  },[user.id,setCookie])
 
 
   return (
@@ -49,7 +40,7 @@ function Regist(props) {
                 <input name="pasword" type="password" placeholder="Password" minLength="5" required />
               </label>
               <div style={{ color: 'red', textAlign: 'center' }}>
-                {error}
+                {err.title}
                 {' '}
                 <br />
                 {' '}
@@ -63,11 +54,14 @@ function Regist(props) {
     </>
   );
 }
-
-
-const mapDispatchToProps = (dispatch) => ({
-  LogIn: (id, nickname, profileId) => dispatch(LogIn(id, nickname, profileId)),
+const mapStateToProps = (state) => ({
+  user: state.user,
+  err: state.error,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  requestFetchRegist: (nickname,email, password) => dispatch(requestFetchRegist(nickname,email, password)),
+})
 
-export default connect(null, mapDispatchToProps)(Regist);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Regist);

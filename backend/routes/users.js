@@ -13,8 +13,8 @@ router.post('/login', async (req, res) => {
     password,
   } = req.body;
   const user = await Person.findOne({ email, password });
-  const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
   if (user) {
+    const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
     return res.send({
       success: true,
       nickname: user.nickname,

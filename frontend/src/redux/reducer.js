@@ -1,6 +1,7 @@
-import { LOGIN } from './action-types';
+import { LOGIN} from './action-types';
 
-const init = { id: '', nickname: '', profileId: '' };
+
+const init = { id:'', nickname: '', profileId: ''};
 
 export default (state = init, action) => {
   switch (action.type) {
