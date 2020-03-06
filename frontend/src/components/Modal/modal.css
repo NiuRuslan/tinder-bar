@@ -1,0 +1,12 @@
+.profile{
+  background-color: #0F4667;
+}
+.list {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px;
+  padding: 16px;
+  background-color: #EBECF0;
+  text-shadow: 1px 1px 0 #FFF; 
+}
