@@ -23,8 +23,8 @@ const profileSchema = new mongoose.Schema({
     type: String,
     minlength: 3,
   },
-  topics: [String],
-  drinks: [String],
+  topics: String,
+  drinks: String,
   avatar: {
     data: Buffer,
     contentType: String,
