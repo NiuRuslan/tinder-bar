@@ -97,4 +97,33 @@ router.post('/profile', async (req, res) => {
   });
 });
 
+router.patch('/profile', async (req, res) => {
+  const {
+    activity,
+    topics,
+    about,
+    drinks,
+    id,
+  } = req.body;
+const response = await Profile.updateOne({person:id}, {activity,topics,about,drinks});
+console.log(response)
+if(response){
+  res.send({sucsses:true})
+} else {
+  res.send({success:false, err:'Повторите попытку'})
+}
+});
+
+router.post('/profileEdit', async (req, res) => {
+  const {
+    id,
+  } = req.body;
+const response = await Profile.findOne({person:id});
+if(response){
+  res.send({sucsses:true, profileId:response })
+} else {
+  res.send({success:false, err:'УУУпсб что-то пошло не так'})
+}
+});
+
 module.exports = router;

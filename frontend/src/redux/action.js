@@ -1,12 +1,4 @@
-import {
-  LOADER,
-  LOGIN,
-  LOGOUT,
-  REQUEST_FETCH_LOGIN,
-  ERROR,
-  CLEAR_ERROR,
-  REQUEST_FETCH_REGIST
-} from "./action-types";
+import { LOGIN, LOGOUT,REQUEST_FETCH_LOGIN,ERROR,CLEAR_ERROR,REQUEST_FETCH_REGIST, PROFILE_INIT,LOADER } from './action-types';
 
 export const LogIn = (id, nickname, profileId, success) => ({
   type: LOGIN,
@@ -22,6 +14,7 @@ export const requestFetchRegist = (nickname, email, password) => ({
   email,
   password
 });
+
 /**
  * createAction 
  * чистим localStorage c именем reduxState
@@ -33,6 +26,12 @@ export const LogOut = () => {
     type: LOGOUT,
   }
 };
+
+export const profileInit = (profileId) =>({
+  type:PROFILE_INIT,
+  profileId
+})
+
 export const setLoader = () => ({
   type: LOADER
 });
