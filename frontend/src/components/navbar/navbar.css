@@ -7,7 +7,9 @@
 .listLi {
   float: left;
 } */
-.list .listLi .navbar {
-  display: inline;
-  text-align: center;
+
+.list {
+  padding-top: 5px;
+  display: flex;
+  justify-content: space-around;
 }

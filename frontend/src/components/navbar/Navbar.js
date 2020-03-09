@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="list">
+    <nav>
       <ul className="list">
         <li className="listLi">
           <img className="navbar" src="./navbar/user.png">
