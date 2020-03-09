@@ -38,8 +38,12 @@ function Regist(props) {
       {cookies.userName ? (
         <Redirect to="/profile" />
       ) : (
-        <div>
-          <form onSubmit={PutData} className="register">
+        <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
+          <form
+            onSubmit={PutData}
+            className="register"
+            style={{ alignSelf: "center" }}
+          >
             <h1 className="segment">Create Account</h1>
             <label>
               <input name="nick" type="text" placeholder="NickName" required />

@@ -92,7 +92,11 @@ const ListUsers = props => {
 
   return (
     <>
-      <div id="nc-main" className="nc-main bg-cover bg-cc">
+      <div
+        id="nc-main"
+        className="nc-main bg-cover bg-cc"
+        style={{ display: "flex" }}
+      >
         <div className="full-wh">
           <div className="bg-animation">
             <div id="stars"></div>
@@ -103,15 +107,14 @@ const ListUsers = props => {
         </div>
         <div
           style={{
+            marginTop: "5%",
+            alignSelf: "center",
             width: "100%",
-            marginTop: "2%",
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            alignItems: "center"
+            height: "100vh",
+            justifyContent: "center"
           }}
         >
-          <div style={{ marginTop: "3%", width: "90%" }}>
+          <div>
             {/* <h1>{props.name}</h1> */}
             <input
               className="inputFind"

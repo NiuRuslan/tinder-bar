@@ -35,7 +35,7 @@ function Login(props) {
   }, [user.id, setCookie]);
 
   return (
-    <>
+    <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
       {slider > 5 ? <Slider /> : <Slider2 />}
       {cookies.userName ? (
         user.profileId ? (
@@ -44,56 +44,58 @@ function Login(props) {
           <Redirect to="/profile" />
         )
       ) : (
-        <div style={{}}>
-          <form onSubmit={PutData} className="login">
-            <h1 className="segment">Sign up</h1>
-            <label>
-              <input
-                name="mail"
-                type="email"
-                placeholder="Email Address"
-                required
-              />
-            </label>
-            <label>
-              <input
-                name="pasword"
-                type="password"
-                placeholder="Password"
-                minLength="5"
-                required
-              />
-            </label>
+        <form
+          onSubmit={PutData}
+          className="login"
+          style={{ alignSelf: "center" }}
+        >
+          <h1 className="segment">Sign up</h1>
+          <label>
+            <input
+              name="mail"
+              type="email"
+              placeholder="Email Address"
+              required
+            />
+          </label>
+          <label>
+            <input
+              name="pasword"
+              type="password"
+              placeholder="Password"
+              minLength="5"
+              required
+            />
+          </label>
+          <button
+            className="red"
+            type="submit"
+            style={{
+              color: "#FFF",
+              backgroundColor: "#0f4667",
+              textShadow: "1px 1px 1px #0f4667"
+            }}
+          >
+            {" "}
+            Log in
+          </button>
+          <div style={{ color: "red", textAlign: "center" }}>{err.title}</div>
+          <br />
+          <Link to="/regist" style={{ width: "100%", alignSelf: "center" }}>
             <button
-              className="red"
-              type="submit"
+              className="green"
               style={{
-                color: "#FFF",
-                backgroundColor: "#0f4667",
-                textShadow: "1px 1px 1px #0f4667"
+                color: "#0f4667",
+                backgroundColor: "#FFF",
+                textShadow: "none"
               }}
             >
-              {" "}
-              Log in
+              Create Account
             </button>
-            <div style={{ color: "red", textAlign: "center" }}>{err.title}</div>
-            <br />
-            <Link to="/regist" style={{ width: "100%", alignSelf: "center" }}>
-              <button
-                className="green"
-                style={{
-                  color: "#0f4667",
-                  backgroundColor: "#FFF",
-                  textShadow: "none"
-                }}
-              >
-                Create Account
-              </button>
-            </Link>
-          </form>
-        </div>
+          </Link>
+        </form>
       )}
-    </>
+    </div>
   );
 }
 
