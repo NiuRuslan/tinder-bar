@@ -17,7 +17,8 @@ const Map = ({
   googleMapURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places",
   latitude,
   longitude,
-  list: { list: users }
+  list: { list: users },
+  radius
 }) => {
   /**
    * @withGoogleMap – функция для создания react-компонента. Предназначенного для отображения карты
@@ -31,8 +32,8 @@ const Map = ({
   const CMap = withScriptjs(
     withGoogleMap(props => (
       <GoogleMap
-        defaultZoom={13}
-        defaultCenter={{ lat: 55.75396, lng: 37.620393 }}
+        defaultZoom={10}
+        defaultCenter={{ lat: latitude, lng: longitude }}
         defaultOptions={{
           disableDefaultUI: true, // disable default map UI
           draggable: true, // make map draggable
@@ -46,7 +47,6 @@ const Map = ({
       </GoogleMap>
     ))
   );
-
   return (
     <>
       <CMap
@@ -84,7 +84,7 @@ const Map = ({
               trigger={
                 <Marker
                   icon={{ url: "./imgs/cocktails.png" }}
-                  position={{ lat: latitude, lng: longitude }}
+                  position={{ lat: el.latitude, lng: el.longitude }}
                 />
               }
             >

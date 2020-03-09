@@ -6,6 +6,7 @@ import ModalWindow from "../Modal/Modal";
 import { Link } from "react-router-dom";
 import Snow from "../snow/snow.css";
 import "./listUsers.css";
+import Navbar from "../navbar/Navbar";
 /**
  * Александр Иванов
  * Коомпонент отрисовывает список пользователей в заданном радиусе
@@ -34,7 +35,7 @@ const ListUsers = props => {
    */
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios
-      .post("/list/users", {
+      .post("http://localhost:4000/list/users", {
         id,
         latitude,
         longitude,
@@ -61,7 +62,10 @@ const ListUsers = props => {
       });
   };
 
-  const geoFindLocation = () => {
+  const geoFindLocation = event => {
+    // event.preventDefault();
+    // event.persist()
+    // setRadius(event.target.radius.value)
     const success = position => {
       setLatitude(position.coords.latitude);
       setLongituse(position.coords.longitude);
@@ -89,9 +93,10 @@ const ListUsers = props => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
-
+  console.log(list);
   return (
     <>
+      <Navbar />
       <div
         id="nc-main"
         className="nc-main bg-cover bg-cc"
@@ -110,7 +115,7 @@ const ListUsers = props => {
             marginTop: "5%",
             alignSelf: "center",
             width: "100%",
-            height: "100vh",
+            height: "100%",
             justifyContent: "center"
           }}
         >

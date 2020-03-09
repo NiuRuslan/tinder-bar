@@ -39,8 +39,6 @@ class Anketa extends React.Component {
     event.preventDefault();
     const { user } = this.props;
     let { name, DoB, activity, topics, drinks, about } = this.state;
-    topics = topics.split(/\W{1,}/gm);
-    drinks = drinks.split(/\W{1,}/gm);
 
     await axios.post("http://localhost:4000/users/profile", {
       name,

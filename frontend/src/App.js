@@ -15,6 +15,7 @@ import {
 import StartPage from "./components/startPage/startPage";
 import { useCookies } from "react-cookie";
 import NotFound from "./components/notFound/notFound";
+import ProfileEdit from './components/profileEdit/profileEdit'
 
 function App() {
   const history = createBrowserHistory();
@@ -30,12 +31,12 @@ function App() {
           <Redirect to="/startpage" />
         )}
         <Switch>
+          <Route exact path='/profileEdit' component={ProfileEdit}/>
           <Route exact path="/listUsers" component={ListUsers} />
           <Route exact path="/profile" component={Anketa} />
           <Route exact path="/regist" component={Regist} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/startpage" component={StartPage} />
-          {/* <Route exact path="/demo" component={Modal} /> */}
           <Route component={NotFound} />
         </Switch>
       </Router>
