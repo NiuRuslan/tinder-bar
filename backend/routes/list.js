@@ -53,7 +53,6 @@ router.post('/users', async (req, res) => {
     },
   });
 
-  console.log('list', list);
 
   if (list) {
     return res.send({
