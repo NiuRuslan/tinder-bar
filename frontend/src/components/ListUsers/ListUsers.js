@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import Map from './Map';
-import Profile from '../Modal/Modal';
-
-
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import axios from 'axios'
+import Map from './Map'
+import ModalWindow from "../Modal/Modal"
+import "./listUsers.css"
 /**
- * Александр Иванов
+ * Александр Иванов 
  * Коомпонент отрисовывает список пользователей в заданном радиусе
  */
 
 const ListUsers = (props) => {
+
+
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
     err: '',
   });
+  const [isShowMap, setShowMap] = useState(false);
+
+  const ChangeOnMap = () => {
+    setShowMap(!isShowMap)
+  }
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongituse] = useState(null);
 
-  const [isShow, setIsShow] = useState(null);
-  const showHandle = (event) => {
-    setIsShow(event.target.innerText);
-    console.log(event.target.profile);
-  };
+
 
   /**
    * Делает запрос на сервер:
@@ -33,7 +35,7 @@ const ListUsers = (props) => {
    * @param {Number} radius - радиус поиска
    */
   const requestListUsers = (id, latitude, longitude, radius) => {
-    axios.post('/list/users', {
+    axios.post('http://localhost:4000/list/users', {
       id,
       latitude,
       longitude,
@@ -58,7 +60,10 @@ const ListUsers = (props) => {
     });
   };
 
-  const geoFindLocation = () => {
+  const geoFindLocation = (event) => {
+    // event.preventDefault();
+    // event.persist()
+    // setRadius(event.target.radius.value)
     const success = (position) => {
       setLatitude(position.coords.latitude);
       setLongituse(position.coords.longitude);
@@ -78,40 +83,59 @@ const ListUsers = (props) => {
         err: 'Geolocation is not supported by your browser',
       });
     } else {
-      // status.textContent = 'Locating…';
       navigator.geolocation.getCurrentPosition(success, error);
     }
-  };
+  }
+
   return (
-    <div>
-      <div>
-        <h1>{props.name}</h1>
-        <input onChange={(event) => { setRadius(event.target.value); }} />
-        <button id="find-me" onClick={() => geoFindLocation()}>Show my location</button>
-        <br />
-        <ul>
-          {list.success ? list.list.map((obj) => (
-            <h2>
-              <a href="#" onClick={showHandle}>
-                {(isShow === obj.name) && (
-                <Profile
-                  profile={obj}
-                  key={obj._id}
-                />
-                )}
-                {obj.name}
-              </a>
-            </h2>
-          )) : ''}
-        </ul>
+    <>
+
+      <div id="nc-main" className="nc-main bg-cover bg-cc" >
+
+        <div className="full-wh">
+          <div className="bg-animation" >
+            <div id='stars'></div>
+            <div id='stars2'></div>
+            <div id='stars3'></div>
+            <div id='stars4'></div>
+          </div>
+        </div>
+        <div style={{ width: "100%", marginTop: "2%", display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+          <div style={{ marginTop: "3%", width: '90%' }}>
+
+            {/* <h1>{props.name}</h1> */}
+            {/* <form onSubmit={geoFindLocation}> */}
+            <input name='radius' className="inputFind"
+             onChange={(event) => { setRadius(event.target.value) }} 
+             style={{ display: "block", width: "50%", position: "relative", margin: "0 auto" }}></input><br />
+            <button id="find-me" type='submit' 
+            onClick={() => geoFindLocation()} 
+            style={{ display: "block", color: "#FFF", backgroundColor: "transparent", position: "relative", margin: "0 auto", width: '25rem' }}>Show my location</button><br />
+            {/* </form> */}
+            <div className="toggleBox" style={{ margin: "0 auto" }}>
+
+              <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
+              <label for="toggle-2" onClick={ChangeOnMap}><span>Use a map</span>
+              </label>
+
+              {isShowMap ? (<Map latitude={latitude} longitude={longitude} list={list} radius={radius} />) : (<ul style={{ listStyle: "none", display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+                {list.success ? list.list.map(obj => {
+                  return <ModalWindow obj={obj}
+                    key={obj._id} />
+                }) : ''}
+              </ul>)}
+
+            </div>
+
+          </div>
+        </div>
       </div>
-      <Map latitude={latitude} longitude={longitude} />
-    </div>
+    </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  ...state,
+  ...state
 });
 
 export default connect(mapStateToProps)(ListUsers);

@@ -7,14 +7,24 @@ body, p, input, select, textarea, button, a {
 div, p {
   color: #BABECC;
   text-shadow: 1px 1px 1px #FFF;
+  
 }
-
+.login{
+  opacity: 0.4;
+  transition: 1s;
+}
+.login:hover {
+  opacity: 1;
+}
 form {
+  
   border-radius: 2%;
   padding: 16px;
   width: 320px;
   margin: 0 auto;
 }
+
+
 
 .segment {
   padding: 32px 0;
@@ -25,16 +35,19 @@ form {
   text-align: center;
   color:#FFF;
   text-shadow: 3px 3px 2 #0f4567; 
+
+
 }
 button, input {
   border: 0;
   outline: 0;
   font-size: 16px;
-  border-radius: 320px;
+  border-radius: 8px;
   padding: 16px;
   /* background-color: #EBECF0;*/
   text-shadow: 1px 1px 0 #FFF; 
 }
+
 
 label {
   display: block;
@@ -68,6 +81,7 @@ button:hover {
 }
 button:active {
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+
 }
 button .icon {
   margin-right: 8px;
