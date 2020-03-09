@@ -1,4 +1,4 @@
-import { LOGIN,PROFILE_INIT,LOADER} from './action-types';
+import { LOGIN, PROFILE_INIT, LOGOUT, LOADER} from './action-types';
 
 const init = { id: "", nickname: "", profileId: "", isLoader: false };
 
@@ -21,7 +21,14 @@ export default (state = init, action) => {
         ...state,
         isLoader: !state.isLoader
       };
-
+    case LOGOUT:
+      return {
+        ...state,
+        id: '',
+        nickname: '',
+        profileId: '',
+        isLoader: false,
+      }
     default:
       return state;
   }

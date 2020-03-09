@@ -15,14 +15,23 @@ export const requestFetchRegist = (nickname, email, password) => ({
   password
 });
 
+/**
+ * createAction 
+ * чистим localStorage c именем reduxState
+ * и инициируем action с типом LOGOUT
+ */
+export const LogOut = () => {
+  localStorage.removeItem('reduxState');
+  return {
+    type: LOGOUT,
+  }
+};
+
 export const profileInit = (profileId) =>({
   type:PROFILE_INIT,
   profileId
 })
 
-export const LogOut = () => ({
-  type: LOGOUT
-});
 export const setLoader = () => ({
   type: LOADER
 });
