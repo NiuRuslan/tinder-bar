@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from './action-types';
+import { LOGIN, LOGOUT, LOADER } from './action-types';
 
 export const LogIn = (id, nickname, profileId) => ({
   type: LOGIN,
@@ -10,9 +10,12 @@ export const LogIn = (id, nickname, profileId) => ({
 export const LogOut = () => ({
   type: LOGOUT,
 });
-
+export const setLoader = () => ({
+  type: LOADER 
+});
 
 export default {
   LogIn,
   LogOut,
+  setLoader
 };

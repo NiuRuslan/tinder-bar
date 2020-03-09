@@ -7,15 +7,20 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { LogIn } from '../../redux/action';
+// import {setLoader} from "../../redux/action"
+// import Loader from "../loader/Loader"
 
 function Login(props) {
+  // const {setLoader, isLoader} = props
   const [error, setError] = useState('');
   const { user, LogIn } = props;
   const [cookies, setCookie] = useCookies(['userName']);
 
   const [slider, setSlider] = useState();
   useEffect(() => {
+    // setLoader()
     let slider = (Math.floor(Math.random() * 10))
+    // setLoader()
     setSlider(slider);
   }, [0]);
 
@@ -41,14 +46,14 @@ function Login(props) {
   }
 
   return (
-    <>
+    <> 
      {slider > 5 ?
         (<Slider />) : (<Slider2 />)}
       {cookies.userName
         ? (user.profileId ? <Redirect from="/login" to="/listUsers" /> : <Redirect to="/profile" />)
         : (
-          <div>
-            <form onSubmit={PutData}>
+          <div >
+            <form onSubmit={PutData} className="login">
               <h1 className="segment">Sign up</h1>
               <label>
                 <input name='mail' type="email" placeholder="Email Address" required />
@@ -60,12 +65,13 @@ function Login(props) {
               <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
               <br/>
               <Link to='/regist' style={{ width: "100%", alignSelf: "center" }}>
-                <button className="green" style={{ color: "#0f4667", backgroundColor: "#FFF", textShadow: "1px 1px 1px #0f4667" }}>Create Account</button>
+                <button className="green" style={{ color: "#0f4667", backgroundColor: "#FFF", textShadow: "none" }}>Create Account</button>
               </Link>
              
             </form>
           </div>
         )}
+    
     </>
   );
 }
@@ -75,7 +81,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  LogIn: (id, nickname, profileId) => dispatch(LogIn(id, nickname, profileId)),
+  LogIn: (id, nickname, profileId, ) => dispatch(LogIn(id, nickname, profileId)),
+
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps, )(Login);

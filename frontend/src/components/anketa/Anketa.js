@@ -74,11 +74,14 @@ class Anketa extends React.Component {
     let currentStep = this.state.currentStep;
     if (currentStep !== 1) {
       return (
+        <>
         <button
           className="btn btn-secondary"
           type="button" onClick={this._prev}>
           Previous
       </button>
+      <br/>
+      </>
       )
     }
     return null;
@@ -90,7 +93,7 @@ class Anketa extends React.Component {
       return (
         <button
           className="btn btn-primary float-right"
-          type="button" onClick={this._next}>
+          type="button" onClick={this._next} style={{ marginBottom: "25px", color: "#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667" }}>
           Next
       </button>
       )

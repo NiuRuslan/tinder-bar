@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Modal from "../src/components/Modal/Modal"
 import Anketa from "./components/anketa/Anketa"
 import './App.css';
 import Login from './components/Login/Login';
@@ -32,6 +32,7 @@ function App() {
           <Route exact path="/regist" component={Regist} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/startpage" component={StartPage} />
+          {/* <Route exact path="/demo" component={Modal} /> */}
           <Route component={NotFound} />
         </Switch>
       </Router>

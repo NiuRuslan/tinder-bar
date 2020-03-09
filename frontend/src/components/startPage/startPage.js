@@ -18,6 +18,20 @@ function StartPage() {
   }
 
   return (
+    <>    
+    <div id="nc-main" className="nc-main bg-cover bg-cc">
+
+     <div className="startPage">
+<div className="smallStartPage">
+
+    <div className="full-wh">
+    <div className="bg-animation">
+      <div id='stars'></div>
+      <div id='stars2'></div>
+      <div id='stars3'></div>
+      <div id='stars4'></div>
+      </div>
+        </div>
     <div>
       {cookies.chacked ?
         (cookies.chacked === 'true' ?
@@ -29,15 +43,18 @@ function StartPage() {
         <>
           <h1 className='segment'>Are you 18+</h1>
           <form onSubmit={checkYes}>
-            <button className="red" type="submit">Yes, Sure</button>
+            <button  type="submit" >Yes, Sure</button>
           </form>
           <form onSubmit={checkNo}>
-            <button className="red" type="submit">No</button>
+            <button  type="submit" style={{color: "#FFF",backgroundColor: "transparent"}}>No</button>
           </form>
         </>
       }
-
+</div>
     </div>
+    </div>
+    </div>
+    </>
   )
 }
 

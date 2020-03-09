@@ -45,7 +45,7 @@ function Regist(props) {
         ? <Redirect to="/profile" />
         : (
           <div>
-            <form onSubmit={PutData}>
+            <form onSubmit={PutData} className="register">
               <h1 className="segment">Create Account</h1>
               <label>
                 <input name="nick" type="text" placeholder="NickName" required />
@@ -59,7 +59,7 @@ function Regist(props) {
               <button type="submit" style={{ color: "#FFF", backgroundColor: "#0f4667", textShadow: "1px 1px 1px #0f4667" }}>Create</button>
               <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>
               <br/>
-              <Link to='/login' style={{ width: "100%", alignSelf: "center" }}><button className="green" style={{ color: "#0f4667", backgroundColor: "#FFF", textShadow: "1px 1px 1px #0f4667" }} >LogIn</button></Link>
+              <Link to='/login' style={{ width: "100%", alignSelf: "center" }}><button className="green" style={{ color: "#0f4667", backgroundColor: "#FFF", textShadow: "none" }} >LogIn</button></Link>
              
             </form>
           </div>
