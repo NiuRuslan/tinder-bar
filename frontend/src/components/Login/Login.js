@@ -44,7 +44,7 @@ function Login(props) {
           <Redirect to="/profile" />
         )
       ) : (
-        <div>
+        <div style={{}}>
           <form onSubmit={PutData} className="login">
             <h1 className="segment">Sign up</h1>
             <label>

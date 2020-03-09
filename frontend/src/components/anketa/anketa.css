@@ -19,7 +19,13 @@ div, p {
 .date {
   color: #0f4667;
 }
-
+.anketa{
+  opacity: 0.4;
+  transition: 1s;
+}
+.anketa:hover {
+  opacity: 1;
+}
 form {
   border-radius: 2%;
   display: flex;
