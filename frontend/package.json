@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:4000",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -16,8 +15,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "redux": "^4.0.5",
-    "semantic-ui-react": "^0.88.2",
-    "redux-saga": "^1.1.3"
+    "redux-saga": "^1.1.3",
+    "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
     "start": "react-scripts start",

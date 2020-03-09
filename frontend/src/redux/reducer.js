@@ -1,4 +1,4 @@
-import { LOGIN, LOADER } from "./action-types";
+import { LOGIN,PROFILE_INIT,LOADER} from './action-types';
 
 const init = { id: "", nickname: "", profileId: "", isLoader: false };
 
@@ -11,6 +11,11 @@ export default (state = init, action) => {
         nickname: action.nickname,
         profileId: action.profileId
       };
+      case PROFILE_INIT:
+        return {
+          ...state,
+          profileId:action.profileId,
+        }
     case LOADER:
       return {
         ...state,

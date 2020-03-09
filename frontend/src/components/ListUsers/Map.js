@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React from "react";
+// import { fitBounds } from 'google-map-react/utils';
 
 import {
   withScriptjs,
@@ -12,17 +13,20 @@ import styles from "./GoogleMapStyles.json";
 const Map = ({
   googleMapURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places",
   latitude,
-  longitude
+  longitude,
+  list: { list: users },
+  radius,
 }) => {
   /**
    * @withGoogleMap – функция для создания react-компонента. Предназначенного для отображения карты
    * GoogleMap – непосредственно сам компонент карты, в который передаются нужные параметры
    */
   const CMap = withScriptjs(
+  
     withGoogleMap(props => (
       <GoogleMap
-        defaultZoom={13}
-        defaultCenter={{ lat: 55.75396, lng: 37.620393 }}
+        defaultZoom={10}
+        defaultCenter={{ lat: latitude, lng: longitude }}
         defaultOptions={{
           disableDefaultUI: true, // disable default map UI
           draggable: true, // make map draggable
@@ -36,10 +40,10 @@ const Map = ({
       </GoogleMap>
     ))
   );
-
   return (
     <>
       <CMap
+      
         googleMapURL={googleMapURL}
         loadingElement={<div style={{ height: "50%" }} />}
         containerElement={<div style={{ height: "700px" }} />}
@@ -56,11 +60,11 @@ const Map = ({
           />
         }
         center={{ lat: latitude, lng: longitude }}
-      >
-        <Marker
-          icon={{ url: "./imgs/cocktails.png" }}
-          position={{ lat: latitude, lng: longitude }}
-        />
+        
+      >{users.map(el => <Marker
+        icon={{ url: "./imgs/cocktails.png" }}
+        position={{ lat: el.latitude, lng: el.longitude }}
+      />)}
       </CMap>
     </>
   );
