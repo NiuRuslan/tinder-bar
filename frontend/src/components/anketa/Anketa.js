@@ -39,7 +39,9 @@ class Anketa extends React.Component {
   handleSubmit = async event => {
     event.preventDefault()
     const { user } = this.props
-    const { name, DoB, activity, topics, drinks, about } = this.state
+    let { name, DoB, activity, topics, drinks, about } = this.state
+    topics = topics.split(/\W{1,}/gm)
+    drinks = drinks.split(/\W{1,}/gm)
 
     await axios.post("http://localhost:4000/users/profile", {
       name, DoB, activity, topics, drinks, about, id: user.id
@@ -153,8 +155,7 @@ function Step1(props) {
         <input value={props.activity}
           onChange={props.handleChange} className="form-control" type="text" name="activity" placeholder="Place of work or study" oninput="this.className" required />
       </label>
-
-    </div >
+    </div>
   );
 }
 
@@ -170,7 +171,7 @@ function Step2(props) {
       </label>
       <label>
         <input type="text" value={props.drinks}
-          onChange={props.handleChange} className="form-control" oninput="this.className" name="drinks" placeholder="Favorite alchogol: beer, wine, wiskey.." />
+          onChange={props.handleChange} className="form-control" oninput="this.className" name="drinks" placeholder="Favorite drink: beer, wine, wisky.." />
       </label>
 
     </div>
@@ -196,7 +197,7 @@ function Step3(props) {
 }
 
 const mapStateToProps = (state) => ({
-  user: state,
+  user: state.user,
 });
 const mapDispatchToProps = (dispatch) => ({
   LogIn: (id, nickname, profileId) => dispatch(LogIn(id, nickname, profileId))

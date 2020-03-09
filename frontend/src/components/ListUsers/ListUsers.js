@@ -10,6 +10,7 @@ import "./listUsers.css"
  * Александр Иванов 
  * Коомпонент отрисовывает список пользователей в заданном радиусе
  */
+
 const ListUsers = (props) => {
 
   
@@ -23,15 +24,17 @@ const ListUsers = (props) => {
   const ChangeOnMap = () => {
     setShowMap(!isShowMap)
   }
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongituse] = useState(null);
+
+  
+
   /**
    * Делает запрос на сервер:
-   * @latitude - координата пользователя
-   * @longitude - координата пользователя
-   * @radius - размер радиуса поиска пользователей
-   * Получает:
-   * @success - флаг выполнения запроса
-   * @list - список найденых пользователей
-   * @err - Расшифровка ошибки
+   * @param {String} id - пользователя в бд
+   * @param {Number} latitude - широта в радинах
+   * @param {Number} longitude - долгота в радианах
+   * @param {Number} radius - радиус поиска
    */
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios.post('/list/users', {
@@ -44,38 +47,40 @@ const ListUsers = (props) => {
         setList({
           success: true,
           list: response.data.list,
-        })
+        });
       } else {
         setList({
           success: false,
           err: '',
-        })
+        });
       }
     }).catch(() => {
       setList({
         success: false,
         err: 'Runtime error',
-      })
-    })
-  }
+      });
+    });
+  };
 
   const geoFindLocation = () => {
     const success = (position) => {
+      setLatitude(position.coords.latitude);
+      setLongituse(position.coords.longitude);
       requestListUsers(props.id, position.coords.latitude, position.coords.longitude, radius);
-    }
+    };
 
     const error = () => {
       setList({
         success: false,
         err: 'Unable to retrieve your location',
-      })
-    }
+      });
+    };
 
     if (!navigator.geolocation) {
       setList({
         success: false,
         err: 'Geolocation is not supported by your browser',
-      })
+      });
     } else {
       navigator.geolocation.getCurrentPosition(success, error);
     }
@@ -106,7 +111,7 @@ const ListUsers = (props) => {
   <label for="toggle-2" onClick={ChangeOnMap}><span>Use a map</span>
   </label>
 
-{isShowMap ? ( <Map /> ) : (   <ul style={{listStyle:"none", display: 'flex', flexDirection:'column', width: '100%', alignItems:'center'}}>
+{isShowMap ? ( <Map latitude={latitude} longitude={longitude}/> ) : (   <ul style={{listStyle:"none", display: 'flex', flexDirection:'column', width: '100%', alignItems:'center'}}>
         {list.success ? list.list.map(obj => {
           return <ModalWindow obj={obj} 
         key={obj._id} />
@@ -120,11 +125,10 @@ const ListUsers = (props) => {
 </div>
 </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   ...state
 });
 
-export default connect(mapStateToProps)(ListUsers)
-
+export default connect(mapStateToProps)(ListUsers);

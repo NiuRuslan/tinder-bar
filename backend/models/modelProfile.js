@@ -32,8 +32,8 @@ const profileSchema = new mongoose.Schema({
   latitude: Number,
   longitude: Number,
 },
-  {
-    versionKey: false,
-  });
+{
+  versionKey: false,
+});
 
 module.exports = mongoose.model('Profile', profileSchema);
