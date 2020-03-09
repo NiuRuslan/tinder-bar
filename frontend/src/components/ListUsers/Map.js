@@ -22,7 +22,7 @@ const Map = ({
     withGoogleMap(props => (
       <GoogleMap
         defaultZoom={13}
-        defaultCenter={{ lat: 55.75396, lng: 37.620393 }}
+        defaultCenter={{ lat: latitude, lng: longitude }}
         defaultOptions={{
           disableDefaultUI: true, // disable default map UI
           draggable: true, // make map draggable
