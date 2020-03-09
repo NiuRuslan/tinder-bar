@@ -27,8 +27,6 @@ const ListUsers = (props) => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongituse] = useState(null);
 
-  
-
   /**
    * Делает запрос на сервер:
    * @param {String} id - пользователя в бд
