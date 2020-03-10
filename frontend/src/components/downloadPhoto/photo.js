@@ -36,9 +36,9 @@ function Photo() {
   };
 
   return (
-    <div>
+    <div style={{ alignSelf: 'center' }}>
       <label htmlFor="file-input">
-        <img style={{ width: `${200}px`, height: `${200}px`, borderRadius: `${50}%` }} src={url} />
+        <div className="avatar" style={{backgroundImage: `url(${url})`}} />
       </label>
       <input id="file-input" type="file" onChange={handleChange} />
     </div>
