@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Slider from "../slider/Slider";
-import Slider2 from "../slider/Slider2";
-import "./Regist.css";
-import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { requestFetchRegist } from "../../redux/action";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { requestFetchRegist } from '../../redux/action';
+import Slider from '../slider/Slider';
+import Slider2 from '../slider/Slider2';
+import './Regist.css';
+import {database} from '../../firebase';
+
 
 function Regist(props) {
-  const [cookies, setCookie] = useCookies(["userName"]);
+  const [cookies, setCookie] = useCookies(['userName']);
   const [slider, setSlider] = useState();
   useEffect(() => {
     const slider = Math.floor(Math.random() * 10);
@@ -21,25 +23,32 @@ function Regist(props) {
     const {
       nick: { value: nickname },
       mail: { value: email },
-      pasword: { value: password }
+      pasword: { value: password },
     } = event.target;
     requestFetchRegist(nickname, email, password);
   }
   useEffect(() => {
     if (user.id) {
-      setCookie("userName", user.id);
+      setCookie('userName', user.id);
+      database.ref().child(`${user.id}`).push({
+        date:Date.now(),
+      });
     }
   }, [user.id, setCookie]);
 
   return (
     <>
-      {" "}
+      {' '}
       {slider > 5 ? <Slider /> : <Slider2 />}
       {cookies.userName ? (
-        <Redirect to="/profile" />
+        <Redirect to="/profilecreator" />
       ) : (
-        <div>
-          <form onSubmit={PutData} className="register">
+        <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
+          <form
+            onSubmit={PutData}
+            className="register"
+            style={{ alignSelf: 'center' }}
+          >
             <h1 className="segment">Create Account</h1>
             <label>
               <input name="nick" type="text" placeholder="NickName" required />
@@ -64,22 +73,22 @@ function Regist(props) {
             <button
               type="submit"
               style={{
-                color: "#FFF",
-                backgroundColor: "#0f4667",
-                textShadow: "1px 1px 1px #0f4667"
+                color: '#FFF',
+                backgroundColor: '#0f4667',
+                textShadow: '1px 1px 1px #0f4667',
               }}
             >
               Create
             </button>
-            <div style={{ color: "red", textAlign: "center" }}>{err.title}</div>
+            <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
             <br />
-            <Link to="/login" style={{ width: "100%", alignSelf: "center" }}>
+            <Link to="/login" style={{ width: '100%', alignSelf: 'center' }}>
               <button
                 className="green"
                 style={{
-                  color: "#0f4667",
-                  backgroundColor: "#FFF",
-                  textShadow: "none"
+                  color: '#0f4667',
+                  backgroundColor: '#FFF',
+                  textShadow: 'none',
                 }}
               >
                 LogIn
@@ -91,14 +100,13 @@ function Regist(props) {
     </>
   );
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
-  err: state.error
+  err: state.error,
 });
 
-const mapDispatchToProps = dispatch => ({
-  requestFetchRegist: (nickname, email, password) =>
-    dispatch(requestFetchRegist(nickname, email, password))
+const mapDispatchToProps = (dispatch) => ({
+  requestFetchRegist: (nickname, email, password) => dispatch(requestFetchRegist(nickname, email, password)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Regist);

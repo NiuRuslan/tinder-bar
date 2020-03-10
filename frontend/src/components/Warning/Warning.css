@@ -1,0 +1,33 @@
+/*------------------------red background---------------------------*/
+
+.smallStartPage {
+  background: #f3ebe6;
+  animation: backgroundred 2.5s infinite;
+  border-radius: 8px;
+}
+
+.startPage {
+  position: relative;
+  display: flex;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 300px;
+  height: 500px;
+}
+
+@keyframes backgroundred {
+  0% {
+    background: transparent;
+  }
+
+  50% {
+    background: #e01b3c;
+  }
+
+  100% {
+    background: transparent;
+  }
+}

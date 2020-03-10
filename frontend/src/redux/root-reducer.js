@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux'
-import reducer from './reducer'
-import reducerError from './reducer-errors'
+import { combineReducers } from 'redux';
+import reducer from './reducer';
+import reducerError from './reducer-errors';
 
 
 // Root reducer
