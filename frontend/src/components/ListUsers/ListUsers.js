@@ -12,8 +12,8 @@ import '../snow/snow.css';
  * @param {*} props
  */
 
-const ListUsers = props => {
-  const [cookies, setCookie] = useCookies(["userName"]);
+const ListUsers = (props) => {
+  const [cookies, setCookie] = useCookies(['userName']);
 
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
@@ -173,8 +173,8 @@ const ListUsers = props => {
               </label>
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
           {isShowMap ? (
             <Map
               latitude={latitude}
@@ -188,20 +188,20 @@ const ListUsers = props => {
               }}
             />
           ) : (
-            <ul
-              style={{
-                display: 'flex',
-                listStyle: 'none',
-                padding: '0',
-                justifyContent: 'space-around',
-                flexWrap: 'wrap',
-              }}
-            >
-              {list.success
-                ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
-                : ''}
-            </ul>
-          )}
+              <ul
+                style={{
+                  display: 'flex',
+                  listStyle: 'none',
+                  padding: '0',
+                  justifyContent: 'space-around',
+                  flexWrap: 'wrap',
+                }}
+              >
+                {list.success
+                  ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
+                  : ''}
+              </ul>
+            )}
         </div>
       </div>
     </div>
