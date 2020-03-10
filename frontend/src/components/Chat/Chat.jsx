@@ -27,7 +27,8 @@ function Chat() {
   const [messages, setMessages] = useState({});
 
   const chatRoom = db.ref().child('chatrooms').child('global');
-
+  const ref = db.ref().child('chatrooms').child('global');
+  
   useEffect(() => {
     const handleNewMessages = snap => {
       if (snap.val()) setMessages(snap.val());
