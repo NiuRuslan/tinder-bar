@@ -66,7 +66,6 @@ function ProfileEdit(props) {
     event.preventDefault();
     setActivity(event.target.value);
   }
-
   function LogOut() {
     removeCookies("userName");
   }

@@ -6,7 +6,9 @@ import axios from "axios";
 import "./anketa.css";
 import { LogIn } from "../../redux/action";
 import { connect } from "react-redux";
+import Photo from '../downloadPhoto/photo'
 import { storage } from '../../firebase';
+
 class Anketa extends React.Component {
   constructor(props) {
     super(props);
@@ -145,6 +147,7 @@ class Anketa extends React.Component {
           />
           <Step3
             currentStep={this.state.currentStep}
+            
             handleChange={this.handleChange}
             about={this.state.about}
           />
@@ -169,7 +172,7 @@ function Step1(props) {
           className="form-control"
           type="text"
           name="name"
-          placeholder="Name"
+          placeholder="Your name"
           oninput="this.className"
           required
         />
@@ -242,6 +245,7 @@ function Step3(props) {
   }
   return (
     <>
+    <Photo />
       <div className="form-group">
         <label>
           <input

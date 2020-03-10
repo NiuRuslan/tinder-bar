@@ -1,21 +1,20 @@
-import firebase from 'firebase/app';
 import 'firebase/storage';
-
+import firebase from 'firebase';
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyBVHoZkVbuh3G38MJbps2a9EDh_TZsSh_U',
-  authDomain: 'tinder-bar.firebaseapp.com',
-  databaseURL: 'https://tinder-bar.firebaseio.com',
-  projectId: 'tinder-bar',
-  storageBucket: 'tinder-bar.appspot.com',
-  messagingSenderId: '136178829220',
-  appId: '1:136178829220:web:f5826ab15e041c911c2331',
-  measurementId: 'G-YSP82RJD3F',
+  apiKey: process.env.REACT_APP_database_API,
+  authDomain: process.env.REACT_APP_authDomain,
+  databaseURL: process.env.REACT_APP_databaseURL,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_database_AppId,
+  measurementId: process.env.REACT_APP_messagingSenderId,
 };
-
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
 const storage = firebase.storage();
-
+const database = firebase.database();
 export {
-  storage, firebase as default,
-};
+  database, storage, firebase as default
+}

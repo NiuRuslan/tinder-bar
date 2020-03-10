@@ -16,6 +16,7 @@ import Warning from './components/Warning/Warning';
 import Anketa from './components/anketa/Anketa';
 import NotFound from './components/notFound/notFound';
 import ProfileEdit from './components/profileEdit/profileEdit';
+import Chat from './components/Chat/Chat';
 
 function App() {
   const history = createBrowserHistory();
@@ -35,6 +36,7 @@ function App() {
           <Route exact path="/warning" component={Warning} />
           <Route exact path="/profile" component={ProfileEdit} />
           <Route exact path="/profileCreator" component={Anketa} />
+          <Route exact path="/chat" component={Chat} />
           <Route exact path="/regist" component={Regist} />
           <Route exact path="/login" component={Login} />
           <Route path="/" component={ListUsers} />

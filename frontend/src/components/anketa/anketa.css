@@ -325,6 +325,10 @@ input.invalid {
 	}
 }
 
+#file-input {
+  display: none;
+}
+
 /* h1 {
 	position: absolute;
 	top: 50%;
