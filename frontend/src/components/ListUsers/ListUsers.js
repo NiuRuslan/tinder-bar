@@ -112,7 +112,7 @@ const ListUsers = props => {
     }
   };
   return (
-    <div>
+<>
       <div className="full-wh" style={{}}>
         <div className="bg-animation">
           <div id="stars" />
@@ -204,7 +204,7 @@ const ListUsers = props => {
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

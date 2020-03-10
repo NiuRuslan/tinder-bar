@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-require('dotenv').config();
 
 // A.I> подключил монгоДБ из облака
 const mongoose = require('mongoose');
