@@ -1,25 +1,25 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import './Warning.css';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import "./Warning.css";
 
 function Warning() {
-  const [cookies, setCookie] = useCookies(['userName', 'chacked']);
+  const [cookies, setCookie] = useCookies(["userName", "chacked"]);
 
   function checkYes(event) {
     event.preventDefault();
-    setCookie('chacked', true);
+    setCookie("chacked", true);
   }
   function checkNo(event) {
     event.preventDefault();
-    setCookie('chacked', false);
+    setCookie("chacked", false);
   }
 
   return (
     <>
       <div id="nc-main" className="nc-main bg-cover bg-cc">
         <div className="startPage">
-          <div className="smallStartPage">
+          <div className="smallStartPage" style={{ margin: "auto 0" }}>
             <div className="full-wh">
               <div className="bg-animation">
                 <div id="stars" />
@@ -30,7 +30,7 @@ function Warning() {
             </div>
             <div>
               {cookies.chacked ? (
-                cookies.chacked === 'true' ? (
+                cookies.chacked === "true" ? (
                   cookies.userName ? (
                     <Redirect from="warning" to="/" />
                   ) : (
@@ -48,7 +48,7 @@ function Warning() {
                   <form onSubmit={checkNo}>
                     <button
                       type="submit"
-                      style={{ color: '#FFF', backgroundColor: 'transparent' }}
+                      style={{ color: "#FFF", backgroundColor: "transparent" }}
                     >
                       No
                     </button>
