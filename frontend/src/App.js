@@ -13,8 +13,9 @@ import Login from './components/Login/Login';
 import Regist from './components/Regist/Regist';
 import ListUsers from './components/ListUsers/ListUsers';
 import StartPage from './components/startPage/startPage';
-import NotFound from './components/notFound/notFound';
 import Anketa from './components/anketa/Anketa';
+import NotFound from './components/notFound/notFound';
+import ProfileEdit from './components/profileEdit/profileEdit';
 
 function App() {
   const history = createBrowserHistory();
@@ -22,8 +23,15 @@ function App() {
   return (
     <>
       <Router history={history}>
-        {cookies.chacked === 'true' ? (cookies.userName ? null : <Redirect to="/login" />) : <Redirect to="/startpage" />}
+        {cookies.chacked === 'true' ? (
+          cookies.userName ? null : (
+            <Redirect to="/login" />
+          )
+        ) : (
+          <Redirect to="/startpage" />
+        )}
         <Switch>
+          <Route exact path="/profileEdit" component={ProfileEdit} />
           <Route exact path="/listUsers" component={ListUsers} />
           <Route exact path="/profile" component={Anketa} />
           <Route exact path="/regist" component={Regist} />
@@ -32,7 +40,6 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </Router>
-
     </>
   );
 }

@@ -1,14 +1,27 @@
-body, p, input, select, textarea, button, a {
-  font-family: 'Montserrat', sans-serif;
+body,
+p,
+input,
+select,
+textarea,
+button,
+a {
+  font-family: "Montserrat", sans-serif;
   letter-spacing: -0.2px;
   font-size: 16px;
 }
 
-div, p {
-  color: #BABECC;
-  text-shadow: 1px 1px 1px #FFF;
+div,
+p {
+  color: #babecc;
+  text-shadow: 1px 1px 1px #fff;
 }
-
+.login {
+  opacity: 0.4;
+  transition: 1s;
+}
+.login:hover {
+  opacity: 1;
+}
 form {
   border-radius: 2%;
   padding: 16px;
@@ -20,20 +33,22 @@ form {
   padding: 32px 0;
   text-align: center;
 }
-.segment, h1 {
+.segment,
+h1 {
   padding: 32px 0;
   text-align: center;
-  color:#FFF;
-  text-shadow: 3px 3px 2 #0f4567; 
+  color: #fff;
+  text-shadow: 3px 3px 2 #0f4567;
 }
-button, input {
+button,
+input {
   border: 0;
   outline: 0;
   font-size: 16px;
-  border-radius: 320px;
+  border-radius: 8px;
   padding: 16px;
   /* background-color: #EBECF0;*/
-  text-shadow: 1px 1px 0 #FFF; 
+  text-shadow: 1px 1px 0 #fff;
 }
 
 label {
@@ -44,7 +59,7 @@ label {
 
 input {
   margin-right: 8px;
-  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
   width: 100%;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
@@ -52,22 +67,22 @@ input {
   -webkit-appearance: none;
 }
 input:focus {
-  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
 }
 
 button {
   color: #0f4667;
   font-weight: bold;
-  box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 600;
 }
 button:hover {
-  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
 }
 button:active {
-  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
 }
 button .icon {
   margin-right: 8px;

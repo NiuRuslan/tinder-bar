@@ -19,7 +19,13 @@ div, p {
 .date {
   color: #0f4667;
 }
-
+.anketa{
+  opacity: 0.4;
+  transition: 1s;
+}
+.anketa:hover {
+  opacity: 1;
+}
 form {
   border-radius: 2%;
   display: flex;
@@ -41,9 +47,9 @@ button, input {
 	border: 0;
 	outline: 0;
 	font-size: 16px;
-	border-radius: 320px;
+  border-radius: 8px;
 	padding: 16px;
-	/* background-color: #EBECF0;*/
+	background-color: #EBECF0;
 	text-shadow: 1px 1px 0 #FFF; 
 }
 
@@ -68,7 +74,7 @@ input:focus {
 }
 
 button {
-	color: #61677C;
+	color: #FFF;
 	font-weight: bold;
 	box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
 	transition: all 0.2s ease-in-out;
