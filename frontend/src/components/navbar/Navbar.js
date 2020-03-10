@@ -18,7 +18,7 @@ const Navbar = props => {
     <nav>
       <ul style={{ padding: "0" }} className="list">
         <li className="listLi">
-          <Link to="/">
+          <Link to="/profileEdit">
             <img className="navbar" src="./navbar/user.png"></img>
           </Link>
         </li>
@@ -29,9 +29,9 @@ const Navbar = props => {
         </li>
 
         <li className="listLi">
-          <Link to="/login">
+          <Link>
             {" "}
-            <img src="./navbar/notification.png"></img>
+            <img src="./navbar/email.png"></img>
           </Link>
         </li>
       </ul>

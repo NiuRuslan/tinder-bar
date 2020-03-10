@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import Map from "./Map";
 import ModalWindow from "../Modal/Modal";
+import AnnouncementMessage from "../Announcement/Announcement";
 import "./listUsers.css";
 import Navbar from "../navbar/Navbar";
 import "../snow/snow.css";
@@ -116,6 +117,7 @@ const ListUsers = props => {
   };
   return (
     <div>
+      <AnnouncementMessage />
       <div className="full-wh" style={{}}>
         <div className="bg-animation">
           <div id="stars"></div>
