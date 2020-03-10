@@ -1,6 +1,6 @@
 .profile-container {
   display: grid;
-  grid-template-rows: auto 5% auto auto;
+  /* grid-template-rows: auto 5% auto auto; */
   justify-items: center;
   margin-left: 0;
   position: relative;
@@ -60,6 +60,7 @@ input[type="file"] {
 }
 
 .exit {
+  margin-top: 2rem;
   opacity: 0.4;
   transition: 1s;
 }

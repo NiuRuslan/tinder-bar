@@ -332,6 +332,7 @@ input.invalid {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center; 
+  cursor: pointer;
 }
 
 #file-input {
