@@ -4,25 +4,35 @@ import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { profileInit } from '../../redux/action';
 import axios from 'axios'
+import { storage } from '../../firebase';
 
 
 
 
 function ProfileEdit(props) {
-  const [cookies, setCookie] = useCookies(['userName']);
+  const [cookies, setCookie, removeCookies] = useCookies(['userName']);
   const [activity, setActivity] = useState('')
   const [drinks, setDrinks] = useState('')
   const [topics, setTopics] = useState('')
   const [about, setAbout] = useState('')
-
+  const [url, setUrl] = useState(null)
   const [save, setSave] = useState('')
   const id = cookies.userName;
   const { profileInit } = props;
+  const [image, setImage] = useState(null);
+
 
   function patchData(event) {
     event.preventDefault();
-
-
+    const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
+    uploadTask.on('state_changed',
+      undefined,
+      undefined,
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then(url => {
+            setUrl(url)
+        });
+      });
     axios.patch('http://localhost:4000/users/profile', {
       activity,
       drinks,
@@ -55,7 +65,14 @@ function ProfileEdit(props) {
     setActivity(event.target.value)
   }
 
+  function LogOut(){
+    removeCookies('userName')
+  }
+
   useEffect(() => {
+    storage.ref(`images/${cookies.userName}`).getDownloadURL().then(url => {
+      setUrl(url);
+    });
     axios.post('http://localhost:4000/users/profileEdit', {
       id,
     }).then(({ data }) => {
@@ -65,10 +82,19 @@ function ProfileEdit(props) {
       setTopics(data.profileId.topics)
       profileInit(data.profileId)
     })
-  }, [profileInit,id])
+  }, [profileInit, id])
+
+  function photoDownload(e) {
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+      setImage(image)
+    }
+  }
 
   return (
     <div>
+      <img style={{ width: 200 + 'px', height: 200 + 'px', borderRadius: 50 + '%' }} src={url} />
+      <input type="file" onChange={photoDownload} />
       <form onSubmit={patchData}>
         <span>activity</span>
         <label>
@@ -93,7 +119,7 @@ function ProfileEdit(props) {
         <button type='submit' > Save changes </button>
         {save}
       </form>
-      <Link to='/listUsers'>Go to Home</Link>
+      <Link to='/login' onClick={LogOut}><button>LogOut</button> </Link>
     </div>
   )
 }

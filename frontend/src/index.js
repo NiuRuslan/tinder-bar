@@ -8,15 +8,11 @@ import { createStore, compose, applyMiddleware } from "redux";
 import rootSaga from "./redux/sagas/sagas";
 import rootReducer from "./redux/root-reducer";
 
-const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
-
-
 
 const initialSagaMiddleware = createSagaMiddleware();
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  persistedState,
   storeEnhancers(
     applyMiddleware(initialSagaMiddleware),
   ),

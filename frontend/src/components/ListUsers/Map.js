@@ -1,11 +1,14 @@
-import React from "react";
-// import { fitBounds } from 'google-map-react/utils';
+import React, { Fragment, useEffect, useState } from "react";
+import { compose, withProps, withStateHandlers } from "recompose";
+import ModalWindow from "../Modal/Modal";
+import { Button, Header, Icon, Image, Modal } from "semantic-ui-react";
 
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
+  Marker,
+  InfoWindow
 } from "react-google-maps";
 
 import styles from "./GoogleMapStyles.json";
@@ -14,13 +17,17 @@ const Map = ({
   googleMapURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places",
   latitude,
   longitude,
-  list: { list: users },
-  radius,
+  list: { list: users }
 }) => {
   /**
    * @withGoogleMap – функция для создания react-компонента. Предназначенного для отображения карты
    * GoogleMap – непосредственно сам компонент карты, в который передаются нужные параметры
    */
+  const [isShowProfile, setShowProfile] = useState(false);
+
+  // const ShowProfile = () => {
+  //   setShowProfile(!isShowProfile);
+  // };
   const CMap = withScriptjs(
   
     withGoogleMap(props => (
@@ -60,11 +67,73 @@ const Map = ({
           />
         }
         center={{ lat: latitude, lng: longitude }}
-        
-      >{users.map(el => <Marker
-        icon={{ url: "./imgs/cocktails.png" }}
-        position={{ lat: el.latitude, lng: el.longitude }}
-      />)}
+      >
+        {users.map(el => (
+          // onClick={() => {
+          //  setShowProfile(!isShowProfile)
+          // }}
+
+          <div
+            style={{
+              display: "flex",
+              width: "50%",
+              marginBottom: "20px",
+              height: "70px"
+            }}
+          >
+            <Modal
+              trigger={
+                <Marker
+                  icon={{ url: "./imgs/cocktails.png" }}
+                  position={{ lat: el.latitude, lng: el.longitude }}
+                />
+              }
+            >
+              {" "}
+              <Modal.Header
+                style={{ backgroundColor: "#0f4667" }}
+              ></Modal.Header>
+              <Modal.Content image>
+                {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
+                <Modal.Description>
+                  <Header style={{ color: "#0f4667" }}>
+                    Name:{" " + el.name}
+                  </Header>
+                  <li style={{ color: "#0f4667" }}>
+                    Date of Birth:{" " + el.DoB}
+                  </li>
+                  <li style={{ color: "#0f4667" }}>
+                    Activity:{" " + el.activity}
+                  </li>
+                  <li style={{ color: "#0f4667" }}>
+                    Favotite drinks:{" " + el.drinks}
+                  </li>
+                  <li style={{ color: "#0f4667" }}>
+                    Favotite topics:{" " + el.topics}
+                  </li>
+                  <li style={{ color: "#0f4667" }}>
+                    About yourself:{" " + el.about}
+                  </li>
+                  {/* <Image src='/images/wireframe/paragraph.png' /> */}
+                </Modal.Description>
+              </Modal.Content>
+              <Modal.Actions style={{ backgroundColor: "#0f4667" }}>
+                <Button
+                  primary
+                  style={{
+                    color: "#0f4667",
+                    textShadow: "none",
+                    margin: "0 auto",
+                    borderRadius: "320px",
+                    backgroundColor: "#FFF"
+                  }}
+                >
+                  Send a request
+                </Button>
+              </Modal.Actions>
+            </Modal>
+          </div>
+        ))}
       </CMap>
     </>
   );

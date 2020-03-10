@@ -10,26 +10,31 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  Link
 } from "react-router-dom";
 import StartPage from "./components/startPage/startPage";
 import { useCookies } from "react-cookie";
 import NotFound from "./components/notFound/notFound";
 import ProfileEdit from './components/profileEdit/profileEdit'
+import Photo from './components/downloadPhoto/photo'
+
 
 function App() {
   const history = createBrowserHistory();
-  const [cookies, setCookie] = useCookies(["userName", "chacked"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["userName", "chacked"])
+
   return (
     <>
+    {/* <Photo /> */}
       <Router history={history}>
         {cookies.chacked === "true" ? (
           cookies.userName ? null : (
-            <Redirect to="/login" />
-          )
-        ) : (
-          <Redirect to="/startpage" />
-        )}
+            <Redirect to="/login" />  
+            )
+            ) : (
+              <Redirect to="/startpage" />
+              )}
         <Switch>
           <Route exact path='/profileEdit' component={ProfileEdit}/>
           <Route exact path="/listUsers" component={ListUsers} />
