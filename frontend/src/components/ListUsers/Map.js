@@ -72,14 +72,7 @@ const Map = ({
           //  setShowProfile(!isShowProfile)
           // }}
 
-          <div
-            style={{
-              display: "flex",
-              width: "50%",
-              marginBottom: "20px",
-              height: "70px"
-            }}
-          >
+          <div>
             <Modal
               trigger={
                 <Marker

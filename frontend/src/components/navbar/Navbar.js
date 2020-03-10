@@ -1,32 +1,38 @@
 import React from "react";
 import "./navbar.css";
-
 import { Link, useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-const Navbar = () => {
-  const [cookies, , removeCookie] = useCookies(["user"]);
-  const history = useHistory();
+const Navbar = props => {
+  // const [cookies, , removeCookie] = useCookies(["user"]);
+  // const history = useHistory();
 
-  const LogOut = event => {
-    // event.preventDefault();
-    removeCookie("user");
-    history.push("/login");
-  };
+  // const LogOut = () => {
+  //   console.log(history);
+  //   debugger;
+  //   removeCookie("userName");
+  //   history.push("/login");
+  // };
 
   return (
     <nav>
-      <ul className="list">
+      <ul style={{ padding: "0" }} className="list">
         <li className="listLi">
-          <img className="navbar" src="./navbar/user.png">
-            {/* <Link to="/"> Main Page</Link> */}
-          </img>
+          <Link to="/">
+            <img className="navbar" src="./navbar/user.png"></img>
+          </Link>
         </li>
-        <li>
-          <img src="./navbar/pin.png"></img>
+        <li className="listLi">
+          <Link to="/listUsers">
+            <img src="./navbar/pin.png"></img>
+          </Link>
         </li>
-        <li>
-          <img src="./navbar/exit-door.png"></img>
+
+        <li className="listLi">
+          <Link to="/login">
+            {" "}
+            <img src="./navbar/notification.png"></img>
+          </Link>
         </li>
       </ul>
     </nav>
@@ -39,4 +45,5 @@ const Navbar = () => {
             <Link to="/login"> Login</Link>
           )} */
 }
+
 export default Navbar;

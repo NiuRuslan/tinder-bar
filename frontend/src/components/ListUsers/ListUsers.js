@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import axios from 'axios'
-import Map from './Map'
-import ModalWindow from "../Modal/Modal"
-import LogOut from '../../redux/action'
-import "./listUsers.css"
-
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import axios from "axios";
+import Map from "./Map";
+import ModalWindow from "../Modal/Modal";
+import "./listUsers.css";
+import Navbar from "../navbar/Navbar";
+import "../snow/snow.css";
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
- * @param {*} props 
+ * @param {*} props
  */
-const ListUsers = (props) => {
-
+const ListUsers = props => {
   // Инициализируем hooks
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongituse] = useState(null);
@@ -20,21 +19,20 @@ const ListUsers = (props) => {
     success: false,
     err: ""
   });
+  const [isColorBtn, setColorBtn] = useState("findMe");
+
   const [isShowMap, setShowMap] = useState(false);
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
    */
   const ChangeOnMap = () => {
-    setShowMap(!isShowMap)
-  }
+    setShowMap(!isShowMap);
+  };
+
   /**
    * Создает событие с типом LogOut
    * @param {event} e - событие
    */
-  const logoutAccaunt = e => {
-    e.preventDefault();
-    props.LogOut();
-  };
 
   /**
    * Делает запрос на сервер:
@@ -43,6 +41,7 @@ const ListUsers = (props) => {
    * @param {Number} longitude - долгота в радианах
    * @param {Number} radius - радиус поиска
    */
+
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios
       .post("http://localhost:4000/list/users", {
@@ -72,12 +71,6 @@ const ListUsers = (props) => {
           success: false,
           err: "Runtime error"
         });
-      }
-    }).catch(() => {
-      // Задаем hooks
-      setList({
-        success: false,
-        err: 'Runtime error',
       });
   };
 
@@ -85,7 +78,8 @@ const ListUsers = (props) => {
    * Определяет координаты пользователя, используя Google map function
    */
   const geoFindLocation = () => {
-    const success = (position) => {
+    setColorBtn("");
+    const success = position => {
       // Задаем в hooks координаты
       setLatitude(position.coords.latitude);
       setLongituse(position.coords.longitude);
@@ -120,34 +114,26 @@ const ListUsers = (props) => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
-  console.log(list);
   return (
-    <>
-      <Navbar />
-      <div
-        id="nc-main"
-        className="nc-main bg-cover bg-cc"
-        style={{ display: "flex" }}
-      >
-        <div className="full-wh">
-          <div className="bg-animation">
-            <div id="stars"></div>
-            <div id="stars2"></div>
-            <div id="stars3"></div>
-            <div id="stars4"></div>
-          </div>
+    <div>
+      <div className="full-wh" style={{}}>
+        <div className="bg-animation">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+          <div id="stars4"></div>
         </div>
+      </div>
+      <div id="nc-main" className="nc-main bg-cover bg-cc">
         <div
+          className="main-container"
           style={{
-            marginTop: "5%",
-            alignSelf: "center",
             width: "100%",
-            height: "100%",
-            justifyContent: "center"
+            height: "100vh"
           }}
         >
-          <div>
-            {/* <h1>{props.name}</h1> */}
+          <Navbar />
+          <div className="input-form-userlist">
             <input
               className="inputFind"
               onChange={event => {
@@ -156,13 +142,13 @@ const ListUsers = (props) => {
               style={{
                 display: "block",
                 width: "50%",
-                position: "relative",
                 margin: "0 auto"
               }}
             ></input>
             <br />
             <button
               id="find-me"
+              className={isColorBtn}
               onClick={() => geoFindLocation()}
               style={{
                 display: "block",
@@ -175,46 +161,58 @@ const ListUsers = (props) => {
             >
               Show my location
             </button>
-            <br />
-            {list.success ? (
-              <div className="toggleBox" style={{ margin: "0 auto" }}>
-                <input
-                  type="checkbox"
-                  name="toggle"
-                  className="sw"
-                  id="toggle-2"
-                />
-                <label for="toggle-2" onClick={ChangeOnMap}>
-                  <span>Use a map</span>
-                </label>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {isShowMap ? (
-              <Map latitude={latitude} longitude={longitude} list={list} />
-            ) : (
-              <ul
-                style={{
-                  listStyle: "none",
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                  alignItems: "center"
-                }}
-              >
-                {list.success
-                  ? list.list.map(obj => {
-                      return <ModalWindow obj={obj} key={obj._id} />;
-                    })
-                  : ""}
-              </ul>
-            )}
           </div>
+
+          <br />
+          {list.success ? (
+            <div className="toggleBox" style={{ margin: "0 auto" }}>
+              <input
+                type="checkbox"
+                name="toggle"
+                className="sw"
+                id="toggle-2"
+              />
+              <label for="toggle-2" onClick={ChangeOnMap}>
+                <span>Use a map</span>
+              </label>
+            </div>
+          ) : (
+            ""
+          )}
+
+          {isShowMap ? (
+            <Map
+              latitude={latitude}
+              longitude={longitude}
+              list={list}
+              style={{
+                marginTop: "10%",
+                alignSelf: "center",
+                width: "100%",
+                justifyContent: "center"
+              }}
+            />
+          ) : (
+            <ul
+              style={{
+                listStyle: "none",
+                display: "flex",
+                padding: "0",
+                justifyContent: "space-around",
+                display: "flex",
+                flexWrap: "wrap"
+              }}
+            >
+              {list.success
+                ? list.list.map(obj => {
+                    return <ModalWindow obj={obj} key={obj._id} />;
+                  })
+                : ""}
+            </ul>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
@@ -222,11 +220,4 @@ const mapStateToProps = state => ({
   ...state
 });
 
-/**
- * createAction c типом LOGOUT
- */
-const mapDispatchToProps = {
-  LogOut,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListUsers);
+export default connect(mapStateToProps)(ListUsers);

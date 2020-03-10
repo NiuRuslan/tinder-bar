@@ -6,14 +6,7 @@ function ModalWindow(props) {
   const profile = props.obj;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "50%",
-        marginBottom: "20px",
-        height: "70px"
-      }}
-    >
+    <div>
       <Modal
         trigger={
           <Button
@@ -25,7 +18,7 @@ function ModalWindow(props) {
               border: "solid 2px #E74C3C",
               borderRadius: "8px",
               backgroundColor: "transparent",
-              flex: "1 1",
+              flex: "1",
               color: "#FFF"
             }}
           >
