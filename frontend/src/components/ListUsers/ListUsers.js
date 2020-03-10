@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import Map from './Map';
 import ModalWindow from '../Modal/Modal';
@@ -10,10 +11,10 @@ import '../snow/snow.css';
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
  */
-const ListUsers = (props) => {
-  // Инициализируем hooks
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongituse] = useState(null);
+
+const ListUsers = props => {
+  const [cookies, setCookie] = useCookies(["userName"]);
+
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
@@ -28,11 +29,8 @@ const ListUsers = (props) => {
   const ChangeOnMap = () => {
     setShowMap(!isShowMap);
   };
-
-  /**
-   * Создает событие с типом LogOut
-   * @param {event} e - событие
-   */
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongituse] = useState(null);
 
   /**
    * Делает запрос на сервер:
@@ -66,7 +64,6 @@ const ListUsers = (props) => {
         }
       })
       .catch(() => {
-        // Задаем hooks
         setList({
           success: false,
           err: 'Runtime error',
@@ -162,7 +159,6 @@ const ListUsers = (props) => {
               Show my location
             </button>
           </div>
-
           <br />
           {list.success ? (
             <div className="toggleBox" style={{ margin: '0 auto' }}>
@@ -179,7 +175,6 @@ const ListUsers = (props) => {
           ) : (
             ''
           )}
-
           {isShowMap ? (
             <Map
               latitude={latitude}

@@ -9,5 +9,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^1.7.0"
+  },
+  "dependencies": {
+    "semantic-ui-react": "^0.88.2"
   }
 }

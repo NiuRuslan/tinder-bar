@@ -39,9 +39,9 @@ function Login(props) {
       {slider > 5 ? <Slider /> : <Slider2 />}
       {cookies.userName ? (
         user.profileId ? (
-          <Redirect from="/login" to="/listUsers" />
+          <Redirect from="/login" to="/" />
         ) : (
-          <Redirect to="/profile" />
+          <Redirect to="/profilecreator" />
         )
       ) : (
         <form

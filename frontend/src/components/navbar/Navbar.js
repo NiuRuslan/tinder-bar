@@ -8,17 +8,17 @@ const Navbar = (props) =>
     <nav>
       <ul style={{ padding: '0' }} className="list">
         <li className="listLi">
-          <Link to="/">
+          <Link to="/profile">
             <img className="navbar" src="./navbar/user.png" />
           </Link>
         </li>
         <li className="listLi">
-          <Link to="/listUsers">
+          <Link to="/">
             <img src="./navbar/pin.png" />
           </Link>
         </li>
         <li className="listLi">
-          <Link to="/login">
+          <Link to="/chat">
             {' '}
             <img src="./navbar/notification.png" />
           </Link>

@@ -6,6 +6,7 @@ import axios from "axios";
 import "./anketa.css";
 import { LogIn } from "../../redux/action";
 import { connect } from "react-redux";
+import { storage } from '../../firebase';
 class Anketa extends React.Component {
   constructor(props) {
     super(props);
@@ -36,9 +37,9 @@ class Anketa extends React.Component {
   };
 
   handleSubmit = async event => {
-    event.preventDefault();
-    const { user } = this.props;
-    let { name, DoB, activity, topics, drinks, about } = this.state;
+    event.preventDefault()
+    const { user } = this.props
+    let { name, DoB, activity, topics, drinks, about } = this.state
 
     await axios.post("http://localhost:4000/users/profile", {
       name,

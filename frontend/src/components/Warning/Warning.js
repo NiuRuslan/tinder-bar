@@ -1,9 +1,9 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import './startPage.css';
+import './Warning.css';
 
-function StartPage() {
+function Warning() {
   const [cookies, setCookie] = useCookies(['userName', 'chacked']);
 
   function checkYes(event) {
@@ -32,9 +32,9 @@ function StartPage() {
               {cookies.chacked ? (
                 cookies.chacked === 'true' ? (
                   cookies.userName ? (
-                    <Redirect from="startpage" to="/home" />
+                    <Redirect from="warning" to="/" />
                   ) : (
-                    <Redirect from="startpage" to="/login" />
+                    <Redirect from="warning" to="/login" />
                   )
                 ) : (
                   <h1 className="red">Sorry, you can't use this app</h1>
@@ -63,4 +63,4 @@ function StartPage() {
   );
 }
 
-export default StartPage;
+export default Warning;

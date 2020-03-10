@@ -1,6 +1,6 @@
-import React from 'react';
-import './modal.css';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import React from "react";
+import "./modal.css";
+import { Button, Header, Modal } from "semantic-ui-react";
 
 function ModalWindow(props) {
   const profile = props.obj;

@@ -12,7 +12,7 @@ import './App.css';
 import Login from './components/Login/Login';
 import Regist from './components/Regist/Regist';
 import ListUsers from './components/ListUsers/ListUsers';
-import StartPage from './components/startPage/startPage';
+import Warning from './components/Warning/Warning';
 import Anketa from './components/anketa/Anketa';
 import NotFound from './components/notFound/notFound';
 import ProfileEdit from './components/profileEdit/profileEdit';
@@ -22,21 +22,22 @@ function App() {
   const [cookies, setCookie] = useCookies(['userName', 'chacked']);
   return (
     <>
+      {/* <Photo /> */}
       <Router history={history}>
         {cookies.chacked === 'true' ? (
           cookies.userName ? null : (
             <Redirect to="/login" />
           )
         ) : (
-          <Redirect to="/startpage" />
+          <Redirect to="/warning" />
         )}
         <Switch>
-          <Route exact path="/profileEdit" component={ProfileEdit} />
-          <Route exact path="/listUsers" component={ListUsers} />
-          <Route exact path="/profile" component={Anketa} />
+          <Route exact path="/warning" component={Warning} />
+          <Route exact path="/profile" component={ProfileEdit} />
+          <Route exact path="/profileCreator" component={Anketa} />
           <Route exact path="/regist" component={Regist} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/startpage" component={StartPage} />
+          <Route path="/" component={ListUsers} />
           <Route component={NotFound} />
         </Switch>
       </Router>
