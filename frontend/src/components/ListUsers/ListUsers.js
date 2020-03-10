@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 import Map from './Map'
 import ModalWindow from "../Modal/Modal"
+import Chat from '../Chat/Chat'
 import "./listUsers.css"
 /**
  * Александр Иванов 
@@ -25,11 +26,6 @@ const ListUsers = (props) => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongituse] = useState(null);
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 875a596de2818f072fd29b8695b1bc1306ca5759
   /**
    * Делает запрос на сервер:
    * @param {String} id - пользователя в бд
@@ -133,6 +129,7 @@ const ListUsers = (props) => {
           </div>
         </div>
       </div>
+      <Chat />
     </>
   );
 };
