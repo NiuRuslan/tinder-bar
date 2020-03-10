@@ -69,9 +69,6 @@ const Map = ({
         center={{ lat: latitude, lng: longitude }}
       >
         {users.map(el => (
-          // onClick={() => {
-          //  setShowProfile(!isShowProfile)
-          // }}
 
           <div
             style={{

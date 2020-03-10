@@ -7,7 +7,7 @@ import createSagaMiddleware from "redux-saga";
 import { createStore, compose, applyMiddleware } from "redux";
 import rootSaga from "./redux/sagas/sagas";
 import rootReducer from "./redux/root-reducer";
-
+import { FirebaseDatabaseProvider } from "@react-firebase/database";
 
 const initialSagaMiddleware = createSagaMiddleware();
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -23,9 +23,9 @@ store.subscribe(() => {
 });
 
 initialSagaMiddleware.run(rootSaga);
-ReactDOM.render(<CookiesProvider>
+ReactDOM.render(<FirebaseDatabaseProvider><CookiesProvider>
   <Provider store={store}>
     <App />
     {' '}
   </Provider>
-</CookiesProvider>, document.getElementById('root'));
+</CookiesProvider></FirebaseDatabaseProvider>, document.getElementById('root'));
