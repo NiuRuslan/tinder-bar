@@ -19,7 +19,7 @@ function Warning() {
     <>
       <div id="nc-main" className="nc-main bg-cover bg-cc">
         <div className="startPage">
-          <div className="smallStartPage" style={{ margin: "auto 0" }}>
+          <div className="smallStartPage">
             <div className="full-wh">
               <div className="bg-animation">
                 <div id="stars" />
@@ -43,12 +43,25 @@ function Warning() {
                 <>
                   <h1 className="segment">Are you 18+</h1>
                   <form onSubmit={checkYes}>
-                    <button type="submit">Yes, Sure</button>
+                    <button
+                      style={{
+                        backgroundColor: "#FFF",
+                        color: "#0f4567",
+                        textShadow: "none"
+                      }}
+                      type="submit"
+                    >
+                      Yes, Sure
+                    </button>
                   </form>
                   <form onSubmit={checkNo}>
                     <button
                       type="submit"
-                      style={{ color: "#FFF", backgroundColor: "transparent" }}
+                      style={{
+                        color: "#FFF",
+                        backgroundColor: "transparent",
+                        textShadow: "none"
+                      }}
                     >
                       No
                     </button>

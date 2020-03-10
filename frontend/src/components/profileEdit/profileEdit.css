@@ -58,3 +58,11 @@ input[type="file"] {
 .edit:hover {
   opacity: 1;
 }
+
+.exit {
+  opacity: 0.4;
+  transition: 1s;
+}
+.exit:hover {
+  opacity: 1;
+}
