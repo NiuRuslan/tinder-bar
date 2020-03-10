@@ -36,7 +36,7 @@ function ProfileEdit(props) {
       about,
       id,
     }).then(({ data }) => {
-      if (data.sucsses) {
+      if (data.success) {
         setSave('Сохранено');
       } else {
         setSave(data.err);
@@ -60,7 +60,6 @@ function ProfileEdit(props) {
     event.preventDefault();
     setActivity(event.target.value);
   }
-
   function LogOut() {
     removeCookies('userName');
   }

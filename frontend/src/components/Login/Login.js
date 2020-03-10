@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Icon } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useCookies } from 'react-cookie';
@@ -49,7 +50,7 @@ function Login(props) {
           className="login"
           style={{ alignSelf: 'center' }}
         >
-          <h1 className="segment">Sign up</h1>
+          <h1 className="segment">Login</h1>
           <label>
             <input
               name="mail"
@@ -77,7 +78,7 @@ function Login(props) {
             }}
           >
             {' '}
-            Log in
+            Sign in <Icon name='sign-in' />
           </button>
           <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
           <br />
@@ -90,7 +91,7 @@ function Login(props) {
                 textShadow: 'none',
               }}
             >
-              Create Account
+              Sign up <Icon name='signup' />
             </button>
           </Link>
         </form>
