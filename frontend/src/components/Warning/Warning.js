@@ -1,18 +1,18 @@
-import React from "react";
-import "./startPage.css";
-import { Redirect } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import './Warning.css';
 
-function StartPage() {
-  const [cookies, setCookie] = useCookies(["userName", "chacked"]);
+function Warning() {
+  const [cookies, setCookie] = useCookies(['userName', 'chacked']);
 
   function checkYes(event) {
     event.preventDefault();
-    setCookie("chacked", true);
+    setCookie('chacked', true);
   }
   function checkNo(event) {
     event.preventDefault();
-    setCookie("chacked", false);
+    setCookie('chacked', false);
   }
 
   return (
@@ -22,19 +22,19 @@ function StartPage() {
           <div className="smallStartPage">
             <div className="full-wh">
               <div className="bg-animation">
-                <div id="stars"></div>
-                <div id="stars2"></div>
-                <div id="stars3"></div>
-                <div id="stars4"></div>
+                <div id="stars" />
+                <div id="stars2" />
+                <div id="stars3" />
+                <div id="stars4" />
               </div>
             </div>
             <div>
               {cookies.chacked ? (
-                cookies.chacked === "true" ? (
+                cookies.chacked === 'true' ? (
                   cookies.userName ? (
-                    <Redirect from="startpage" to="/home" />
+                    <Redirect from="warning" to="/" />
                   ) : (
-                    <Redirect from="startpage" to="/login" />
+                    <Redirect from="warning" to="/login" />
                   )
                 ) : (
                   <h1 className="red">Sorry, you can't use this app</h1>
@@ -48,7 +48,7 @@ function StartPage() {
                   <form onSubmit={checkNo}>
                     <button
                       type="submit"
-                      style={{ color: "#FFF", backgroundColor: "transparent" }}
+                      style={{ color: '#FFF', backgroundColor: 'transparent' }}
                     >
                       No
                     </button>
@@ -63,4 +63,4 @@ function StartPage() {
   );
 }
 
-export default StartPage;
+export default Warning;

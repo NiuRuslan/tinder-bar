@@ -3,7 +3,7 @@ import { storage } from '../../firebase';
 import { useCookies } from "react-cookie";
 
 function Photo() {
-  const [cookies, setCookie] = useCookies(["userName"]);
+  const [cookies] = useCookies(["userName"]);
 
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState('');
@@ -17,23 +17,13 @@ function Photo() {
     const handleUpload = () => {
       const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
       uploadTask.on('state_changed',
-        (snapshot) => {
-          // progrss function ....
-          // const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          // this.setState({ progress });
-          console.log(snapshot)
-        },
-        (error) => {
-          // error function ....
-          console.log(error);
-        },
-        () => {
-          // complete function ....
-          storage.ref('images').child(cookies.userName).getDownloadURL().then(url => {
-            setUrl(url)
-            console.log(url);
-          })
+      undefined,
+      undefined,
+      () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+          setUrl(url);
         });
+      });
     }
   
   return (

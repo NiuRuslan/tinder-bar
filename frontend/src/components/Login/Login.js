@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import Slider from "../slider/Slider";
-import Slider2 from "../slider/Slider2";
-import "./Login.css";
-import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import { useCookies } from "react-cookie";
-import { requestFetchLogin } from "../../redux/action";
+import React, { useState, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { requestFetchLogin } from '../../redux/action';
+import Slider from '../slider/Slider';
+import Slider2 from '../slider/Slider2';
+import './Login.css';
 
 function Login(props) {
   const { user, err, requestFetchLogin } = props;
-  const [cookies, setCookie] = useCookies(["userName"]);
+  const [cookies, setCookie] = useCookies(['userName']);
 
   const [slider, setSlider] = useState();
   useEffect(() => {
     // setLoader()
-    let slider = Math.floor(Math.random() * 10);
+    const slider = Math.floor(Math.random() * 10);
     // setLoader()
     setSlider(slider);
   }, []);
@@ -23,89 +23,88 @@ function Login(props) {
     event.preventDefault();
     const {
       mail: { value: email },
-      pasword: { value: password }
+      pasword: { value: password },
     } = event.target;
     requestFetchLogin(email, password);
   }
 
   useEffect(() => {
     if (user.id) {
-      setCookie("userName", user.id);
+      setCookie('userName', user.id);
     }
   }, [user.id, setCookie]);
 
   return (
-    <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
+    <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
       {slider > 5 ? <Slider /> : <Slider2 />}
       {cookies.userName ? (
         user.profileId ? (
-          <Redirect from="/login" to="/listUsers" />
+          <Redirect from="/login" to="/" />
         ) : (
-          <Redirect to="/profile" />
-        )
+            <Redirect to="/profilecreator" />
+          )
       ) : (
-        <form
-          onSubmit={PutData}
-          className="login"
-          style={{ alignSelf: "center" }}
-        >
-          <h1 className="segment">Sign up</h1>
-          <label>
-            <input
-              name="mail"
-              type="email"
-              placeholder="Email Address"
-              required
-            />
-          </label>
-          <label>
-            <input
-              name="pasword"
-              type="password"
-              placeholder="Password"
-              minLength="5"
-              required
-            />
-          </label>
-          <button
-            className="red"
-            type="submit"
-            style={{
-              color: "#FFF",
-              backgroundColor: "#0f4667",
-              textShadow: "1px 1px 1px #0f4667"
-            }}
+          <form
+            onSubmit={PutData}
+            className="login"
+            style={{ alignSelf: 'center' }}
           >
-            {" "}
-            Log in
-          </button>
-          <div style={{ color: "red", textAlign: "center" }}>{err.title}</div>
-          <br />
-          <Link to="/regist" style={{ width: "100%", alignSelf: "center" }}>
+            <h1 className="segment">Sign up</h1>
+            <label>
+              <input
+                name="mail"
+                type="email"
+                placeholder="Email Address"
+                required
+              />
+            </label>
+            <label>
+              <input
+                name="pasword"
+                type="password"
+                placeholder="Password"
+                minLength="5"
+                required
+              />
+            </label>
             <button
-              className="green"
+              className="red"
+              type="submit"
               style={{
-                color: "#0f4667",
-                backgroundColor: "#FFF",
-                textShadow: "none"
+                color: '#FFF',
+                backgroundColor: '#0f4667',
+                textShadow: '1px 1px 1px #0f4667',
               }}
             >
-              Create Account
+              {' '}
+              Log in
+          </button>
+            <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
+            <br />
+            <Link to="/regist" style={{ width: '100%', alignSelf: 'center' }}>
+              <button
+                className="green"
+                style={{
+                  color: '#0f4667',
+                  backgroundColor: '#FFF',
+                  textShadow: 'none',
+                }}
+              >
+                Create Account
             </button>
-          </Link>
-        </form>
-      )}
+            </Link>
+          </form>
+        )}
     </div>
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
-  err: state.error
+  err: state.error,
 });
-const mapDispatchToProps = dispatch => ({
-  requestFetchLogin: (email, password) =>
-    dispatch(requestFetchLogin(email, password))
+const mapDispatchToProps = (dispatch) => ({
+  requestFetchLogin: (email, password) => dispatch(requestFetchLogin(email, password)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
