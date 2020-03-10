@@ -1,49 +1,29 @@
 import React from "react";
 import "./navbar.css";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-const Navbar = props => {
-  // const [cookies, , removeCookie] = useCookies(["user"]);
-  // const history = useHistory();
-
-  // const LogOut = () => {
-  //   console.log(history);
-  //   debugger;
-  //   removeCookie("userName");
-  //   history.push("/login");
-  // };
-
-  return (
-    <nav>
-      <ul style={{ padding: "0" }} className="list">
-        <li className="listLi">
-          <Link to="/profileEdit">
-            <img className="navbar" src="./navbar/user.png"></img>
-          </Link>
-        </li>
-        <li className="listLi">
-          <Link to="/listUsers">
-            <img src="./navbar/pin.png"></img>
-          </Link>
-        </li>
-
-        <li className="listLi">
-          <Link>
-            {" "}
-            <img src="./navbar/email.png"></img>
-          </Link>
-        </li>
-      </ul>
-    </nav>
-  );
-};
-{
-  /* {cookies.user ? (
-            <Link onClick={event => LogOut(event)}>Logout </Link>
-          ) : (
-            <Link to="/login"> Login</Link>
-          )} */
-}
+const Navbar = props => (
+  <nav>
+    <ul style={{ padding: "0" }} className="list">
+      <li className="listLi">
+        <Link to="/profile">
+          <img className="navbar" src="./navbar/user.png" />
+        </Link>
+      </li>
+      <li className="listLi">
+        <Link to="/">
+          <img src="./navbar/pin.png" />
+        </Link>
+      </li>
+      <li className="listLi">
+        <Link to="/chat">
+          {" "}
+          <img src="./navbar/email.png" />
+        </Link>
+      </li>
+    </ul>
+  </nav>
+);
 
 export default Navbar;

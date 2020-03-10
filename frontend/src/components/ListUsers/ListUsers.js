@@ -11,10 +11,8 @@ import "../snow/snow.css";
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
  */
+
 const ListUsers = props => {
-  // Инициализируем hooks
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongituse] = useState(null);
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
@@ -23,17 +21,16 @@ const ListUsers = props => {
   const [isColorBtn, setColorBtn] = useState("findMe");
 
   const [isShowMap, setShowMap] = useState(false);
+
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
    */
+
   const ChangeOnMap = () => {
     setShowMap(!isShowMap);
   };
-
-  /**
-   * Создает событие с типом LogOut
-   * @param {event} e - событие
-   */
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongituse] = useState(null);
 
   /**
    * Делает запрос на сервер:
@@ -67,7 +64,6 @@ const ListUsers = props => {
         }
       })
       .catch(() => {
-        // Задаем hooks
         setList({
           success: false,
           err: "Runtime error"
@@ -118,101 +114,99 @@ const ListUsers = props => {
   return (
     <div>
       <AnnouncementMessage />
-      <div className="full-wh" style={{}}>
+      <div className="full-wh">
         <div className="bg-animation">
-          <div id="stars"></div>
-          <div id="stars2"></div>
-          <div id="stars3"></div>
-          <div id="stars4"></div>
+          <div id="stars" />
+          <div id="stars2" />
+          <div id="stars3" />
+          <div id="stars4" />
         </div>
       </div>
-      <div id="nc-main" className="nc-main bg-cover bg-cc">
-        <div
-          className="main-container"
-          style={{
-            width: "100%",
-            height: "100vh"
-          }}
-        >
-          <Navbar />
-          <div className="input-form-userlist">
-            <input
-              className="inputFind"
-              onChange={event => {
-                setRadius(event.target.value);
-              }}
-              style={{
-                display: "block",
-                width: "50%",
-                margin: "0 auto"
-              }}
-            ></input>
-            <br />
-            <button
-              id="find-me"
-              className={isColorBtn}
-              onClick={() => geoFindLocation()}
-              style={{
-                display: "block",
-                color: "#FFF",
-                backgroundColor: "transparent",
-                position: "relative",
-                margin: "0 auto",
-                width: "25rem"
-              }}
-            >
-              Show my location
-            </button>
-          </div>
+      <div
+        className="main-container"
+        style={{
+          width: "100%",
+          height: "100vh"
+        }}
+      >
+        <Navbar />
 
+        <div className="input-form-userlist">
+          <input
+            className="inputFind"
+            onChange={event => {
+              setRadius(event.target.value);
+            }}
+            type="range"
+            style={{
+              display: "block",
+              width: "50%",
+              margin: "0 auto"
+            }}
+            min="100"
+            max="5000"
+            step="200"
+            value={radius}
+          />{" "}
+          <label className="label">
+            Chosen radius: {radius} {radius !== null ? "meters" : ""}
+          </label>
           <br />
-          {list.success ? (
-            <div className="toggleBox" style={{ margin: "0 auto" }}>
-              <input
-                type="checkbox"
-                name="toggle"
-                className="sw"
-                id="toggle-2"
-              />
-              <label for="toggle-2" onClick={ChangeOnMap}>
-                <span>Use a map</span>
-              </label>
-            </div>
-          ) : (
-            ""
-          )}
-
-          {isShowMap ? (
-            <Map
-              latitude={latitude}
-              longitude={longitude}
-              list={list}
-              style={{
-                marginTop: "10%",
-                alignSelf: "center",
-                width: "100%",
-                justifyContent: "center"
-              }}
-            />
-          ) : (
-            <ul
-              style={{
-                listStyle: "none",
-                display: "flex",
-                padding: "0",
-                justifyContent: "space-around",
-                display: "flex",
-                flexWrap: "wrap"
-              }}
-            >
-              {list.success
-                ? list.list.map(obj => {
-                    return <ModalWindow obj={obj} key={obj._id} />;
-                  })
-                : ""}
-            </ul>
-          )}
+          <button
+            id="find-me"
+            className={isColorBtn}
+            onClick={() => geoFindLocation()}
+            style={{
+              display: "block",
+              color: "#FFF",
+              backgroundColor: "transparent",
+              position: "relative",
+              margin: "0 auto",
+              width: "25rem",
+              textShadow: "none"
+            }}
+          >
+            Show my location
+          </button>
         </div>
+        <br />
+        {list.success ? (
+          <div className="toggleBox" style={{ margin: "0 auto" }}>
+            <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
+            <label htmlFor="toggle-2" onClick={ChangeOnMap}>
+              <span>Use a map</span>
+            </label>
+          </div>
+        ) : (
+          ""
+        )}
+        {isShowMap ? (
+          <Map
+            latitude={latitude}
+            longitude={longitude}
+            list={list}
+            style={{
+              marginTop: "10%",
+              alignSelf: "center",
+              width: "100%",
+              justifyContent: "center"
+            }}
+          />
+        ) : (
+          <ul
+            style={{
+              display: "flex",
+              listStyle: "none",
+              padding: "0",
+              justifyContent: "space-around",
+              flexWrap: "wrap"
+            }}
+          >
+            {list.success
+              ? list.list.map(obj => <ModalWindow obj={obj} key={obj._id} />)
+              : ""}
+          </ul>
+        )}
       </div>
     </div>
   );

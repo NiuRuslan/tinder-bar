@@ -1,6 +1,10 @@
-import { LOGIN, PROFILE_INIT, LOGOUT, LOADER} from './action-types';
+import {
+  LOGIN, PROFILE_INIT, LOGOUT, LOADER,
+} from './action-types';
 
-const init = { id: "", nickname: "", profileId: "", isLoader: false };
+const init = {
+  id: '', nickname: '', profileId: '', isLoader: false,
+};
 
 export default (state = init, action) => {
   switch (action.type) {
@@ -9,17 +13,17 @@ export default (state = init, action) => {
         ...state,
         id: action.id,
         nickname: action.nickname,
-        profileId: action.profileId
+        profileId: action.profileId,
       };
-      case PROFILE_INIT:
-        return {
-          ...state,
-          profileId:action.profileId,
-        }
+    case PROFILE_INIT:
+      return {
+        ...state,
+        profileId: action.profileId,
+      };
     case LOADER:
       return {
         ...state,
-        isLoader: !state.isLoader
+        isLoader: !state.isLoader,
       };
     case LOGOUT:
       return {
@@ -28,7 +32,7 @@ export default (state = init, action) => {
         nickname: '',
         profileId: '',
         isLoader: false,
-      }
+      };
     default:
       return state;
   }

@@ -1,0 +1,60 @@
+.profile-container {
+  display: grid;
+  grid-template-rows: auto 5% auto auto;
+  justify-items: center;
+  margin-left: 0;
+  position: relative;
+}
+.example-1 {
+  padding: 0;
+}
+.example-1 .form-group {
+  width: 150px;
+  position: relative;
+}
+input[type="file"] {
+  display: none;
+}
+.example-1 input[type="file"] {
+  outline: 0;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.example-1 .label {
+  /* width: 120px; */
+  border: 2px dashed #fff;
+  text-shadow: none;
+  border-radius: 5px;
+  display: block;
+  padding: 0;
+  transition: border 300ms ease;
+  cursor: pointer;
+  text-align: center;
+}
+.example-1 .label i {
+  display: block;
+  font-size: 32px;
+  /* padding-bottom: 6px; */
+}
+.example-1 .label i,
+.example-1 .label .title {
+  margin: 5px;
+  padding: 0;
+  color: #e01b3c;
+  transition: 200ms color;
+}
+.example-1 .label:hover {
+  border: 2px solid #e01b3c;
+}
+.example-1 .label:hover i,
+.example-1 .label:hover .title {
+  color: #e01b3c;
+}
+.edit {
+  opacity: 0.4;
+  transition: 1s;
+}
+.edit:hover {
+  opacity: 1;
+}
