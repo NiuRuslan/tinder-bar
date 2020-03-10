@@ -224,7 +224,7 @@ function ProfileEdit(props) {
             {save}
           </form>
         </div>
-        <div>
+        <div className="exit">
           <Link to="/login" onClick={LogOut} style={{ position: "relative" }}>
             <img src="./navbar/exit-door.png"></img>
           </Link>

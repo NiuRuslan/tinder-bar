@@ -10,4 +10,10 @@ nav {
 }
 .listLi {
   list-style: none;
+  opacity: 0.4;
+  transition: 1s;
+}
+
+.listLi:hover {
+  opacity: 1;
 }
