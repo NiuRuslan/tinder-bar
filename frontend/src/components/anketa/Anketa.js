@@ -60,7 +60,7 @@ class Anketa extends React.Component {
       drinks
     };
     this.props.LogIn(user.id, user.nickname, profileId);
-    this.props.history.push("/listUsers");
+    this.props.history.push("/");
   };
 
   _next = () => {
