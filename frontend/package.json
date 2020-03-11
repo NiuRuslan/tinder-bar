@@ -11,7 +11,6 @@
     "history": "^4.10.1",
     "dotenv": "^8.2.0",
     "firebase": "^7.10.0",
-    "history": "^4.10.1",
     "react": "^16.13.0",
     "react-announcement": "^1.1.2",
     "react-cookie": "^4.0.3",
