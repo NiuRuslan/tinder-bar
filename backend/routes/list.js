@@ -10,8 +10,8 @@ router.get('/', async (req, res) => {
 
 /**
  * Получаем запрос с координатами и радиусом поиска
- * @latitude
- * @longitude
+ * @latitude 
+ * @longitude 
  * @radius
  * Отдаю объект:
  * @success - флаг выполнения запроса
@@ -46,7 +46,7 @@ router.post('/users', async (req, res) => {
     latitude: { $gte: la1, $lte: la2 },
     longitude: { $gte: lo1, $lte: lo2 },
   });
-
+  
   // Записываю текущие координаты пользователя
   await Profile.updateOne({
     person: id,
