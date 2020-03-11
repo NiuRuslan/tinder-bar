@@ -145,7 +145,6 @@ class Anketa extends React.Component {
           />
           <Step3
             currentStep={this.state.currentStep}
-            
             handleChange={this.handleChange}
             about={this.state.about}
           />

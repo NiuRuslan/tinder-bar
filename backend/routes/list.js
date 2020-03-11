@@ -34,7 +34,7 @@ router.post('/users', async (req, res) => {
 
   /**
    * Расчитываем поправку к координатам (очень грубое вычисление)
-   * @coeff - 1m in degree = 1 / 111320m = 0.000008983
+   * @coeff - 1m in degree = 1 / 111320m = 0.00008983
    */
   const coeff = 0.000008983;
   const la1 = +latitude - radius * coeff;

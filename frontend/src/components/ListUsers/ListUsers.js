@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Map from './Map';
+import { storage } from '../../firebase';
 import ModalWindow from '../Modal/Modal';
 import AnnouncementMessage from '../Announcement/Announcement';
 import './listUsers.css';
@@ -50,13 +51,26 @@ const ListUsers = () => {
         longitude,
         radius,
       })
-      .then((response) => {
+      .then(async (response) => {
         if (response.data.success) {
-          // Задаем hooks
-          setList({
-            success: true,
-            list: response.data.list,
+          const promisesArr = response.data.list.map(async (user) => {
+            const pic = await storage
+              .ref(`images/${user.person}`)
+              .getDownloadURL()
+              .catch((e) => console.log(e));
+            user.url = pic;
+            return user;
           });
+
+          Promise.all(promisesArr).then((result) => {
+            setList({
+              success: true,
+              list: result,
+            });
+          });
+
+
+          // Задаем hooks
         } else {
           // Задаем hooks
           setList({
@@ -131,7 +145,6 @@ const ListUsers = () => {
         }}
       >
         <Navbar />
-
         <div className="input-form-userlist">
           <input
             className="inputFind"
@@ -151,7 +164,7 @@ const ListUsers = () => {
               boxShadow: 'none',
             }}
             min="200"
-            max="500000"
+            max="10000"
             step="200"
             value={radius}
           />
@@ -199,7 +212,6 @@ const ListUsers = () => {
             FIND ME SOMEONE
           </button>
         </div>
-
         {list.success ? (
           <div className="toggleBox" style={{ margin: '0 auto' }}>
             <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
@@ -232,7 +244,7 @@ const ListUsers = () => {
               flexWrap: 'wrap',
             }}
           >
-            {list.success
+            { list.success
               ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
               : list.err}
           </ul>
