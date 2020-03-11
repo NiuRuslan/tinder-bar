@@ -8,6 +8,7 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  Circle,
 } from 'react-google-maps';
 
 import styles from './GoogleMapStyles.json';
@@ -16,10 +17,10 @@ const Map = ({
   googleMapURL = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places',
   latitude,
   longitude,
-  list: { list: users },
+  list,
+  radius,
 }) => {
   const [cookies] = useCookies(['userName']);
-
 
   function sendRequest(id) {
     axios.post('http://localhost:4000/database', {
@@ -80,80 +81,73 @@ const Map = ({
         )}
         center={{ lat: latitude, lng: longitude }}
       >
-        {users.map((el) => (
-          // onClick={() => {
-          //  setShowProfile(!isShowProfile)
-          // }}
-
+        <Circle 
+          center={{ lat: latitude, lng: longitude }}
+          radius = {+radius}
+        />
+        {list.list.map((profile) => (
           <div>
             <Modal
               trigger={(
                 <Marker
                   icon={{ url: './imgs/cocktails.png' }}
-                  position={{ lat: el.latitude, lng: el.longitude }}
+                  position={{ lat: profile.latitude, lng: profile.longitude }}
                 />
               )}
             >
               {' '}
-              <Modal.Header
-                style={{ backgroundColor: '#0f4667' }}
-              >
-              </Modal.Header>
-              <Modal.Content image>
-                {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
-                <Modal.Description>
-                  <Header style={{ color: '#0f4667' }}>
-                    Name:
-                    {` ${el.name}`}
-                  </Header>
-                  <li style={{ color: '#0f4667' }}>
-                    Date of Birth:
-                    {` ${el.DoB}`}
-                  </li>
-                  <li style={{ color: '#0f4667' }}>
-                    Activity:
-                    {` ${el.activity}`}
-                  </li>
-                  <li style={{ color: '#0f4667' }}>
-                    Favotite drinks:
-                    {` ${el.drinks}`}
-                  </li>
-                  <li style={{ color: '#0f4667' }}>
-                    Favotite topics:
-                    {` ${el.topics}`}
-                  </li>
-                  <li style={{ color: '#0f4667' }}>
-                    About yourself:
-                    {` ${el.about}`}
-                  </li>
-                  {/* <Image src='/images/wireframe/paragraph.png' /> */}
-                </Modal.Description>
-              </Modal.Content>
-              <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-                <Link
-                  onClick={() => sendRequest(el._id)}
-                  to={{
-                    pathname: '/chat',
-                    state: {
-                      chats: getChatName(cookies.userName, el._id),
-                    },
-                  }}
-                >
-                  <Button
-
-                    primary
-                    style={{
-                      color: '#0f4667',
-                      textShadow: 'none',
-                      margin: '0 auto',
-                      borderRadius: '320px',
-                      backgroundColor: '#FFF',
-                    }}
-                  >
-                    Написать
-                  </Button>
-                </Link>
-              </Modal.Actions>
+              <Modal.Header style={{ backgroundColor: '#0f4667' }}></Modal.Header>
+        <Modal.Content image>
+          {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
+          <Modal.Description>
+            <Header style={{ color: '#0f4667' }}>
+              {` ${profile.name}, ${Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000))}`}
+            </Header>
+            <div className="avatar" style={{ backgroundImage: `url(${profile.url || './imgs/userphoto.svg'})` }} />
+            {/* <div className="avatar" style={{ backgroundImage: `url(${url})` }} /> */}
+            <li style={{ color: '#0f4667' }}>
+              Activity:
+              {` ${profile.activity}`}
+            </li>
+            <li style={{ color: '#0f4667' }}>
+              Favotite drinks:
+              {` ${profile.drinks}`}
+            </li>
+            <li style={{ color: '#0f4667' }}>
+              Favotite topics:
+              {` ${profile.topics}`}
+            </li>
+            <li style={{ color: '#0f4667' }}>
+              About yourself:
+              {` ${profile.about}`}
+            </li>
+            {/* <Image src='/images/wireframe/paragraph.png' /> */}
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
+          <Link
+            onClick={sendRequest}
+            to={{
+              pathname: '/chat',
+              state: {
+                chats: getChatName(cookies.userName, profile.person),
+              },
+            }}
+          >
+            <Button
+              primary
+              style={{
+                color: '#0f4667',
+                textShadow: 'none',
+                margin: '0 auto',
+                borderRadius: '320px',
+                backgroundColor: '#FFF',
+              }}
+            >
+              Написать
+            </Button>
+          </Link>
+        </Modal.Actions>
             </Modal>
           </div>
         ))}

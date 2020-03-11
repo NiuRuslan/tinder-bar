@@ -233,6 +233,7 @@ const ListUsers = () => {
               width: '100%',
               justifyContent: 'center',
             }}
+            radius = {radius}
           />
         ) : (
           <ul

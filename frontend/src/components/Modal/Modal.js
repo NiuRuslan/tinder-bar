@@ -95,10 +95,7 @@ function ModalWindow(props) {
             >
               Написать
             </Button>
-
           </Link>
-
-
         </Modal.Actions>
       </Modal>
     </div>
