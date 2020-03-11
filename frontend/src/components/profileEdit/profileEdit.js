@@ -10,7 +10,7 @@ import '../snow/snow.css';
 import './profileEdit.css';
 
 function ProfileEdit(props) {
-  const [cookies, removeCookies] = useCookies(['userName', 'userNickname']);
+  const [cookies, setCookies, removeCookies] = useCookies(['userName', 'userNickname']);
   const [activity, setActivity] = useState('');
   const [drinks, setDrinks] = useState('');
   const [topics, setTopics] = useState('');

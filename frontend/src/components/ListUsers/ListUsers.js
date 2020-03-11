@@ -87,7 +87,7 @@ const ListUsers = () => {
         cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius,
+        radius || 2000,
       );
     };
     // Обрабатываем ошибки getCurrentPosition
