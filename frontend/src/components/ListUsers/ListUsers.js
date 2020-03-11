@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -23,6 +23,12 @@ const ListUsers = () => {
   const [isColorBtn, setColorBtn] = useState('findMe');
 
   const [isShowMap, setShowMap] = useState(false);
+  useEffect(() => {
+    
+    return (() => {
+      
+    })
+  }, [])
 
   /**
    * Обрабатывает переключатель - со списка на карту и обратно

@@ -4,7 +4,6 @@ const router = express.Router();
 
 const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
-
 //эти функции используются для определения расстояния между точками на
 //поверхности Земли, заданных с помощью географических координат
 //результат возвращается в км
@@ -22,7 +21,7 @@ const distHaversine = (p1, p2) => {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const d = R * c;
 
-  return d.toFixed(3);
+  return d.toFixed(3) * 1000; // переводим в метры
 }
 
 
@@ -79,7 +78,7 @@ router.post('/users', async (req, res) => {
    }, {
      lat: el.latitude,
      lng: el.longitude,
-   }) * 1000 < radius) list.push(el)})
+   }) < radius) list.push(el)})
 
 
   // Записываю текущие координаты пользователя
