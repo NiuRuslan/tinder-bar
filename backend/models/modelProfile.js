@@ -25,10 +25,7 @@ const profileSchema = new mongoose.Schema({
   },
   topics: String,
   drinks: String,
-  avatar: {
-    data: Buffer,
-    contentType: String,
-  },
+  avatar: String,
   latitude: Number,
   longitude: Number,
 },

@@ -5,13 +5,13 @@ const router = express.Router();
 const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
 
 
-//эти функции используются для определения расстояния между точками на
-//поверхности Земли, заданных с помощью географических координат
-//результат возвращается в км
-//(distHaversine(latlng, centerPoint)
+// эти функции используются для определения расстояния между точками на
+// поверхности Земли, заданных с помощью географических координат
+// результат возвращается в км
+// (distHaversine(latlng, centerPoint)
 const rad = (x) => x * Math.PI / 180;
 /**
- * 
+ *
  */
 const distHaversine = (p1, p2) => {
   const R = 6371; // earth's mean radius in km
@@ -23,7 +23,7 @@ const distHaversine = (p1, p2) => {
   const d = R * c;
 
   return d.toFixed(3);
-}
+};
 
 
 router.get('/', async (req, res) => {
@@ -32,8 +32,8 @@ router.get('/', async (req, res) => {
 
 /**
  * Получаем запрос с координатами и радиусом поиска
- * @latitude 
- * @longitude 
+ * @latitude
+ * @longitude
  * @radius
  * Отдаю объект:
  * @success - флаг выполнения запроса
@@ -42,11 +42,10 @@ router.get('/', async (req, res) => {
  */
 router.post('/users', async (req, res) => {
   const {
-    id,
-    latitude,
-    longitude,
-    radius,
+    id, latitude, longitude, radius,
   } = req.body;
+  console.log(id, latitude, longitude, radius);
+
   if ([id, latitude, longitude, radius].some((el) => el === undefined)) {
     return res.send({
       success: false,
@@ -69,30 +68,36 @@ router.post('/users', async (req, res) => {
   //   longitude: { $gte: lo1, $lte: lo2 },
   // });
 
-// Поиск анкет по радиусу на карте
+  // Поиск анкет по радиусу на карте
 
   const listAll = await Profile.find({});
-  let list = [];
-  listAll.forEach((el) => {if (distHaversine({
-    lat: latitude,
-    lng: longitude
-   }, {
-     lat: el.latitude,
-     lng: el.longitude,
-   }) * 1000 < radius) list.push(el)})
+  const list = [];
+  listAll.forEach((el) => {
+    if (distHaversine({
+      lat: latitude,
+      lng: longitude,
+    }, {
+      lat: el.latitude,
+      lng: el.longitude,
+    }) * 1000 < radius) list.push(el);
+  });
 
 
   // Записываю текущие координаты пользователя
-  await Profile.updateOne({
-    person: id,
-  }, {
-    $set: {
-      latitude,
-      longitude,
+  await Profile.updateOne(
+    {
+      person: id,
     },
-  });
+    {
+      $set: {
+        latitude,
+        longitude,
+      },
+    },
+  );
 
   if (list) {
+    console.log(list);
     return res.send({
       success: true,
       list,

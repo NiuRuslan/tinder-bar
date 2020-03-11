@@ -116,6 +116,12 @@ input.sw:checked + label {
     background: transparent;
   }
 }
+/* .back { */
+/* background-color: #8a2be2; */
+
+/* background-color: #72c89e; */
+/* background-color: rgb(124, 42, 255); */
+/* } */
 /*-------------------------------------input-range-----------------------------------------*/
 .label {
   font: 1rem "Fira Sans", sans-serif;
@@ -142,4 +148,11 @@ input[type="range"]::-moz-range-thumb {
   background-image: url("/imgs/cocktails.png");
   border-radius: 0;
   background-repeat: no-repeat;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+.map:hover {
+  transform: scale(1.3);
+  transition: 1s;
 }

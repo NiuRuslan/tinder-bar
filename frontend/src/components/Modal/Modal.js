@@ -1,26 +1,27 @@
-import React from "react";
-import "./modal.css";
-import { Button, Header, Modal } from "semantic-ui-react";
-import axios from 'axios'
+import React from 'react';
+import './modal.css';
+import { Button, Header, Modal } from 'semantic-ui-react';
+import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Photo from '../downloadPhoto/photo';
 
 function ModalWindow(props) {
   const profile = props.obj;
+  const age = Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000));
   const [cookies] = useCookies(['userName']);
   function sendRequest() {
     axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
       ID2: profile.person,
-    })
+    });
   }
 
-  function getChatName (a, b) {
+  function getChatName(a, b) {
     if (a > b) {
-      return (a + '+' + b)
-    } else {
-      return (b + '+' + a)
+      return (`${a}+${b}`);
     }
+    return (`${b}+${a}`);
   }
   return (
     <div>
@@ -48,13 +49,10 @@ function ModalWindow(props) {
           {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
           <Modal.Description>
             <Header style={{ color: '#0f4667' }}>
-              Name:
-              {` ${profile.name}`}
+              {` ${profile.name}, ${age}`}
             </Header>
-            <li style={{ color: '#0f4667' }}>
-              Date of Birth:
-              {` ${profile.DoB}`}
-            </li>
+            <div className="avatar" style={{ backgroundImage: `url(${profile.url})` }} />
+            {/* <div className="avatar" style={{ backgroundImage: `url(${url})` }} /> */}
             <li style={{ color: '#0f4667' }}>
               Activity:
               {` ${profile.activity}`}
@@ -80,11 +78,10 @@ function ModalWindow(props) {
             state: {
               chats: getChatName(cookies.userName, profile.person),
               name:profile.name,
-              
+              url:profile.url,
             }
           }}>
             <Button
-
               primary
               style={{
                 color: '#0f4667',
@@ -95,11 +92,8 @@ function ModalWindow(props) {
               }}
             >
               Написать
-          </Button>
-
+            </Button>
           </Link>
-
-
         </Modal.Actions>
       </Modal>
     </div>

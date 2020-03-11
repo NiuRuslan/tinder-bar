@@ -3,13 +3,12 @@ import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Map from './Map';
+import { storage } from '../../firebase';
 import ModalWindow from '../Modal/Modal';
 import AnnouncementMessage from '../Announcement/Announcement';
 import './listUsers.css';
 import Navbar from '../navbar/Navbar';
 import '../snow/snow.css';
-import { storage } from '../../firebase';
-
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
@@ -52,14 +51,26 @@ const ListUsers = () => {
         longitude,
         radius,
       })
-      .then((response) => {
+      .then(async (response) => {
         if (response.data.success) {
-          // Задаем hooks
-         
-          setList({
-            success: true,
-            list: response.data.list,
+          const promisesArr = response.data.list.map(async (user) => {
+            const pic = await storage
+              .ref(`images/${user.person}`)
+              .getDownloadURL()
+              .catch((e) => console.log(e));
+            user.url = pic;
+            return user;
           });
+
+          Promise.all(promisesArr).then((result) => {
+            setList({
+              success: true,
+              list: result,
+            });
+          });
+
+
+          // Задаем hooks
         } else {
           // Задаем hooks
           setList({
@@ -90,7 +101,7 @@ const ListUsers = () => {
         cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius,
+        radius || 2000,
       );
     };
     // Обрабатываем ошибки getCurrentPosition
@@ -116,8 +127,9 @@ const ListUsers = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
+
   return (
-    <div>
+    <div className="back">
       <AnnouncementMessage />
       <div className="full-wh">
         <div className="bg-animation">
@@ -134,7 +146,6 @@ const ListUsers = () => {
         }}
       >
         <Navbar />
-
         <div className="input-form-userlist">
           <input
             className="inputFind"
@@ -152,6 +163,7 @@ const ListUsers = () => {
               borderBottom: 'solid #FFF 2px',
               borderRadius: '0',
               boxShadow: 'none',
+              marginBottom: '20px',
             }}
             min="200"
             max="10000"
@@ -160,31 +172,20 @@ const ListUsers = () => {
           />
           {' '}
           <label className="label">
-            &nbsp;
-            {' '}
-            {radius ? 'Chosen radius:' : ' '}
-            {' '}
-            &nbsp;
-            <div
-              style={{
-                color: '#e01b3c',
-                fontSize: '35px',
-                textShadow: '1px 1px 1px #FFF',
-              }}
-            >
-              &nbsp;
-              {' '}
-              {radius}
-              {' '}
-              &nbsp;
-            </div>
-            &nbsp;
-            {' '}
-            {radius !== null ? 'meters' : ' '}
-            {' '}
+            {radius !== null ? (
+              <div>
+                {' '}
+                Chosen radius: &nbsp;
+                {' '}
+                {radius}
+                &nbsp; meters
+                {' '}
+              </div>
+            ) : (
+              <div style={{ margin: ' auto 0' }}>Choose the radius</div>
+            )}
             &nbsp;
           </label>
-          <br />
           <button
             id="find-me"
             className={isColorBtn}
@@ -202,7 +203,6 @@ const ListUsers = () => {
             FIND ME SOMEONE
           </button>
         </div>
-
         {list.success ? (
           <div className="toggleBox" style={{ margin: '0 auto' }}>
             <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
@@ -224,7 +224,7 @@ const ListUsers = () => {
               width: '100%',
               justifyContent: 'center',
             }}
-            radius = {radius}
+            radius={radius}
           />
         ) : (
           <ul
@@ -236,8 +236,8 @@ const ListUsers = () => {
               flexWrap: 'wrap',
             }}
           >
-            {list.success
-              ? list.list.map((obj) => <ModalWindow obj={obj}key={obj._id} />)
+            { list.success
+              ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
               : list.err}
           </ul>
         )}

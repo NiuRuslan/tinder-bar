@@ -33,8 +33,8 @@ async () => {
     DoB: "1998-06-01",
     activity: "teacher",
     about: "playing",
-    topics: ["swimming", "singing"],
-    drinks: ["beer"],
+    topics: "swimming, singing",
+    drinks: "beer",
     latitude: 55.734973,
     longitude: 37.619144
   });
@@ -45,8 +45,8 @@ async () => {
     DoB: "1993-06-01",
     activity: "dancer",
     about: "running",
-    topics: ["singing", "swimming"],
-    drinks: ["wiskey"],
+    topics: "singing, swimming",
+    drinks: "wiskey",
     latitude: 55.737263,
     longitude: 37.471979
   });
@@ -57,8 +57,8 @@ async () => {
     DoB: "1987-06-01",
     activity: "doctor",
     about: "dancing",
-    topics: ["cooking", "swimming"],
-    drinks: ["winw"],
+    topics: "cooking, swimming",
+    drinks: "winw",
     latitude: 55.736879,
     longitude: 37.483627
   });
@@ -66,28 +66,29 @@ async () => {
   await mongoose.connection.close();
 };
 (async () => {
-  await Person.updateOne(
-    { nickname: "Olyaaa" },
-    { $set: { profileId: "5e62000f11ac59f32d8556e3" } }
-  );
-  await Person.updateOne(
-    { nickname: "Danyaa" },
-    { $set: { profileId: "5e62000f11ac59f32d8556e4" } }
-  );
-  await Person.updateOne(
-    { nickname: "Sanyaaa" },
-    { $set: { profileId: "5e62001011ac59f32d8556e5" } }
-  );
+  // await Person.updateOne(
+  //   { nickname: "Olyaaa" },
+  //   { $set: { profileId: "5e68988e12db1032709ef4ce" } }
+  // );
+  // await Person.updateOne(
+  //   { nickname: "Danyaa" },
+  //   { $set: { profileId: "5e68988e12db1032709ef4cf" } }
+  // );
+  // await Person.updateOne(
+  //   { nickname: "Sanyaaa" },
+  //   { $set: { profileId: "5e68988f12db1032709ef4d0" } }
+  // );
   await Profile.updateOne(
     { name: "Olyaa" },
-    { $set: { latitude: 55.734973, longitude: 37.619144 } }
+    { $set: { person: "5e6897ab59780a324c6ec9bd" } }
   );
   await Profile.updateOne(
     { name: "Danyaa" },
-    { $set: { latitude: 55.737263, longitude: 37.471979 } }
+    { $set: { person: "5e6897ad59780a324c6ec9be" } }
   );
   await Profile.updateOne(
     { name: "Sanya" },
-    { $set: { latitude: 55.734973, longitude: 37.619144 } }
+    { $set: { person: "5e6897ad59780a324c6ec9bf" } }
   );
+  await mongoose.connection.close();
 })();
