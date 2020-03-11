@@ -235,6 +235,7 @@ const ListUsers = () => {
               width: "100%",
               justifyContent: "center"
             }}
+            radius={radius}
           />
         ) : (
           <ul
@@ -247,7 +248,11 @@ const ListUsers = () => {
             }}
           >
             {list.success
-              ? list.list.map(obj => <ModalWindow obj={obj} key={obj._id} />)
+              ? list.list.map(obj => (
+                  <div className="map">
+                    <ModalWindow obj={obj} key={obj._id} />
+                  </div>
+                ))
               : list.err}
           </ul>
         )}

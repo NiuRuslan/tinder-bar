@@ -16,7 +16,7 @@ const Navbar = () => (
         </Link>
       </li>
       <li className="listLi">
-        <Link to="/chat">
+        <Link to="/allChats">
           {' '}
           <img src="./navbar/email.png" />
         </Link>

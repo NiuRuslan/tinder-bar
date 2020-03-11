@@ -7,7 +7,9 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
+  Marker,
+  Circle,
+  Rectangle
 } from "react-google-maps";
 
 import styles from "./GoogleMapStyles.json";
@@ -16,7 +18,8 @@ const Map = ({
   googleMapURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places",
   latitude,
   longitude,
-  list: { list: users }
+  list: { list: users },
+  radius
 }) => {
   const [cookies] = useCookies(["userName"]);
 
@@ -80,6 +83,7 @@ const Map = ({
         }
         center={{ lat: latitude, lng: longitude }}
       >
+        <Circle center={{ lat: latitude, lng: longitude }} radius={+radius} />
         {users.map(el => (
           // onClick={() => {
           //  setShowProfile(!isShowProfile)

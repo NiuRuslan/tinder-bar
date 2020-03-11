@@ -10,7 +10,17 @@ const personSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Profile"
     },
-    chats: Array
+    chats: [
+      {
+        chat: {
+          type: String,
+          default: ""
+        },
+        nickname: String,
+        date: Date,
+        lastMessage: String
+      }
+    ]
   },
   {
     versionKey: false
