@@ -57,6 +57,7 @@ const Map = ({
     <>
       <CMap
         googleMapURL={googleMapURL}
+<<<<<<< HEAD
         loadingElement={<div style={{ height: "50%" }} />}
         containerElement={<div style={{ height: "700px" }} />}
         mapElement={
@@ -68,6 +69,19 @@ const Map = ({
               borderRadius: "25px",
               margin: "0 auto",
               boxShadow: "10px 10px 8px black"
+=======
+        loadingElement={<div style={{ height: '50%' }} />}
+        containerElement={<div style={{ height: '400px' }} />}
+        mapElement={(
+          <div
+            style={{
+              height: '95%',
+              width: '85%',
+              border: '2px solid #FFF',
+              borderRadius: '25px',
+              margin: '0 auto',
+              boxShadow: '10px 10px 8px black',
+>>>>>>> f2fce00ee64f097407490609c2b9f9278a536d51
             }}
           />
         }

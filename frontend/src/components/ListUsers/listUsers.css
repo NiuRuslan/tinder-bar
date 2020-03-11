@@ -84,7 +84,7 @@ input.sw:checked + label {
 
 .main-container {
   display: grid;
-  grid-template-rows: 30% auto auto;
+  /* grid-template-rows: 30% auto auto; */
   grid-row-gap: 1rem;
 }
 
