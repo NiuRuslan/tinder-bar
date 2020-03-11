@@ -8,6 +8,8 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  Circle,
+  Rectangle,
 } from 'react-google-maps';
 
 import styles from './GoogleMapStyles.json';
@@ -17,6 +19,7 @@ const Map = ({
   latitude,
   longitude,
   list: { list: users },
+  radius,
 }) => {
   const [cookies] = useCookies(['userName']);
 
@@ -81,6 +84,10 @@ const Map = ({
         )}
         center={{ lat: latitude, lng: longitude }}
       >
+        <Circle 
+          center={{ lat: latitude, lng: longitude }}
+          radius = {+radius}
+        />
         {users.map((el) => (
           // onClick={() => {
           //  setShowProfile(!isShowProfile)

@@ -151,7 +151,7 @@ const ListUsers = () => {
               boxShadow: 'none',
             }}
             min="200"
-            max="5000"
+            max="10000"
             step="200"
             value={radius}
           />
@@ -221,6 +221,7 @@ const ListUsers = () => {
               width: '100%',
               justifyContent: 'center',
             }}
+            radius = {radius}
           />
         ) : (
           <ul
