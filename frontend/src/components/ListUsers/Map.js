@@ -26,6 +26,14 @@ const Map = ({
       ID2: id
     });
   }
+
+  function getChatName(a, b) {
+    if (a > b) {
+      return a + "+" + b;
+    } else {
+      return b + "+" + a;
+    }
+  }
   /**
    * @withGoogleMap – функция для создания react-компонента. Предназначенного для отображения карты
    * GoogleMap – непосредственно сам компонент карты, в который передаются нужные параметры
@@ -124,9 +132,9 @@ const Map = ({
                 <Link
                   onClick={() => sendRequest(el._id)}
                   to={{
-                    pathname: "/chat",
+                    pathname: `/chat`,
                     state: {
-                      chats: cookies.userName + el._id
+                      chats: getChatName(cookies.userName, el._id)
                     }
                   }}
                 >

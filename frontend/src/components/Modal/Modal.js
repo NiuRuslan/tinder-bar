@@ -12,10 +12,17 @@ function ModalWindow(props) {
   function sendRequest() {
     axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
-      ID2: profile._id,
+      ID2: profile.person,
     })
   }
 
+  function getChatName (a, b) {
+    if (a > b) {
+      return (a + '+' + b)
+    } else {
+      return (b + '+' + a)
+    }
+  }
   return (
     <div>
       <Modal
@@ -69,14 +76,14 @@ function ModalWindow(props) {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-        <Link onClick={sendRequest} to={{
-              pathname: `/chat`,
-              state: {
-                chats: (cookies.userName+profile._id),
-              }
-            }}>
+          <Link onClick={sendRequest} to={{
+            pathname: `/chat`,
+            state: {
+              chats: getChatName(cookies.userName, profile.person),
+            }
+          }}>
             <Button
-              
+
               primary
               style={{
                 color: '#0f4667',
@@ -88,9 +95,9 @@ function ModalWindow(props) {
             >
               Написать
           </Button>
-            
-           </Link>
-          
+
+          </Link>
+
 
         </Modal.Actions>
       </Modal>
