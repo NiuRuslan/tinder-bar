@@ -1,9 +1,20 @@
 import React from "react";
 import "./modal.css";
 import { Button, Header, Modal } from "semantic-ui-react";
+import axios from 'axios'
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom'
 
 function ModalWindow(props) {
   const profile = props.obj;
+  const [cookies] = useCookies(['userName']);
+
+  function sendRequest() {
+    axios.post('http://localhost:4000/database', {
+      ID1: cookies.userName,
+      ID2: profile._id,
+    })
+  }
 
   return (
     <div>
@@ -58,18 +69,29 @@ function ModalWindow(props) {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-          <Button
-            primary
-            style={{
-              color: '#0f4667',
-              textShadow: 'none',
-              margin: '0 auto',
-              borderRadius: '320px',
-              backgroundColor: '#FFF',
-            }}
-          >
-            Send a request
+        <Link onClick={sendRequest} to={{
+              pathname: `/chat`,
+              state: {
+                chats: (cookies.userName+profile._id),
+              }
+            }}>
+            <Button
+              
+              primary
+              style={{
+                color: '#0f4667',
+                textShadow: 'none',
+                margin: '0 auto',
+                borderRadius: '320px',
+                backgroundColor: '#FFF',
+              }}
+            >
+              Написать
           </Button>
+            
+           </Link>
+          
+
         </Modal.Actions>
       </Modal>
     </div>

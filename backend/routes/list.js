@@ -53,7 +53,6 @@ router.post('/users', async (req, res) => {
     },
   });
 
-
   if (list) {
     return res.send({
       success: true,

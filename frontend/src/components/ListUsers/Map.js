@@ -1,6 +1,8 @@
 import React from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
-
+import axios from 'axios'
+import { useCookies } from 'react-cookie';
+import {Link} from 'react-router-dom'
 import {
   withScriptjs,
   withGoogleMap,
@@ -16,6 +18,15 @@ const Map = ({
   longitude,
   list: { list: users },
 }) => {
+  const [cookies] = useCookies(['userName']);
+
+
+  function sendRequest(id) {
+    axios.post('http://localhost:4000/database', {
+      ID1: cookies.userName,
+      ID2: id,
+    })
+  }
   /**
    * @withGoogleMap – функция для создания react-компонента. Предназначенного для отображения карты
    * GoogleMap – непосредственно сам компонент карты, в который передаются нужные параметры
@@ -112,18 +123,27 @@ const Map = ({
                 </Modal.Description>
               </Modal.Content>
               <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-                <Button
-                  primary
-                  style={{
-                    color: '#0f4667',
-                    textShadow: 'none',
-                    margin: '0 auto',
-                    borderRadius: '320px',
-                    backgroundColor: '#FFF',
-                  }}
-                >
-                  Send a request
-                </Button>
+                <Link onClick={() => sendRequest(el._id)} to={{
+                  pathname: `/chat`,
+                  state: {
+                    chats: (cookies.userName + el._id),
+                  }
+                }}>
+                  <Button
+
+                    primary
+                    style={{
+                      color: '#0f4667',
+                      textShadow: 'none',
+                      margin: '0 auto',
+                      borderRadius: '320px',
+                      backgroundColor: '#FFF',
+                    }}
+                  >
+                    Написать
+          </Button>
+
+                </Link>
               </Modal.Actions>
             </Modal>
           </div>
