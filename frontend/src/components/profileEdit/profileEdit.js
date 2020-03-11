@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import Navbar from "../navbar/Navbar";
-import { profileInit } from "../../redux/action";
-import { storage } from "../../firebase";
-import "../snow/snow.css";
-import "./profileEdit.css";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Navbar from '../navbar/Navbar';
+import { profileInit } from '../../redux/action';
+import { storage } from '../../firebase';
+import '../snow/snow.css';
+import './profileEdit.css';
 
 function ProfileEdit(props) {
   const [cookies, setCookies, removeCookies] = useCookies([
-    "userName",
-    "userNickname"
+    'userName',
+    'userNickname',
   ]);
-  const [activity, setActivity] = useState("");
-  const [drinks, setDrinks] = useState("");
-  const [topics, setTopics] = useState("");
-  const [about, setAbout] = useState("");
+  const [activity, setActivity] = useState('');
+  const [drinks, setDrinks] = useState('');
+  const [topics, setTopics] = useState('');
+  const [about, setAbout] = useState('');
   const [url, setUrl] = useState(null);
-  const [save, setSave] = useState("");
+  const [save, setSave] = useState('');
   const id = cookies.userName;
   const { profileInit, user } = props;
   const [image, setImage] = useState(null);
@@ -28,23 +28,23 @@ function ProfileEdit(props) {
     event.preventDefault();
 
     const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
-    uploadTask.on("state_changed", undefined, undefined, () => {
-      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+    uploadTask.on('state_changed', undefined, undefined, () => {
+      uploadTask.snapshot.ref.getDownloadURL().then((url) => {
         setUrl(url);
       });
     });
     if (setUrl !== null || setUrl == null) {
       axios
-        .patch("http://localhost:4000/users/profile", {
+        .patch('http://localhost:4000/users/profile', {
           activity,
           drinks,
           topics,
           about,
-          id
+          id,
         })
         .then(({ data }) => {
           if (data.sucsses) {
-            setSave("Сохранено");
+            setSave('Сохранено');
           } else {
             setSave(data.err);
           }
@@ -70,20 +70,20 @@ function ProfileEdit(props) {
   }
   function LogOut() {
     user.id = null;
-    removeCookies("userName");
-    removeCookies("userNickname");
+    removeCookies('userName');
+    removeCookies('userNickname');
   }
 
   useEffect(() => {
     storage
       .ref(`images/${cookies.userName}`)
       .getDownloadURL()
-      .then(url => {
+      .then((url) => {
         setUrl(url);
       });
     axios
-      .post("http://localhost:4000/users/profileEdit", {
-        id
+      .post('http://localhost:4000/users/profileEdit', {
+        id,
       })
       .then(({ data }) => {
         setActivity(data.profileId.activity);
@@ -100,23 +100,23 @@ function ProfileEdit(props) {
       setImage(image);
       const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
       uploadTask.on(
-        "state_changed",
-        snapshot => {
-          setUrl("./loader.gif");
+        'state_changed',
+        (snapshot) => {
+          setUrl('./loader.gif');
         },
-        error => {
+        (error) => {
           console.log(error);
         },
         () => {
           storage
-            .ref("images")
+            .ref('images')
             .child(cookies.userName)
             .getDownloadURL()
-            .then(url => {
+            .then((url) => {
               setUrl(url);
               console.log(url);
             });
-        }
+        },
       );
     }
   }
@@ -133,7 +133,7 @@ function ProfileEdit(props) {
       </div>
       <Navbar />
       <div className="profile-container">
-        <div style={{ alignSelf: "center" }}>
+        <div style={{ alignSelf: 'center' }}>
           <label htmlFor="file-input">
             <div
               className="avatar"
@@ -145,10 +145,10 @@ function ProfileEdit(props) {
         <form onSubmit={patchData} className="edit">
           <span
             style={{
-              textShadow: "none",
-              marginBottom: "8px",
-              marginTop: "0px",
-              color: "#fff"
+              textShadow: 'none',
+              marginBottom: '8px',
+              marginTop: '0px',
+              color: '#fff',
             }}
           >
             Activity:
@@ -162,11 +162,11 @@ function ProfileEdit(props) {
               name="activity"
               onInput="this.className"
               required
-              style={{ color: "#0f4567" }}
+              style={{ color: '#0f4567' }}
             />
           </label>
           <span
-            style={{ textShadow: "none", marginBottom: "8px", color: "#fff" }}
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
           >
             Topics:
           </span>
@@ -179,11 +179,11 @@ function ProfileEdit(props) {
               name="topics"
               onInput="this.className"
               required
-              style={{ color: "#0f4567" }}
+              style={{ color: '#0f4567' }}
             />
           </label>
           <span
-            style={{ textShadow: "none", marginBottom: "8px", color: "#fff" }}
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
           >
             About:
           </span>
@@ -196,11 +196,11 @@ function ProfileEdit(props) {
               name="about"
               onInput="this.className"
               required
-              style={{ color: "#0f4567" }}
+              style={{ color: '#0f4567' }}
             />
           </label>
           <span
-            style={{ textShadow: "none", marginBottom: "8px", color: "#fff" }}
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
           >
             Drinks:
           </span>
@@ -213,23 +213,24 @@ function ProfileEdit(props) {
               name="drinks"
               onInput="this.className"
               required
-              style={{ color: "#0f4567" }}
+              style={{ color: '#0f4567' }}
             />
           </label>
           <button
             style={{
-              color: "#FFF",
-              backgroundColor: "rgb(124, 42, 255)",
-              textShadow: "1px 1px 1px rgb(124, 42, 255)"
+              color: '#FFF',
+              backgroundColor: 'rgb(124, 42, 255)',
+              textShadow: '1px 1px 1px rgb(124, 42, 255)',
             }}
           >
-            {" "}
-            Save changes{" "}
+            {' '}
+            Save changes
+            {' '}
           </button>
           {save}
         </form>
         <div className="exit">
-          <Link to="/login" onClick={LogOut} style={{ position: "relative" }}>
+          <Link to="/login" onClick={LogOut} style={{ position: 'relative' }}>
             <img src="./navbar/exit-door.png" />
           </Link>
         </div>
@@ -238,13 +239,13 @@ function ProfileEdit(props) {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profileId: state.user.profileId,
   user: state.user,
-  err: state.error
+  err: state.error,
 });
-const mapDispatchToProps = dispatch => ({
-  profileInit: profileId => dispatch(profileInit(profileId))
+const mapDispatchToProps = (dispatch) => ({
+  profileInit: (profileId) => dispatch(profileInit(profileId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);
