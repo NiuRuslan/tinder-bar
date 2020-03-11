@@ -38,7 +38,6 @@ function App() {
           <Route exact path="/warning" component={Warning} />
           <Route exact path="/profile" component={ProfileEdit} />
           <Route exact path="/profileCreator" component={Anketa} />
-          <Route exact path="/chat" component={Chat} />
           <Route exact path="/regist" component={Regist} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={ListUsers} />

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import {
   withScriptjs,
   withGoogleMap,
@@ -26,6 +26,14 @@ const Map = ({
       ID1: cookies.userName,
       ID2: id,
     });
+  }
+
+ function getChatName(a, b){
+    if (a > b) {
+      return (a + '+' + b)
+    } else {
+      return (b + '+' + a)
+    }
   }
   /**
    * @withGoogleMap – функция для создания react-компонента. Предназначенного для отображения карты
@@ -123,15 +131,12 @@ const Map = ({
                 </Modal.Description>
               </Modal.Content>
               <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-                <Link
-                  onClick={() => sendRequest(el._id)}
-                  to={{
-                    pathname: '/chat',
-                    state: {
-                      chats: (cookies.userName + el._id),
-                    },
-                  }}
-                >
+                <Link onClick={() => sendRequest(el._id)} to={{
+                  pathname: `/chat`,
+                  state: {
+                    chats: getChatName(cookies.userName, el._id),
+                  }
+                }}>
                   <Button
 
                     primary
@@ -144,8 +149,7 @@ const Map = ({
                     }}
                   >
                     Написать
-                  </Button>
-
+          </Button>
                 </Link>
               </Modal.Actions>
             </Modal>

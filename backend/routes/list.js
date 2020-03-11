@@ -46,6 +46,7 @@ router.post('/users', async (req, res) => {
     latitude: { $gte: la1, $lte: la2 },
     longitude: { $gte: lo1, $lte: lo2 },
   });
+  console.log(list)
 
   // Записываю текущие координаты пользователя
   await Profile.updateOne({
