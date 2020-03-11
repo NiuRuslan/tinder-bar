@@ -1,13 +1,14 @@
+import 'firebase/storage';
 import firebase from 'firebase';
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_DB_API,
+  apiKey: process.env.REACT_APP_database_API,
   authDomain: process.env.REACT_APP_authDomain,
   databaseURL: process.env.REACT_APP_databaseURL,
   projectId: process.env.REACT_APP_projectId,
   storageBucket: process.env.REACT_APP_storageBucket,
   messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_DB_AppId,
+  appId: process.env.REACT_APP_database_AppId,
   measurementId: process.env.REACT_APP_messagingSenderId,
 };
 // Initialize Firebase

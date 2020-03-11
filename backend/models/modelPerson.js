@@ -9,7 +9,7 @@ const personSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Profile',
   },
-  chats:Array,
+  chats: Array,
 },
 {
   versionKey: false,

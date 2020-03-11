@@ -121,7 +121,7 @@ router.post('/profileEdit', async (req, res) => {
   } = req.body;
   const response = await Profile.findOne({ person: id });
   if (response) {
-    res.send({ sucsses: true, profileId: response });
+    res.send({ success: true, profileId: response });
   } else {
     res.send({ success: false, err: 'УУУпс, что-то пошло не так' });
   }

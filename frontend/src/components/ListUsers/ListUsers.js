@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useCookies } from 'react-cookie';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import Map from './Map';
 import ModalWindow from '../Modal/Modal';
+import AnnouncementMessage from '../Announcement/Announcement';
 import './listUsers.css';
 import Navbar from '../navbar/Navbar';
 import '../snow/snow.css';
@@ -12,9 +13,8 @@ import '../snow/snow.css';
  * @param {*} props
  */
 
-const ListUsers = props => {
-  // const [cookies, setCookie] = useCookies(["userName"]);
-
+const ListUsers = () => {
+  const [cookies] = useCookies(['userName']);
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
@@ -23,9 +23,11 @@ const ListUsers = props => {
   const [isColorBtn, setColorBtn] = useState('findMe');
 
   const [isShowMap, setShowMap] = useState(false);
+
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
    */
+
   const ChangeOnMap = () => {
     setShowMap(!isShowMap);
   };
@@ -59,7 +61,7 @@ const ListUsers = props => {
           // Задаем hooks
           setList({
             success: false,
-            err: '',
+            err: response.data.err,
           });
         }
       })
@@ -82,10 +84,10 @@ const ListUsers = props => {
       setLongituse(position.coords.longitude);
       // Делает запрос на сервер
       requestListUsers(
-        props.id,
+        cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius,
+        radius || 2000,
       );
     };
     // Обрабатываем ошибки getCurrentPosition
@@ -112,8 +114,9 @@ const ListUsers = props => {
     }
   };
   return (
-<>
-      <div className="full-wh" style={{}}>
+    <div>
+      <AnnouncementMessage />
+      <div className="full-wh">
         <div className="bg-animation">
           <div id="stars" />
           <div id="stars2" />
@@ -121,90 +124,121 @@ const ListUsers = props => {
           <div id="stars4" />
         </div>
       </div>
-      <div id="nc-main" className="nc-main bg-cover bg-cc">
-        <div
-          className="main-container"
-          style={{
-            width: '100%',
-            height: '100vh',
-          }}
-        >
-          <Navbar />
-          <div className="input-form-userlist">
-            <input
-              className="inputFind"
-              onChange={(event) => {
-                setRadius(event.target.value);
-              }}
+      <div
+        className="main-container"
+        style={{
+          width: '100%',
+        }}
+      >
+        <Navbar />
+
+        <div className="input-form-userlist">
+          <input
+            className="inputFind"
+            onChange={(event) => {
+              setRadius(event.target.value);
+            }}
+            type="range"
+            style={{
+              display: 'block',
+              width: '30%',
+              height: '50px',
+              margin: '0 auto',
+              border: 'none',
+              paddingBottom: '0',
+              borderBottom: 'solid #FFF 2px',
+              borderRadius: '0',
+              boxShadow: 'none',
+            }}
+            min="200"
+            max="5000"
+            step="200"
+            value={radius}
+          />
+          {' '}
+          <label className="label">
+            &nbsp;
+            {' '}
+            {radius ? 'Chosen radius:' : ' '}
+            {' '}
+            &nbsp;
+            <div
               style={{
-                display: 'block',
-                width: '50%',
-                margin: '0 auto',
-              }}
-            />
-            <br />
-            <button
-              id="find-me"
-              className={isColorBtn}
-              onClick={() => geoFindLocation()}
-              style={{
-                display: 'block',
-                color: '#FFF',
-                backgroundColor: 'transparent',
-                position: 'relative',
-                margin: '0 auto',
-                width: '25rem',
+                color: '#e01b3c',
+                fontSize: '35px',
+                textShadow: '1px 1px 1px #FFF',
               }}
             >
-              Show my location
-            </button>
-          </div>
-          <br />
-          {list.success ? (
-            <div className="toggleBox" style={{ margin: '0 auto' }}>
-              <input
-                type="checkbox"
-                name="toggle"
-                className="sw"
-                id="toggle-2"
-              />
-              <label htmlFor="toggle-2" onClick={ChangeOnMap}>
-                <span>Use a map</span>
-              </label>
+              &nbsp;
+              {' '}
+              {radius}
+              {' '}
+              &nbsp;
             </div>
-          ) : (
-            ''
-          )}
-          {isShowMap ? (
-            <Map
-              latitude={latitude}
-              longitude={longitude}
-              list={list}
-              style={{
-                marginTop: '10%',
-                alignSelf: 'center',
-                width: '100%',
-                justifyContent: 'center',
-              }}
-            />
-          ) : (
-            <ul
-              style={{
-                display: 'flex',
-                listStyle: 'none',
-                padding: '0',
-                justifyContent: 'space-around',
-                flexWrap: 'wrap',
-              }}
-            >
-              {list.success
-                ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
-                : ''}
-            </ul>
-          )}
+            &nbsp;
+            {' '}
+            {radius !== null ? 'meters' : ' '}
+            {' '}
+            &nbsp;
+          </label>
+          <br />
+          <button
+            id="find-me"
+            className={isColorBtn}
+            onClick={() => geoFindLocation()}
+            style={{
+              display: 'block',
+              color: '#FFF',
+              backgroundColor: 'transparent',
+              position: 'relative',
+              margin: '0 auto',
+              width: '25rem',
+              textShadow: 'none',
+            }}
+          >
+            FIND ME SOMEONE
+          </button>
         </div>
+
+        {list.success ? (
+          <div className="toggleBox" style={{ margin: '0 auto' }}>
+            <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
+            <label htmlFor="toggle-2" onClick={ChangeOnMap}>
+              <span>Use a map</span>
+            </label>
+          </div>
+        ) : (
+          list.err
+        )}
+        {isShowMap ? (
+          <Map
+            latitude={latitude}
+            longitude={longitude}
+            list={list}
+            style={{
+              marginTop: '10%',
+              alignSelf: 'center',
+              width: '100%',
+              justifyContent: 'center',
+            }}
+          />
+        ) : (
+          <ul
+            style={{
+              display: 'flex',
+              listStyle: 'none',
+              padding: '0',
+              justifyContent: 'space-around',
+              flexWrap: 'wrap',
+            }}
+          >
+            {list.success
+              ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
+              : list.err}
+          </ul>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

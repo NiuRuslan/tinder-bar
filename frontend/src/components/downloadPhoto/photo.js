@@ -1,47 +1,48 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { storage } from '../../firebase';
-import { useCookies } from "react-cookie";
 
 function Photo() {
   const [cookies] = useCookies(["userName"]);
 
-    const [image, setImage] = useState(null);
-    const [url, setUrl] = useState('');
-    
-    const handleChange = e => {
-      if (e.target.files[0]) {
-        const image = e.target.files[0];
-        setImage(image)
-      }
-    }
-    const handleUpload = () => {
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState('./imgs/userphoto.svg');
+
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+      setImage(image);
       const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
       uploadTask.on('state_changed',
-      undefined,
-      undefined,
-      () => {
-        uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-          setUrl(url);
+        (snapshot) => {
+          setUrl('./loader.gif');
+          // progrss function ....
+          // const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          // this.setState({ progress });
+          console.log(snapshot);
+        },
+        (error) => {
+          // error function ....
+          console.log(error);
+        },
+        () => {
+          // complete function ....
+          storage.ref('images').child(cookies.userName).getDownloadURL().then((url) => {
+            setUrl(url);
+            console.log(url);
+          });
         });
-      });
-    }
-  
+      };
+    };
+
   return (
-    <div>
-      <div style={{
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <input type="file" onChange={handleChange} />
-        <button onClick={handleUpload}>Upload</button>
-        <br />
-        <img src={url || 'http://via.placeholder.com/400x300'} alt="Uploaded images" height="300" width="400" />
-      </div>
+    <div style={{ alignSelf: 'center' }}>
+      <label htmlFor="file-input">
+        <div className="avatar" style={{backgroundImage: `url(${url})`}} />
+      </label>
+      <input id="file-input" type="file" onChange={handleChange} />
     </div>
-  )
+  );
 }
 
-export default Photo
+export default Photo;

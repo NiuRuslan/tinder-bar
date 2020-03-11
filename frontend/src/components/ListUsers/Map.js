@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Header, Modal } from 'semantic-ui-react';
-import axios from 'axios'
+import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom'
 import {
@@ -25,7 +25,7 @@ const Map = ({
     axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
       ID2: id,
-    })
+    });
   }
 
  function getChatName(a, b){
@@ -66,12 +66,12 @@ const Map = ({
       <CMap
         googleMapURL={googleMapURL}
         loadingElement={<div style={{ height: '50%' }} />}
-        containerElement={<div style={{ height: '700px' }} />}
+        containerElement={<div style={{ height: '400px' }} />}
         mapElement={(
           <div
             style={{
-              height: '45%',
-              width: '55%',
+              height: '95%',
+              width: '85%',
               border: '2px solid #FFF',
               borderRadius: '25px',
               margin: '0 auto',

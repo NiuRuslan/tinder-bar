@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
 });
 
 /**
- * Aleksandr Ivanov
  * Получаем запрос с координатами и радиусом поиска
  * @latitude
  * @longitude
@@ -19,8 +18,6 @@ router.get('/', async (req, res) => {
  * @list - массив объектов - анкеты пользователей
  * @err - Расшифровка ошибки
  */
-
-
 router.post('/users', async (req, res) => {
   const {
     id,
@@ -28,6 +25,13 @@ router.post('/users', async (req, res) => {
     longitude,
     radius,
   } = req.body;
+  if ([id, latitude, longitude, radius].some((el) => el === undefined)) {
+    return res.send({
+      success: false,
+      err: 'Arguments is undefined',
+    });
+  }
+
   /**
    * Расчитываем поправку к координатам (очень грубое вычисление)
    * @coeff - 1m in degree = 1 / 111320m = 0.000008983

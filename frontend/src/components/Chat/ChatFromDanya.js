@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import {database} from '../../firebase';
-import { useCookies } from "react-cookie";
+import { useCookies } from 'react-cookie';
+import { database } from '../../firebase';
 
 
 function Chat(props) {
-  const [cookies] = useCookies(['userName','userNickname'])
-  const [nickname, setNickname] = useState("");
-  const [msg, setMsg] = useState("");
+  const [cookies] = useCookies(['userName', 'userNickname']);
+  const [nickname, setNickname] = useState('');
+  const [msg, setMsg] = useState('');
   const [messages, setMessages] = useState({});
-  const { chats } = props.location.state
-  console.log(chats)
+  const { chats } = props.location.state;
   const [chat, setChat] = useState(null);
 
   const chatRoom = database.ref().child(`${chats}`);
 
   useEffect(() => {
-    const handleNewMessages = snap => {
+    const handleNewMessages = (snap) => {
       if (snap.val()) setMessages(snap.val());
-    }
+    };
     chatRoom.on('value', handleNewMessages);
     return () => {
       chatRoom.off('value', handleNewMessages);
@@ -30,10 +29,10 @@ function Chat(props) {
       chatRoom.push({
         nickname: cookies.userNickname,
         msg,
-        dateDay:new Date().toLocaleTimeString(),
-        dateTime:new Date().toLocaleDateString(),
+        dateDay: new Date().toLocaleTimeString(),
+        dateTime: new Date().toLocaleDateString(),
       });
-      setMsg("");
+      setMsg('');
     }
   };
 

@@ -1,15 +1,6 @@
-/* .list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.listLi {
-  float: left;
-} */
 nav {
   overflow: hidden;
-  /* position: fixed; */
+  position: relative;
   top: 0;
   width: 100%;
 }
@@ -19,4 +10,10 @@ nav {
 }
 .listLi {
   list-style: none;
+  opacity: 0.4;
+  transition: 1s;
+}
+
+.listLi:hover {
+  opacity: 1;
 }

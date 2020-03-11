@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Icon } from 'semantic-ui-react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useCookies } from 'react-cookie';
@@ -9,7 +10,7 @@ import './Login.css';
 
 function Login(props) {
   const { user, err, requestFetchLogin } = props;
-  const [cookies, setCookie] = useCookies(['userName','userNickname']);
+  const [cookies, setCookie] = useCookies(['userName', 'userNickname']);
 
   const [slider, setSlider] = useState();
   useEffect(() => {
@@ -31,7 +32,7 @@ function Login(props) {
   useEffect(() => {
     if (user.id) {
       setCookie('userName', user.id);
-      setCookie('userNickname',user.nickname)
+      setCookie('userNickname', user.nickname);
     }
   }, [user.id, setCookie]);
 
@@ -42,32 +43,49 @@ function Login(props) {
         user.profileId ? (
           <Redirect from="/login" to="/" />
         ) : (
-            <Redirect to="/profilecreator" />
-          )
+          <Redirect to="/profilecreator" />
+        )
       ) : (
-          <form
-            onSubmit={PutData}
-            className="login"
-            style={{ alignSelf: 'center' }}
+        <form
+          onSubmit={PutData}
+          className="login"
+          style={{ alignSelf: 'center' }}
+        >
+          <h1 className="segment">Login</h1>
+          <label>
+            <input
+              name="mail"
+              type="email"
+              placeholder="Email Address"
+              required
+            />
+          </label>
+          <label>
+            <input
+              name="pasword"
+              type="password"
+              placeholder="Password"
+              minLength="5"
+              required
+            />
+          </label>
+          <button
+            className="red"
+            type="submit"
+            style={{
+              color: '#FFF',
+              backgroundColor: '#0f4667',
+              textShadow: '1px 1px 1px #0f4667',
+            }}
           >
-            <h1 className="segment">Sign up</h1>
-            <label>
-              <input
-                name="mail"
-                type="email"
-                placeholder="Email Address"
-                required
-              />
-            </label>
-            <label>
-              <input
-                name="pasword"
-                type="password"
-                placeholder="Password"
-                minLength="5"
-                required
-              />
-            </label>
+            {' '}
+            Sign in
+            {' '}
+            <Icon name="sign-in" />
+          </button>
+          <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
+          <br />
+          <Link to="/regist" style={{ width: '100%', alignSelf: 'center' }}>
             <button
               className="red"
               type="submit"
@@ -77,25 +95,13 @@ function Login(props) {
                 textShadow: '1px 1px 1px #0f4667',
               }}
             >
+              Sign up
               {' '}
-              Log in
-          </button>
-            <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
-            <br />
-            <Link to="/regist" style={{ width: '100%', alignSelf: 'center' }}>
-              <button
-                className="green"
-                style={{
-                  color: '#0f4667',
-                  backgroundColor: '#FFF',
-                  textShadow: 'none',
-                }}
-              >
-                Create Account
+              <Icon name="signup" />
             </button>
-            </Link>
-          </form>
-        )}
+          </Link>
+        </form>
+      )}
     </div>
   );
 }

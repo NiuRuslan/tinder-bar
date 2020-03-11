@@ -1,18 +1,18 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import './Warning.css';
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import "./Warning.css";
 
 function Warning() {
-  const [cookies, setCookie] = useCookies(['userName', 'chacked']);
+  const [cookies, setCookie] = useCookies(["userName", "chacked"]);
 
   function checkYes(event) {
     event.preventDefault();
-    setCookie('chacked', true);
+    setCookie("chacked", true);
   }
   function checkNo(event) {
     event.preventDefault();
-    setCookie('chacked', false);
+    setCookie("chacked", false);
   }
 
   return (
@@ -30,7 +30,7 @@ function Warning() {
             </div>
             <div>
               {cookies.chacked ? (
-                cookies.chacked === 'true' ? (
+                cookies.chacked === "true" ? (
                   cookies.userName ? (
                     <Redirect from="warning" to="/" />
                   ) : (
@@ -43,12 +43,25 @@ function Warning() {
                 <>
                   <h1 className="segment">Are you 18+</h1>
                   <form onSubmit={checkYes}>
-                    <button type="submit">Yes, Sure</button>
+                    <button
+                      style={{
+                        backgroundColor: "#FFF",
+                        color: "#0f4567",
+                        textShadow: "none"
+                      }}
+                      type="submit"
+                    >
+                      Yes, Sure
+                    </button>
                   </form>
                   <form onSubmit={checkNo}>
                     <button
                       type="submit"
-                      style={{ color: '#FFF', backgroundColor: 'transparent' }}
+                      style={{
+                        color: "#FFF",
+                        backgroundColor: "transparent",
+                        textShadow: "none"
+                      }}
                     >
                       No
                     </button>

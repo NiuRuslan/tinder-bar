@@ -325,6 +325,20 @@ input.invalid {
 	}
 }
 
+.avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; 
+  cursor: pointer;
+}
+
+#file-input {
+  display: none;
+}
+
 /* h1 {
 	position: absolute;
 	top: 50%;

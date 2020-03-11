@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
 import { useCookies } from 'react-cookie';
 import { requestFetchRegist } from '../../redux/action';
 import Slider from '../slider/Slider';
@@ -50,9 +51,9 @@ function Regist(props) {
             className="register"
             style={{ alignSelf: 'center' }}
           >
-            <h1 className="segment">Create Account</h1>
+            <h1 className="segment">New Account</h1>
             <label>
-              <input name="nick" type="text" placeholder="NickName" required />
+              <input name="nick" type="text" placeholder="Nickname" required />
             </label>
             <label>
               <input
@@ -80,6 +81,8 @@ function Regist(props) {
               }}
             >
               Create
+              {' '}
+              <Icon name="add user" />
             </button>
             <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
             <br />
@@ -92,7 +95,9 @@ function Regist(props) {
                   textShadow: 'none',
                 }}
               >
-                LogIn
+                Login
+                {' '}
+                <Icon name="sign-in" />
               </button>
             </Link>
           </form>
