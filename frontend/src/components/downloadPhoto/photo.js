@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { storage } from '../../firebase';
 
 function Photo() {
-  const [cookies, setCookie] = useCookies(['userName']);
+  const [cookies] = useCookies(["userName"]);
 
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('./imgs/userphoto.svg');
@@ -32,8 +32,8 @@ function Photo() {
             console.log(url);
           });
         });
-    }
-  };
+      };
+    };
 
   return (
     <div style={{ alignSelf: 'center' }}>

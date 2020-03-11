@@ -7,9 +7,11 @@ import { requestFetchRegist } from '../../redux/action';
 import Slider from '../slider/Slider';
 import Slider2 from '../slider/Slider2';
 import './Regist.css';
+import {database} from '../../firebase';
+
 
 function Regist(props) {
-  const [cookies, setCookie] = useCookies(['userName']);
+  const [cookies, setCookie] = useCookies(['userName','userNickname']);
   const [slider, setSlider] = useState();
   useEffect(() => {
     const slider = Math.floor(Math.random() * 10);
@@ -28,7 +30,11 @@ function Regist(props) {
   }
   useEffect(() => {
     if (user.id) {
+      setCookie('userNickname',user.nickname)
       setCookie('userName', user.id);
+      database.ref().child(`${user.id}`).push({
+        date:Date.now(),
+      });
     }
   }, [user.id, setCookie]);
 

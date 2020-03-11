@@ -10,7 +10,7 @@ import './Login.css';
 
 function Login(props) {
   const { user, err, requestFetchLogin } = props;
-  const [cookies, setCookie] = useCookies(['userName']);
+  const [cookies, setCookie] = useCookies(['userName', 'userNickname']);
 
   const [slider, setSlider] = useState();
   useEffect(() => {
@@ -32,6 +32,7 @@ function Login(props) {
   useEffect(() => {
     if (user.id) {
       setCookie('userName', user.id);
+      setCookie('userNickname', user.nickname);
     }
   }, [user.id, setCookie]);
 
@@ -78,20 +79,25 @@ function Login(props) {
             }}
           >
             {' '}
-            Sign in <Icon name='sign-in' />
+            Sign in
+            {' '}
+            <Icon name="sign-in" />
           </button>
           <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
           <br />
           <Link to="/regist" style={{ width: '100%', alignSelf: 'center' }}>
             <button
-              className="green"
+              className="red"
+              type="submit"
               style={{
-                color: '#0f4667',
-                backgroundColor: '#FFF',
-                textShadow: 'none',
+                color: '#FFF',
+                backgroundColor: '#0f4667',
+                textShadow: '1px 1px 1px #0f4667',
               }}
             >
-              Sign up <Icon name='signup' />
+              Sign up
+              {' '}
+              <Icon name="signup" />
             </button>
           </Link>
         </form>

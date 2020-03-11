@@ -8,7 +8,6 @@ import App from './App';
 import rootSaga from "./redux/sagas/sagas";
 import rootReducer from "./redux/root-reducer";
 
-
 const initialSagaMiddleware = createSagaMiddleware();
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

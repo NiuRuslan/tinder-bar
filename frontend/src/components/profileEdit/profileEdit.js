@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../navbar/Navbar';
 import { profileInit } from '../../redux/action';
@@ -10,9 +10,7 @@ import '../snow/snow.css';
 import './profileEdit.css';
 
 function ProfileEdit(props) {
-  const [upload, setUpload] = useState(false);
-
-  const [cookies, setCookie, removeCookies] = useCookies(['userName']);
+  const [cookies, removeCookies] = useCookies(['userName', 'userNickname']);
   const [activity, setActivity] = useState('');
   const [drinks, setDrinks] = useState('');
   const [topics, setTopics] = useState('');
@@ -20,7 +18,7 @@ function ProfileEdit(props) {
   const [url, setUrl] = useState(null);
   const [save, setSave] = useState('');
   const id = cookies.userName;
-  const { profileInit } = props;
+  const { profileInit, user } = props;
   const [image, setImage] = useState(null);
 
   function patchData(event) {
@@ -68,7 +66,9 @@ function ProfileEdit(props) {
     setActivity(event.target.value);
   }
   function LogOut() {
+    user.id = null;
     removeCookies('userName');
+    removeCookies('userNickname');
   }
 
   useEffect(() => {
@@ -110,7 +110,7 @@ function ProfileEdit(props) {
           });
         });
     }
-  };
+  }
 
   return (
     <>
@@ -130,105 +130,106 @@ function ProfileEdit(props) {
           </label>
           <input id="file-input" type="file" onChange={photoDownload} />
         </div>
-          <form onSubmit={patchData} className="edit">
-            <span
-              style={{
-                textShadow: 'none',
-                marginBottom: '8px',
-                marginTop: '0px',
-                color: '#fff',
-              }}
-            >
-              Activity:
-            </span>
-            <label>
-              <input
-                value={activity}
-                onChange={handleChangeActivity}
-                className="form-control"
-                type="text"
-                name="activity"
-                onInput="this.className"
-                required
-                style={{ color: '#0f4567' }}
-              />
-            </label>
-            <span
-              style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
-            >
-              Topics:
-            </span>
-            <label>
-              <input
-                value={topics}
-                onChange={handleChangeTopics}
-                className="form-control"
-                type="text"
-                name="topics"
-                onInput="this.className"
-                required
-                style={{ color: '#0f4567' }}
-              />
-            </label>
-            <span
-              style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
-            >
-              About:
-            </span>
-            <label>
-              <input
-                value={about}
-                onChange={handleChangeAbout}
-                className="form-control"
-                type="text"
-                name="about"
-                onInput="this.className"
-                required
-                style={{ color: '#0f4567' }}
-              />
-            </label>
-            <span
-              style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
-            >
-              Drinks:
-            </span>
-            <label>
-              <input
-                value={drinks}
-                onChange={handleChangeDrinks}
-                className="form-control"
-                type="text"
-                name="drinks"
-                onInput="this.className"
-                required
-                style={{ color: '#0f4567' }}
-              />
-            </label>
-            <button
-              style={{
-                color: '#FFF',
-                backgroundColor: '#0f4667',
-                textShadow: '1px 1px 1px #0f4667',
-              }}
-            >
-              {' '}
-              Save changes
-              {' '}
-            </button>
-            {save}
-          </form>
+        <form onSubmit={patchData} className="edit">
+          <span
+            style={{
+              textShadow: 'none',
+              marginBottom: '8px',
+              marginTop: '0px',
+              color: '#fff',
+            }}
+          >
+            Activity:
+          </span>
+          <label>
+            <input
+              value={activity}
+              onChange={handleChangeActivity}
+              className="form-control"
+              type="text"
+              name="activity"
+              onInput="this.className"
+              required
+              style={{ color: '#0f4567' }}
+            />
+          </label>
+          <span
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
+          >
+            Topics:
+          </span>
+          <label>
+            <input
+              value={topics}
+              onChange={handleChangeTopics}
+              className="form-control"
+              type="text"
+              name="topics"
+              onInput="this.className"
+              required
+              style={{ color: '#0f4567' }}
+            />
+          </label>
+          <span
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
+          >
+            About:
+          </span>
+          <label>
+            <input
+              value={about}
+              onChange={handleChangeAbout}
+              className="form-control"
+              type="text"
+              name="about"
+              onInput="this.className"
+              required
+              style={{ color: '#0f4567' }}
+            />
+          </label>
+          <span
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
+          >
+            Drinks:
+          </span>
+          <label>
+            <input
+              value={drinks}
+              onChange={handleChangeDrinks}
+              className="form-control"
+              type="text"
+              name="drinks"
+              onInput="this.className"
+              required
+              style={{ color: '#0f4567' }}
+            />
+          </label>
+          <button
+            style={{
+              color: '#FFF',
+              backgroundColor: '#0f4667',
+              textShadow: '1px 1px 1px #0f4667',
+            }}
+          >
+            {' '}
+            Save changes
+            {' '}
+          </button>
+          {save}
+        </form>
         <div className="exit">
           <Link to="/login" onClick={LogOut} style={{ position: 'relative' }}>
             <img src="./navbar/exit-door.png" />
           </Link>
         </div>
-        </div>
+      </div>
     </>
   );
 }
 
 const mapStateToProps = (state) => ({
   profileId: state.user.profileId,
+  user: state.user,
   err: state.error,
 });
 const mapDispatchToProps = (dispatch) => ({

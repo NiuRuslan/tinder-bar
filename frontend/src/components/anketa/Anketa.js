@@ -2,12 +2,10 @@ import React from "react";
 import Slider from "../slider/Slider";
 import Slider2 from "../slider/Slider2";
 import axios from "axios";
-// import "./anketaJS"
 import "./anketa.css";
 import { LogIn } from "../../redux/action";
 import { connect } from "react-redux";
 import Photo from '../downloadPhoto/photo'
-import { storage } from '../../firebase';
 
 class Anketa extends React.Component {
   constructor(props) {

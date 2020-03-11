@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -8,14 +8,13 @@ import AnnouncementMessage from '../Announcement/Announcement';
 import './listUsers.css';
 import Navbar from '../navbar/Navbar';
 import '../snow/snow.css';
-
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
  */
 
-const ListUsers = (props) => {
-  const [cookies, setCookie] = useCookies(['userName']);
+const ListUsers = () => {
+  const [cookies] = useCookies(['userName']);
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
@@ -62,7 +61,7 @@ const ListUsers = (props) => {
           // Задаем hooks
           setList({
             success: false,
-            err: '',
+            err: response.data.err,
           });
         }
       })
@@ -162,7 +161,7 @@ const ListUsers = (props) => {
             {' '}
             {radius ? 'Chosen radius:' : ' '}
             {' '}
-&nbsp;
+            &nbsp;
             <div
               style={{
                 color: '#e01b3c',
@@ -174,13 +173,13 @@ const ListUsers = (props) => {
               {' '}
               {radius}
               {' '}
-&nbsp;
+              &nbsp;
             </div>
             &nbsp;
             {' '}
             {radius !== null ? 'meters' : ' '}
             {' '}
-&nbsp;
+            &nbsp;
           </label>
           <br />
           <button
@@ -209,7 +208,7 @@ const ListUsers = (props) => {
             </label>
           </div>
         ) : (
-          ' '
+          list.err
         )}
         {isShowMap ? (
           <Map
@@ -235,7 +234,7 @@ const ListUsers = (props) => {
           >
             {list.success
               ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
-              : ''}
+              : list.err}
           </ul>
         )}
       </div>
