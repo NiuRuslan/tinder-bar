@@ -261,7 +261,7 @@ function Step3(props) {
         style={{
           marginBottom: "25px",
           color: "#FFF",
-          backgroundColor: "#0f4667",
+          backgroundColor: "rgb(124, 42, 255)",
           textShadow: "1px 1px 1px #0f4667"
         }}
       >

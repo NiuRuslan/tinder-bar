@@ -219,8 +219,8 @@ function ProfileEdit(props) {
           <button
             style={{
               color: "#FFF",
-              backgroundColor: "#0f4667",
-              textShadow: "1px 1px 1px #0f4667"
+              backgroundColor: "rgb(124, 42, 255)",
+              textShadow: "1px 1px 1px rgb(124, 42, 255)"
             }}
           >
             {" "}

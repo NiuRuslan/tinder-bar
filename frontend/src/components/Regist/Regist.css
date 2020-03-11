@@ -10,11 +10,11 @@ a {
   font-size: 16px;
 }
 
-div,
+/* div,
 p {
   color: #babecc;
   text-shadow: 1px 1px 1px #fff;
-}
+} */
 .register {
   opacity: 0.4;
   transition: 1s;

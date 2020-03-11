@@ -149,10 +149,11 @@ const ListUsers = () => {
               paddingBottom: "0",
               borderBottom: "solid #FFF 2px",
               borderRadius: "0",
-              boxShadow: "none"
+              boxShadow: "none",
+              marginBottom: "20px"
             }}
             min="200"
-            max="50000"
+            max="10000"
             step="200"
             value={radius}
           />{" "}
@@ -182,19 +183,19 @@ const ListUsers = () => {
                 Choose the radius
               </div>
             )} */}
-            &nbsp; {radius ? "Chosen radius:" : " "} &nbsp;
-            <div
-              style={{
-                color: "#e01b3c",
-                fontSize: "35px",
-                textShadow: "1px 1px 1px #FFF"
-              }}
-            >
-              &nbsp; {radius} &nbsp;
-            </div>
-            &nbsp; {radius !== null ? "meters" : " "} &nbsp;
+            {/* &nbsp; */}
+            {/* &nbsp;{" "} */}
+            {radius !== null ? (
+              <div>
+                {" "}
+                Chosen radius: &nbsp; {radius}
+                &nbsp; meters{" "}
+              </div>
+            ) : (
+              <div style={{ margin: " auto 0" }}>Choose the radius</div>
+            )}
+            &nbsp;
           </label>
-          <br />
           <button
             id="find-me"
             className={isColorBtn}
