@@ -6,7 +6,7 @@ import { profileInit } from '../../redux/action';
 import { storage } from '../../firebase';
 
 function ProfileEdit(props) {
-  const [cookies, setCookie, removeCookies] = useCookies(['userName','chacked']);
+  const [cookies, setCookie, removeCookies] = useCookies(['userName','userNickname']);
   const [activity, setActivity] = useState('');
   const [drinks, setDrinks] = useState('');
   const [topics, setTopics] = useState('');
@@ -64,6 +64,8 @@ function ProfileEdit(props) {
   function LogOut() {
   user.id=null;
   removeCookies('userName');
+  removeCookies('userNickname');
+
   }
 
   useEffect(() => {

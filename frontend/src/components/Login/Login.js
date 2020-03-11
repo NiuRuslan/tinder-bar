@@ -9,7 +9,7 @@ import './Login.css';
 
 function Login(props) {
   const { user, err, requestFetchLogin } = props;
-  const [cookies, setCookie] = useCookies(['userName']);
+  const [cookies, setCookie] = useCookies(['userName','userNickname']);
 
   const [slider, setSlider] = useState();
   useEffect(() => {
@@ -31,6 +31,7 @@ function Login(props) {
   useEffect(() => {
     if (user.id) {
       setCookie('userName', user.id);
+      setCookie('userNickname',user.nickname)
     }
   }, [user.id, setCookie]);
 
