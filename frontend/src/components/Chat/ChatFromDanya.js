@@ -9,7 +9,9 @@ function Chat(props) {
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState({});
   const { chats } = props.location.state
+  console.log(chats)
   const [chat, setChat] = useState(null);
+
   const chatRoom = database.ref().child(`${chats}`);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ function Chat(props) {
     return () => {
       chatRoom.off('value', handleNewMessages);
     };
-  });
+  },[setMessages]);
   
   const handleMsgChange = e => setMsg(e.target.value);
   const handleKeyDown = e => {
@@ -42,7 +44,7 @@ function Chat(props) {
               {Object.keys(messages).map(message => {
                 if (messages[message]["nickname"] === cookies.userNickname)
                   return (
-                    <div className="message">
+                    <div style={{textAlign:'right'}} className="message">
                       <span id="me">{messages[message]["nickname"]} :</span><br />
                       {messages[message]["msg"]}<br/>
                       {messages[message]["dateDay"]}<br/>
@@ -52,7 +54,7 @@ function Chat(props) {
                   );
                 else
                   return (
-                    <div className="message">
+                    <div style={{textAlign:'left'}} className="message">
                       <span id="sender">{messages[message]["nickname"]} :</span><br />
                       {messages[message]["msg"]}
                     </div>

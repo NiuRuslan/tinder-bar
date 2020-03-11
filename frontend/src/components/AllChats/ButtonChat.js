@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 const ButtonChat = (props) => {
   const { url, chat } = props
-  console.log(url, ' dfdf f df fd  ', props)
   return (
     <>
       <Link to={{

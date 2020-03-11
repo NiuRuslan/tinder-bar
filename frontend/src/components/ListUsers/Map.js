@@ -28,7 +28,7 @@ const Map = ({
     })
   }
 
-  function getChatName(a, b) {
+ function getChatName(a, b){
     if (a > b) {
       return (a + '+' + b)
     } else {
@@ -134,7 +134,7 @@ const Map = ({
                 <Link onClick={() => sendRequest(el._id)} to={{
                   pathname: `/chat`,
                   state: {
-                    chats: (getChatName(cookies.userName, el._id)),
+                    chats: getChatName(cookies.userName, el._id),
                   }
                 }}>
                   <Button

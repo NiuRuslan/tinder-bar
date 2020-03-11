@@ -8,11 +8,10 @@ import ButtonChat from './ButtonChat'
 function AllChats() {
   const [cookies] = useCookies(['userName', 'chacked']);
   const [chat, setChat] = useState(null)
-  const [url, setUrl] = useState(null);
+  const [urls, setUrl] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:4000/database/${cookies.userName}`).then(({ data }) => {
-      let urls = []
       data.chats.forEach(el => {
         let user;
         if (el.indexOf(cookies.userName) === 0) {
@@ -21,23 +20,22 @@ function AllChats() {
           user = el.slice(0, cookies.userName.length)
         }
         storage.ref(`images/${user}`).getDownloadURL().then((url) => {
-          urls.push(url);
+          setUrl(urls.concat(url))
         });
       })
       setChat(data.chats)
-      setUrl(urls)
     })
-  })
+  },[setChat])
   return (
     <>
-      {
+      {chat ?
        chat.map((el, index) => {
          return(
          <>
-         <ButtonChat chat={el} url={url[index]}/>
+         <ButtonChat chat={el} url={urls[index]}/>
          </>
          )
-        })
+        }) : <h1>LOADING</h1>
       }
     </>
   )

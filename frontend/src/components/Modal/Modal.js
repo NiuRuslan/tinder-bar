@@ -12,7 +12,7 @@ function ModalWindow(props) {
   function sendRequest() {
     axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
-      ID2: profile._id,
+      ID2: profile.person,
     })
   }
 
@@ -23,7 +23,6 @@ function ModalWindow(props) {
       return (b + '+' + a)
     }
   }
-
   return (
     <div>
       <Modal
@@ -80,7 +79,7 @@ function ModalWindow(props) {
           <Link onClick={sendRequest} to={{
             pathname: `/chat`,
             state: {
-              chats: getChatName(cookies.userName, profile._id),
+              chats: getChatName(cookies.userName, profile.person),
             }
           }}>
             <Button
