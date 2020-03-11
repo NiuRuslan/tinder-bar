@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie';
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import { storage } from '../../firebase'
-
+import ButtonChat from './ButtonChat'
 
 
 function AllChats() {
@@ -17,7 +16,7 @@ function AllChats() {
       data.chats.forEach(el => {
         let user;
         if (el.indexOf(cookies.userName) === 0) {
-          user = el.slice(cookies.userName.length)
+          user = el.slice(cookies.userName.length+1)
         } else {
           user = el.slice(0, cookies.userName.length)
         }
@@ -30,23 +29,17 @@ function AllChats() {
     })
   })
   return (
-    // <>
-      {/* { */}
-      //   chat.map((el, index) => {
-      //     <Link to={{
-      //       pathname: `/chat`,
-      //       state: {
-      //         chats: el,
-      //       }
-      //     }}>
-      //       <img src={url[index]} />
-      //       <button>
-      //         начать
-      //       </button>
-      //     </Link>
-      //   })
-      // }
-    // </>
+    <>
+      {
+       chat.map((el, index) => {
+         return(
+         <>
+         <ButtonChat chat={el} url={url[index]}/>
+         </>
+         )
+        })
+      }
+    </>
   )
 }
 

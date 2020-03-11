@@ -16,6 +16,14 @@ function ModalWindow(props) {
     })
   }
 
+  function getChatName (a, b) {
+    if (a > b) {
+      return (a + '+' + b)
+    } else {
+      return (b + '+' + a)
+    }
+  }
+
   return (
     <div>
       <Modal
@@ -69,14 +77,14 @@ function ModalWindow(props) {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-        <Link onClick={sendRequest} to={{
-              pathname: `/chat`,
-              state: {
-                chats: (cookies.userName+profile._id),
-              }
-            }}>
+          <Link onClick={sendRequest} to={{
+            pathname: `/chat`,
+            state: {
+              chats: getChatName(cookies.userName, profile._id),
+            }
+          }}>
             <Button
-              
+
               primary
               style={{
                 color: '#0f4667',
@@ -88,9 +96,9 @@ function ModalWindow(props) {
             >
               Написать
           </Button>
-            
-           </Link>
-          
+
+          </Link>
+
 
         </Modal.Actions>
       </Modal>
