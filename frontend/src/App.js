@@ -18,6 +18,7 @@ import NotFound from './components/notFound/notFound';
 import ProfileEdit from './components/profileEdit/profileEdit';
 import ChatFromDanya from './components/Chat/ChatFromDanya';
 import AllChats from './components/AllChats/AllChats';
+import Message from './components/Chat/Message'
 
 function App() {
   const history = createBrowserHistory();
@@ -33,6 +34,9 @@ function App() {
           <Redirect to="/warning" />
         )}
         <Switch>
+
+<Route exact path='/message' component={Message}/>
+
           <Route exact path="/allChats" component={AllChats} />
           <Route exact path="/warning" component={Warning} />
           <Route exact path="/profile" component={ProfileEdit} />

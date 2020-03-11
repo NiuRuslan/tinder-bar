@@ -1,0 +1,124 @@
+
+.windowqwe {
+  border: 1px solid #000;
+  border-radius: 10px;
+  background: #fff;
+  width:100%;
+  height: calc(100% - 50px);
+  max-height: 100%;
+  margin: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+h2{
+margin: auto 0;
+color: black;
+}
+.headerqwe{
+ display: block;
+  background: #ededed;
+  padding: 10px;
+  margin: -10px -10px 8px -10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.imgqwe{
+ margin: auto 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.chatqwe{
+  background: #72b8ff;
+  border-radius: 20px;
+  display: inline-block;
+  max-height: max-content;
+  padding: 10px;
+  color: #fff;
+  font-weight: lighter;
+  font-size: small;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+  margin: 5px;
+  position: relative;
+}
+.chatqwe.u1{
+  float: left;
+  clear: both;
+  border-top-left-radius: 0px;
+}
+.chatqwe.u1:before{
+  content: "";
+  width: 0px;
+  height: 0px;
+  display: block;
+  border-left: 5px solid transparent;
+  border-right: 5px solid #72b8ff;
+  border-top: 5px solid #72b8ff;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  top: 0px;
+  left: -10px;
+}
+.chatqwe.u2{
+  float: right;
+  clear: both;
+  border-top-right-radius: 0px;
+  background: #00D025;
+}
+.chatqwe.u2:before{
+  content: "";
+  width: 0px;
+  height: 0px;
+  display: block;
+  border-left: 5px solid #00D025;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #00D025;
+  border-bottom: 5px solid transparent;
+  position: absolute;
+  top: 0px;
+  right: -10px;
+}
+
+.new-chatqwe{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background: #ededed;
+  height: 40px;
+  left: 0px;
+  border-top: 1px solid #ddd;
+}
+.new-chatqwe input{
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 18px;
+  width: 250px;
+  height: 40px;
+  border: none;
+  display: inline-block;
+  color: #999;
+  font-weight: 100;
+  background: #ddd;
+}
+.new-chatqwe button{
+  width: 40px;
+  height: 30px;
+  padding: 0;
+  display: inline-block;
+  border: none;
+  color: #00D025;
+  background: none;
+  position: relative;
+  top: -3px;
+  outline: none;
+  cursor: pointer;
+}
+.new-chatqwe button:active{
+  color: #555;
+}

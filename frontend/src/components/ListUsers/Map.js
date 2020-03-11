@@ -9,7 +9,6 @@ import {
   GoogleMap,
   Marker,
   Circle,
-  Rectangle,
 } from 'react-google-maps';
 
 import styles from './GoogleMapStyles.json';
@@ -22,7 +21,6 @@ const Map = ({
   radius,
 }) => {
   const [cookies] = useCookies(['userName']);
-
 
   function sendRequest(id) {
     axios.post('http://localhost:4000/database', {
@@ -142,6 +140,7 @@ const Map = ({
                   pathname: `/chat`,
                   state: {
                     chats: getChatName(cookies.userName, el._id),
+                    name: el.name,
                   }
                 }}>
                   <Button

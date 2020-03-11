@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 function ModalWindow(props) {
   const profile = props.obj;
   const [cookies] = useCookies(['userName']);
-
   function sendRequest() {
     axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
@@ -80,6 +79,8 @@ function ModalWindow(props) {
             pathname: `/chat`,
             state: {
               chats: getChatName(cookies.userName, profile.person),
+              name:profile.name,
+              
             }
           }}>
             <Button

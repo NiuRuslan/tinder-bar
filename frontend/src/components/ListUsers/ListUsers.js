@@ -8,6 +8,8 @@ import AnnouncementMessage from '../Announcement/Announcement';
 import './listUsers.css';
 import Navbar from '../navbar/Navbar';
 import '../snow/snow.css';
+import { storage } from '../../firebase';
+
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
@@ -53,6 +55,7 @@ const ListUsers = () => {
       .then((response) => {
         if (response.data.success) {
           // Задаем hooks
+         
           setList({
             success: true,
             list: response.data.list,
@@ -234,7 +237,7 @@ const ListUsers = () => {
             }}
           >
             {list.success
-              ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
+              ? list.list.map((obj) => <ModalWindow obj={obj}key={obj._id} />)
               : list.err}
           </ul>
         )}
