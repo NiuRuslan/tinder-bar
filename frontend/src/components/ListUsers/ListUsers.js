@@ -13,7 +13,7 @@ import '../snow/snow.css';
  */
 
 const ListUsers = props => {
-  // const [cookies, setCookie] = useCookies(["userName"]);
+  const [cookies, setCookie] = useCookies(["userName"]);
 
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
@@ -59,7 +59,7 @@ const ListUsers = props => {
           // Задаем hooks
           setList({
             success: false,
-            err: '',
+            err: response.data.err,
           });
         }
       })
@@ -82,7 +82,7 @@ const ListUsers = props => {
       setLongituse(position.coords.longitude);
       // Делает запрос на сервер
       requestListUsers(
-        props.id,
+        cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
         radius,
@@ -112,7 +112,7 @@ const ListUsers = props => {
     }
   };
   return (
-<>
+    <>
       <div className="full-wh" style={{}}>
         <div className="bg-animation">
           <div id="stars" />
@@ -172,9 +172,8 @@ const ListUsers = props => {
                 <span>Use a map</span>
               </label>
             </div>
-          ) : (
-            ''
-          )}
+          ) : list.err
+          }
           {isShowMap ? (
             <Map
               latitude={latitude}
@@ -188,20 +187,20 @@ const ListUsers = props => {
               }}
             />
           ) : (
-            <ul
-              style={{
-                display: 'flex',
-                listStyle: 'none',
-                padding: '0',
-                justifyContent: 'space-around',
-                flexWrap: 'wrap',
-              }}
-            >
-              {list.success
-                ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
-                : ''}
-            </ul>
-          )}
+              <ul
+                style={{
+                  display: 'flex',
+                  listStyle: 'none',
+                  padding: '0',
+                  justifyContent: 'space-around',
+                  flexWrap: 'wrap',
+                }}
+              >
+                {list.success
+                  ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
+                  : list.err}
+              </ul>
+            )}
         </div>
       </div>
     </>
