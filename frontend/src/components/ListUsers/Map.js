@@ -8,7 +8,8 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
-  Circle
+  Circle,
+  Rectangle,
 } from 'react-google-maps';
 
 import styles from './GoogleMapStyles.json';
@@ -78,7 +79,6 @@ const Map = ({
         <Circle 
           center={{ lat: latitude, lng: longitude }}
           radius = {+radius}
-         // visible = {true}
         />
         {users.map((el) => (
           // onClick={() => {
