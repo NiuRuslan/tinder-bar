@@ -16,7 +16,6 @@ import Warning from './components/Warning/Warning';
 import Anketa from './components/anketa/Anketa';
 import NotFound from './components/notFound/notFound';
 import ProfileEdit from './components/profileEdit/profileEdit';
-import Chat from './components/Chat/Chat';
 import ChatFromDanya from './components/Chat/ChatFromDanya';
 import AllChats from './components/AllChats/AllChats';
 

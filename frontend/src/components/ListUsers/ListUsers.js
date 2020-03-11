@@ -101,7 +101,7 @@ const ListUsers = () => {
         cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius,
+        radius || 2000,
       );
     };
     // Обрабатываем ошибки getCurrentPosition
@@ -127,8 +127,9 @@ const ListUsers = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
+
   return (
-    <div>
+    <div className="back">
       <AnnouncementMessage />
       <div className="full-wh">
         <div className="bg-animation">
@@ -162,6 +163,7 @@ const ListUsers = () => {
               borderBottom: 'solid #FFF 2px',
               borderRadius: '0',
               boxShadow: 'none',
+              marginBottom: '20px',
             }}
             min="200"
             max="10000"
@@ -170,31 +172,20 @@ const ListUsers = () => {
           />
           {' '}
           <label className="label">
-            &nbsp;
-            {' '}
-            {radius ? 'Chosen radius:' : ' '}
-            {' '}
-            &nbsp;
-            <div
-              style={{
-                color: '#e01b3c',
-                fontSize: '35px',
-                textShadow: '1px 1px 1px #FFF',
-              }}
-            >
-              &nbsp;
-              {' '}
-              {radius}
-              {' '}
-              &nbsp;
-            </div>
-            &nbsp;
-            {' '}
-            {radius !== null ? 'meters' : ' '}
-            {' '}
+            {radius !== null ? (
+              <div>
+                {' '}
+                Chosen radius: &nbsp;
+                {' '}
+                {radius}
+                &nbsp; meters
+                {' '}
+              </div>
+            ) : (
+              <div style={{ margin: ' auto 0' }}>Choose the radius</div>
+            )}
             &nbsp;
           </label>
-          <br />
           <button
             id="find-me"
             className={isColorBtn}
@@ -233,7 +224,7 @@ const ListUsers = () => {
               width: '100%',
               justifyContent: 'center',
             }}
-            radius = {radius}
+            radius={radius}
           />
         ) : (
           <ul

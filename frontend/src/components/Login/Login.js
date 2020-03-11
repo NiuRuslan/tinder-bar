@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Icon } from 'semantic-ui-react';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { useCookies } from 'react-cookie';
-import { requestFetchLogin } from '../../redux/action';
-import Slider from '../slider/Slider';
-import Slider2 from '../slider/Slider2';
-import './Login.css';
+import React, { useState, useEffect } from "react";
+import { Icon } from "semantic-ui-react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { useCookies } from "react-cookie";
+import { requestFetchLogin } from "../../redux/action";
+import Slider from "../slider/Slider";
+import Slider2 from "../slider/Slider2";
+import "./Login.css";
 
 function Login(props) {
   const { user, err, requestFetchLogin } = props;
-  const [cookies, setCookie] = useCookies(['userName', 'userNickname']);
+  const [cookies, setCookie] = useCookies(["userName", "userNickname"]);
 
   const [slider, setSlider] = useState();
   useEffect(() => {
@@ -24,20 +24,20 @@ function Login(props) {
     event.preventDefault();
     const {
       mail: { value: email },
-      pasword: { value: password },
+      pasword: { value: password }
     } = event.target;
     requestFetchLogin(email, password);
   }
 
   useEffect(() => {
     if (user.id) {
-      setCookie('userName', user.id);
-      setCookie('userNickname', user.nickname);
+      setCookie("userName", user.id);
+      setCookie("userNickname", user.nickname);
     }
   }, [user.id, setCookie]);
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
+    <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
       {slider > 5 ? <Slider /> : <Slider2 />}
       {cookies.userName ? (
         user.profileId ? (
@@ -49,7 +49,7 @@ function Login(props) {
         <form
           onSubmit={PutData}
           className="login"
-          style={{ alignSelf: 'center' }}
+          style={{ alignSelf: "center" }}
         >
           <h1 className="segment">Login</h1>
           <label>
@@ -73,31 +73,27 @@ function Login(props) {
             className="red"
             type="submit"
             style={{
-              color: '#FFF',
-              backgroundColor: '#0f4667',
-              textShadow: '1px 1px 1px #0f4667',
+              color: "#FFF",
+              backgroundColor: "rgb(124, 42, 255)",
+              textShadow: "1px 1px 1px rgb(124, 42, 255)"
             }}
           >
-            {' '}
-            Sign in
-            {' '}
-            <Icon name="sign-in" />
+            {" "}
+            Sign in <Icon name="sign-in" />
           </button>
-          <div style={{ color: 'red', textAlign: 'center' }}>{err.title}</div>
+          <div style={{ color: "red", textAlign: "center" }}>{err.title}</div>
           <br />
-          <Link to="/regist" style={{ width: '100%', alignSelf: 'center' }}>
+          <Link to="/regist" style={{ width: "100%", alignSelf: "center" }}>
             <button
               className="red"
               type="submit"
               style={{
-                color: '#FFF',
-                backgroundColor: '#0f4667',
-                textShadow: '1px 1px 1px #0f4667',
+                color: "rgb(124, 42, 255)",
+                backgroundColor: "#fff",
+                textShadow: "1px 1px 1px #0f4667"
               }}
             >
-              Sign up
-              {' '}
-              <Icon name="signup" />
+              Sign up <Icon name="signup" />
             </button>
           </Link>
         </form>
@@ -106,12 +102,13 @@ function Login(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   user: state.user,
-  err: state.error,
+  err: state.error
 });
-const mapDispatchToProps = (dispatch) => ({
-  requestFetchLogin: (email, password) => dispatch(requestFetchLogin(email, password)),
+const mapDispatchToProps = dispatch => ({
+  requestFetchLogin: (email, password) =>
+    dispatch(requestFetchLogin(email, password))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

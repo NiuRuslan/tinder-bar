@@ -81,9 +81,9 @@ const Map = ({
         )}
         center={{ lat: latitude, lng: longitude }}
       >
-        <Circle 
+        <Circle
           center={{ lat: latitude, lng: longitude }}
-          radius = {+radius}
+          radius={+radius}
         />
         {list.list.map((profile) => (
           <div>
@@ -97,57 +97,57 @@ const Map = ({
             >
               {' '}
               <Modal.Header style={{ backgroundColor: '#0f4667' }}></Modal.Header>
-        <Modal.Content image>
-          {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
-          <Modal.Description>
-            <Header style={{ color: '#0f4667' }}>
-              {` ${profile.name}, ${Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000))}`}
-            </Header>
-            <div className="avatar" style={{ backgroundImage: `url(${profile.url || './imgs/userphoto.svg'})` }} />
-            {/* <div className="avatar" style={{ backgroundImage: `url(${url})` }} /> */}
-            <li style={{ color: '#0f4667' }}>
-              Activity:
-              {` ${profile.activity}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              Favotite drinks:
-              {` ${profile.drinks}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              Favotite topics:
-              {` ${profile.topics}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              About yourself:
-              {` ${profile.about}`}
-            </li>
-            {/* <Image src='/images/wireframe/paragraph.png' /> */}
-          </Modal.Description>
-        </Modal.Content>
-        <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-          <Link
-            onClick={sendRequest}
-            to={{
-              pathname: '/chat',
-              state: {
-                chats: getChatName(cookies.userName, profile.person),
-              },
-            }}
-          >
-            <Button
-              primary
-              style={{
-                color: '#0f4667',
-                textShadow: 'none',
-                margin: '0 auto',
-                borderRadius: '320px',
-                backgroundColor: '#FFF',
-              }}
-            >
-              Написать
-            </Button>
-          </Link>
-        </Modal.Actions>
+              <Modal.Content image>
+                {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
+                <Modal.Description>
+                  <Header style={{ color: '#0f4667' }}>
+                    {` ${profile.name}, ${Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000))}`}
+                  </Header>
+                  <div className="avatar" style={{ backgroundImage: `url(${profile.url || './imgs/userphoto.svg'})` }} />
+                  {/* <div className="avatar" style={{ backgroundImage: `url(${url})` }} /> */}
+                  <li style={{ color: '#0f4667' }}>
+                    Activity:
+                    {` ${profile.activity}`}
+                  </li>
+                  <li style={{ color: '#0f4667' }}>
+                    Favotite drinks:
+                    {` ${profile.drinks}`}
+                  </li>
+                  <li style={{ color: '#0f4667' }}>
+                    Favotite topics:
+                    {` ${profile.topics}`}
+                  </li>
+                  <li style={{ color: '#0f4667' }}>
+                    About yourself:
+                    {` ${profile.about}`}
+                  </li>
+                  {/* <Image src='/images/wireframe/paragraph.png' /> */}
+                </Modal.Description>
+              </Modal.Content>
+              <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
+                <Link
+                  onClick={sendRequest}
+                  to={{
+                    pathname: '/chat',
+                    state: {
+                      chats: getChatName(cookies.userName, profile.person),
+                    },
+                  }}
+                >
+                  <Button
+                    primary
+                    style={{
+                      color: '#0f4667',
+                      textShadow: 'none',
+                      margin: '0 auto',
+                      borderRadius: '320px',
+                      backgroundColor: '#FFF',
+                    }}
+                  >
+                    Написать
+                  </Button>
+                </Link>
+              </Modal.Actions>
             </Modal>
           </div>
         ))}

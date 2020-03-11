@@ -13,13 +13,19 @@ getChatName = (a, b) => {
 router.post('/',async (req,res)=>{
 const {ID1, ID2} = req.body;
 const chat = getChatName(ID1,ID2)
-const user = await Person.findOne({_id:ID1})
-const user2 = await Person.findOne({_id:ID2})
-if(user.chats.includes(chat) && user2.chats.includes(chat)){
+
+const results = await Promise.all(
+  [ID1, ID2].map(x => Person.findOne({_id:x}))
+);
+const user = results[0];
+
+const check = user.chats.some(el=>el.chat===chat)
+if(check){
 return res.send()
 } else {
-  await Person.updateOne({_id:ID1},{$push: { chats:chat }})
-  await Person.updateOne({_id:ID2},{$push: { chats:chat }})
+  await Promise.all(
+    [ID2, ID1].map((x,index) => Person.updateOne({_id:x},{$push: { chats:{chat:chat,nickname:results[index].nickname,date:new Date()}}}))
+  )
   res.send()
 }
 })
@@ -29,7 +35,6 @@ const chats = (await Person.findOne({_id:id})).chats
   res.send({
     chats,
   })
-  })
-
+  }) 
 
 module.exports = router;

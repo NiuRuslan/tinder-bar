@@ -42,11 +42,10 @@ router.get('/', async (req, res) => {
  */
 router.post('/users', async (req, res) => {
   const {
-    id,
-    latitude,
-    longitude,
-    radius,
+    id, latitude, longitude, radius,
   } = req.body;
+  console.log(id, latitude, longitude, radius);
+
   if ([id, latitude, longitude, radius].some((el) => el === undefined)) {
     return res.send({
       success: false,
@@ -85,16 +84,20 @@ router.post('/users', async (req, res) => {
 
 
   // Записываю текущие координаты пользователя
-  await Profile.updateOne({
-    person: id,
-  }, {
-    $set: {
-      latitude,
-      longitude,
+  await Profile.updateOne(
+    {
+      person: id,
     },
-  });
+    {
+      $set: {
+        latitude,
+        longitude,
+      },
+    },
+  );
 
   if (list) {
+    console.log(list);
     return res.send({
       success: true,
       list,
