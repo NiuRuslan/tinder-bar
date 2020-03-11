@@ -157,7 +157,7 @@ function ProfileEdit(props) {
                 name="activity"
                 onInput="this.className"
                 required
-                style={{ color: "#0f4567" }}
+                style={{ color: "rgb(124, 42, 255)" }}
               />
             </label>
             <span
@@ -174,7 +174,7 @@ function ProfileEdit(props) {
                 name="topics"
                 onInput="this.className"
                 required
-                style={{ color: "#0f4567" }}
+                style={{ color: "rgb(124, 42, 255)" }}
               />
             </label>
             <span
@@ -191,7 +191,7 @@ function ProfileEdit(props) {
                 name="about"
                 onInput="this.className"
                 required
-                style={{ color: "#0f4567" }}
+                style={{ color: "rgb(124, 42, 255)" }}
               />
             </label>
             <span
@@ -208,14 +208,14 @@ function ProfileEdit(props) {
                 name="drinks"
                 onInput="this.className"
                 required
-                style={{ color: "#0f4567" }}
+                style={{ color: "rgb(124, 42, 255)" }}
               />
             </label>
             <button
               style={{
                 color: "#FFF",
-                backgroundColor: "#0f4667",
-                textShadow: "1px 1px 1px #0f4667"
+                backgroundColor: "transparent",
+                textShadow: "1px 1px 1px rgb(124, 42, 255)"
               }}
             >
               {" "}

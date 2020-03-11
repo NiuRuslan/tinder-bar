@@ -38,7 +38,10 @@ h1 {
   padding: 32px 0;
   text-align: center;
   color: #fff;
-  text-shadow: 3px 3px 2 #0f4567;
+  text-shadow: 2px 0 0 rgb(124, 42, 255), -2px 0 0 rgb(124, 42, 255),
+    0 2px 0 rgb(124, 42, 255), 0 -2px 0 rgb(124, 42, 255),
+    1px 1px rgb(124, 42, 255), -1px -1px 0 rgb(124, 42, 255),
+    1px -1px 0 rgb(124, 42, 255), -1px 1px 0 rgb(124, 42, 255);
 }
 button,
 input {
@@ -65,13 +68,14 @@ input {
   transition: all 0.2s ease-in-out;
   appearance: none;
   -webkit-appearance: none;
+  color: rgb(124, 42, 255);
 }
 input:focus {
   box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
 }
 
 button {
-  color: #0f4667;
+  color: rgb(124, 42, 255);
   font-weight: bold;
   box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
   transition: all 0.2s ease-in-out;

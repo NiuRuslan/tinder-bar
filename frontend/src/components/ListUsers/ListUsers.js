@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+
 import { connect } from "react-redux";
 import axios from "axios";
 import Map from "./Map";
@@ -13,6 +15,8 @@ import "../snow/snow.css";
  */
 
 const ListUsers = props => {
+  const [cookies, setCookie] = useCookies(["userName"]);
+
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
@@ -82,7 +86,7 @@ const ListUsers = props => {
       setLongituse(position.coords.longitude);
       // Делает запрос на сервер
       requestListUsers(
-        props.id,
+        cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
         radius
@@ -111,8 +115,9 @@ const ListUsers = props => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
+
   return (
-    <div>
+    <div className="back">
       <AnnouncementMessage />
       <div className="full-wh">
         <div className="bg-animation">
@@ -143,6 +148,7 @@ const ListUsers = props => {
               width: "30%",
               height: "50px",
               margin: "0 auto",
+
               border: "none",
               paddingBottom: "0",
               borderBottom: "solid #FFF 2px",
@@ -155,19 +161,31 @@ const ListUsers = props => {
             value={radius}
           />{" "}
           <label className="label">
-            Chosen radius:
-            {
+            {radius !== null ? (
               <div
-                style={{
-                  color: "#e01b3c",
-                  fontSize: "35px",
-                  textShadow: "1px 1px 1px #FFF"
-                }}
+                style={{ textShadow: "none ", color: "#FFF", fontSize: "25px" }}
               >
-                {radius}
+                Chosen radius is
+                {
+                  <div
+                    style={{
+                      color: "#e01b3c",
+                      fontSize: "28px",
+                      textShadow: "1px 1px 1px #fff"
+                    }}
+                  >
+                    {radius}
+                  </div>
+                }
+                meters
               </div>
-            }
-            {radius !== null ? "meters" : ""}
+            ) : (
+              <div
+                style={{ textShadow: "none ", color: "#FFF", fontSize: "25px" }}
+              >
+                Choose the radius
+              </div>
+            )}
           </label>
           <br />
           <button

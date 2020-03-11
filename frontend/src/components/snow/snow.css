@@ -1,5 +1,7 @@
 
-
+body {
+  background-color: rgb(124, 42, 255);
+}
 .full-wh {
   position: absolute;
   top: 0px;
