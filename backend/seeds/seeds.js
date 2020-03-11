@@ -66,29 +66,29 @@ async () => {
   await mongoose.connection.close();
 };
 (async () => {
-  await Person.updateOne(
-    { nickname: "Olyaaa" },
-    { $set: { profileId: "5e68988e12db1032709ef4ce" } }
-  );
-  await Person.updateOne(
-    { nickname: "Danyaa" },
-    { $set: { profileId: "5e68988e12db1032709ef4cf" } }
-  );
-  await Person.updateOne(
-    { nickname: "Sanyaaa" },
-    { $set: { profileId: "5e68988f12db1032709ef4d0" } }
-  );
+  // await Person.updateOne(
+  //   { nickname: "Olyaaa" },
+  //   { $set: { profileId: "5e68988e12db1032709ef4ce" } }
+  // );
+  // await Person.updateOne(
+  //   { nickname: "Danyaa" },
+  //   { $set: { profileId: "5e68988e12db1032709ef4cf" } }
+  // );
+  // await Person.updateOne(
+  //   { nickname: "Sanyaaa" },
+  //   { $set: { profileId: "5e68988f12db1032709ef4d0" } }
+  // );
   await Profile.updateOne(
     { name: "Olyaa" },
-    { $set: { latitude: 55.734973, longitude: 37.619144 } }
+    { $set: { person: "5e6897ab59780a324c6ec9bd" } }
   );
   await Profile.updateOne(
     { name: "Danyaa" },
-    { $set: { latitude: 55.737263, longitude: 37.471979 } }
+    { $set: { person: "5e6897ad59780a324c6ec9be" } }
   );
   await Profile.updateOne(
     { name: "Sanya" },
-    { $set: { latitude: 55.734973, longitude: 37.619144 } }
+    { $set: { person: "5e6897ad59780a324c6ec9bf" } }
   );
   await mongoose.connection.close();
 })();

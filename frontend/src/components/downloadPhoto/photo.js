@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import { storage } from '../../firebase';
 
 function Photo() {
-  const [cookies, setCookie] = useCookies(['userName']);
+  const [cookies] = useCookies(["userName"]);
 
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('./imgs/userphoto.svg');
@@ -32,13 +32,13 @@ function Photo() {
             console.log(url);
           });
         });
-    }
-  };
+      };
+    };
 
   return (
-    <div>
+    <div style={{ alignSelf: 'center' }}>
       <label htmlFor="file-input">
-        <img style={{ width: `${200}px`, height: `${200}px`, borderRadius: `${50}%` }} src={url} />
+        <div className="avatar" style={{backgroundImage: `url(${url})`}} />
       </label>
       <input id="file-input" type="file" onChange={handleChange} />
     </div>

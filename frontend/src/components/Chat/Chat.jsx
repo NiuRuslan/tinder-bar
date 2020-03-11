@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { database } from '../../firebase';
+import {database} from '../../firebase';
+import { useCookies } from "react-cookie";
 
 
 function Chat() {
-  const [nickname, setNickname] = useState('');
-  const [email, setEmail] = useState('');
+  const [cookies] = useCookies(['userName'])
+  const [nickname, setNickname] = useState("");
   const [joined, setJoined] = useState(false);
   const [msg, setMsg] = useState('');
   const [messages, setMessages] = useState({});
 
-  const chatRoom = database.ref().child('chatrooms').child('global');
+  const chatRoom = database.ref().child(`${cookies.userName}`);
 
   useEffect(() => {
-    const handleNewMessages = (snap) => {
+
+    const handleNewMessages = snap => {
       if (snap.val()) setMessages(snap.val());
     };
     chatRoom.on('value', handleNewMessages);
@@ -22,12 +23,10 @@ function Chat() {
     };
   });
 
-  const handleNameChange = (e) => setNickname(e.target.value);
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handleClick = (e) => {
+  const handleNameChange = e => setNickname(e.target.value);
+  const handleClick = e => {
     database.ref().child('nicknames').push({
       nickname,
-      email,
     });
     setJoined(true);
   };
@@ -47,10 +46,7 @@ function Chat() {
     <div className="App">
       {!joined ? (
         <div className="joinForm">
-          <input placeholder="Nickname" value={nickname} onChange={handleNameChange} />
-          <br />
-          <input placeholder="Email" value={email} onChange={handleEmailChange} />
-          <br />
+          <input placeholder="Nickname" value={nickname} onChange={handleNameChange} /><br />
           <button onClick={handleClick}>Join</button>
         </div>
       ) : (

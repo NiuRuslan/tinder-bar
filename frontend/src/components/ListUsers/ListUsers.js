@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useCookies } from "react-cookie";
-
 import { connect } from "react-redux";
 import axios from "axios";
 import Map from "./Map";
@@ -14,9 +13,8 @@ import "../snow/snow.css";
  * @param {*} props
  */
 
-const ListUsers = props => {
-  const [cookies, setCookie] = useCookies(["userName"]);
-
+const ListUsers = () => {
+  const [cookies] = useCookies(["userName"]);
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
@@ -63,7 +61,7 @@ const ListUsers = props => {
           // Задаем hooks
           setList({
             success: false,
-            err: ""
+            err: response.data.err
           });
         }
       })
@@ -130,8 +128,7 @@ const ListUsers = props => {
       <div
         className="main-container"
         style={{
-          width: "100%",
-          height: "100vh"
+          width: "100%"
         }}
       >
         <Navbar />
@@ -148,7 +145,6 @@ const ListUsers = props => {
               width: "30%",
               height: "50px",
               margin: "0 auto",
-
               border: "none",
               paddingBottom: "0",
               borderBottom: "solid #FFF 2px",
@@ -161,7 +157,7 @@ const ListUsers = props => {
             value={radius}
           />{" "}
           <label className="label">
-            {radius !== null ? (
+            {/* {radius !== null ? (
               <div
                 style={{ textShadow: "none ", color: "#FFF", fontSize: "25px" }}
               >
@@ -185,7 +181,18 @@ const ListUsers = props => {
               >
                 Choose the radius
               </div>
-            )}
+            )} */}
+            &nbsp; {radius ? "Chosen radius:" : " "} &nbsp;
+            <div
+              style={{
+                color: "#e01b3c",
+                fontSize: "35px",
+                textShadow: "1px 1px 1px #FFF"
+              }}
+            >
+              &nbsp; {radius} &nbsp;
+            </div>
+            &nbsp; {radius !== null ? "meters" : " "} &nbsp;
           </label>
           <br />
           <button
@@ -202,7 +209,7 @@ const ListUsers = props => {
               textShadow: "none"
             }}
           >
-            Show my location
+            FIND ME SOMEONE
           </button>
         </div>
 
@@ -214,7 +221,7 @@ const ListUsers = props => {
             </label>
           </div>
         ) : (
-          ""
+          list.err
         )}
         {isShowMap ? (
           <Map
@@ -240,7 +247,7 @@ const ListUsers = props => {
           >
             {list.success
               ? list.list.map(obj => <ModalWindow obj={obj} key={obj._id} />)
-              : ""}
+              : list.err}
           </ul>
         )}
       </div>

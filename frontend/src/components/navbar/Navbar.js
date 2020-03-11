@@ -1,11 +1,10 @@
-import React from "react";
-import "./navbar.css";
-import { Link } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import React from 'react';
+import './navbar.css';
+import { Link } from 'react-router-dom';
 
-const Navbar = props => (
+const Navbar = () => (
   <nav>
-    <ul style={{ padding: "0" }} className="list">
+    <ul style={{ padding: '0' }} className="list">
       <li className="listLi">
         <Link to="/profile">
           <img className="navbar" src="./navbar/user.png" />
@@ -18,7 +17,7 @@ const Navbar = props => (
       </li>
       <li className="listLi">
         <Link to="/chat">
-          {" "}
+          {' '}
           <img src="./navbar/email.png" />
         </Link>
       </li>

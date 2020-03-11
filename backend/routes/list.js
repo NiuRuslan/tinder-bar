@@ -9,7 +9,6 @@ router.get("/", async (req, res) => {
 });
 
 /**
- * Aleksandr Ivanov
  * Получаем запрос с координатами и радиусом поиска
  * @latitude
  * @longitude
@@ -19,9 +18,16 @@ router.get("/", async (req, res) => {
  * @list - массив объектов - анкеты пользователей
  * @err - Расшифровка ошибки
  */
-
 router.post("/users", async (req, res) => {
   const { id, latitude, longitude, radius } = req.body;
+  console.log(id, latitude, longitude, radius);
+
+  if ([id, latitude, longitude, radius].some(el => el === undefined)) {
+    return res.send({
+      success: false,
+      err: "Arguments is undefined"
+    });
+  }
 
   /**
    * Расчитываем поправку к координатам (очень грубое вычисление)
@@ -37,7 +43,6 @@ router.post("/users", async (req, res) => {
     latitude: { $gte: la1, $lte: la2 },
     longitude: { $gte: lo1, $lte: lo2 }
   });
-  console.log(list);
 
   // Записываю текущие координаты пользователя
   await Profile.updateOne(
@@ -53,6 +58,7 @@ router.post("/users", async (req, res) => {
   );
 
   if (list) {
+    console.log(list);
     return res.send({
       success: true,
       list

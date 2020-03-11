@@ -108,7 +108,6 @@ router.patch('/profile', async (req, res) => {
   const response = await Profile.updateOne({ person: id }, {
     activity, topics, about, drinks,
   });
-  console.log(response);
   if (response) {
     res.send({ sucsses: true });
   } else {
