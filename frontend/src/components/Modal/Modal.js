@@ -10,7 +10,6 @@ function ModalWindow(props) {
   const profile = props.obj;
   const age = Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000));
   const [cookies] = useCookies(['userName']);
-
   function sendRequest() {
     axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
@@ -74,15 +73,14 @@ function ModalWindow(props) {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-          <Link
-            onClick={sendRequest}
-            to={{
-              pathname: '/chat',
-              state: {
-                chats: getChatName(cookies.userName, profile.person),
-              },
-            }}
-          >
+          <Link onClick={sendRequest} to={{
+            pathname: `/chat`,
+            state: {
+              chats: getChatName(cookies.userName, profile.person),
+              name:profile.name,
+              url:profile.url,
+            }
+          }}>
             <Button
               primary
               style={{

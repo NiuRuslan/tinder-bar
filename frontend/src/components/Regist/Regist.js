@@ -38,7 +38,7 @@ function Regist(props) {
       {" "}
       {slider > 5 ? <Slider /> : <Slider2 />}
       {cookies.userName ? (
-        <Redirect to="/profilecreator" />
+        <Redirect to="/profileCreator" />
       ) : (
         <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
           <form
