@@ -23,7 +23,6 @@ function App() {
   const [cookies, setCookie] = useCookies(['userName', 'chacked']);
   return (
     <>
-      {/* <Photo /> */}
       <Router history={history}>
         {cookies.chacked === 'true' ? (
           cookies.userName ? null : (

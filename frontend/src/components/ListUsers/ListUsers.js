@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Map from './Map';
@@ -7,12 +8,14 @@ import AnnouncementMessage from '../Announcement/Announcement';
 import './listUsers.css';
 import Navbar from '../navbar/Navbar';
 import '../snow/snow.css';
+
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
  */
 
 const ListUsers = (props) => {
+  const [cookies, setCookie] = useCookies(['userName']);
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
@@ -82,7 +85,7 @@ const ListUsers = (props) => {
       setLongituse(position.coords.longitude);
       // Делает запрос на сервер
       requestListUsers(
-        props.id,
+        cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
         radius,
@@ -155,7 +158,11 @@ const ListUsers = (props) => {
           />
           {' '}
           <label className="label">
-            &nbsp; {radius ? 'Chosen radius:' : ' '} &nbsp;
+            &nbsp;
+            {' '}
+            {radius ? 'Chosen radius:' : ' '}
+            {' '}
+&nbsp;
             <div
               style={{
                 color: '#e01b3c',
@@ -163,9 +170,17 @@ const ListUsers = (props) => {
                 textShadow: '1px 1px 1px #FFF',
               }}
             >
-              &nbsp;  {radius} &nbsp;
+              &nbsp;
+              {' '}
+              {radius}
+              {' '}
+&nbsp;
             </div>
-            &nbsp; {radius !== null ? 'meters' : ' '} &nbsp;
+            &nbsp;
+            {' '}
+            {radius !== null ? 'meters' : ' '}
+            {' '}
+&nbsp;
           </label>
           <br />
           <button
@@ -194,8 +209,8 @@ const ListUsers = (props) => {
             </label>
           </div>
         ) : (
-            ''
-          )}
+          ' '
+        )}
         {isShowMap ? (
           <Map
             latitude={latitude}
@@ -209,20 +224,20 @@ const ListUsers = (props) => {
             }}
           />
         ) : (
-            <ul
-              style={{
-                display: 'flex',
-                listStyle: 'none',
-                padding: '0',
-                justifyContent: 'space-around',
-                flexWrap: 'wrap',
-              }}
-            >
-              {list.success
-                ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
-                : ''}
-            </ul>
-          )}
+          <ul
+            style={{
+              display: 'flex',
+              listStyle: 'none',
+              padding: '0',
+              justifyContent: 'space-around',
+              flexWrap: 'wrap',
+            }}
+          >
+            {list.success
+              ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
+              : ''}
+          </ul>
+        )}
       </div>
     </div>
   );

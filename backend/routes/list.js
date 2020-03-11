@@ -28,6 +28,13 @@ router.post('/users', async (req, res) => {
     longitude,
     radius,
   } = req.body;
+
+  if ([id, latitude, longitude, radius].every((el) => typeof el === 'undefined')) {
+    return res.send({
+      success: false,
+      err: 'Arguments is "undefined"',
+    });
+  }
   /**
    * Расчитываем поправку к координатам (очень грубое вычисление)
    * @coeff - 1m in degree = 1 / 111320m = 0.000008983
