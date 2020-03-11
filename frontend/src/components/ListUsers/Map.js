@@ -1,8 +1,8 @@
-import React from 'react';
-import { Button, Header, Modal } from 'semantic-ui-react';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Button, Header, Modal } from "semantic-ui-react";
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import {
   withScriptjs,
   withGoogleMap,
@@ -18,13 +18,12 @@ const Map = ({
   longitude,
   list: { list: users }
 }) => {
-  const [cookies] = useCookies(['userName']);
-
+  const [cookies] = useCookies(["userName"]);
 
   function sendRequest(id) {
-    axios.post('http://localhost:4000/database', {
+    axios.post("http://localhost:4000/database", {
       ID1: cookies.userName,
-      ID2: id,
+      ID2: id
     });
   }
   /**
@@ -57,31 +56,17 @@ const Map = ({
     <>
       <CMap
         googleMapURL={googleMapURL}
-<<<<<<< HEAD
         loadingElement={<div style={{ height: "50%" }} />}
-        containerElement={<div style={{ height: "700px" }} />}
+        containerElement={<div style={{ height: "400px" }} />}
         mapElement={
           <div
             style={{
-              height: "45%",
-              width: "55%",
+              height: "95%",
+              width: "85%",
               border: "2px solid #FFF",
               borderRadius: "25px",
               margin: "0 auto",
               boxShadow: "10px 10px 8px black"
-=======
-        loadingElement={<div style={{ height: '50%' }} />}
-        containerElement={<div style={{ height: '400px' }} />}
-        mapElement={(
-          <div
-            style={{
-              height: '95%',
-              width: '85%',
-              border: '2px solid #FFF',
-              borderRadius: '25px',
-              margin: '0 auto',
-              boxShadow: '10px 10px 8px black',
->>>>>>> f2fce00ee64f097407490609c2b9f9278a536d51
             }}
           />
         }
@@ -135,30 +120,28 @@ const Map = ({
                   {/* <Image src='/images/wireframe/paragraph.png' /> */}
                 </Modal.Description>
               </Modal.Content>
-              <Modal.Actions style={{ backgroundColor: 'rgb(124, 42, 255)' }}>
+              <Modal.Actions style={{ backgroundColor: "rgb(124, 42, 255)" }}>
                 <Link
                   onClick={() => sendRequest(el._id)}
                   to={{
-                    pathname: '/chat',
+                    pathname: "/chat",
                     state: {
-                      chats: (cookies.userName + el._id),
-                    },
+                      chats: cookies.userName + el._id
+                    }
                   }}
                 >
                   <Button
-
                     primary
                     style={{
-                      color: '#0f4667',
-                      textShadow: 'none',
-                      margin: '0 auto',
-                      borderRadius: '320px',
-                      backgroundColor: '#FFF',
+                      color: "#0f4667",
+                      textShadow: "none",
+                      margin: "0 auto",
+                      borderRadius: "320px",
+                      backgroundColor: "#FFF"
                     }}
                   >
                     Написать
                   </Button>
-
                 </Link>
               </Modal.Actions>
             </Modal>

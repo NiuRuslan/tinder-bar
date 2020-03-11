@@ -5,7 +5,7 @@ import axios from "axios";
 import "./anketa.css";
 import { LogIn } from "../../redux/action";
 import { connect } from "react-redux";
-import Photo from '../downloadPhoto/photo'
+import Photo from "../downloadPhoto/photo";
 
 class Anketa extends React.Component {
   constructor(props) {
@@ -37,9 +37,9 @@ class Anketa extends React.Component {
   };
 
   handleSubmit = async event => {
-    event.preventDefault()
-    const { user } = this.props
-    let { name, DoB, activity, topics, drinks, about } = this.state
+    event.preventDefault();
+    const { user } = this.props;
+    let { name, DoB, activity, topics, drinks, about } = this.state;
 
     await axios.post("http://localhost:4000/users/profile", {
       name,
@@ -60,7 +60,7 @@ class Anketa extends React.Component {
       drinks
     };
     this.props.LogIn(user.id, user.nickname, profileId);
-    this.props.history.push("/listUsers");
+    this.props.history.push("/");
   };
 
   _next = () => {
@@ -145,7 +145,6 @@ class Anketa extends React.Component {
           />
           <Step3
             currentStep={this.state.currentStep}
-            
             handleChange={this.handleChange}
             about={this.state.about}
           />
@@ -243,7 +242,7 @@ function Step3(props) {
   }
   return (
     <>
-    <Photo />
+      <Photo />
       <div className="form-group">
         <label>
           <input

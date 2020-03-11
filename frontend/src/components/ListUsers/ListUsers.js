@@ -152,7 +152,7 @@ const ListUsers = () => {
               boxShadow: "none"
             }}
             min="200"
-            max="5000"
+            max="50000"
             step="200"
             value={radius}
           />{" "}

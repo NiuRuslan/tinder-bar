@@ -12,17 +12,9 @@ const personSchema = new mongoose.Schema(
     },
     chats: Array
   },
-<<<<<<< HEAD
   {
     versionKey: false
   }
 );
-=======
-  chats: Array,
-},
-{
-  versionKey: false,
-});
->>>>>>> f2fce00ee64f097407490609c2b9f9278a536d51
 
 module.exports = mongoose.model("Person", personSchema);
