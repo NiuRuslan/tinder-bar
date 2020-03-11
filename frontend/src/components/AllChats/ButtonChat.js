@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const ButtonChat = (props) => {
-  const { url, chat } = props
+  const { url, chats } = props
   return (
     <>
       <Link to={{
         pathname: `/chat`,
         state: {
-          chats: chat,
+          chats: chats.chat,
         }
       }}>
         <img src={url} />
@@ -16,7 +16,7 @@ const ButtonChat = (props) => {
                 </Link>
     </>
   )
-}
+} 
 
 
 

@@ -7,7 +7,6 @@ import { requestFetchRegist } from '../../redux/action';
 import Slider from '../slider/Slider';
 import Slider2 from '../slider/Slider2';
 import './Regist.css';
-import {database} from '../../firebase';
 
 
 function Regist(props) {
@@ -32,9 +31,6 @@ function Regist(props) {
     if (user.id) {
       setCookie('userNickname',user.nickname)
       setCookie('userName', user.id);
-      database.ref().child(`${user.id}`).push({
-        date:Date.now(),
-      });
     }
   }, [user.id, setCookie]);
 

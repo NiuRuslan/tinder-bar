@@ -25,7 +25,6 @@ function Chat(props) {
   
   const handleMsgChange = e => setMsg(e.target.value);
   const handleKeyDown = e => {
-    if (e.key === "Enter") {
       chatRoom.push({
         nickname: cookies.userNickname,
         msg,
@@ -33,7 +32,6 @@ function Chat(props) {
         dateTime: new Date().toLocaleDateString(),
       });
       setMsg('');
-    }
   };
 
   return (
@@ -60,7 +58,10 @@ function Chat(props) {
                   );
               })}
             </div>
-            <input placeholder="write here" onChange={handleMsgChange} onKeyDown={handleKeyDown} value={msg} /><br />
+            <div>
+            <input placeholder="write here" onChange={handleMsgChange} value={msg} /><br />
+            <button onClick={handleKeyDown}>Send</button>
+            </div>
           </div>
         
     </div>
