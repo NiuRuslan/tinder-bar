@@ -132,7 +132,6 @@ const ListUsers = () => {
         }}
       >
         <Navbar />
-
         <div className="input-form-userlist">
           <input
             className="inputFind"
@@ -158,33 +157,6 @@ const ListUsers = () => {
             value={radius}
           />{" "}
           <label className="label">
-            {/* {radius !== null ? (
-              <div
-                style={{ textShadow: "none ", color: "#FFF", fontSize: "25px" }}
-              >
-                Chosen radius is
-                {
-                  <div
-                    style={{
-                      color: "#e01b3c",
-                      fontSize: "28px",
-                      textShadow: "1px 1px 1px #fff"
-                    }}
-                  >
-                    {radius}
-                  </div>
-                }
-                meters
-              </div>
-            ) : (
-              <div
-                style={{ textShadow: "none ", color: "#FFF", fontSize: "25px" }}
-              >
-                Choose the radius
-              </div>
-            )} */}
-            {/* &nbsp; */}
-            {/* &nbsp;{" "} */}
             {radius !== null ? (
               <div>
                 {" "}
