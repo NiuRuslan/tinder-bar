@@ -1,124 +1,118 @@
-
-.windowqwe {
-  border: 1px solid #000;
-  border-radius: 10px;
-  background: #fff;
-  width:100%;
-  height: calc(100% - 50px);
-  max-height: 100%;
-  margin: auto;
-  padding: 10px;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
+.body {
+  font-family: helvetica;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  justify-content: center;
 }
 
-h2{
-margin: auto 0;
-color: black;
-}
-.headerqwe{
- display: block;
-  background: #ededed;
-  padding: 10px;
-  margin: -10px -10px 8px -10px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-.imgqwe{
- margin: auto 0;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-}
-
-.chatqwe{
-  background: #72b8ff;
-  border-radius: 20px;
-  display: inline-block;
-  max-height: max-content;
-  padding: 10px;
-  color: #fff;
-  font-weight: lighter;
-  font-size: small;
-  box-shadow: 1px 1px 2px rgba(0,0,0,.3);
-  margin: 5px;
-  position: relative;
-}
-.chatqwe.u1{
-  float: left;
-  clear: both;
-  border-top-left-radius: 0px;
-}
-.chatqwe.u1:before{
-  content: "";
-  width: 0px;
-  height: 0px;
-  display: block;
-  border-left: 5px solid transparent;
-  border-right: 5px solid #72b8ff;
-  border-top: 5px solid #72b8ff;
-  border-bottom: 5px solid transparent;
-  position: absolute;
-  top: 0px;
-  left: -10px;
-}
-.chatqwe.u2{
-  float: right;
-  clear: both;
-  border-top-right-radius: 0px;
-  background: #00D025;
-}
-.chatqwe.u2:before{
-  content: "";
-  width: 0px;
-  height: 0px;
-  display: block;
-  border-left: 5px solid #00D025;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #00D025;
-  border-bottom: 5px solid transparent;
-  position: absolute;
-  top: 0px;
-  right: -10px;
-}
-
-.new-chatqwe{
-  position: absolute;
-  bottom: 0px;
+.chat {
   width: 100%;
-  background: #ededed;
-  height: 40px;
-  left: 0px;
-  border-top: 1px solid #ddd;
-}
-.new-chatqwe input{
-  outline: none;
+  display: flex;
+  flex-direction: column;
   padding: 10px;
-  box-sizing: border-box;
-  font-size: 18px;
-  width: 250px;
-  height: 40px;
-  border: none;
-  display: inline-block;
-  color: #999;
-  font-weight: 100;
-  background: #ddd;
 }
-.new-chatqwe button{
-  width: 40px;
-  height: 30px;
-  padding: 0;
-  display: inline-block;
-  border: none;
-  color: #00D025;
-  background: none;
+
+.messages {
+  margin: 5px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin: 2px;
+  width: 40%;
+  border-radius: 20px;
+  padding: 8px 15px;
+  display: block;
+  flex-wrap: wrap;
+  word-break: break-all;
+}
+
+.yours {
+  align-items: flex-start;
+}
+
+.yours .message {
+  color: #fff;
+  font-size: 25px;
+  margin-right: 25%;
   position: relative;
-  top: -3px;
-  outline: none;
-  cursor: pointer;
+  background: linear-gradient(
+    to bottom,
+    rgb(124, 42, 255) 0%,
+    rgb(221, 199, 255) 100%
+  );
 }
-.new-chatqwe button:active{
-  color: #555;
+
+.yours .message.last:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: -7px;
+  height: 20px;
+  width: 20px;
+  background: #eee;
+  border-bottom-right-radius: 15px;
+}
+.yours .message.last:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: -10px;
+  width: 10px;
+  height: 20px;
+  background: white;
+  border-bottom-right-radius: 10px;
+}
+
+.mine {
+  align-items: flex-end;
+}
+
+.mine .message {
+  color: #fff;
+  font-size: 25px;
+  margin-left: 25%;
+  background: linear-gradient(
+    to bottom,
+    rgb(124, 42, 255) 0%,
+    rgb(221, 199, 255) 100%
+  );
+
+  background-attachment: fixed;
+  position: relative;
+}
+
+.mine .message.last:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  right: -8px;
+  height: 20px;
+  width: 20px;
+  background: linear-gradient(
+    to bottom,
+    rgb(124, 42, 255) 0%,
+    rgb(221, 199, 255) 100%
+  );
+  background-attachment: fixed;
+  border-bottom-left-radius: 15px;
+}
+
+.mine .message.last:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: -10px;
+  width: 10px;
+  height: 20px;
+  background: white;
+  border-bottom-left-radius: 10px;
 }

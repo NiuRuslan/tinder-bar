@@ -78,7 +78,7 @@ input:focus {
 button {
   color: rgb(124, 42, 255);
   font-weight: bold;
-  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  /* box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc; */
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 600;

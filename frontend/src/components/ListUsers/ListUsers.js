@@ -1,33 +1,39 @@
-import React, { useState,useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import Map from './Map';
-import { storage } from '../../firebase';
-import ModalWindow from '../Modal/Modal';
-import AnnouncementMessage from '../Announcement/Announcement';
-import './listUsers.css';
-import Navbar from '../navbar/Navbar';
-import '../snow/snow.css';
-import { database } from "../../firebase";
-
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { connect } from "react-redux";
+import { storage } from "../../firebase";
+import axios from "axios";
+import Map from "./Map";
+import ModalWindow from "../Modal/Modal";
+import AnnouncementMessage from "../Announcement/Announcement";
+import "./listUsers.css";
+import Navbar from "../navbar/Navbar";
+import "../snow/snow.css";
+import Loader from "../loader/Loader";
+import Loader2 from "../loader/loader2";
+import {database} from '../../firebase'
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
  */
 
 const ListUsers = () => {
-  const [cookies] = useCookies(['userName']);
+  const [cookies] = useCookies(["userName"]);
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
-    err: '',
+    err: ""
   });
-  const pushRoom = database.ref().child(`${cookies.userName}`);
   const [isColorBtn, setColorBtn] = useState('findMe');
-
+  const [isShowLoader, setIsShowLoader] = useState(false);
   const [isShowMap, setShowMap] = useState(false);
   const [user, setUser] = useState('')
+  const [loader, setLoader] = useState();
+  const pushRoom = database.ref().child(`${cookies.userName}`);
+  useEffect(() => {
+    const loader = Math.floor(Math.random() * 10);
+    setLoader(loader);
+  }, []);
 
   useEffect(() => {
     const handleNewMessages = async snap => {
@@ -44,7 +50,6 @@ const ListUsers = () => {
       pushRoom.off("value", handleNewMessages);
     };
   });
-  console.log(user)
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
    */
@@ -65,44 +70,46 @@ const ListUsers = () => {
 
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios
-      .post('http://localhost:4000/list/users', {
+      .post("http://localhost:4000/list/users", {
         id,
         latitude,
         longitude,
-        radius,
+        radius
       })
-      .then(async (response) => {
+      .then(async response => {
         if (response.data.success) {
-          const promisesArr = response.data.list.map(async (user) => {
+          // Задаем hooks
+          setIsShowLoader(false);
+
+          const promisesArr = response.data.list.map(async user => {
             const pic = await storage
               .ref(`images/${user.person}`)
               .getDownloadURL()
-              .catch((e) => console.log(e));
+              .catch(e => console.log(e));
             user.url = pic;
             return user;
           });
 
-          Promise.all(promisesArr).then((result) => {
+          Promise.all(promisesArr).then(result => {
             setList({
               success: true,
-              list: result,
+              list: result
             });
           });
-
 
           // Задаем hooks
         } else {
           // Задаем hooks
           setList({
             success: false,
-            err: response.data.err,
+            err: response.data.err
           });
         }
       })
       .catch(() => {
         setList({
           success: false,
-          err: 'Runtime error',
+          err: "Runtime error"
         });
       });
   };
@@ -111,17 +118,19 @@ const ListUsers = () => {
    * Определяет координаты пользователя, используя Google map function
    */
   const geoFindLocation = () => {
-    setColorBtn('');
-    const success = (position) => {
+    setIsShowLoader(true);
+    setColorBtn("");
+    const success = position => {
       // Задаем в hooks координаты
       setLatitude(position.coords.latitude);
       setLongituse(position.coords.longitude);
+
       // Делает запрос на сервер
       requestListUsers(
         cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius || 2000,
+        radius || 2000
       );
     };
     // Обрабатываем ошибки getCurrentPosition
@@ -129,7 +138,7 @@ const ListUsers = () => {
       // Задаем hooks
       setList({
         success: false,
-        err: 'Unable to retrieve your location',
+        err: "Unable to retrieve your location"
       });
     };
 
@@ -137,13 +146,14 @@ const ListUsers = () => {
       // Задаем hooks
       setList({
         success: false,
-        err: 'Geolocation is not supported by your browser',
+        err: "Geolocation is not supported by your browser"
       });
     } else {
       /**
        * @param {function} success - определяет координаты пользователя
        * @param {function} error - возвращает ошибку обработки координат
        */
+
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
@@ -161,47 +171,44 @@ const ListUsers = () => {
       <div
         className="main-container"
         style={{
-          width: '100%',
+          width: "100%"
         }}
       >
         <Navbar />
         <div className="input-form-userlist">
           <input
             className="inputFind"
-            onChange={(event) => {
+            onChange={event => {
               setRadius(event.target.value);
             }}
             type="range"
             style={{
-              display: 'block',
-              width: '30%',
-              height: '50px',
-              margin: '0 auto',
-              border: 'none',
-              paddingBottom: '0',
-              borderBottom: 'solid #FFF 2px',
-              borderRadius: '0',
-              boxShadow: 'none',
-              marginBottom: '20px',
+              minWidth: "300px",
+              display: "block",
+              width: "30%",
+              height: "50px",
+              margin: "0 auto",
+              border: "none",
+              paddingBottom: "0",
+              borderBottom: "solid #FFF 2px",
+              borderRadius: "0",
+              boxShadow: "none",
+              marginBottom: "20px"
             }}
             min="200"
             max="10000"
             step="200"
             value={radius}
           />
-          {' '}
           <label className="label">
             {radius !== null ? (
               <div>
-                {' '}
-                Chosen radius: &nbsp;
-                {' '}
-                {radius}
-                &nbsp; meters
-                {' '}
+                {" "}
+                Chosen radius: &nbsp; {radius}
+                &nbsp; meters{" "}
               </div>
             ) : (
-              <div style={{ margin: ' auto 0' }}>Choose the radius</div>
+              <div style={{ margin: " auto 0" }}>Choose the radius</div>
             )}
             &nbsp;
           </label>
@@ -210,20 +217,20 @@ const ListUsers = () => {
             className={isColorBtn}
             onClick={() => geoFindLocation()}
             style={{
-              display: 'block',
-              color: '#FFF',
-              backgroundColor: 'transparent',
-              position: 'relative',
-              margin: '0 auto',
-              width: '25rem',
-              textShadow: 'none',
+              display: "block",
+              color: "#FFF",
+              backgroundColor: "transparent",
+              position: "relative",
+              margin: "0 auto",
+              width: "25rem",
+              textShadow: "none"
             }}
           >
             FIND ME SOMEONE
           </button>
         </div>
         {list.success ? (
-          <div className="toggleBox" style={{ margin: '0 auto' }}>
+          <div className="toggleBox" style={{ margin: "0 auto" }}>
             <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
             <label htmlFor="toggle-2" onClick={ChangeOnMap}>
               <span>Use a map</span>
@@ -232,41 +239,51 @@ const ListUsers = () => {
         ) : (
           list.err
         )}
-        {isShowMap ? (
-          <Map
-            latitude={latitude}
-            longitude={longitude}
-            list={list}
-            style={{
-              marginTop: '10%',
-              alignSelf: 'center',
-              width: '100%',
-              justifyContent: 'center',
-            }}
-            radius={radius}
-          />
+        {isShowLoader ? (
+          <div>{loader > 5 ? <Loader /> : <Loader2 />}</div>
         ) : (
-          <ul
-            style={{
-              display: 'flex',
-              listStyle: 'none',
-              padding: '0',
-              justifyContent: 'space-around',
-              flexWrap: 'wrap',
-            }}
-          >
-            { list.success
-              ? list.list.map((obj) => <ModalWindow obj={obj} key={obj._id} />)
-              : list.err}
-          </ul>
+          <div>
+            {isShowMap ? (
+              <Map
+                latitude={latitude}
+                longitude={longitude}
+                list={list}
+                style={{
+                  marginTop: "10%",
+                  alignSelf: "center",
+                  width: "100%",
+                  justifyContent: "center"
+                }}
+                radius={radius}
+              />
+            ) : (
+              <ul
+                style={{
+                  display: "flex",
+                  listStyle: "none",
+                  padding: "0",
+                  justifyContent: "space-around",
+                  flexWrap: "wrap"
+                }}
+              >
+                {list.success
+                  ? list.list.map(obj => (
+                      <div className="map">
+                        <ModalWindow obj={obj} key={obj._id} />
+                      </div>
+                    ))
+                  : list.err}
+              </ul>
+            )}
+          </div>
         )}
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  ...state,
+const mapStateToProps = state => ({
+  ...state
 });
 
 export default connect(mapStateToProps)(ListUsers);

@@ -26,7 +26,21 @@ function ProfileEdit(props) {
 
   function patchData(event) {
     event.preventDefault();
-
+    axios
+      .patch("http://localhost:4000/users/profile", {
+        activity,
+        drinks,
+        topics,
+        about,
+        id
+      })
+      .then(({ data }) => {
+        if (data.sucsses) {
+          setSave("Changes were saved");
+        } else {
+          setSave(data.err);
+        }
+      });
     const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
     uploadTask.on("state_changed", undefined, undefined, () => {
       uploadTask.snapshot.ref.getDownloadURL().then(url => {
@@ -40,7 +54,8 @@ function ProfileEdit(props) {
           drinks,
           topics,
           about,
-          id
+          id,
+          avatar: url
         })
         .then(({ data }) => {
           if (data.sucsses) {
@@ -219,16 +234,16 @@ function ProfileEdit(props) {
           <button
             style={{
               color: "#FFF",
-              backgroundColor: "rgb(124, 42, 255)",
+              backgroundColor: "transparent",
               textShadow: "1px 1px 1px rgb(124, 42, 255)"
             }}
           >
             {" "}
             Save changes{" "}
           </button>
-          {save}
+          <div style={{ marginTop: "15px", color: "#fff" }}> {save}</div>
         </form>
-        <div className="exit">
+        <div className="exit" style={{ margin: "0" }}>
           <Link to="/login" onClick={LogOut} style={{ position: "relative" }}>
             <img src="./navbar/exit-door.png" />
           </Link>

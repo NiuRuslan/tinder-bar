@@ -1,4 +1,13 @@
 
+body {
+  /* background-image: linear-gradient(
+    #4a00e0,#8e2de2 */
+     background-color: rgb(124, 42, 255) 
+    /* background-image: linear-gradient(rgb(124, 42, 255),
+    #6c37ff ) */
+
+
+}
 .full-wh {
   position: absolute;
   top: 0px;

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import {
+  Button, Header, Modal, List,
+} from 'semantic-ui-react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
@@ -88,39 +90,31 @@ const Map = ({
         {list.list.map((profile) => (
           <div>
             <Modal
+              style={{
+                textAlign: 'center', height: 'auto',
+              }}
+              dimmer="blurring"
+              size="mini"
               trigger={(
                 <Marker
                   icon={{ url: './imgs/cocktails.png' }}
                   position={{ lat: profile.latitude, lng: profile.longitude }}
+                  title={profile.name}
                 />
               )}
             >
-              {' '}
-              <Modal.Header style={{ backgroundColor: '#0f4667' }}></Modal.Header>
-              <Modal.Content image>
-                {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
+              <Modal.Content>
                 <Modal.Description>
-                  <Header style={{ color: '#0f4667' }}>
+                  <Header style={{ color: '#0f4667', fontSize: 'x-large' }}>
                     {` ${profile.name}, ${Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000))}`}
                   </Header>
-                  <div className="avatar" style={{ backgroundImage: `url(${profile.url || './imgs/userphoto.svg'})` }} />
-                  {/* <div className="avatar" style={{ backgroundImage: `url(${url})` }} /> */}
-                  <li style={{ color: '#0f4667' }}>
-                    Activity:
-                    {` ${profile.activity}`}
-                  </li>
-                  <li style={{ color: '#0f4667' }}>
-                    Favotite drinks:
-                    {` ${profile.drinks}`}
-                  </li>
-                  <li style={{ color: '#0f4667' }}>
-                    Favotite topics:
-                    {` ${profile.topics}`}
-                  </li>
-                  <li style={{ color: '#0f4667' }}>
-                    About yourself:
-                    {` ${profile.about}`}
-                  </li>
+                  <div className="avatar cursor" style={{ backgroundImage: `url(${profile.url || './imgs/info.png'})` }} />
+                  <List style={{ padding: '0 3rem', fontSize: 'large' }}>
+                    <List.Item icon="briefcase" content={profile.activity} />
+                    <List.Item icon="glass martini" content={profile.drinks} />
+                    <List.Item icon="comments" content={profile.topics} />
+                    <List.Item icon="info circle" content={profile.about} />
+                  </List>
                   {/* <Image src='/images/wireframe/paragraph.png' /> */}
                 </Modal.Description>
               </Modal.Content>

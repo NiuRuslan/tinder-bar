@@ -9,7 +9,6 @@ button {
   font-size: 20px;
   text-decoration-line: none;
   color: black;
-  margin-left: 2px;
 }
 
 a {
@@ -31,6 +30,7 @@ a {
 .anketa:hover {
   opacity: 1;
 }
+
 form {
   border-radius: 2%;
   display: flex;
@@ -48,15 +48,11 @@ form {
   text-align: center;
 }
 
-button,
-input {
+button {
   border: 0;
   outline: 0;
   font-size: 16px;
-  border-radius: 8px;
-  padding: 16px;
-  background-color: #ebecf0;
-  text-shadow: 1px 1px 0 #fff;
+  text-align: center;
 }
 
 label {
@@ -66,12 +62,15 @@ label {
 }
 
 input {
-  margin-right: 8px;
+  text-align: center;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
   width: 100%;
+  font-size: 1.2rem;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
   appearance: none;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
   -webkit-appearance: none;
 }
 
@@ -82,7 +81,7 @@ input:focus {
 button {
   color: #fff;
   font-weight: bold;
-  box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc;
+  /* box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc; */
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 600;
@@ -144,13 +143,7 @@ button.red {
 }
 
 /* Style the input fields */
-input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
+
 
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
@@ -331,8 +324,8 @@ input.invalid {
 }
 
 .avatar {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -340,39 +333,11 @@ input.invalid {
   cursor: pointer;
 }
 
+.cursor {
+  cursor: help;
+  margin: auto;
+}
+
 #file-input {
   display: none;
 }
-
-/* h1 {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate3d(-50%, -50%, 0);
-	z-index: 99;
-	text-align: center;
-	font-family: Raleway, sans-serif;
-	font-weight: 300;
-	text-transform: uppercase;
-	background-color: rgba(255, 255, 255, 0.75);
-	box-shadow: 0 1em 2em -1em rgba(0, 0, 0, 0.5);
-	padding: 1em 2em;
-	line-height: 1.5;
-}
-
-h1 small {
-	display: block;
-	text-transform: lowercase;
-	font-size: .7em;
-}
-
-h1 small:first-child {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-	padding-bottom: .5em;
-}
-
-h1 small:last-child {
-	border-top: 1px solid rgba(0, 0, 0, 0.25);
-	padding-top: .5em;
-}
- */

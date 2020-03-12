@@ -4,13 +4,14 @@ nav {
   top: 0;
   width: 100%;
 }
-.list {
+.navlist {
   display: flex;
   justify-content: space-around;
 }
 .listLi {
   list-style: none;
   transition: 1s;
+  margin-left: 0%;
 }
 
 .listLi:hover {

@@ -1,8 +1,8 @@
+
 .profile-container {
   display: grid;
   /* grid-template-rows: auto 5% auto auto; */
   justify-items: center;
-  margin-left: 0;
   position: relative;
 }
 .example-1 {
@@ -58,7 +58,7 @@ input[type="file"] {
 .edit:hover {
   opacity: 1;
 }
-
+/* 
 .exit {
   margin-top: 2rem;
   opacity: 0.4;
@@ -66,4 +66,4 @@ input[type="file"] {
 }
 .exit:hover {
   opacity: 1;
-}
+} */

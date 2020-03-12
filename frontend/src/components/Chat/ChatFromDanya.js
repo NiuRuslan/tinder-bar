@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { database } from "../../firebase";
-import Message from './Message'
+import Message from "./Message";
+import { Link } from "react-router-dom";
+import "./chatForm.css";
 
 
 function Chat(props) {
@@ -29,7 +31,7 @@ function Chat(props) {
   const handleMsgChange = e => setMsg(e.target.value);
   const handleKeyDown = e => {
     pushRoom.push({
-      url,
+      url:'11111',
       name:cookies.userNickname,
       date:Date.now(),
     })
@@ -40,35 +42,54 @@ function Chat(props) {
       dateDay: new Date().toLocaleDateString(),
       date: Date.now(),
     });
-    setMsg('');
+    setMsg("");
   };
   return (
-    <>
-
-      <div className="windowqwe">
-        <div className="headerqwe"><img className='imgqwe' src={url} />
-          <h2>{name}</h2>
+    <div className="bodyChat">
+      <div className="full-wh">
+        <div className="bg-animation">
+          <div id="stars" />
+          <div id="stars2" />
+          <div id="stars3" />
+          <div id="stars4" />
+        </div>
+      </div>
+      <div className="mini" style={{ backgroundImage: `url(${url || './imgs/info.png'})` }} />
+      <div className="window">
+        <div className="exit">
+          <Link to="/allChats" className="chatbar">
+            <img src="./imgs/stop.png" />
+          </Link>
         </div>
         <div class="chats">
           <Message />
-          {Object.keys(messages).map(message =>
+          {Object.keys(messages).map(message => (
             <>
-              <Message key={messages[message]["dateTime"]} msg={messages[message]["msg"]} dateDay={messages[message]["dateDay"]}
-                dateTime={messages[message]["dateTime"]} nickname={messages[message]["nickname"]}
+              <Message
+                key={messages[message]["dateTime"]}
+                msg={messages[message]["msg"]}
+                dateDay={messages[message]["dateDay"]}
+                dateTime={messages[message]["dateTime"]}
+                nickname={messages[message]["nickname"]}
               />
             </>
-          )}
-          <div class="new-chatqwe">
-            <input type="text" id="message" placeholder="write here" onChange={handleMsgChange} value={msg} />
-            <button id="send" onClick={handleKeyDown}>Send</button>
-          </div>
-
-
+          ))}
         </div>
-
-
       </div>
-    </>
+      <div className="sendButton">
+        <input
+          className="chatInput"
+          type="text"
+          id="message"
+          placeholder="write here"
+          onChange={handleMsgChange}
+          value={msg}
+        />
+        <button id="send" onClick={handleKeyDown} className="chatButton">
+          Send
+        </button>
+      </div>
+    </div>
   );
 }
 export default Chat;
