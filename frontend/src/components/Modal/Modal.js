@@ -71,7 +71,7 @@ function ModalWindow(props) {
             </List>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
+        <Modal.Actions style={{ backgroundColor: '#0f4667', textAlign:'center' }}>
           <Link onClick={sendRequest} to={{
             pathname: `/chat`,
             state: {

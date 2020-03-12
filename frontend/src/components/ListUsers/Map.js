@@ -118,16 +118,19 @@ const Map = ({
                   {/* <Image src='/images/wireframe/paragraph.png' /> */}
                 </Modal.Description>
               </Modal.Content>
-              <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-                <Link onClick={() => sendRequest(profile._id)} to={{
-                  pathname: `/chat`,
-                  state: {
-                    chats: getChatName(cookies.userName, profile._id),
-                    name: profile.name,
-                    url:profile.url,
-                    friend:profile._id,
-                  }
-                }}>
+              <Modal.Actions style={{ backgroundColor: '#0f4667', textAlign: 'center' }}>
+                <Link
+                  onClick={() => sendRequest(profile._id)}
+                  to={{
+                    pathname: '/chat',
+                    state: {
+                      chats: getChatName(cookies.userName, profile._id),
+                      name: profile.name,
+                      url: profile.url,
+                      friend: profile._id,
+                    },
+                  }}
+                >
                   <Button
                     primary
                     style={{
