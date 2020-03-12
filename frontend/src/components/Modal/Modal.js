@@ -71,18 +71,16 @@ function ModalWindow(props) {
             </List>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions style={{ backgroundColor: '#0f4667', textAlign: 'center' }}>
-          <Link
-            onClick={sendRequest}
-            to={{
-              pathname: '/chat',
-              state: {
-                chats: getChatName(cookies.userName, profile.person),
-                name: profile.name,
-                url: profile.url,
-              },
-            }}
-          >
+        <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
+          <Link onClick={sendRequest} to={{
+            pathname: `/chat`,
+            state: {
+              chats: getChatName(cookies.userName, profile.person),
+              name:profile.name,
+              url:profile.url,
+              friend:profile.person,
+            }
+          }}>
             <Button
               primary
               style={{

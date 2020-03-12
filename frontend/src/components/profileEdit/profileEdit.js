@@ -23,7 +23,6 @@ function ProfileEdit(props) {
   const id = cookies.userName;
   const { profileInit, user } = props;
   const [image, setImage] = useState(null);
-  console.log(url);
 
   function patchData(event) {
     event.preventDefault();

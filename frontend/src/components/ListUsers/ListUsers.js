@@ -11,6 +11,7 @@ import Navbar from "../navbar/Navbar";
 import "../snow/snow.css";
 import Loader from "../loader/Loader";
 import Loader2 from "../loader/loader2";
+import {database} from '../../firebase'
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
@@ -23,18 +24,32 @@ const ListUsers = () => {
     success: false,
     err: ""
   });
-
-  const [isColorBtn, setColorBtn] = useState("findMe");
+  const [isColorBtn, setColorBtn] = useState('findMe');
   const [isShowLoader, setIsShowLoader] = useState(false);
   const [isShowMap, setShowMap] = useState(false);
+  const [user, setUser] = useState('')
   const [loader, setLoader] = useState();
+  const pushRoom = database.ref().child(`${cookies.userName}`);
   useEffect(() => {
-    // setLoader()
     const loader = Math.floor(Math.random() * 10);
-    // setLoader()
     setLoader(loader);
   }, []);
 
+  useEffect(() => {
+    const handleNewMessages = async snap => {
+      if (snap.val()) {
+        (Object.entries(snap.val())).map((el)=>{
+            const [, obj] = el
+            setUser(obj)
+        });        
+        pushRoom.remove() 
+      };
+    };
+    pushRoom.on("value", handleNewMessages);
+    return () => {
+      pushRoom.off("value", handleNewMessages);
+    };
+  });
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
    */
@@ -109,7 +124,6 @@ const ListUsers = () => {
       // Задаем в hooks координаты
       setLatitude(position.coords.latitude);
       setLongituse(position.coords.longitude);
-      console.log(position.coords.latitude, position.coords.longitude);
 
       // Делает запрос на сервер
       requestListUsers(
@@ -143,10 +157,9 @@ const ListUsers = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
-
   return (
     <div className="back">
-      <AnnouncementMessage />
+      <AnnouncementMessage user={user}/>
       <div className="full-wh">
         <div className="bg-animation">
           <div id="stars" />

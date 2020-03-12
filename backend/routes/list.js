@@ -58,12 +58,11 @@ router.post("/users", async (req, res) => {
   //   longitude: { $gte: lo1, $lte: lo2 },
   // });
   // Поиск анкет по радиусу на карте
-  console.log(`${latitude} ${longitude}`);
 
   const listAll = await Profile.find({});
   let list = [];
   listAll.forEach(el => {
-    const t = distHaversine(
+    const dist = distHaversine(
       {
         lat: latitude,
         lng: longitude
@@ -73,9 +72,8 @@ router.post("/users", async (req, res) => {
         lng: el.longitude
       }
     );
-    console.log(`${el._id} ${t} ${radius}`);
 
-    if (t < radius) list.push(el);
+    if (dist < radius) list.push(el);
   });
   // Записываю текущие координаты пользователя
   await Profile.updateOne(

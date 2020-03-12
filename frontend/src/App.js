@@ -31,12 +31,11 @@ function App() {
             <Redirect to="/login" />
           )
         ) : (
-          <Redirect to="/warning" />
-        )}
+            <Redirect to="/warning" />
+          )}
         <Switch>
 
-<Route exact path='/message' component={Message}/>
-
+          <Route exact path='/message' component={Message} />
           <Route exact path="/allChats" component={AllChats} />
           <Route exact path="/warning" component={Warning} />
           <Route exact path="/profile" component={ProfileEdit} />
