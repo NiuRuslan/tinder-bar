@@ -104,7 +104,7 @@ const ListUsers = () => {
    */
   const geoFindLocation = () => {
     setIsShowLoader(true);
-    setColorBtn("");
+    setColorBtn("whiteBorder");
     const success = position => {
       // Задаем в hooks координаты
       setLatitude(position.coords.latitude);
@@ -210,7 +210,7 @@ const ListUsers = () => {
               position: "relative",
               margin: "0 auto",
               width: "25rem",
-              textShadow: "none"
+              textShadow: "none",
             }}
           >
             FIND ME SOMEONE
