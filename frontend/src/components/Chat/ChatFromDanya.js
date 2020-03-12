@@ -11,14 +11,15 @@ function Chat(props) {
   const [cookies] = useCookies(["userName", "userNickname"]);
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState({});
-
-  const { chats, url, name } = props.location.state;
-
+  const { chats, url, name, friend } = props.location.state;
   const chatRoom = database.ref().child(`${chats}`);
+  const pushRoom = database.ref().child(`${friend}`);
 
   useEffect(() => {
     const handleNewMessages = snap => {
-      if (snap.val()) setMessages(snap.val());
+      if (snap.val()) {
+        setMessages(snap.val());
+      }
     };
     chatRoom.on("value", handleNewMessages);
     return () => {
@@ -28,11 +29,17 @@ function Chat(props) {
 
   const handleMsgChange = e => setMsg(e.target.value);
   const handleKeyDown = e => {
+    pushRoom.push({
+      url: "11111",
+      name: cookies.userNickname,
+      date: Date.now()
+    });
     chatRoom.push({
       nickname: cookies.userNickname,
       msg,
       dateTime: new Date().toLocaleTimeString(),
-      dateDay: new Date().toLocaleDateString()
+      dateDay: new Date().toLocaleDateString(),
+      date: Date.now()
     });
     setMsg("");
   };
@@ -61,17 +68,16 @@ function Chat(props) {
             <img src="./imgs/stop.png" />
           </Link>
         </div>
-        <div class="chats">
+        <div className="chats">
           <Message />
           {Object.keys(messages).map(message => (
             <>
               <Message
-                url={url}
-                key={messages[message]["dateTime"]}
-                msg={messages[message]["msg"]}
-                dateDay={messages[message]["dateDay"]}
-                dateTime={messages[message]["dateTime"]}
-                nickname={messages[message]["nickname"]}
+                key={messages[message].dateTime}
+                msg={messages[message].msg}
+                dateDay={messages[message].dateDay}
+                dateTime={messages[message].dateTime}
+                nickname={messages[message].nickname}
               />
             </>
           ))}

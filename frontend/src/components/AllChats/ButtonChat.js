@@ -61,10 +61,9 @@ const ButtonChat = props => {
             </div>
             <div
               style={{
-                fontSize: "13px",
                 fontWeight: "400",
                 color: "#aab8c2",
-                fontSize: "25px"
+                fontSize: "13px"
               }}
             />
           </div>

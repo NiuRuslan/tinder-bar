@@ -4,7 +4,7 @@ import "./loader.css";
 function Loader() {
   return (
     <div>
-      <div className="content">
+      <div className="contentLoader">
         <svg width="20%" viewBox="0 0 500 493">
           <circle style={{ backgroundColor: "transparent" }} />
           <g id="right">

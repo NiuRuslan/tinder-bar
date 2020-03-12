@@ -182,7 +182,7 @@ function Step1(props) {
           name="DoB"
           placeholder="Date of Birth"
           oninput="this.className"
-          max="2001-12-31"
+          max="2002-03-13"
           min="1920-12-31"
           required
         />

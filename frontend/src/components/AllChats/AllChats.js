@@ -1,33 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { storage } from "../../firebase";
 import ButtonChat from "./ButtonChat";
 import Navbar from "../navbar/Navbar";
+import { database } from "../../firebase";
 import Loader from "../loader/Loader";
 function AllChats() {
   const [cookies] = useCookies(["userName", "chacked"]);
   const [chats, setChat] = useState(null);
-  const [urls, setUrl] = useState([]);
 
   useEffect(() => {
     axios
       .get(`http://localhost:4000/database/${cookies.userName}`)
-      .then(({ data }) => {
-        data.chats.forEach(el => {
-          let user;
-          if (el.chat.indexOf(cookies.userName) === 0) {
-            user = el.chat.slice(cookies.userName.length + 1);
-          } else {
-            user = el.chat.slice(0, cookies.userName.length);
-          }
-          storage
-            .ref(`images/${user}`)
-            .getDownloadURL()
-            .then(url => {
-              setUrl(urls.concat(url));
-            });
-        });
+      .then(async ({ data }) => {
+        await Promise.all(data.chats.map(async el => {
+          const snapshot = await database.ref(`${el.chat}`).limitToLast(1).once('value');
+          snapshot.forEach(function (childSnapshot) {
+            const { nickname, dateDay, dateTime, msg, date } = childSnapshot.val();
+            el.date = date;
+            el.nickname = nickname;
+            el.lastMessage = msg;
+          });
+        }))
+        data.chats.sort((a, b) => {
+          return b.date - a.date
+        })
         setChat(data.chats);
       });
   }, [setChat]);
@@ -57,7 +54,7 @@ function AllChats() {
         >
           {chats ? (
             chats.map((el, index) => {
-              return <ButtonChat key={el._id} chats={el} url={urls[index]} />;
+              return <ButtonChat key={el._id} chats={el} />;
             })
           ) : (
             <Loader />
