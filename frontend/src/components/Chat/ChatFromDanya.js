@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { database } from "../../firebase";
 import Message from "./Message";
+import { Link } from "react-router-dom";
 import "./chatForm.css";
 
 function Chat(props) {
@@ -33,7 +34,20 @@ function Chat(props) {
   };
   return (
     <div className="bodyChat">
+      <div className="full-wh">
+        <div className="bg-animation">
+          <div id="stars" />
+          <div id="stars2" />
+          <div id="stars3" />
+          <div id="stars4" />
+        </div>
+      </div>
       <div className="window">
+        <div className="exit">
+          <Link to="/allChats" className="navbar">
+            <img src="./imgs/stop.png" />
+          </Link>
+        </div>
         <div className="header">
           <img className="img" src={url} />
           <h2>{name}</h2>
@@ -52,18 +66,19 @@ function Chat(props) {
             </>
           ))}
         </div>
-        <div className="button">
-          <input
-            type="text"
-            id="message"
-            placeholder="write here"
-            onChange={handleMsgChange}
-            value={msg}
-          />
-          <button id="send" onClick={handleKeyDown}>
-            Send
-          </button>
-        </div>
+      </div>
+      <div className="button">
+        <input
+          className="chatInput"
+          type="text"
+          id="message"
+          placeholder="write here"
+          onChange={handleMsgChange}
+          value={msg}
+        />
+        <button id="send" onClick={handleKeyDown} className="chatButton">
+          Send
+        </button>
       </div>
     </div>
   );

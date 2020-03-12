@@ -9,24 +9,26 @@
 
 .chat {
   width: 100%;
-  border: solid 1px #eee;
   display: flex;
   flex-direction: column;
   padding: 10px;
 }
 
 .messages {
+  margin: 5px;
   margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
 
 .message {
+  margin: 2px;
+  width: 40%;
   border-radius: 20px;
   padding: 8px 15px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  display: inline-block;
+  display: block;
+  flex-wrap: wrap;
+  word-break: break-all;
 }
 
 .yours {
@@ -34,9 +36,15 @@
 }
 
 .yours .message {
+  color: #fff;
+  font-size: 25px;
   margin-right: 25%;
-  background-color: #eee;
   position: relative;
+  background: linear-gradient(
+    to bottom,
+    rgb(124, 42, 255) 0%,
+    rgb(221, 199, 255) 100%
+  );
 }
 
 .yours .message.last:before {
@@ -67,9 +75,15 @@
 }
 
 .mine .message {
-  color: white;
+  color: #fff;
+  font-size: 25px;
   margin-left: 25%;
-  background: linear-gradient(to bottom, #00d0ea 0%, #0085d1 100%);
+  background: linear-gradient(
+    to bottom,
+    rgb(124, 42, 255) 0%,
+    rgb(221, 199, 255) 100%
+  );
+
   background-attachment: fixed;
   position: relative;
 }
@@ -82,7 +96,11 @@
   right: -8px;
   height: 20px;
   width: 20px;
-  background: linear-gradient(to bottom, #00d0ea 0%, #0085d1 100%);
+  background: linear-gradient(
+    to bottom,
+    rgb(124, 42, 255) 0%,
+    rgb(221, 199, 255) 100%
+  );
   background-attachment: fixed;
   border-bottom-left-radius: 15px;
 }

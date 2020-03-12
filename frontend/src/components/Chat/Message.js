@@ -14,16 +14,20 @@ function Message(props) {
     <div className="body">
       <div className="chat">
         {cookies.userNickname === nickname ? (
-          msg !== 0 && (
-            <>
-              <div>{dateTime}</div>
-              <div className="mine messages">
-                <div className="message">{msg}</div>
-              </div>
-            </>
-          )
+          <>
+            <div className="mine messages">
+              <small style={{ color: " #fff", margin: "0 auto" }}>
+                {dateTime}
+              </small>
+              <div className="message">{msg}</div>
+            </div>
+          </>
         ) : (
           <div className="yours messages">
+            <small style={{ color: " #fff", margin: "0 auto" }}>
+              {dateTime}
+            </small>
+
             <div className="message">{msg}</div>
           </div>
         )}

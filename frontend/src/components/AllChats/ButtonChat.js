@@ -17,7 +17,7 @@ const ButtonChat = props => {
           color: " #fff",
           margin: " 5px"
         }}
-        className="chat"
+        className="chatButton"
       >
         <Link
           to={{
