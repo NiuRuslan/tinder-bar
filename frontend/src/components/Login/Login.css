@@ -68,7 +68,6 @@ input {
   transition: all 0.2s ease-in-out;
   appearance: none;
   -webkit-appearance: none;
-  color: rgb(124, 42, 255);
 }
 input:focus {
   box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;

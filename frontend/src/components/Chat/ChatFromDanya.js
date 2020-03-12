@@ -1,47 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import { useCookies } from "react-cookie";
-import { database } from "../../firebase";
-import Message from "./Message";
-import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
+import { database } from '../../firebase';
+import Message from './Message';
 
-import "./chatForm.css";
+import './chatForm.css';
 
 function Chat(props) {
-  const [cookies] = useCookies(["userName", "userNickname"]);
-  const [msg, setMsg] = useState("");
+  const [cookies] = useCookies(['userName', 'userNickname']);
+  const [msg, setMsg] = useState('');
   const [messages, setMessages] = useState({});
-  const { chats, url, name, friend } = props.location.state;
+  const {
+    chats, url, name, friend,
+  } = props.location.state;
   const chatRoom = database.ref().child(`${chats}`);
   const pushRoom = database.ref().child(`${friend}`);
 
   useEffect(() => {
-    const handleNewMessages = snap => {
+    const handleNewMessages = (snap) => {
       if (snap.val()) {
         setMessages(snap.val());
       }
     };
-    chatRoom.on("value", handleNewMessages);
+    chatRoom.on('value', handleNewMessages);
     return () => {
-      chatRoom.off("value", handleNewMessages);
+      chatRoom.off('value', handleNewMessages);
     };
   }, [setMessages]);
 
-  const handleMsgChange = e => setMsg(e.target.value);
-  const handleKeyDown = e => {
+  const handleMsgChange = (e) => setMsg(e.target.value);
+  const handleKeyDown = (e) => {
     pushRoom.push({
-      url: "11111",
+      url: '11111',
       name: cookies.userNickname,
-      date: Date.now()
+      date: Date.now(),
     });
     chatRoom.push({
       nickname: cookies.userNickname,
       msg,
       dateTime: new Date().toLocaleTimeString(),
       dateDay: new Date().toLocaleDateString(),
-      date: Date.now()
+      date: Date.now(),
     });
-    setMsg("");
+    setMsg('');
   };
   return (
     <div className="bodyChat">
@@ -54,23 +56,23 @@ function Chat(props) {
         </div>
       </div>
       <div className="header">
-        {" "}
+        {' '}
         <h2>{name}</h2>
         <img
           className="img"
-          src={`${url || "./imgs/info.png"}`}
-          style={{ width: "15%" }}
+          src={`${url || './imgs/info.png'}`}
+          style={{ width: '15%' }}
         />
       </div>
       <div className="window">
-        <div className="exit">
+        <div className="exitChat">
           <Link to="/allChats" className="chatbar">
             <img src="./imgs/stop.png" />
           </Link>
         </div>
         <div className="chats">
           <Message />
-          {Object.keys(messages).map(message => (
+          {Object.keys(messages).map((message) => (
             <>
               <Message
                 key={messages[message].dateTime}
@@ -93,7 +95,7 @@ function Chat(props) {
           onChange={handleMsgChange}
           value={msg}
         />
-        {msg !== "" ? (
+        {msg !== '' ? (
           <button id="send" onClick={handleKeyDown} className="chatButton">
             Send
           </button>

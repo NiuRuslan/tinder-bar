@@ -36,10 +36,11 @@
 .chats {
   margin: 5%;
 }
-.exit {
+.exitChat {
   display: flex;
   justify-content: flex-end;
   position: relative;
+  margin-right: 5px;
 }
 
 .chatbar {
