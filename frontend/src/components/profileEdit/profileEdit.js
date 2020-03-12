@@ -41,6 +41,7 @@ function ProfileEdit(props) {
           topics,
           about,
           id,
+          avatar: url,
         })
         .then(({ data }) => {
           if (data.sucsses) {

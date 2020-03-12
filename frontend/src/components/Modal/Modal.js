@@ -1,10 +1,9 @@
 import React from 'react';
 import './modal.css';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import { Button, Header, Modal, List } from 'semantic-ui-react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
-import Photo from '../downloadPhoto/photo';
 
 function ModalWindow(props) {
   const profile = props.obj;
@@ -26,6 +25,11 @@ function ModalWindow(props) {
   return (
     <div>
       <Modal
+        style={{
+          textAlign: 'center',
+        }}
+        dimmer="blurring"
+        size="mini"
         trigger={(
           <Button
             style={{
@@ -51,8 +55,10 @@ function ModalWindow(props) {
             <Header style={{ color: '#0f4667' }}>
               {` ${profile.name}, ${age}`}
             </Header>
-            <div className="avatar" style={{ backgroundImage: `url(${profile.url})` }} />
-            {/* <div className="avatar" style={{ backgroundImage: `url(${url})` }} /> */}
+            <div className="avatar cursor" style={{ backgroundImage: `url(${profile.url || './imgs/info.png'})` }} />
+
+            <List.Item icon='users' content='Semantic UI' />
+
             <li style={{ color: '#0f4667' }}>
               Activity:
               {` ${profile.activity}`}
@@ -69,18 +75,20 @@ function ModalWindow(props) {
               About yourself:
               {` ${profile.about}`}
             </li>
-            {/* <Image src='/images/wireframe/paragraph.png' /> */}
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-          <Link onClick={sendRequest} to={{
-            pathname: `/chat`,
-            state: {
-              chats: getChatName(cookies.userName, profile.person),
-              name:profile.name,
-              url:profile.url,
-            }
-          }}>
+          <Link
+            onClick={sendRequest}
+            to={{
+              pathname: '/chat',
+              state: {
+                chats: getChatName(cookies.userName, profile.person),
+                name: profile.name,
+                url: profile.url,
+              },
+            }}
+          >
             <Button
               primary
               style={{

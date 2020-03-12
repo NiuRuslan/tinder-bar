@@ -88,6 +88,11 @@ const Map = ({
         {list.list.map((profile) => (
           <div>
             <Modal
+              style={{
+                textAlign: 'center',
+              }}
+              dimmer="blurring"
+              size="mini"
               trigger={(
                 <Marker
                   icon={{ url: './imgs/cocktails.png' }}
@@ -103,8 +108,7 @@ const Map = ({
                   <Header style={{ color: '#0f4667' }}>
                     {` ${profile.name}, ${Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000))}`}
                   </Header>
-                  <div className="avatar" style={{ backgroundImage: `url(${profile.url || './imgs/userphoto.svg'})` }} />
-                  {/* <div className="avatar" style={{ backgroundImage: `url(${url})` }} /> */}
+                  <div className="avatar cursor" style={{ backgroundImage: `url(${profile.url || './imgs/info.png'})` }} />
                   <li style={{ color: '#0f4667' }}>
                     Activity:
                     {` ${profile.activity}`}
@@ -125,14 +129,15 @@ const Map = ({
                 </Modal.Description>
               </Modal.Content>
               <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-                <Link onClick={() => sendRequest(profile._id)} to={{
-                  pathname: `/chat`,
-                  state: {
-                    chats: getChatName(cookies.userName, profile._id),
-                    name: profile.name,
-                    url:profile.url,
-                  }
-                }}>
+                <Link
+                  onClick={sendRequest}
+                  to={{
+                    pathname: '/chat',
+                    state: {
+                      chats: getChatName(cookies.userName, profile.person),
+                    },
+                  }}
+                >
                   <Button
                     primary
                     style={{
