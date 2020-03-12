@@ -12,10 +12,7 @@ const personSchema = new mongoose.Schema(
     },
     chats: [
       {
-        chat: {
-          type: String,
-          default: ""
-        },
+        chat: String,
         nickname: String,
         date: Date,
         lastMessage: String

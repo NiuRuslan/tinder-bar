@@ -79,6 +79,7 @@ function ModalWindow(props) {
               chats: getChatName(cookies.userName, profile.person),
               name:profile.name,
               url:profile.url,
+              friend:profile.person,
             }
           }}>
             <Button

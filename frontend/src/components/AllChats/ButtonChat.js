@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import "./button.css";
 
-const ButtonChat = props => {
-  const { url, chats } = props;
 
+const ButtonChat = props => {
+  const { chats } = props;
   return (
     <>
       <div
@@ -33,7 +33,7 @@ const ButtonChat = props => {
           <div
             className="avatar"
             style={{
-              backgroundImage: `url(${url})`,
+              backgroundImage: `url()`,
               width: "100px",
               height: "100px",
               float: "left"
@@ -67,8 +67,8 @@ const ButtonChat = props => {
                 color: "#aab8c2",
                 fontSize: "25px"
               }}
-            >
-              vfvfevgf
+            >{chats.lastMessage}<br/>
+            {chats.nickname} <br/>
             </div>
           </div>
         </Link>

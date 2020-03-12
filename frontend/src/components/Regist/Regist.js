@@ -8,6 +8,7 @@ import Slider from "../slider/Slider";
 import Slider2 from "../slider/Slider2";
 import "./Regist.css";
 
+
 function Regist(props) {
   const [cookies, setCookie] = useCookies(["userName", "userNickname"]);
   const [slider, setSlider] = useState();

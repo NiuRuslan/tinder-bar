@@ -131,6 +131,7 @@ const Map = ({
                     chats: getChatName(cookies.userName, profile._id),
                     name: profile.name,
                     url:profile.url,
+                    friend:profile._id,
                   }
                 }}>
                   <Button

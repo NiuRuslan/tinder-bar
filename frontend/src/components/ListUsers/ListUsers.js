@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -9,6 +9,8 @@ import AnnouncementMessage from '../Announcement/Announcement';
 import './listUsers.css';
 import Navbar from '../navbar/Navbar';
 import '../snow/snow.css';
+import { database } from "../../firebase";
+
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
@@ -21,10 +23,28 @@ const ListUsers = () => {
     success: false,
     err: '',
   });
+  const pushRoom = database.ref().child(`${cookies.userName}`);
   const [isColorBtn, setColorBtn] = useState('findMe');
 
   const [isShowMap, setShowMap] = useState(false);
+  const [user, setUser] = useState('')
 
+  useEffect(() => {
+    const handleNewMessages = async snap => {
+      if (snap.val()) {
+        (Object.entries(snap.val())).map((el)=>{
+            const [, obj] = el
+            setUser(obj)
+        });        
+        pushRoom.remove() 
+      };
+    };
+    pushRoom.on("value", handleNewMessages);
+    return () => {
+      pushRoom.off("value", handleNewMessages);
+    };
+  });
+  console.log(user)
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
    */
@@ -127,10 +147,9 @@ const ListUsers = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
-
   return (
     <div className="back">
-      <AnnouncementMessage />
+      <AnnouncementMessage user={user}/>
       <div className="full-wh">
         <div className="bg-animation">
           <div id="stars" />
