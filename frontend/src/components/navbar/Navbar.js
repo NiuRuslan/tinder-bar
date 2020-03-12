@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => (
   <nav>
-    <ul style={{ padding: "0" }} className="list">
+    <ul style={{ padding: "0" }} className="navlist">
       <li className="listLi">
         <Link to="/profile">
           <img className="navbar" src="./navbar/user.png" />

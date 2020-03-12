@@ -1,8 +1,8 @@
+
 .profile-container {
   display: grid;
   /* grid-template-rows: auto 5% auto auto; */
   justify-items: center;
-  margin-left: 0;
   position: relative;
 }
 .example-1 {
