@@ -4,7 +4,7 @@ nav {
   top: 0;
   width: 100%;
 }
-.list {
+.navlist {
   display: flex;
   justify-content: space-around;
 }
