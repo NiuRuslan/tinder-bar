@@ -27,7 +27,6 @@ function Message(props) {
             <small style={{ color: " #fff", margin: "0 auto" }}>
               {dateTime}
             </small>
-
             <div className="message">{msg}</div>
           </div>
         )}

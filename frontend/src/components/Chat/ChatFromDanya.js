@@ -42,15 +42,12 @@ function Chat(props) {
           <div id="stars4" />
         </div>
       </div>
+      <div className="mini" style={{ backgroundImage: `url(${url || './imgs/info.png'})` }} />
       <div className="window">
         <div className="exit">
           <Link to="/allChats" className="chatbar">
             <img src="./imgs/stop.png" />
           </Link>
-        </div>
-        <div className="header">
-          <img className="img" src={url} />
-          <h2>{name}</h2>
         </div>
         <div class="chats">
           <Message />
