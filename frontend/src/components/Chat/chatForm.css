@@ -1,0 +1,62 @@
+.window {
+  justify-content: center;
+  overflow-y: scroll;
+  align-self: center;
+  border: solid 2px #aab8c2;
+  box-shadow: 7px 7px 5px #fff;
+  border-radius: 10px;
+  height: 65%;
+  width: 50%;
+}
+
+.sendButton {
+  display: flex;
+  width: 50%;
+  align-self: center;
+  padding-top: 2%;
+}
+
+.bodyChat {
+  justify-items: center;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  min-width: 375px;
+}
+.chats {
+  margin: 5%;
+}
+.exit {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.chatbar {
+  display: flex;
+  justify-self: flex-end;
+  position: fixed;
+  z-index: 1;
+  margin: 10px 12px 12px 0;
+}
+.chatbar:hover {
+  transform: scale(1.1);
+}
+.chatInput {
+  opacity: 0.4;
+  transition: 1s;
+}
+.chatInput:hover {
+  opacity: 1;
+}
+.chatButton {
+  background-color: rgb(124, 42, 255);
+  color: #fff;
+}
+.chatButton:hover {
+  background-color: #fff;
+  color: #fff;
+}

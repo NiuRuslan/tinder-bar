@@ -9,17 +9,15 @@ const ButtonChat = (props) => {
     <>
       <div
         style={{
+          width: '50%',
           border: 'solid 1px #aab8c2',
           alignSelf: 'center',
-          width: '60%',
           borderRadius: '20px',
           padding: '10px',
           color: ' #fff',
-          fontWeight: 'lighter',
-          fontSize: 'small',
           margin: ' 5px',
         }}
-        className="chat"
+        className="chatButton"
       >
         <Link
           to={{
@@ -67,9 +65,7 @@ const ButtonChat = (props) => {
                 color: '#aab8c2',
                 fontSize: '25px',
               }}
-            >
-              vfvfevgf
-            </div>
+            />
           </div>
         </Link>
       </div>
