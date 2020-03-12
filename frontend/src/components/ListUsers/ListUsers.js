@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -8,6 +8,8 @@ import AnnouncementMessage from "../Announcement/Announcement";
 import "./listUsers.css";
 import Navbar from "../navbar/Navbar";
 import "../snow/snow.css";
+import Loader from "../loader/Loader";
+import Loader2 from "../loader/loader2";
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
  * @param {*} props
@@ -20,9 +22,17 @@ const ListUsers = () => {
     success: false,
     err: ""
   });
-  const [isColorBtn, setColorBtn] = useState("findMe");
 
+  const [isColorBtn, setColorBtn] = useState("findMe");
+  const [isShowLoader, setIsShowLoader] = useState(false);
   const [isShowMap, setShowMap] = useState(false);
+  const [loader, setLoader] = useState();
+  useEffect(() => {
+    // setLoader()
+    const loader = Math.floor(Math.random() * 10);
+    // setLoader()
+    setLoader(loader);
+  }, []);
 
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
@@ -53,6 +63,7 @@ const ListUsers = () => {
       .then(response => {
         if (response.data.success) {
           // Задаем hooks
+          setIsShowLoader(false);
           setList({
             success: true,
             list: response.data.list
@@ -77,11 +88,14 @@ const ListUsers = () => {
    * Определяет координаты пользователя, используя Google map function
    */
   const geoFindLocation = () => {
+    setIsShowLoader(true);
     setColorBtn("");
     const success = position => {
       // Задаем в hooks координаты
       setLatitude(position.coords.latitude);
       setLongituse(position.coords.longitude);
+      console.log(position.coords.latitude, position.coords.longitude);
+
       // Делает запрос на сервер
       requestListUsers(
         cookies.userName,
@@ -110,6 +124,7 @@ const ListUsers = () => {
        * @param {function} success - определяет координаты пользователя
        * @param {function} error - возвращает ошибку обработки координат
        */
+
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
@@ -140,6 +155,7 @@ const ListUsers = () => {
             }}
             type="range"
             style={{
+              minWidth: "300px",
               display: "block",
               width: "30%",
               height: "50px",
@@ -155,7 +171,8 @@ const ListUsers = () => {
             max="10000"
             step="200"
             value={radius}
-          />{" "}
+          />
+
           <label className="label">
             {radius !== null ? (
               <div>
@@ -196,37 +213,43 @@ const ListUsers = () => {
         ) : (
           list.err
         )}
-        {isShowMap ? (
-          <Map
-            latitude={latitude}
-            longitude={longitude}
-            list={list}
-            style={{
-              marginTop: "10%",
-              alignSelf: "center",
-              width: "100%",
-              justifyContent: "center"
-            }}
-            radius={radius}
-          />
+        {isShowLoader ? (
+          <div>{loader > 5 ? <Loader /> : <Loader2 />}</div>
         ) : (
-          <ul
-            style={{
-              display: "flex",
-              listStyle: "none",
-              padding: "0",
-              justifyContent: "space-around",
-              flexWrap: "wrap"
-            }}
-          >
-            {list.success
-              ? list.list.map(obj => (
-                  <div className="map">
-                    <ModalWindow obj={obj} key={obj._id} />
-                  </div>
-                ))
-              : list.err}
-          </ul>
+          <div>
+            {isShowMap ? (
+              <Map
+                latitude={latitude}
+                longitude={longitude}
+                list={list}
+                style={{
+                  marginTop: "10%",
+                  alignSelf: "center",
+                  width: "100%",
+                  justifyContent: "center"
+                }}
+                radius={radius}
+              />
+            ) : (
+              <ul
+                style={{
+                  display: "flex",
+                  listStyle: "none",
+                  padding: "0",
+                  justifyContent: "space-around",
+                  flexWrap: "wrap"
+                }}
+              >
+                {list.success
+                  ? list.list.map(obj => (
+                      <div className="map">
+                        <ModalWindow obj={obj} key={obj._id} />
+                      </div>
+                    ))
+                  : list.err}
+              </ul>
+            )}
+          </div>
         )}
       </div>
     </div>

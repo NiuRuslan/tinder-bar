@@ -90,7 +90,7 @@ function Login(props) {
               style={{
                 color: "rgb(124, 42, 255)",
                 backgroundColor: "#fff",
-                textShadow: "1px 1px 1px #0f4667"
+                textShadow: "none"
               }}
             >
               Sign up <Icon name="signup" />

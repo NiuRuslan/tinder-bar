@@ -4,7 +4,7 @@ import axios from "axios";
 import { storage } from "../../firebase";
 import ButtonChat from "./ButtonChat";
 import Navbar from "../navbar/Navbar";
-
+import Loader from "../loader/Loader";
 function AllChats() {
   const [cookies] = useCookies(["userName", "chacked"]);
   const [chats, setChat] = useState(null);
@@ -32,7 +32,12 @@ function AllChats() {
       });
   }, [setChat]);
   return (
-    <>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh"
+      }}
+    >
       <div className="full-wh">
         <div className="bg-animation">
           <div id="stars" />
@@ -41,25 +46,25 @@ function AllChats() {
           <div id="stars4" />
         </div>
       </div>
-      <Navbar />
-      <div
-        style={{
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column"
-        }}
-      >
-        {chats ? (
-          chats.map((el, index) => {
-            return <ButtonChat key={el._id} chats={el} url={urls[index]} />;
-          })
-        ) : (
-          <h1>Loading...</h1>
-        )}
+      <div style={{ width: "100%" }}>
+        <Navbar />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column"
+          }}
+        >
+          {chats ? (
+            chats.map((el, index) => {
+              return <ButtonChat key={el._id} chats={el} url={urls[index]} />;
+            })
+          ) : (
+            <Loader />
+          )}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

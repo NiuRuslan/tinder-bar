@@ -58,7 +58,7 @@ input[type="file"] {
 .edit:hover {
   opacity: 1;
 }
-
+/* 
 .exit {
   margin-top: 2rem;
   opacity: 0.4;
@@ -66,4 +66,4 @@ input[type="file"] {
 }
 .exit:hover {
   opacity: 1;
-}
+} */
