@@ -1,6 +1,8 @@
 import React from 'react';
 import './modal.css';
-import { Button, Header, Modal, List } from 'semantic-ui-react';
+import {
+  Button, Header, Modal, List,
+} from 'semantic-ui-react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { Link } from 'react-router-dom';
@@ -49,32 +51,16 @@ function ModalWindow(props) {
         )}
       >
         <Modal.Header style={{ backgroundColor: '#0f4667' }}></Modal.Header>
-        <Modal.Content image>
-          {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
-          <Modal.Description>
+        <Modal.Content>
+          <Modal.Description style={{ color: '#0f4667' }}>
             <Header style={{ color: '#0f4667' }}>
               {` ${profile.name}, ${age}`}
             </Header>
             <div className="avatar cursor" style={{ backgroundImage: `url(${profile.url || './imgs/info.png'})` }} />
-
-            <List.Item icon='users' content='Semantic UI' />
-
-            <li style={{ color: '#0f4667' }}>
-              Activity:
-              {` ${profile.activity}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              Favotite drinks:
-              {` ${profile.drinks}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              Favotite topics:
-              {` ${profile.topics}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              About yourself:
-              {` ${profile.about}`}
-            </li>
+            <List><List.Item icon="briefcase" content={profile.activity} /></List>
+            <List><List.Item icon="glass martini" content={profile.drinks} /></List>
+            <List><List.Item icon="comments" content={profile.topics} /></List>
+            <List><List.Item icon="info circle" content={profile.about} /></List>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
