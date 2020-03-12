@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
+
 import { useCookies } from "react-cookie";
 import { database } from "../../firebase";
 import Message from "./Message";
 import { Link } from "react-router-dom";
+
 import "./chatForm.css";
 
 function Chat(props) {
   const [cookies] = useCookies(["userName", "userNickname"]);
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState({});
+
   const { chats, url, name } = props.location.state;
+
   const chatRoom = database.ref().child(`${chats}`);
 
   useEffect(() => {
@@ -42,21 +46,27 @@ function Chat(props) {
           <div id="stars4" />
         </div>
       </div>
+      <div className="header">
+        {" "}
+        <h2>{name}</h2>
+        <img
+          className="img"
+          src={`${url || "./imgs/info.png"}`}
+          style={{ width: "15%" }}
+        />
+      </div>
       <div className="window">
         <div className="exit">
           <Link to="/allChats" className="chatbar">
             <img src="./imgs/stop.png" />
           </Link>
         </div>
-        <div className="header">
-          <img className="img" src={url} />
-          <h2>{name}</h2>
-        </div>
         <div class="chats">
           <Message />
           {Object.keys(messages).map(message => (
             <>
               <Message
+                url={url}
                 key={messages[message]["dateTime"]}
                 msg={messages[message]["msg"]}
                 dateDay={messages[message]["dateDay"]}
@@ -67,6 +77,7 @@ function Chat(props) {
           ))}
         </div>
       </div>
+
       <div className="sendButton">
         <input
           className="chatInput"
@@ -76,9 +87,15 @@ function Chat(props) {
           onChange={handleMsgChange}
           value={msg}
         />
-        <button id="send" onClick={handleKeyDown} className="chatButton">
-          Send
-        </button>
+        {msg !== "" ? (
+          <button id="send" onClick={handleKeyDown} className="chatButton">
+            Send
+          </button>
+        ) : (
+          <button id="send" className="chatButton">
+            Send
+          </button>
+        )}
       </div>
     </div>
   );

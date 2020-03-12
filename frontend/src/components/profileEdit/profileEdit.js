@@ -42,7 +42,9 @@ function ProfileEdit(props) {
           setSave(data.err);
         }
       });
-    const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
+    const uploadTask = storage
+      .ref(`images/${cookies.userName || "./imgs/info.png"}`)
+      .put(image);
     uploadTask.on("state_changed", undefined, undefined, () => {
       uploadTask.snapshot.ref.getDownloadURL().then(url => {
         setUrl(url);

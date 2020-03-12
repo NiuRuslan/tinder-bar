@@ -1,12 +1,18 @@
 .window {
   justify-content: center;
   overflow-y: scroll;
+  scroll-behavior: smooth;
+
+  scroll-margin-top: 65%;
   align-self: center;
   border: solid 2px #aab8c2;
-  box-shadow: 7px 7px 5px #fff;
   border-radius: 10px;
   height: 65%;
   width: 50%;
+}
+.header {
+  display: flex;
+  justify-content: center;
 }
 
 .sendButton {
@@ -14,6 +20,7 @@
   width: 50%;
   align-self: center;
   padding-top: 2%;
+  margin-bottom: 5%;
 }
 
 .bodyChat {
@@ -48,6 +55,7 @@
 .chatInput {
   opacity: 0.4;
   transition: 1s;
+  width: 80%;
 }
 .chatInput:hover {
   opacity: 1;
@@ -55,8 +63,10 @@
 .chatButton {
   background-color: rgb(124, 42, 255);
   color: #fff;
+  width: 20%;
 }
 .chatButton:hover {
   background-color: #fff;
   color: #fff;
+  width: 40%;
 }

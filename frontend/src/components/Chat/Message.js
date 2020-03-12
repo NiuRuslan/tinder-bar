@@ -8,7 +8,8 @@ function Message(props) {
   // key={messages[message]["dateTime"]} msg={messages[message]["msg"]} dateDay={messages[message]["dateDay"]}
   // dateTime={messages[message]["dateTime"]} nickname={messages[message]["nickname"]}
 
-  const { msg, dateDay, dateTime, nickname } = props;
+  const { msg, dateDay, dateTime, nickname, url } = props;
+  console.log(url);
 
   return (
     <div className="body">
@@ -28,7 +29,7 @@ function Message(props) {
               {dateTime}
             </small>
 
-            <div className="message">{msg}</div>
+            <div className="message"> {msg}</div>
           </div>
         )}
       </div>
