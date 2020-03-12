@@ -43,7 +43,7 @@ function Login(props) {
         user.profileId ? (
           <Redirect from="/login" to="/" />
         ) : (
-          <Redirect to="/profilecreator" />
+          <Redirect to="/profileCreator" />
         )
       ) : (
         <form

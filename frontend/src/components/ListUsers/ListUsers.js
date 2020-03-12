@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { connect } from "react-redux";
+import { storage } from "../../firebase";
 import axios from "axios";
 import Map from "./Map";
 import ModalWindow from "../Modal/Modal";
@@ -60,14 +61,28 @@ const ListUsers = () => {
         longitude,
         radius
       })
-      .then(response => {
+      .then(async response => {
         if (response.data.success) {
           // Задаем hooks
           setIsShowLoader(false);
-          setList({
-            success: true,
-            list: response.data.list
+
+          const promisesArr = response.data.list.map(async user => {
+            const pic = await storage
+              .ref(`images/${user.person}`)
+              .getDownloadURL()
+              .catch(e => console.log(e));
+            user.url = pic;
+            return user;
           });
+
+          Promise.all(promisesArr).then(result => {
+            setList({
+              success: true,
+              list: result
+            });
+          });
+
+          // Задаем hooks
         } else {
           // Задаем hooks
           setList({
@@ -172,7 +187,6 @@ const ListUsers = () => {
             step="200"
             value={radius}
           />
-
           <label className="label">
             {radius !== null ? (
               <div>
@@ -202,7 +216,6 @@ const ListUsers = () => {
             FIND ME SOMEONE
           </button>
         </div>
-
         {list.success ? (
           <div className="toggleBox" style={{ margin: "0 auto" }}>
             <input type="checkbox" name="toggle" className="sw" id="toggle-2" />

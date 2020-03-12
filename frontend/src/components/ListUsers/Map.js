@@ -1,41 +1,39 @@
-import React from "react";
-import { Button, Header, Modal } from "semantic-ui-react";
-import axios from "axios";
-import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Button, Header, Modal } from 'semantic-ui-react';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
   Circle,
-  Rectangle
-} from "react-google-maps";
+} from 'react-google-maps';
 
-import styles from "./GoogleMapStyles.json";
+import styles from './GoogleMapStyles.json';
 
 const Map = ({
-  googleMapURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places",
+  googleMapURL = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places',
   latitude,
   longitude,
-  list: { list: users },
-  radius
+  list,
+  radius,
 }) => {
-  const [cookies] = useCookies(["userName"]);
+  const [cookies] = useCookies(['userName']);
 
   function sendRequest(id) {
-    axios.post("http://localhost:4000/database", {
+    axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
-      ID2: id
+      ID2: id,
     });
   }
 
   function getChatName(a, b) {
     if (a > b) {
-      return a + "+" + b;
-    } else {
-      return b + "+" + a;
+      return (`${a}+${b}`);
     }
+    return (`${b}+${a}`);
   }
   /**
    * @withGoogleMap – функция для создания react-компонента. Предназначенного для отображения карты
@@ -46,9 +44,9 @@ const Map = ({
   //   setShowProfile(!isShowProfile);
   // };
   const CMap = withScriptjs(
-    withGoogleMap(props => (
+    withGoogleMap((props) => (
       <GoogleMap
-        defaultZoom={10}
+        defaultZoom={14}
         defaultCenter={{ lat: latitude, lng: longitude }}
         defaultOptions={{
           disableDefaultUI: true, // disable default map UI
@@ -56,100 +54,98 @@ const Map = ({
           keyboardShortcuts: false, // disable keyboard shortcuts
           scaleControl: true, // allow scale controle
           scrollwheel: true, // allow scroll wheel
-          styles // change default map styles
+          styles, // change default map styles
         }}
       >
         {props.children}
       </GoogleMap>
-    ))
+    )),
   );
   return (
     <>
       <CMap
         googleMapURL={googleMapURL}
-        loadingElement={<div style={{ height: "50%" }} />}
-        containerElement={<div style={{ height: "400px" }} />}
-        mapElement={
+        loadingElement={<div style={{ height: '50%' }} />}
+        containerElement={<div style={{ height: '400px' }} />}
+        mapElement={(
           <div
             style={{
-              height: "95%",
-              width: "85%",
-              border: "2px solid #FFF",
-              borderRadius: "25px",
-              margin: "0 auto",
-              boxShadow: "10px 10px 8px black"
+              height: '95%',
+              width: '85%',
+              border: '2px solid #FFF',
+              borderRadius: '25px',
+              margin: '0 auto',
+              boxShadow: '10px 10px 8px black',
             }}
           />
-        }
+        )}
         center={{ lat: latitude, lng: longitude }}
       >
-        <Circle center={{ lat: latitude, lng: longitude }} radius={+radius} />
-        {users.map(el => (
-          // onClick={() => {
-          //  setShowProfile(!isShowProfile)
-          // }}
-
+        <Circle
+          center={{ lat: latitude, lng: longitude }}
+          radius={+radius}
+        />
+        {list.list.map((profile) => (
           <div>
             <Modal
-              trigger={
+              style={{
+                textAlign: 'center',
+              }}
+              dimmer="blurring"
+              size="mini"
+              trigger={(
                 <Marker
-                  icon={{ url: "./imgs/cocktails.png" }}
-                  position={{ lat: el.latitude, lng: el.longitude }}
+                  icon={{ url: './imgs/cocktails.png' }}
+                  position={{ lat: profile.latitude, lng: profile.longitude }}
                 />
-              }
+              )}
             >
-              {" "}
-              <Modal.Header
-                style={{ backgroundColor: "rgb(124, 42, 255)" }}
-              ></Modal.Header>
+              {' '}
+              <Modal.Header style={{ backgroundColor: '#0f4667' }}></Modal.Header>
               <Modal.Content image>
                 {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
                 <Modal.Description>
-                  <Header style={{ color: "rgb(124, 42, 255)" }}>
-                    Name:
-                    {` ${el.name}`}
+                  <Header style={{ color: '#0f4667' }}>
+                    {` ${profile.name}, ${Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000))}`}
                   </Header>
-                  <li style={{ color: "rgb(124, 42, 255)" }}>
-                    Date of Birth:
-                    {` ${el.DoB}`}
-                  </li>
-                  <li style={{ color: "rgb(124, 42, 255)" }}>
+                  <div className="avatar cursor" style={{ backgroundImage: `url(${profile.url || './imgs/info.png'})` }} />
+                  <li style={{ color: '#0f4667' }}>
                     Activity:
-                    {` ${el.activity}`}
+                    {` ${profile.activity}`}
                   </li>
-                  <li style={{ color: "rgb(124, 42, 255)" }}>
+                  <li style={{ color: '#0f4667' }}>
                     Favotite drinks:
-                    {` ${el.drinks}`}
+                    {` ${profile.drinks}`}
                   </li>
-                  <li style={{ color: "rgb(124, 42, 255)" }}>
+                  <li style={{ color: '#0f4667' }}>
                     Favotite topics:
-                    {` ${el.topics}`}
+                    {` ${profile.topics}`}
                   </li>
-                  <li style={{ color: "rgb(124, 42, 255)" }}>
+                  <li style={{ color: '#0f4667' }}>
                     About yourself:
-                    {` ${el.about}`}
+                    {` ${profile.about}`}
                   </li>
                   {/* <Image src='/images/wireframe/paragraph.png' /> */}
                 </Modal.Description>
               </Modal.Content>
-              <Modal.Actions style={{ backgroundColor: "rgb(124, 42, 255)" }}>
+              <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
                 <Link
-                  onClick={() => sendRequest(el._id)}
+                  onClick={sendRequest}
                   to={{
-                    pathname: `/chat`,
+                    pathname: '/chat',
                     state: {
-                      chats: getChatName(cookies.userName, el._id)
-                    }
+                      chats: getChatName(cookies.userName, profile.person),
+                    },
                   }}
                 >
                   <Button
                     primary
                     style={{
-                      color: "#0f4667",
-                      textShadow: "none",
-                      margin: "0 auto",
-                      borderRadius: "320px",
-                      backgroundColor: "#FFF"
+                      color: '#0f4667',
+                      textShadow: 'none',
+                      margin: '0 auto',
+                      borderRadius: '320px',
+                      backgroundColor: '#FFF',
                     }}
                   >
                     Написать

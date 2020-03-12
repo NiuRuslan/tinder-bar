@@ -1,31 +1,37 @@
-import React from "react";
-import "./modal.css";
-import { Button, Header, Modal } from "semantic-ui-react";
-import axios from 'axios'
+import React from 'react';
+import './modal.css';
+import {
+  Button, Header, Modal, List,
+} from 'semantic-ui-react';
+import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function ModalWindow(props) {
   const profile = props.obj;
+  const age = Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000));
   const [cookies] = useCookies(['userName']);
-
   function sendRequest() {
     axios.post('http://localhost:4000/database', {
       ID1: cookies.userName,
       ID2: profile.person,
-    })
+    });
   }
 
-  function getChatName (a, b) {
+  function getChatName(a, b) {
     if (a > b) {
-      return (a + '+' + b)
-    } else {
-      return (b + '+' + a)
+      return (`${a}+${b}`);
     }
+    return (`${b}+${a}`);
   }
   return (
     <div>
       <Modal
+        style={{
+          textAlign: 'center',
+        }}
+        dimmer="blurring"
+        size="mini"
         trigger={(
           <Button
             style={{
@@ -45,45 +51,31 @@ function ModalWindow(props) {
         )}
       >
         <Modal.Header style={{ backgroundColor: '#0f4667' }}></Modal.Header>
-        <Modal.Content image>
-          {/* <Image wrapped size='medium' src='/images/wireframe/image.png' /> */}
-          <Modal.Description>
+        <Modal.Content>
+          <Modal.Description style={{ color: '#0f4667' }}>
             <Header style={{ color: '#0f4667' }}>
-              Name:
-              {` ${profile.name}`}
+              {` ${profile.name}, ${age}`}
             </Header>
-            <li style={{ color: '#0f4667' }}>
-              Date of Birth:
-              {` ${profile.DoB}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              Activity:
-              {` ${profile.activity}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              Favotite drinks:
-              {` ${profile.drinks}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              Favotite topics:
-              {` ${profile.topics}`}
-            </li>
-            <li style={{ color: '#0f4667' }}>
-              About yourself:
-              {` ${profile.about}`}
-            </li>
-            {/* <Image src='/images/wireframe/paragraph.png' /> */}
+            <div className="avatar cursor" style={{ backgroundImage: `url(${profile.url || './imgs/info.png'})` }} />
+            <List><List.Item icon="briefcase" content={profile.activity} /></List>
+            <List><List.Item icon="glass martini" content={profile.drinks} /></List>
+            <List><List.Item icon="comments" content={profile.topics} /></List>
+            <List><List.Item icon="info circle" content={profile.about} /></List>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
-          <Link onClick={sendRequest} to={{
-            pathname: `/chat`,
-            state: {
-              chats: getChatName(cookies.userName, profile.person),
-            }
-          }}>
+          <Link
+            onClick={sendRequest}
+            to={{
+              pathname: '/chat',
+              state: {
+                chats: getChatName(cookies.userName, profile.person),
+                name: profile.name,
+                url: profile.url,
+              },
+            }}
+          >
             <Button
-
               primary
               style={{
                 color: '#0f4667',
@@ -94,11 +86,8 @@ function ModalWindow(props) {
               }}
             >
               Написать
-          </Button>
-
+            </Button>
           </Link>
-
-
         </Modal.Actions>
       </Modal>
     </div>

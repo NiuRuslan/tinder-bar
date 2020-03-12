@@ -48,6 +48,24 @@ function ProfileEdit(props) {
         setUrl(url);
       });
     });
+    if (setUrl !== null || setUrl == null) {
+      axios
+        .patch("http://localhost:4000/users/profile", {
+          activity,
+          drinks,
+          topics,
+          about,
+          id,
+          avatar: url
+        })
+        .then(({ data }) => {
+          if (data.sucsses) {
+            setSave("Сохранено");
+          } else {
+            setSave(data.err);
+          }
+        });
+    }
   }
 
   function handleChangeAbout(event) {

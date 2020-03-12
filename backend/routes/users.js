@@ -103,10 +103,11 @@ router.patch('/profile', async (req, res) => {
     topics,
     about,
     drinks,
+    avatar,
     id,
   } = req.body;
   const response = await Profile.updateOne({ person: id }, {
-    activity, topics, about, drinks,
+    activity, topics, about, drinks, avatar
   });
   if (response) {
     res.send({ sucsses: true });
