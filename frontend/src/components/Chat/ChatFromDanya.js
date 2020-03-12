@@ -44,7 +44,7 @@ function Chat(props) {
       </div>
       <div className="window">
         <div className="exit">
-          <Link to="/allChats" className="navbar">
+          <Link to="/allChats" className="chatbar">
             <img src="./imgs/stop.png" />
           </Link>
         </div>
@@ -67,7 +67,7 @@ function Chat(props) {
           ))}
         </div>
       </div>
-      <div className="button">
+      <div className="sendButton">
         <input
           className="chatInput"
           type="text"

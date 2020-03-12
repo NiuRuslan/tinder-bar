@@ -9,7 +9,7 @@
   width: 50%;
 }
 
-.button {
+.sendButton {
   display: flex;
   width: 50%;
   align-self: center;
@@ -34,14 +34,14 @@
   position: relative;
 }
 
-.navbar {
+.chatbar {
   display: flex;
   justify-self: flex-end;
   position: fixed;
   z-index: 1;
   margin: 10px 12px 12px 0;
 }
-.navbar:hover {
+.chatbar:hover {
   transform: scale(1.1);
 }
 .chatInput {
