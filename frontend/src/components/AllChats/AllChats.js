@@ -11,7 +11,7 @@ function AllChats() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/database/${cookies.userName}`)
+      .get(`/database/${cookies.userName}`)
       .then(async ({ data }) => {
         await Promise.all(data.chats.map(async el => {
           const snapshot = await database.ref(`${el.chat}`).limitToLast(1).once('value');
