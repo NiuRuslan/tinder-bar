@@ -35,7 +35,8 @@ function Chat(props) {
   const handleMsgChange = e => setMsg(e.target.value);
   const handleKeyDown = e => {
     pushRoom.push({
-      url: "11111",
+      friend,
+      url,
       name: cookies.userNickname,
       date: Date.now()
     });
@@ -64,7 +65,7 @@ function Chat(props) {
             <img src="./imgs/back.png" />
           </Link>
 
-          <h2 className="h2">{name}fgrg</h2>
+          <h2 className="h2">{name}</h2>
           <div
             style={{ backgroundImage: `url(${url || "./imgs/info.png"}` }}
             className="img"

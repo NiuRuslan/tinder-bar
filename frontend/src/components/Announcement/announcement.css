@@ -1,6 +1,12 @@
+.message-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
 .mainContainer {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
   width: 400px;
   height: 120px;
   border-radius: 8px;
@@ -9,6 +15,9 @@
   transition: 1s;
   background-color: #ebecf0e8;
   color: rgb(124, 42, 255);
+}
+.h1 {
+  justify-self: center;
 }
 .mainContainer:hover {
   opacity: 1;
@@ -19,6 +28,7 @@
 .exitbar {
   margin: 5px 5px 0 0;
 }
+
 @media screen and (max-width: 1200px) {
   .mainContainer {
     width: 280px;

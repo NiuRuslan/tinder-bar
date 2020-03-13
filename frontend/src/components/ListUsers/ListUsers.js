@@ -40,7 +40,7 @@ const ListUsers = () => {
       if (snap.val()) {
         Object.entries(snap.val()).map(el => {
           const [, obj] = el;
-          setUser(obj);
+          obj && setUser(obj);
         });
         pushRoom.remove();
       }

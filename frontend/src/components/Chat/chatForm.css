@@ -22,9 +22,9 @@
 }
 .img {
   align-self: center;
-  margin-bottom: 0;
-  width: 150px;
-  height: 150px;
+  margin-bottom: 5px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: cover;
