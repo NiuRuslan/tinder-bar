@@ -24,10 +24,14 @@ const ListUsers = () => {
     success: false,
     err: ""
   });
+
   const [isColorBtn, setColorBtn] = useState("findMe");
   const [isShowLoader, setIsShowLoader] = useState(false);
   const [isShowMap, setShowMap] = useState(false);
   const [user, setUser] = useState("");
+
+  const [url, setUrl] = useState("");
+
   const [loader, setLoader] = useState();
   const pushRoom = database.ref().child(`${cookies.userName}`);
   useEffect(() => {
@@ -70,7 +74,7 @@ const ListUsers = () => {
 
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios
-      .post('/list/users', {
+      .post("/list/users", {
         id,
         latitude,
         longitude,
@@ -94,6 +98,11 @@ const ListUsers = () => {
             setList({
               success: true,
               list: result
+            });
+            result.map(el => {
+              if (el.person === cookies.userName) {
+                setUrl(el.url);
+              }
             });
           });
 
@@ -130,7 +139,7 @@ const ListUsers = () => {
         cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius || 200,
+        radius || 200
       );
     };
     // Обрабатываем ошибки getCurrentPosition
@@ -157,6 +166,7 @@ const ListUsers = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
+
   return (
     <div className="back">
       <div className="full-wh">
@@ -232,7 +242,7 @@ const ListUsers = () => {
           <div className="toggleBox" style={{ margin: "0 auto" }}>
             <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
             <label htmlFor="toggle-2" onClick={ChangeOnMap}>
-              <span>Use a list</span>
+              <span>Use a map</span>
             </label>
           </div>
         ) : (
@@ -268,7 +278,7 @@ const ListUsers = () => {
                 {list.success
                   ? list.list.map(obj => (
                       <div className="map">
-                        <ModalWindow obj={obj} key={obj._id} />
+                        <ModalWindow obj={obj} url={url} key={obj._id} />
                       </div>
                     ))
                   : list.err}

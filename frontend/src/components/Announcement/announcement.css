@@ -16,6 +16,9 @@
   background-color: #ebecf0e8;
   color: rgb(124, 42, 255);
 }
+/* .nameAndDate {
+  display: block;
+} */
 .h1 {
   justify-self: center;
 }
@@ -24,9 +27,15 @@
 }
 .exitbar {
   color: rgb(124, 42, 255);
+  width: 30px;
+  height: 30px;
 }
-.exitbar {
-  margin: 5px 5px 0 0;
+
+.image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: relative;
 }
 
 @media screen and (max-width: 1200px) {

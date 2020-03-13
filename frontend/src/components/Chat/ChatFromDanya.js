@@ -11,7 +11,7 @@ function Chat(props) {
   const [cookies] = useCookies(["userName", "userNickname"]);
   const [msg, setMsg] = useState("");
   const [messages, setMessages] = useState({});
-  const { chats, url, name, friend } = props.location.state;
+  const { chats, url, urlFriend, name, friend } = props.location.state;
   const chatRoom = database.ref().child(`${chats}`);
   const pushRoom = database.ref().child(`${friend}`);
 
@@ -67,7 +67,7 @@ function Chat(props) {
 
           <h2 className="h2">{name}</h2>
           <div
-            style={{ backgroundImage: `url(${url || "./imgs/info.png"}` }}
+            style={{ backgroundImage: `url(${urlFriend || "./imgs/info.png"}` }}
             className="img"
           ></div>
         </div>

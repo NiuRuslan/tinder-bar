@@ -22,42 +22,39 @@ function AnnouncementMessage(props) {
   const deleteAnnoun = () => {
     setMan(null);
   };
+  console.log(user.url);
+
   return (
     <>
       {/* {user ? ( */}
       {man && (
-        <>
+        <div className="mainContainer">
+          <div className="message-container">
+            <div className="nameAndDate">
+              <img className="image" src={user.url} />
+              <div>{man.name}</div>
+            </div>
+            {/* <small>{user.date}</small> */}
+          </div>
+
           <Link
             to={{
               pathname: "/chat",
               state: {
                 chats: getChatName(cookies.userName, user.friend),
                 name: user.name,
-                url: user.url,
+                urlFriend: user.url,
                 date: user.date
               }
             }}
           >
-            <div className="mainContainer">
-              <div className="message-container">
-                <img className="image" scr={man.url}></img>
-                <div className="nameAndDate">{man.name}</div>
-                {/* <small>{user.date}</small> */}
-              </div>
-              {/* 
-              <div
-                to="/"
-                className="exitbar"
-                onClick={deleteAnnoun}
-                style={{ position: "relative" }}
-              >
-                <img src="./imgs/stop.png" />
-              </div> */}
-            </div>
+            {" "}
+            Go chat
           </Link>
-        </>
+
+          <img className="exitbar" src="./imgs/stop.png" />
+        </div>
       )}
-      {/*) : null}*/}
     </>
   );
 }
