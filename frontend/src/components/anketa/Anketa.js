@@ -255,6 +255,7 @@ function Step3(props) {
         </label>
       </div>
       <button
+        type='submit'
         className="btn btn-success"
         style={{
           marginBottom: "25px",
