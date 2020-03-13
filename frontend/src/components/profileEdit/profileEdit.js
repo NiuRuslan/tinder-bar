@@ -27,7 +27,7 @@ function ProfileEdit(props) {
   function patchData(event) {
     event.preventDefault();
     axios
-      .patch('http://localhost:4000/users/profile', {
+      .patch('/users/profile', {
         activity,
         drinks,
         topics,
@@ -51,7 +51,7 @@ function ProfileEdit(props) {
     });
     if (setUrl !== null || setUrl == null) {
       axios
-        .patch('http://localhost:4000/users/profile', {
+        .patch('/users/profile', {
           activity,
           drinks,
           topics,
@@ -99,7 +99,7 @@ function ProfileEdit(props) {
         setUrl(url);
       });
     axios
-      .post('http://localhost:4000/users/profileEdit', {
+      .post('/users/profileEdit', {
         id,
       })
       .then(({ data }) => {

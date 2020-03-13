@@ -13,13 +13,16 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
-const indexRouter = require("./routes/index");
+// const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const listRouter = require("./routes/list"); // add A.I.
 const databaseRouter = require("./routes/database");
 
 const app = express();
 app.use(cors());
+
+const publicPath = path.join(__dirname, 'build');
+app.use(express.static(publicPath));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -31,10 +34,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+//app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/database", databaseRouter);
 app.use("/list", listRouter); // add A.I.
+
+app.get('*', (res, req) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
+
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

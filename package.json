@@ -2,6 +2,10 @@
   "name": "tinder-bar",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "cd backend && npm install && npm start",
+    "heroku-postbuild": "cd frontend && npm install && npm run build && cp -r build ../backend/"
+  },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",

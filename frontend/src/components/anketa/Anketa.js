@@ -40,7 +40,7 @@ class Anketa extends React.Component {
     event.preventDefault();
     const { user } = this.props;
     let { name, DoB, activity, topics, drinks, about } = this.state;
-    await axios.post("http://localhost:4000/users/profile", {
+    await axios.post("/users/profile", {
       name,
       DoB,
       activity,
@@ -262,13 +262,11 @@ function Step3(props) {
         style={{
           marginBottom: "25px",
           color: "#FFF",
-          backgroundColor: "rgb(124, 42, 255)",
           textShadow: "1px 1px 1px #0f4667"
         }}
       >
         Save it
       </button>
-      {/* <button className="btn btn-success btn-block" style={{ color: "red" }}>Save it</button> */}
     </>
   );
 }

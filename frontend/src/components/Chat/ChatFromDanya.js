@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import { database } from "../../firebase";
 import Message from "./Message";
-import { Link } from "react-router-dom";
 
 import "./chatForm.css";
 

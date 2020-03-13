@@ -70,7 +70,7 @@ const ListUsers = () => {
 
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios
-      .post("http://localhost:4000/list/users", {
+      .post('/list/users', {
         id,
         latitude,
         longitude,
@@ -130,7 +130,7 @@ const ListUsers = () => {
         cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius || 2000
+        radius || 200,
       );
     };
     // Обрабатываем ошибки getCurrentPosition
