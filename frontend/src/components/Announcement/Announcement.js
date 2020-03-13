@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Announcement from 'react-announcement';
 import './announcement.css';
 
@@ -6,6 +6,7 @@ import './announcement.css';
 function AnnouncementMessage(props) {
   const { user } = props
   const { date, url, name } = user;
+  date=date.toLocaleTimeString()
   return (
     <>{
       user ?
@@ -15,11 +16,12 @@ function AnnouncementMessage(props) {
             subtitle={`${date}`}
             link="http://localhost:3000/allChats"
             imageSource={`${url}`}
-            daysToLive={0.0000001}
+            daysToLive={1}
             secondsBeforeBannerShows={1}
             closeIconSize={30}
           />
-        </div> :null
+        </div> :
+        null
     }
     </>
   )

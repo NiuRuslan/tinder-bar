@@ -15,7 +15,6 @@ function Chat(props) {
   const pushRoom = database.ref().child(`${friend}`);
 
 
-
   useEffect(() => {
     const handleNewMessages = snap => {
       if (snap.val()) {
@@ -31,7 +30,7 @@ function Chat(props) {
   const handleMsgChange = e => setMsg(e.target.value);
   const handleKeyDown = e => {
     pushRoom.push({
-      url:'11111',
+      url:url,
       name:cookies.userNickname,
       date:Date.now(),
     })

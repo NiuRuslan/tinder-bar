@@ -50,6 +50,7 @@ const ListUsers = () => {
       pushRoom.off("value", handleNewMessages);
     };
   });
+  console.log(user)
   /**
    * Обрабатывает переключатель - со списка на карту и обратно
    */

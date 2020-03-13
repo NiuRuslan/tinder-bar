@@ -27,6 +27,7 @@ function AllChats() {
         })
         setChat(data.chats);
       });
+      
   }, [setChat]);
   return (
     <div
