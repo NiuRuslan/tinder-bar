@@ -31,11 +31,10 @@ function Chat(props) {
       chatRoom.off("value", handleNewMessages);
     };
   }, [setMessages]);
-
   const handleMsgChange = e => setMsg(e.target.value);
   const handleKeyDown = e => {
     pushRoom.push({
-      friend,
+      friend: cookies.userName,
       url,
       name: cookies.userNickname,
       date: Date.now()
