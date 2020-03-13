@@ -16,7 +16,7 @@ p {
   text-shadow: 1px 1px 1px #fff;
 } */
 .register {
-  opacity: 0.5;
+  opacity: 0.65;
   transition: 1s;
 }
 .register:hover {

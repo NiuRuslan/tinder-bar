@@ -103,3 +103,19 @@
   background: white;
   border-bottom-left-radius: 10px;
 }
+@media screen and (max-width: 900px) {
+  .yours .message {
+    font-size: 20px;
+  }
+  .mine .message {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .yours .message {
+    font-size: 15px;
+  }
+  .mine .message {
+    font-size: 15px;
+  }
+}

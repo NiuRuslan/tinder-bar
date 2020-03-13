@@ -1,4 +1,3 @@
-
 .profile-container {
   display: grid;
   /* grid-template-rows: auto 5% auto auto; */
@@ -52,7 +51,7 @@ input[type="file"] {
   color: #e01b3c;
 }
 .edit {
-  opacity: 0.4;
+  opacity: 0.65;
   transition: 1s;
 }
 .edit:hover {
@@ -61,7 +60,7 @@ input[type="file"] {
 
 .exit {
   transition: 1s;
- }
+}
 .exit:hover {
   transform: scale(1.3);
 }

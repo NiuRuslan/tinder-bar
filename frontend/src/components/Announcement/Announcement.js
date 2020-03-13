@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Announcement from "react-announcement";
+import { Link } from "react-router-dom";
+
 import "./announcement.css";
 
 function AnnouncementMessage(props) {
@@ -7,19 +9,20 @@ function AnnouncementMessage(props) {
   const { date, url, name } = user;
   return (
     <>
-      {user ? (
-        <div className="message">
-          <Announcement
-            title={`${name}`}
-            subtitle={`${date}`}
-            link="http://localhost:3000/allChats"
-            imageSource={`${url}`}
-            daysToLive={0.0000001}
-            secondsBeforeBannerShows={1}
-            closeIconSize={30}
-          />
+      {/* {user ? ( */}
+      <Link to="">
+        <div className="mainContainer">
+          <div className="message-container">
+            <img className="image" scr={`${url}`}></img>
+            <div className="nameAndDate">{name}</div>
+            <small>{date}</small>
+          </div>
+          <Link to="/" className="exitbar">
+            <img src="./imgs/stop.png" />
+          </Link>
         </div>
-      ) : null}
+      </Link>
+      {/*) : null}*/}
     </>
   );
 }
