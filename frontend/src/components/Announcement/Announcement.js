@@ -22,6 +22,8 @@ function AnnouncementMessage(props) {
   const deleteAnnoun = () => {
     setMan(null);
   };
+  console.log(getChatName(user.friend, cookies.userName));
+  console.log(user.friend, cookies.userName);
 
   return (
     <>
@@ -43,7 +45,8 @@ function AnnouncementMessage(props) {
                 chats: getChatName(cookies.userName, user.friend),
                 name: user.name,
                 urlFriend: user.url,
-                date: user.date
+                friend: user.friend,
+                url: ""
               }
             }}
           >
