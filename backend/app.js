@@ -9,7 +9,7 @@ require("dotenv").config();
 // A.I> подключил монгоДБ из облака
 const mongoose = require("mongoose");
 mongoose.connect(
-  `mongodb+srv://TinderBar:TinderBar@cluster0-bajz8.mongodb.net/TinderBar?retryWrites=true&w=majority`,
+  process.env.MONGO_DB_URI,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 

@@ -12,7 +12,7 @@ function AnnouncementMessage(props) {
           <Announcement
             title={`${name}`}
             subtitle={`${date}`}
-            link="http://localhost:3000/allChats"
+            link="/allChats"
             imageSource={`${url}`}
             daysToLive={0.0000001}
             secondsBeforeBannerShows={1}
