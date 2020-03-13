@@ -12,7 +12,7 @@ function ModalWindow(props) {
   const age = Math.floor((new Date() - new Date(profile.DoB)) / (24 * 3600 * 365.25 * 1000));
   const [cookies] = useCookies(['userName']);
   function sendRequest() {
-    axios.post('http://localhost:4000/database', {
+    axios.post('/database', {
       ID1: cookies.userName,
       ID2: profile.person,
     });

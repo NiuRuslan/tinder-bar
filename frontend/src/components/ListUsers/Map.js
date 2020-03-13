@@ -25,7 +25,7 @@ const Map = ({
   const [cookies] = useCookies(['userName']);
 
   function sendRequest(id) {
-    axios.post('http://localhost:4000/database', {
+    axios.post('/database', {
       ID1: cookies.userName,
       ID2: id,
     });
