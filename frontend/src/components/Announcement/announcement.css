@@ -2,10 +2,7 @@
   opacity: 0.4;
   transition: 1s;
   background-color: #ebecf0;
-  color: #0f4567;
+  color: rgb(124, 42, 255);
   text-shadow: 3px 3px 2 #fff;
   position: absolute;
-}
-.message:hover {
-  opacity: 1;
 } */

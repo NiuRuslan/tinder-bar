@@ -16,7 +16,7 @@ p {
   text-shadow: 1px 1px 1px #fff;
 } */
 .register {
-  opacity: 0.4;
+  opacity: 0.5;
   transition: 1s;
 }
 .register:hover {
@@ -52,7 +52,6 @@ input {
   font-size: 16px;
   border-radius: 8px;
   padding: 16px;
-  color: rgb(124, 42, 255);
   text-shadow: 1px 1px 0 #fff;
 }
 

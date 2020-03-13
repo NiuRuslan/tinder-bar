@@ -103,6 +103,10 @@ input.sw:checked + label {
   border-radius: 8px;
 }
 
+.whiteBorder {
+  border: white 1px solid
+}
+
 @keyframes backgroundred {
   0% {
     background: transparent;

@@ -3,7 +3,7 @@ import 'firebase/messaging'
 import firebase from 'firebase';
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_database_API,
+  apiKey: process.env.REACT_APP_DB_API,
   authDomain: process.env.REACT_APP_authDomain,
   databaseURL: process.env.REACT_APP_databaseURL,
   projectId: process.env.REACT_APP_projectId,

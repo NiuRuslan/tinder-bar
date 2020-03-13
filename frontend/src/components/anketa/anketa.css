@@ -8,7 +8,19 @@ button {
   letter-spacing: -0.2px;
   font-size: 20px;
   text-decoration-line: none;
-  color: black;
+}
+
+.btn-primary {
+  background-color: #762BFF ;
+}
+
+.btn-secondary {
+  background-color: #FFB472;
+  text-shadow: none;
+}
+
+.btn-success {
+  background-color: #e01b3c;
 }
 
 a {
@@ -26,6 +38,8 @@ a {
 .anketa {
   opacity: 0.4;
   transition: 1s;
+  padding-top: 5%;
+  color: white;
 }
 .anketa:hover {
   opacity: 1;

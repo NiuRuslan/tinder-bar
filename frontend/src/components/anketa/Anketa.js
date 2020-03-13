@@ -87,7 +87,7 @@ class Anketa extends React.Component {
       return (
         <>
           <button
-            className="btn btn-secondary"
+            className="btn-secondary"
             type="button"
             onClick={this._prev}
           >
@@ -111,7 +111,6 @@ class Anketa extends React.Component {
           style={{
             marginBottom: "25px",
             color: "#FFF",
-            backgroundColor: "#0f4667",
             textShadow: "1px 1px 1px #0f4667"
           }}
         >
@@ -182,7 +181,7 @@ function Step1(props) {
           name="DoB"
           placeholder="Date of Birth"
           oninput="this.className"
-          max="2001-12-31"
+          max="2002-03-13"
           min="1920-12-31"
           required
         />
@@ -256,17 +255,16 @@ function Step3(props) {
         </label>
       </div>
       <button
-        className="btn btn-success btn-block"
+        type='submit'
+        className="btn btn-success"
         style={{
           marginBottom: "25px",
           color: "#FFF",
-          backgroundColor: "rgb(124, 42, 255)",
           textShadow: "1px 1px 1px #0f4667"
         }}
       >
         Save it
       </button>
-      {/* <button className="btn btn-success btn-block" style={{ color: "red" }}>Save it</button> */}
     </>
   );
 }

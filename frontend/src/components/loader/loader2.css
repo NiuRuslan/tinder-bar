@@ -3,7 +3,7 @@
 #plate {
   position: relative;
   margin: 0 auto;
-  height: 200px;
+  height: 250px;
   width: 250px;
   border-bottom: solid 5px #b4b4b4;
   border-radius: 0 0 10px 10px / 5px;
@@ -64,18 +64,18 @@
   height: 110px;
   border-radius: 20px 20px 5px 5px;
 }
-
-#bottle .body:before {
-  position: absolute;
-  display: block;
-  content: " ";
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 0px 0px 5px 5px;
-}
-
+/*
+    #bottle .body:before {
+        position: absolute;
+        display: block;
+        content: " ";
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 0px 0px 5px 5px; 
+    }
+*/
 #bottle .label {
   position: relative;
   background-color: #f2eab9;

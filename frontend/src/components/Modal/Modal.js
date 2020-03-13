@@ -44,7 +44,7 @@ function ModalWindow(props) {
               color: '#FFF',
             }}
           >
-            <Card style={{ backgroundColor: 'transparent', border: 'solid 2px #E74C3C', borderRadius: '8px', width: '200px' }}>
+            <Card style={{ backgroundColor: 'transparent', border: 'solid 2px #f5505b', borderRadius: '8px', width: '200px' }}>
               <Card.Content>
                 <div className="mini" style={{ backgroundImage: `url(${profile.url || './imgs/info.png'})` }} />
                 <Card.Header textAlign='center'></Card.Header>
@@ -71,7 +71,7 @@ function ModalWindow(props) {
             </List>
           </Modal.Description>
         </Modal.Content>
-        <Modal.Actions style={{ backgroundColor: '#0f4667' }}>
+        <Modal.Actions style={{ backgroundColor: '#0f4667', textAlign:'center' }}>
           <Link onClick={sendRequest} to={{
             pathname: `/chat`,
             state: {
