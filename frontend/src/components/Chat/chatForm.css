@@ -1,26 +1,48 @@
 .window {
   justify-content: center;
   overflow-y: scroll;
-  scroll-behavior: smooth;
-
+  -ms-overflow-style: none;
+  margin-top: 2%;
   scroll-margin-top: 65%;
   align-self: center;
-  border: solid 2px #aab8c2;
   border-radius: 10px;
   height: 65%;
   width: 50%;
 }
+.window::-webkit-scrollbar {
+  display: none;
+}
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 2%;
+  border-bottom: solid 2px #fff;
 }
-
+.img {
+  align-self: center;
+  margin-bottom: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+}
+.h2 {
+  align-self: center;
+  color: #fff;
+  font-size: 35px;
+}
 .sendButton {
   display: flex;
   width: 50%;
   align-self: center;
   padding-top: 2%;
-  margin-bottom: 5%;
+  padding-bottom: 2%;
+  justify-content: center;
 }
 
 .bodyChat {
@@ -36,38 +58,72 @@
 .chats {
   margin: 5%;
 }
-.exitChat {
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-  margin-right: 5px;
-}
 
 .chatbar {
-  display: flex;
-  justify-self: flex-end;
-  position: fixed;
+  align-self: center;
   z-index: 1;
-  margin: 10px 12px 12px 0;
 }
 .chatbar:hover {
   transform: scale(1.1);
 }
 .chatInput {
-  opacity: 0.4;
+  opacity: 0.8;
   transition: 1s;
-  width: 80%;
+  width: 75%;
 }
 .chatInput:hover {
   opacity: 1;
 }
 .chatButton {
   background-color: rgb(124, 42, 255);
+  opacity: 0.8;
   color: #fff;
-  width: 20%;
+  width: 25%;
+  text-shadow: none;
+  font-size: 20px;
+  margin: 3px;
+  padding: 5px;
+  box-shadow: -2px 1px #fff, 1px 2px 1px #babecc;
 }
 .chatButton:hover {
-  background-color: #fff;
+  background-color: rgb(124, 42, 255);
+  opacity: 1;
   color: #fff;
-  width: 40%;
+  width: 26%;
+}
+@media screen and (max-width: 1200px) {
+  .window {
+    width: 75%;
+  }
+  .sendButton {
+    width: 75%;
+  }
+  .header {
+    width: 75%;
+  }
+  .h2 {
+    font-size: 30px;
+  }
+  .img {
+    height: 150px;
+    width: 150px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .window {
+    width: 99%;
+  }
+  .sendButton {
+    width: 96%;
+  }
+  .header {
+    width: 96%;
+  }
+  .h2 {
+    font-size: 25px;
+  }
+  .img {
+    height: 130px;
+    width: 130px;
+  }
 }

@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 import "./button.css";
 
 const ButtonChat = props => {
+  const [cookies] = useCookies(['userName']);
   const { url, chats } = props;
   const {chat} = chats
   let friend;
@@ -18,14 +20,15 @@ if(chat.indexOf(cookies.userName)===0){
       <div
         style={{
           width: "50%",
-          border: "solid 1px #aab8c2",
+          borderBottom: "solid 2px #aab8c2",
+          borderRight: "none",
+          borderLeft: "none",
           alignSelf: "center",
-          borderRadius: "20px",
           padding: "10px",
           color: " #fff",
           margin: " 5px"
         }}
-        className="chatButton"
+        className="msgButton"
       >
         <Link
           to={{
@@ -36,6 +39,7 @@ if(chat.indexOf(cookies.userName)===0){
             },
           }}
           style={{ display: " flex", outline: "none" }}
+          className="btnLink"
         >
           <div
             className="avatar"

@@ -255,8 +255,8 @@ function Step3(props) {
         </label>
       </div>
       <button
-        type='submit'
-        className="btn btn-success"
+        type="submit"
+        className="btn btn-success btn-block"
         style={{
           marginBottom: "25px",
           color: "#FFF",
