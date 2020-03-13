@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useCookies } from 'react-cookie';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import { storage, database } from '../../firebase';
-import Map from './Map';
-import ModalWindow from '../Modal/Modal';
-import AnnouncementMessage from '../Announcement/Announcement';
-import './listUsers.css';
-import Navbar from '../navbar/Navbar';
-import '../snow/snow.css';
-import Loader from '../loader/Loader';
-import Loader2 from '../loader/loader2';
+import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { connect } from "react-redux";
+import axios from "axios";
+import { storage, database } from "../../firebase";
+import Map from "./Map";
+import ModalWindow from "../Modal/Modal";
+import AnnouncementMessage from "../Announcement/Announcement";
+import "./listUsers.css";
+import Navbar from "../navbar/Navbar";
+import "../snow/snow.css";
+import Loader from "../loader/Loader";
+import Loader2 from "../loader/loader2";
 
 /**
  * Компонент List - отрисовывает список пользователей в заданном радиусе
@@ -18,16 +18,20 @@ import Loader2 from '../loader/loader2';
  */
 
 const ListUsers = () => {
-  const [cookies] = useCookies(['userName']);
+  const [cookies] = useCookies(["userName"]);
   const [radius, setRadius] = useState(null);
   const [list, setList] = useState({
     success: false,
-    err: '',
+    err: ""
   });
-  const [isColorBtn, setColorBtn] = useState('findMe');
+
+  const [isColorBtn, setColorBtn] = useState("findMe");
   const [isShowLoader, setIsShowLoader] = useState(false);
   const [isShowMap, setShowMap] = useState(false);
-  const [user, setUser] = useState('');
+  const [user, setUser] = useState("");
+
+  const [url, setUrl] = useState("");
+
   const [loader, setLoader] = useState();
   const pushRoom = database.ref().child(`${cookies.userName}`);
   useEffect(() => {
@@ -36,18 +40,18 @@ const ListUsers = () => {
   }, []);
 
   useEffect(() => {
-    const handleNewMessages = async (snap) => {
+    const handleNewMessages = async snap => {
       if (snap.val()) {
-        (Object.entries(snap.val())).map((el) => {
+        Object.entries(snap.val()).map(el => {
           const [, obj] = el;
-          setUser(obj);
+          obj && setUser(obj);
         });
         pushRoom.remove();
       }
     };
-    pushRoom.on('value', handleNewMessages);
+    pushRoom.on("value", handleNewMessages);
     return () => {
-      pushRoom.off('value', handleNewMessages);
+      pushRoom.off("value", handleNewMessages);
     };
   });
   /**
@@ -70,30 +74,35 @@ const ListUsers = () => {
 
   const requestListUsers = (id, latitude, longitude, radius) => {
     axios
-      .post('/list/users', {
+      .post("/list/users", {
         id,
         latitude,
         longitude,
-        radius,
+        radius
       })
-      .then(async (response) => {
+      .then(async response => {
         if (response.data.success) {
           // Задаем hooks
           setIsShowLoader(false);
 
-          const promisesArr = response.data.list.map(async (user) => {
+          const promisesArr = response.data.list.map(async user => {
             const pic = await storage
               .ref(`images/${user.person}`)
               .getDownloadURL()
-              .catch((e) => console.log(e));
+              .catch(e => console.log(e));
             user.url = pic;
             return user;
           });
 
-          Promise.all(promisesArr).then((result) => {
+          Promise.all(promisesArr).then(result => {
             setList({
               success: true,
-              list: result,
+              list: result
+            });
+            result.map(el => {
+              if (el.person === cookies.userName) {
+                setUrl(el.url);
+              }
             });
           });
 
@@ -102,14 +111,14 @@ const ListUsers = () => {
           // Задаем hooks
           setList({
             success: false,
-            err: response.data.err,
+            err: response.data.err
           });
         }
       })
       .catch(() => {
         setList({
           success: false,
-          err: 'Runtime error',
+          err: "Runtime error"
         });
       });
   };
@@ -119,8 +128,8 @@ const ListUsers = () => {
    */
   const geoFindLocation = () => {
     setIsShowLoader(true);
-    setColorBtn('whiteBorder');
-    const success = (position) => {
+    setColorBtn("whiteBorder");
+    const success = position => {
       // Задаем в hooks координаты
       setLatitude(position.coords.latitude);
       setLongituse(position.coords.longitude);
@@ -130,7 +139,7 @@ const ListUsers = () => {
         cookies.userName,
         position.coords.latitude,
         position.coords.longitude,
-        radius || 200,
+        radius || 200
       );
     };
     // Обрабатываем ошибки getCurrentPosition
@@ -138,7 +147,7 @@ const ListUsers = () => {
       // Задаем hooks
       setList({
         success: false,
-        err: 'Unable to retrieve your location',
+        err: "Unable to retrieve your location"
       });
     };
 
@@ -146,7 +155,7 @@ const ListUsers = () => {
       // Задаем hooks
       setList({
         success: false,
-        err: 'Geolocation is not supported by your browser',
+        err: "Geolocation is not supported by your browser"
       });
     } else {
       /**
@@ -157,9 +166,9 @@ const ListUsers = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }
   };
+
   return (
     <div className="back">
-      <AnnouncementMessage user={user} />
       <div className="full-wh">
         <div className="bg-animation">
           <div id="stars" />
@@ -171,29 +180,29 @@ const ListUsers = () => {
       <div
         className="main-container"
         style={{
-          width: '100%',
+          width: "100%"
         }}
       >
         <Navbar />
         <div className="input-form-userlist">
           <input
             className="inputFind"
-            onChange={(event) => {
+            onChange={event => {
               setRadius(event.target.value);
             }}
             type="range"
             style={{
-              minWidth: '300px',
-              display: 'block',
-              width: '30%',
-              height: '50px',
-              margin: '0 auto',
-              border: 'none',
-              paddingBottom: '0',
-              borderBottom: 'solid #FFF 2px',
-              borderRadius: '0',
-              boxShadow: 'none',
-              marginBottom: '20px',
+              minWidth: "300px",
+              display: "block",
+              width: "30%",
+              height: "50px",
+              margin: "0 auto",
+              border: "none",
+              paddingBottom: "0",
+              borderBottom: "solid #FFF 2px",
+              borderRadius: "0",
+              boxShadow: "none",
+              marginBottom: "20px"
             }}
             min="200"
             max="10000"
@@ -203,15 +212,12 @@ const ListUsers = () => {
           <label className="label">
             {radius !== null ? (
               <div>
-                {' '}
-                Chosen radius: &nbsp;
-                {' '}
-                {radius}
-                &nbsp; meters
-                {' '}
+                {" "}
+                Chosen radius: &nbsp; {radius}
+                &nbsp; meters{" "}
               </div>
             ) : (
-              <div style={{ margin: ' auto 0' }}>Choose the radius</div>
+              <div style={{ margin: " auto 0" }}>Choose the radius</div>
             )}
             &nbsp;
           </label>
@@ -220,20 +226,20 @@ const ListUsers = () => {
             className={isColorBtn}
             onClick={() => geoFindLocation()}
             style={{
-              display: 'block',
-              color: '#FFF',
-              backgroundColor: 'transparent',
-              position: 'relative',
-              margin: '0 auto',
-              width: '25rem',
-              textShadow: 'none',
+              display: "block",
+              color: "#FFF",
+              backgroundColor: "transparent",
+              position: "relative",
+              margin: "0 auto",
+              width: "25rem",
+              textShadow: "none"
             }}
           >
             FIND ME SOMEONE
           </button>
         </div>
         {list.success ? (
-          <div className="toggleBox" style={{ margin: '0 auto' }}>
+          <div className="toggleBox" style={{ margin: "0 auto" }}>
             <input type="checkbox" name="toggle" className="sw" id="toggle-2" />
             <label htmlFor="toggle-2" onClick={ChangeOnMap}>
               <span>Use a map</span>
@@ -252,41 +258,42 @@ const ListUsers = () => {
                 longitude={longitude}
                 list={list}
                 style={{
-                  marginTop: '10%',
-                  alignSelf: 'center',
-                  width: '100%',
-                  justifyContent: 'center',
+                  marginTop: "10%",
+                  alignSelf: "center",
+                  width: "100%",
+                  justifyContent: "center"
                 }}
                 radius={radius}
               />
             ) : (
               <ul
                 style={{
-                  display: 'flex',
-                  listStyle: 'none',
-                  padding: '0',
-                  justifyContent: 'space-around',
-                  flexWrap: 'wrap',
+                  display: "flex",
+                  listStyle: "none",
+                  padding: "0",
+                  justifyContent: "space-around",
+                  flexWrap: "wrap"
                 }}
               >
                 {list.success
-                  ? list.list.map((obj) => (
-                    <div className="map">
-                      <ModalWindow obj={obj} key={obj._id} />
-                    </div>
-                  ))
+                  ? list.list.map(obj => (
+                      <div className="map">
+                        <ModalWindow obj={obj} url={url} key={obj._id} />
+                      </div>
+                    ))
                   : list.err}
               </ul>
             )}
           </div>
         )}
       </div>
+      <AnnouncementMessage user={user} />
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  ...state,
+const mapStateToProps = state => ({
+  ...state
 });
 
 export default connect(mapStateToProps)(ListUsers);

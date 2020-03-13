@@ -1,4 +1,4 @@
-.chatButton:hover {
-  background-color: #aab8c24d;
+.msgButton:hover {
+  opacity: 0.4;
   transition: 1s;
 }

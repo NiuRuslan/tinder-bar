@@ -87,7 +87,8 @@ class Anketa extends React.Component {
       return (
         <>
           <button
-            className="btn-secondary"
+            style={{ color: "rgb(124, 42, 255)" }}
+            className="btn btn-secondary"
             type="button"
             onClick={this._prev}
           >
@@ -111,6 +112,7 @@ class Anketa extends React.Component {
           style={{
             marginBottom: "25px",
             color: "#FFF",
+            backgroundColor: "rgb(124, 42, 255)",
             textShadow: "1px 1px 1px #0f4667"
           }}
         >
@@ -255,8 +257,8 @@ function Step3(props) {
         </label>
       </div>
       <button
-        type='submit'
-        className="btn btn-success"
+        type="submit"
+        className="btn btn-success btn-block"
         style={{
           marginBottom: "25px",
           color: "#FFF",

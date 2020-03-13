@@ -5,6 +5,7 @@ import ButtonChat from "./ButtonChat";
 import Navbar from "../navbar/Navbar";
 import { database } from "../../firebase";
 import Loader from "../loader/Loader";
+import "./allChats.css";
 function AllChats() {
   const [cookies] = useCookies(["userName", "chacked"]);
   const [chats, setChat] = useState(null);
@@ -13,18 +14,29 @@ function AllChats() {
     axios
       .get(`/database/${cookies.userName}`)
       .then(async ({ data }) => {
-        await Promise.all(data.chats.map(async el => {
-          const snapshot = await database.ref(`${el.chat}`).limitToLast(1).once('value');
-          snapshot.forEach(function (childSnapshot) {
-            const { nickname, dateDay, dateTime, msg, date } = childSnapshot.val();
-            el.date = date;
-            el.nickname = nickname;
-            el.lastMessage = msg;
-          });
-        }))
+        await Promise.all(
+          data.chats.map(async el => {
+            const snapshot = await database
+              .ref(`${el.chat}`)
+              .limitToLast(1)
+              .once("value");
+            snapshot.forEach(function(childSnapshot) {
+              const {
+                nickname,
+                dateDay,
+                dateTime,
+                msg,
+                date
+              } = childSnapshot.val();
+              el.date = date;
+              el.nickname = nickname;
+              el.lastMessage = msg;
+            });
+          })
+        );
         data.chats.sort((a, b) => {
-          return b.date - a.date
-        })
+          return b.date - a.date;
+        });
         setChat(data.chats);
       });
   }, [setChat]);
@@ -43,7 +55,7 @@ function AllChats() {
           <div id="stars4" />
         </div>
       </div>
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%" }} className="main-cont">
         <Navbar />
         <div
           style={{
@@ -51,6 +63,7 @@ function AllChats() {
             justifyContent: "center",
             flexDirection: "column"
           }}
+          className="button-chat"
         >
           {chats ? (
             chats.map((el, index) => {

@@ -1,12 +1,12 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
-const Profile = require('../models/modelProfile'); // A.I. подключил модель монгоДБ
+const Profile = require("../models/modelProfile"); // A.I. подключил модель монгоДБ
 // эти функции используются для определения расстояния между точками на
 // поверхности Земли, заданных с помощью географических координат
 // результат возвращается в км
 // (distHaversine(latlng, centerPoint)
-const rad = (x) => (x * Math.PI) / 180;
+const rad = x => (x * Math.PI) / 180;
 /**
  *
  */
@@ -14,17 +14,18 @@ const distHaversine = (p1, p2) => {
   const R = 6371; // earth's mean radius in km
   const dLat = rad(p2.lat - p1.lat);
   const dLong = rad(p2.lng - p1.lng);
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-    + Math.cos(rad(p1.lat))
-      * Math.cos(rad(p2.lat))
-      * Math.sin(dLong / 2)
-      * Math.sin(dLong / 2);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(rad(p1.lat)) *
+      Math.cos(rad(p2.lat)) *
+      Math.sin(dLong / 2) *
+      Math.sin(dLong / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   const d = R * c;
   return d.toFixed(3) * 1000; // переводим в метры
 };
-router.get('/', async (req, res) => {
-  res.send('respond with a resource');
+router.get("/", async (req, res) => {
+  res.send("respond with a resource");
 });
 /**
  * Получаем запрос с координатами и радиусом поиска
@@ -36,14 +37,12 @@ router.get('/', async (req, res) => {
  * @list - массив объектов - анкеты пользователей
  * @err - Расшифровка ошибки
  */
-router.post('/users', async (req, res) => {
-  const {
-    id, latitude, longitude, radius,
-  } = req.body;
-  if ([id, latitude, longitude, radius].some((el) => el === undefined)) {
+router.post("/users", async (req, res) => {
+  const { id, latitude, longitude, radius } = req.body;
+  if ([id, latitude, longitude, radius].some(el => el === undefined)) {
     return res.send({
       success: false,
-      err: 'Arguments is undefined',
+      err: "Arguments is undefined"
     });
   }
   // /**
@@ -63,16 +62,16 @@ router.post('/users', async (req, res) => {
 
   const listAll = await Profile.find({});
   const list = [];
-  listAll.forEach((el) => {
+  listAll.forEach(el => {
     const dist = distHaversine(
       {
         lat: latitude,
-        lng: longitude,
+        lng: longitude
       },
       {
         lat: el.latitude,
-        lng: el.longitude,
-      },
+        lng: el.longitude
+      }
     );
 
     if (dist < radius) list.push(el);
@@ -80,24 +79,25 @@ router.post('/users', async (req, res) => {
   // Записываю текущие координаты пользователя
   await Profile.updateOne(
     {
-      person: id,
+      person: id
     },
     {
       $set: {
         latitude,
-        longitude,
-      },
-    },
+        longitude
+      }
+    }
   );
+
   if (list) {
     return res.send({
       success: true,
-      list,
+      list
     });
   }
   return res.send({
     success: false,
-    err: 'No such user from this geolocation',
+    err: "No such user from this geolocation"
   });
 });
 module.exports = router;

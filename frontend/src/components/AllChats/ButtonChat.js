@@ -5,20 +5,22 @@ import "./button.css";
 
 const ButtonChat = props => {
   const { url, chats } = props;
+  console.log("feef", props);
 
   return (
     <>
       <div
         style={{
           width: "50%",
-          border: "solid 1px #aab8c2",
+          borderBottom: "solid 2px #aab8c2",
+          borderRight: "none",
+          borderLeft: "none",
           alignSelf: "center",
-          borderRadius: "20px",
           padding: "10px",
           color: " #fff",
           margin: " 5px"
         }}
-        className="chatButton"
+        className="msgButton"
       >
         <Link
           to={{
@@ -28,6 +30,7 @@ const ButtonChat = props => {
             }
           }}
           style={{ display: " flex", outline: "none" }}
+          className="btnLink"
         >
           <div
             className="avatar"
