@@ -6,7 +6,6 @@ import './announcement.css';
 function AnnouncementMessage(props) {
   const { user } = props
   const { date, url, name } = user;
-  date=date.toLocaleTimeString()
   return (
     <>{
       user ?

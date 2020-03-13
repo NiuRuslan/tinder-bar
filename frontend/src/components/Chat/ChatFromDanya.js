@@ -32,7 +32,7 @@ function Chat(props) {
     pushRoom.push({
       url:url,
       name:cookies.userNickname,
-      date:Date.now(),
+      date:new Date().toLocaleTimeString(),
     })
     chatRoom.push({
       nickname: cookies.userNickname,

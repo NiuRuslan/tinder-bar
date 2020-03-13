@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './button.css';
 import { useCookies } from "react-cookie";
@@ -7,8 +7,6 @@ const ButtonChat = (props) => {
   const [cookies] = useCookies(["userName", "chacked"]);
   const { url, chats } = props;
   const {chat} = chats
-  const [pic,setPic]=useState('')
-  const date=chats.date.toLocaleTimeString()
   let friend;
 if(chat.indexOf(cookies.userName)===0){
   friend=chat.slice(chat.indexOf('+')+1)
@@ -16,14 +14,6 @@ if(chat.indexOf(cookies.userName)===0){
   friend=chat.slice(0,chat.indexOf('+'))
 }
 
-//ЭТО УБОЖЕСТВО НУЖНО ПЕРЕДЕЛАТЬ!!!!
-useEffect(()=>{
-    const image = storage
-      .ref(`images/${friend}`)
-      .getDownloadURL()
-      .catch(e => console.log(e));
-  setPic(image)
-},[setPic])
   return (
     <>
       <div
@@ -78,7 +68,7 @@ useEffect(()=>{
             >
               <strong>{chats.nickname}</strong> {/* кто последний написал */}
               <strong>{chats.lastMessage}</strong> {/* последнее сообщение */}
-              <strong>{date} </strong>   {/* время сообщения */}
+              <strong>{chats.date} </strong>   {/* время сообщения */}
             </div>
             <div
               style={{
