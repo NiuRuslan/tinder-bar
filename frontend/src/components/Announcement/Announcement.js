@@ -22,7 +22,6 @@ function AnnouncementMessage(props) {
   const deleteAnnoun = () => {
     setMan(null);
   };
-  console.log(user.url);
 
   return (
     <>

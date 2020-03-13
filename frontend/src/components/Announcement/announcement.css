@@ -1,7 +1,5 @@
 .message-container {
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
 }
 .mainContainer {
   display: flex;
