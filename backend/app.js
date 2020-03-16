@@ -41,7 +41,7 @@ app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
 app.use('/list', listRouter); // add A.I.
 
-app.get('*', (res) => {
+app.get('/', (res) => {
   res.sendfile(path.join(publicPath, 'index.html'));
 });
 
