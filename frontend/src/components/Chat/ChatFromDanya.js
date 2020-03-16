@@ -59,7 +59,7 @@ function Chat(props) {
             <div id="stars4" />
           </div>
         </div>
-        <div className="header">
+        <div className="headerChat">
           <Link to="/allChats" className="chatbar">
             <img src="./imgs/back.png" />
           </Link>
