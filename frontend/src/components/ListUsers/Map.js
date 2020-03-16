@@ -21,6 +21,7 @@ const Map = ({
   radius,
   url
 }) => {
+  console.log(url);
   const [cookies] = useCookies(["userName"]);
 
   function sendRequest(id) {
@@ -132,10 +133,10 @@ const Map = ({
                   to={{
                     pathname: "/chat",
                     state: {
-                      chats: getChatName(cookies.userName, profile._id),
+                      chats: getChatName(cookies.userName, profile.person),
                       name: profile.name,
                       url: url,
-                      friend: profile._id,
+                      friend: profile.person,
                       urlFriend: profile.url
                     }
                   }}
