@@ -22,12 +22,9 @@ function AnnouncementMessage(props) {
   const deleteAnnoun = () => {
     setMan(null);
   };
-  console.log(getChatName(user.friend, cookies.userName));
-  console.log(user.friend, cookies.userName);
 
   return (
     <>
-      {/* {user ? ( */}
       {man && (
         <div className="mainContainer">
           <div className="message-container">

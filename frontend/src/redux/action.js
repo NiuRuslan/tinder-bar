@@ -1,50 +1,50 @@
 import {
-  LOGIN, REQUEST_FETCH_LOGIN, ERROR, CLEAR_ERROR, REQUEST_FETCH_REGIST, PROFILE_INIT, LOADER,
-} from './action-types';
+  LOGIN,
+  REQUEST_FETCH_LOGIN,
+  ERROR,
+  CLEAR_ERROR,
+  REQUEST_FETCH_REGIST,
+  PROFILE_INIT
+} from "./action-types";
 
 export const LogIn = (id, nickname, profileId, success) => ({
   type: LOGIN,
   id,
   nickname,
   profileId,
-  success,
+  success
 });
 
 export const requestFetchRegist = (nickname, email, password) => ({
   type: REQUEST_FETCH_REGIST,
   nickname,
   email,
-  password,
+  password
 });
 
-export const profileInit = (profileId) => ({
+export const profileInit = profileId => ({
   type: PROFILE_INIT,
-  profileId,
+  profileId
 });
 
-export const setLoader = () => ({
-  type: LOADER,
-});
-
-export const error = (title) => ({
+export const error = title => ({
   type: ERROR,
-  title,
+  title
 });
 
 export const clearError = () => ({
-  type: CLEAR_ERROR,
+  type: CLEAR_ERROR
 });
 
 export const requestFetchLogin = (email, password) => ({
   type: REQUEST_FETCH_LOGIN,
   email,
-  password,
+  password
 });
 export default {
   LogIn,
-  setLoader,
   requestFetchLogin,
   clearError,
   error,
-  requestFetchRegist,
+  requestFetchRegist
 };

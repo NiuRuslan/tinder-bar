@@ -71,8 +71,8 @@ function ModalWindow(props) {
         }
       >
         <Modal.Content>
-          <Modal.Description style={{ color: "#0f4667" }}>
-            <Header style={{ color: "#0f4667", fontSize: "x-large" }}>
+          <Modal.Description style={{ color: "rgb(124, 42, 255)" }}>
+            <Header style={{ color: "rgb(124, 42, 255)", fontSize: "x-large" }}>
               {` ${profile.name}, ${age}`}
             </Header>
             <div
@@ -90,7 +90,7 @@ function ModalWindow(props) {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions
-          style={{ backgroundColor: "#0f4667", textAlign: "center" }}
+          style={{ backgroundColor: "rgb(124, 42, 255)", textAlign: "center" }}
         >
           <Link
             onClick={sendRequest}
@@ -106,9 +106,8 @@ function ModalWindow(props) {
             }}
           >
             <Button
-              primary
               style={{
-                color: "#0f4667",
+                color: "rgb(124, 42, 255)",
                 textShadow: "none",
                 marginBottom: "1em",
                 borderRadius: "320px",

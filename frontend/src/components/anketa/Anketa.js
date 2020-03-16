@@ -88,7 +88,7 @@ class Anketa extends React.Component {
         <>
           <button
             style={{ color: "rgb(124, 42, 255)" }}
-            className="btn btn-secondary"
+            className="btn"
             type="button"
             onClick={this._prev}
           >
@@ -106,7 +106,7 @@ class Anketa extends React.Component {
     if (currentStep < 3) {
       return (
         <button
-          className="btn btn-primary float-right"
+          className="btn "
           type="button"
           onClick={this._next}
           style={{
@@ -127,7 +127,7 @@ class Anketa extends React.Component {
     return (
       <>
         {this.state.random > 5 ? <Slider /> : <Slider2 />}
-        <form onSubmit={this.handleSubmit} className="anketa">
+        <form onSubmit={this.handleSubmit} className="form">
           <p>Step {this.state.currentStep} </p>
           {/* render the form steps and pass required props in */}
           <Step1
@@ -258,8 +258,9 @@ function Step3(props) {
       </div>
       <button
         type="submit"
-        className="btn btn-success btn-block"
+        className="btn"
         style={{
+          backgroundColor: "rgb(124, 42, 255)",
           marginBottom: "25px",
           color: "#FFF",
           textShadow: "1px 1px 1px #0f4667"

@@ -6,7 +6,6 @@ import { useCookies } from "react-cookie";
 import { requestFetchLogin } from "../../redux/action";
 import Slider from "../slider/Slider";
 import Slider2 from "../slider/Slider2";
-import "./Login.css";
 
 function Login(props) {
   const { user, err, requestFetchLogin } = props;
@@ -48,7 +47,7 @@ function Login(props) {
       ) : (
         <form
           onSubmit={PutData}
-          className="login"
+          className="form"
           style={{ alignSelf: "center" }}
         >
           <h1 className="segment">Login</h1>

@@ -5,7 +5,6 @@ import ButtonChat from "./ButtonChat";
 import Navbar from "../navbar/Navbar";
 import { database } from "../../firebase";
 import Loader from "../loader/Loader";
-import "./allChats.css";
 function AllChats() {
   const [cookies] = useCookies(["userName", "chacked"]);
   const [chats, setChat] = useState(null);
@@ -13,6 +12,7 @@ function AllChats() {
   useEffect(() => {
     axios
       .get(`http://localhost:4000/database/${cookies.userName}`)
+
       .then(async ({ data }) => {
         await Promise.all(
           data.chats.map(async el => {
