@@ -1,8 +1,6 @@
 # BuddyS
 *codename: tinder-bar*
 
-https://tinder-bar.herokuapp.com/
-
 Web-based geolocation buddy finder application
 
 ### Installing
