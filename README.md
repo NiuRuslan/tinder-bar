@@ -19,7 +19,7 @@ REACT_APP_storageBucket=//**firebaseConfig.storageBucket**
 REACT_APP_messagingSenderId=//**firebaseConfig.messagingSenderId**
 REACT_APP_DB_AppId=//**firebaseConfig.appId**
 
-GOOGLE_MAP_API_KEY=/https://maps.googleapis.com/maps/api/js?key=** YOUR KEY **&v=3.exp&libraries=geometry,drawing,place
+REACT_APP_GOOGLE_MAP_URI=/https://maps.googleapis.com/maps/api/js?key=** YOUR KEY **&v=3.exp&libraries=geometry,drawing,place
 ```
 for root, backend and frontend
 ```
