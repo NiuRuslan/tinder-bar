@@ -23,8 +23,10 @@ function AnnouncementMessage(props) {
   const deleteAnnoun = () => {
     setMan(null);
   };
-  console.log(getChatName(user.friend, cookies.userName));
-  console.log(user.friend, cookies.userName);
+  // console.log(cookies.userName)
+
+  console.log(user);
+  console.log(cookies.userName)
 
   return (
     <>
