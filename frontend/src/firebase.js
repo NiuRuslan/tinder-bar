@@ -1,5 +1,5 @@
 import 'firebase/storage';
-import 'firebase/messaging'
+import 'firebase/messaging';
 import firebase from 'firebase';
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,5 +18,5 @@ const storage = firebase.storage();
 const database = firebase.database();
 
 export {
-  database, storage, firebase as default
-}
+  database, storage, firebase as default,
+};

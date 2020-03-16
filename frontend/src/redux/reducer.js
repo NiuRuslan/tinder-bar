@@ -1,9 +1,9 @@
-import {
-  LOGIN, PROFILE_INIT, LOGOUT, LOADER,
-} from './action-types';
+import { LOGIN, PROFILE_INIT } from "./action-types";
 
 const init = {
-  id: '', nickname: '', profileId: '', isLoader: false,
+  id: "",
+  nickname: "",
+  profileId: ""
 };
 
 export default (state = init, action) => {
@@ -13,26 +13,14 @@ export default (state = init, action) => {
         ...state,
         id: action.id,
         nickname: action.nickname,
-        profileId: action.profileId,
+        profileId: action.profileId
       };
     case PROFILE_INIT:
       return {
         ...state,
-        profileId: action.profileId,
+        profileId: action.profileId
       };
-    case LOADER:
-      return {
-        ...state,
-        isLoader: !state.isLoader,
-      };
-    case LOGOUT:
-      return {
-        ...state,
-        id: '',
-        nickname: '',
-        profileId: '',
-        isLoader: false,
-      };
+
     default:
       return state;
   }

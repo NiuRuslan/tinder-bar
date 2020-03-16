@@ -8,7 +8,6 @@ import Slider from "../slider/Slider";
 import Slider2 from "../slider/Slider2";
 import "./Regist.css";
 
-
 function Regist(props) {
   const [cookies, setCookie] = useCookies(["userName", "userNickname"]);
   const [slider, setSlider] = useState();
@@ -44,7 +43,7 @@ function Regist(props) {
         <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
           <form
             onSubmit={PutData}
-            className="register"
+            className="form"
             style={{ alignSelf: "center" }}
           >
             <h1 className="segment">New Account</h1>

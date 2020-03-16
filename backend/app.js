@@ -41,7 +41,7 @@ app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
 app.use('/list', listRouter); // add A.I.
 
-app.get('*', (res, req) => {
+app.get('*', (res) => {
   res.sendfile(path.join(publicPath, 'index.html'));
 });
 
@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

@@ -10,16 +10,11 @@ a {
   font-size: 16px;
 }
 
-/* div,
-p {
-  color: #babecc;
-  text-shadow: 1px 1px 1px #fff;
-} */
-.register {
+.form {
   opacity: 0.65;
   transition: 1s;
 }
-.register:hover {
+.form:hover {
   opacity: 1;
 }
 form {

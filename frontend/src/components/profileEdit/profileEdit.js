@@ -42,10 +42,10 @@ function ProfileEdit(props) {
         }
       });
     const uploadTask = storage
-      .ref(`images/${cookies.userName || "./imgs/info.png"}`)
+      .ref(`images/${cookies.userName || './imgs/info.png'}`)
       .put(image);
-    uploadTask.on("state_changed", undefined, undefined, () => {
-      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+    uploadTask.on('state_changed', undefined, undefined, () => {
+      uploadTask.snapshot.ref.getDownloadURL().then((url) => {
         setUrl(url);
       });
     });
@@ -122,7 +122,7 @@ function ProfileEdit(props) {
           setUrl('./loader.gif');
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
         },
         () => {
           storage
@@ -131,7 +131,7 @@ function ProfileEdit(props) {
             .getDownloadURL()
             .then((url) => {
               setUrl(url);
-              console.log(url);
+              // console.log(url);
             });
         },
       );
@@ -174,12 +174,11 @@ function ProfileEdit(props) {
             <input
               value={activity}
               onChange={handleChangeActivity}
-              className="form-control"
               type="text"
               name="activity"
               onInput="this.className"
               required
-              style={{ color: '#0f4567' }}
+              className="profileInput"
             />
           </label>
           <span
@@ -191,12 +190,11 @@ function ProfileEdit(props) {
             <input
               value={topics}
               onChange={handleChangeTopics}
-              className="form-control"
               type="text"
               name="topics"
               onInput="this.className"
               required
-              style={{ color: '#0f4567' }}
+              className="profileInput"
             />
           </label>
           <span
@@ -208,12 +206,11 @@ function ProfileEdit(props) {
             <input
               value={about}
               onChange={handleChangeAbout}
-              className="form-control"
               type="text"
               name="about"
               onInput="this.className"
               required
-              style={{ color: '#0f4567' }}
+              className="profileInput"
             />
           </label>
           <span
@@ -225,20 +222,20 @@ function ProfileEdit(props) {
             <input
               value={drinks}
               onChange={handleChangeDrinks}
-              className="form-control"
               type="text"
               name="drinks"
               onInput="this.className"
               required
-              style={{ color: '#0f4567' }}
+              className="profileInput"
             />
           </label>
           <button
             style={{
-              color: '#FFF',
-              backgroundColor: 'transparent',
-              textShadow: '1px 1px 1px rgb(124, 42, 255)',
+              margin: '0 auto',
+              width: '95%',
+              height: '100%',
             }}
+            className="chatButton"
           >
             {' '}
             Save changes

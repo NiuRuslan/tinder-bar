@@ -19,11 +19,11 @@ function Photo() {
           // progrss function ....
           // const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
           // this.setState({ progress });
-          console.log(snapshot);
+          // console.log(snapshot);
         },
         (error) => {
           // error function ....
-          console.log(error);
+          // console.log(error);
         },
         () => {
           // complete function ....

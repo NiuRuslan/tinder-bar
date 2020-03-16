@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Announcement from 'react-announcement';
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import './announcement.css';
@@ -20,27 +19,18 @@ function AnnouncementMessage(props) {
       setTimeout(setMan, 10000, null);
     }
   }, [user]);
-  const deleteAnnoun = () => {
-    setMan(null);
-  };
-  // console.log(cookies.userName)
-
-  console.log(user);
-  console.log(cookies.userName)
 
   return (
     <>
-      {/* {user ? ( */}
       {man && (
         <div className="mainContainer">
           <div className="message-container">
             <div className="nameAndDate">
-              <img className="image" src={user.url} />
+              <img className="image" src={user.url} alt={user.friend} />
               <div>{man.name}</div>
             </div>
             {/* <small>{user.date}</small> */}
           </div>
-
           <Link
             to={{
               pathname: '/chat',
@@ -49,15 +39,14 @@ function AnnouncementMessage(props) {
                 name: user.name,
                 urlFriend: user.url,
                 friend: user.friend,
-                url: ""
-              }
+                url: '',
+              },
             }}
           >
             {' '}
             Go chat
           </Link>
-
-          <img className="exitbar" src="./imgs/stop.png" />
+          <img className="exitbar" src="./imgs/stop.png" alt="close" />
         </div>
       )}
     </>

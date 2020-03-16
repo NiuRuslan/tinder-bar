@@ -34,7 +34,7 @@ function Chat(props) {
     };
   }, [setMessages]);
   const handleMsgChange = (e) => setMsg(e.target.value);
-  const handleKeyDown = (e) => {
+  const handleKeyDown = () => {
     pushRoom.push({
       friend: cookies.userName,
       url,
@@ -61,11 +61,10 @@ function Chat(props) {
             <div id="stars4" />
           </div>
         </div>
-        <div className="header">
+        <div className="headerChat">
           <Link to="/allChats" className="chatbar">
-            <img src="./imgs/back.png" />
+            <img src="./imgs/back.png" alt="back" />
           </Link>
-
           <h2 className="h2">{name}</h2>
           <div
             style={{ backgroundImage: `url(${urlFriend || './imgs/info.png'}` }}
@@ -108,10 +107,10 @@ function Chat(props) {
               Send
             </button>
           ) : (
-            <button id="send" className="chatButton">
-              Send
+              <button id="send" className="chatButton">
+                Send
             </button>
-          )}
+            )}
         </div>
       </div>
     </>
