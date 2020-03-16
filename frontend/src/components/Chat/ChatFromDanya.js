@@ -37,7 +37,6 @@ function Chat(props) {
   const handleKeyDown = () => {
     pushRoom.push({
       friend: cookies.userName,
-      url,
       name: cookies.userNickname,
       date: Date.now(),
     });
