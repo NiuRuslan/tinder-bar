@@ -3,6 +3,8 @@
 
 Web-based geolocation buddy finder application
 
+![Example](readme-assets/example.gif)
+
 ### Installing
 
 after clone create .env file in the folder backend with 
