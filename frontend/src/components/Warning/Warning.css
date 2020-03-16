@@ -1,0 +1,32 @@
+/*------------------------red background---------------------------*/
+.nc-main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.smallStartPage {
+  background: #f3ebe6;
+  animation: backgroundred 2.5s infinite;
+  border-radius: 8px;
+  height: 500px;
+  width: 350px;
+}
+
+.startPage {
+  align-self: center;
+}
+
+@keyframes backgroundred {
+  0% {
+    background: transparent;
+  }
+
+  50% {
+    background: #e01b3c;
+  }
+
+  100% {
+    background: transparent;
+  }
+}

@@ -1,23 +1,48 @@
-body, p, input, select, textarea, button {
-	font-family: 'Montserrat', sans-serif;
-	letter-spacing: -0.2px;
+body,
+p,
+input,
+select,
+textarea,
+button {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: -0.2px;
   font-size: 20px;
   text-decoration-line: none;
-  color: black;
-  margin-left: 2px;
+}
+
+.btn-primary {
+  background-color: #762BFF ;
+}
+
+.btn-secondary {
+  background-color: #FFB472;
+  text-shadow: none;
+}
+
+.btn-success {
+  background-color: #e01b3c;
 }
 
 a {
   text-decoration-line: none;
 }
 
-div, p {
+/* div, p {
 	color: #BABECC;
   text-shadow: 1px 1px 1px #FFF;
 
-}
+} */
 .date {
-  color: #0f4667;
+  color: rgb(124, 42, 255);
+}
+.anketa {
+  opacity: 0.4;
+  transition: 1s;
+  padding-top: 5%;
+  color: white;
+}
+.anketa:hover {
+  opacity: 1;
 }
 
 form {
@@ -27,98 +52,98 @@ form {
   text-align: center;
   position: relative;
   z-index: 100;
-	padding: 16px;
-	width: 320px;
-	margin: 0 auto;
+  padding: 16px;
+  width: 320px;
+  margin: 0 auto;
 }
 
 .segment {
-	padding: 32px 0;
-	text-align: center;
-}
-
-button, input {
-	border: 0;
-	outline: 0;
-	font-size: 16px;
-  border-radius: 8px;
-	padding: 16px;
-	background-color: #EBECF0;
-	text-shadow: 1px 1px 0 #FFF; 
-}
-
-label {
-	display: block;
-	margin-bottom: 24px;
-	width: 100%;
-}
-
-input {
-	margin-right: 8px;
-	box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
-	width: 100%;
-	box-sizing: border-box;
-	transition: all 0.2s ease-in-out;
-	appearance: none;
-	-webkit-appearance: none;
-}
-
-input:focus {
-	box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  padding: 32px 0;
+  text-align: center;
 }
 
 button {
-	color: #FFF;
-	font-weight: bold;
-	box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
-	transition: all 0.2s ease-in-out;
-	cursor: pointer;
-	font-weight: 600;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+input {
+  text-align: center;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  width: 100%;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+  -webkit-appearance: none;
+}
+
+input:focus {
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
+}
+
+button {
+  color: #fff;
+  font-weight: bold;
+  /* box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc; */
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 button:hover {
-	box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
 }
 
 button:active {
-	box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
 }
 
 button .icon {
-	margin-right: 8px;
+  margin-right: 8px;
 }
 
 button.unit {
-	border-radius: 8px;
-	line-height: 0;
-	width: 48px;
-	height: 48px;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin: 0 8px;
-	font-size: 19.2px;
+  border-radius: 8px;
+  line-height: 0;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 8px;
+  font-size: 19.2px;
 }
 
 button.unit .icon {
-	margin-right: 0;
+  margin-right: 0;
 }
 
 button.red {
-	display: block;
-	width: 100%;
-	color: #AE1100;
+  display: block;
+  width: 100%;
+  color: #ae1100;
 }
 
 .input-group {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .input-group label {
-	margin: 0;
-	flex: 1;
+  margin: 0;
+  flex: 1;
 }
 /* --------------------------- Stepper--------------------*/
 
@@ -132,13 +157,7 @@ button.red {
 }
 
 /* Style the input fields */
-input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
-}
+
 
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
@@ -169,186 +188,170 @@ input.invalid {
 
 /* Mark the steps that are finished and valid: */
 .step.finish {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 /*------------------------------------------slider---------------------*/
 .slideshow {
-
   margin-top: 0;
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .slideshow-image {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	background: no-repeat 50% 50%;
-	background-size: cover;
-	animation-name: kenburns;
-	animation-timing-function: linear;
-	animation-iteration-count: infinite;
-	animation-duration: 16s;
-	opacity: 1;
-	transform: scale(1.2);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: no-repeat 50% 50%;
+  background-size: cover;
+  animation-name: kenburns;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 16s;
+  opacity: 1;
+  transform: scale(1.2);
 }
 
 .slideshow-image:nth-child(1) {
-	animation-name: kenburns-1;
-	z-index: 3;
+  animation-name: kenburns-1;
+  z-index: 3;
 }
 
 .slideshow-image:nth-child(2) {
-	animation-name: kenburns-2;
-	z-index: 2;
+  animation-name: kenburns-2;
+  z-index: 2;
 }
 
 .slideshow-image:nth-child(3) {
-	animation-name: kenburns-3;
-	z-index: 1;
+  animation-name: kenburns-3;
+  z-index: 1;
 }
 
 .slideshow-image:nth-child(4) {
-	animation-name: kenburns-4;
-	z-index: 0;
+  animation-name: kenburns-4;
+  z-index: 0;
 }
 
 @keyframes kenburns-1 {
-	0% {
-		opacity: 1;
-		transform: scale(1.2);
-	}
+  0% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 
-	1.5625% {
-		opacity: 1;
-	}
+  1.5625% {
+    opacity: 1;
+  }
 
-	23.4375% {
-		opacity: 1;
-	}
+  23.4375% {
+    opacity: 1;
+  }
 
-	26.5625% {
-		opacity: 0;
-		transform: scale(1);
-	}
+  26.5625% {
+    opacity: 0;
+    transform: scale(1);
+  }
 
-	100% {
-		opacity: 0;
-		transform: scale(1.2);
-	}
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
 
-	98.4375% {
-		opacity: 0;
-		transform: scale(1.21176);
-	}
+  98.4375% {
+    opacity: 0;
+    transform: scale(1.21176);
+  }
 
-	100% {
-		opacity: 1;
-	}
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes kenburns-2 {
-	23.4375% {
-		opacity: 1;
-		transform: scale(1.2);
-	}
+  23.4375% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 
-	26.5625% {
-		opacity: 1;
-	}
+  26.5625% {
+    opacity: 1;
+  }
 
-	48.4375% {
-		opacity: 1;
-	}
+  48.4375% {
+    opacity: 1;
+  }
 
-	51.5625% {
-		opacity: 0;
-		transform: scale(1);
-	}
+  51.5625% {
+    opacity: 0;
+    transform: scale(1);
+  }
 
-	100% {
-		opacity: 0;
-		transform: scale(1.2);
-	}
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
 }
 
 @keyframes kenburns-3 {
-	48.4375% {
-		opacity: 1;
-		transform: scale(1.2);
-	}
+  48.4375% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 
-	51.5625% {
-		opacity: 1;
-	}
+  51.5625% {
+    opacity: 1;
+  }
 
-	73.4375% {
-		opacity: 1;
-	}
+  73.4375% {
+    opacity: 1;
+  }
 
-	76.5625% {
-		opacity: 0;
-		transform: scale(1);
-	}
+  76.5625% {
+    opacity: 0;
+    transform: scale(1);
+  }
 
-	100% {
-		opacity: 0;
-		transform: scale(1.2);
-	}
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
 }
 
 @keyframes kenburns-4 {
-	73.4375% {
-		opacity: 1;
-		transform: scale(1.2);
-	}
+  73.4375% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 
-	76.5625% {
-		opacity: 1;
-	}
+  76.5625% {
+    opacity: 1;
+  }
 
-	98.4375% {
-		opacity: 1;
-	}
+  98.4375% {
+    opacity: 1;
+  }
 
-	100% {
-		opacity: 0;
-		transform: scale(1);
-	}
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
 }
 
-/* h1 {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate3d(-50%, -50%, 0);
-	z-index: 99;
-	text-align: center;
-	font-family: Raleway, sans-serif;
-	font-weight: 300;
-	text-transform: uppercase;
-	background-color: rgba(255, 255, 255, 0.75);
-	box-shadow: 0 1em 2em -1em rgba(0, 0, 0, 0.5);
-	padding: 1em 2em;
-	line-height: 1.5;
+.avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
 }
 
-h1 small {
-	display: block;
-	text-transform: lowercase;
-	font-size: .7em;
+.cursor {
+  cursor: help;
+  margin: auto;
 }
 
-h1 small:first-child {
-	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-	padding-bottom: .5em;
+#file-input {
+  display: none;
 }
-
-h1 small:last-child {
-	border-top: 1px solid rgba(0, 0, 0, 0.25);
-	padding-top: .5em;
-}
- */
-

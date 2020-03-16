@@ -3,7 +3,7 @@ const Person = require('../models/modelPerson'); // A.I. подключил мо
 const Profile = require('../models/modelProfile');
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   res.send('respond with a resource');
 });
 
@@ -14,7 +14,7 @@ router.post('/login', async (req, res) => {
   } = req.body;
   const user = await Person.findOne({ email, password });
   if (user) {
-    const profileId = (await Person.findOne({ email, password }).populate('profileId')).profileId
+    const { profileId } = await Person.findOne({ email, password }).populate('profileId');
     return res.send({
       success: true,
       nickname: user.nickname,
@@ -103,27 +103,29 @@ router.patch('/profile', async (req, res) => {
     topics,
     about,
     drinks,
+    avatar,
     id,
   } = req.body;
-const response = await Profile.updateOne({person:id}, {activity,topics,about,drinks});
-console.log(response)
-if(response){
-  res.send({sucsses:true})
-} else {
-  res.send({success:false, err:'Повторите попытку'})
-}
+  const response = await Profile.updateOne({ person: id }, {
+    activity, topics, about, drinks, avatar
+  });
+  if (response) {
+    res.send({ sucsses: true });
+  } else {
+    res.send({ success: false, err: 'Повторите попытку' });
+  }
 });
 
 router.post('/profileEdit', async (req, res) => {
   const {
     id,
   } = req.body;
-const response = await Profile.findOne({person:id});
-if(response){
-  res.send({sucsses:true, profileId:response })
-} else {
-  res.send({success:false, err:'УУУпсб что-то пошло не так'})
-}
+  const response = await Profile.findOne({ person: id });
+  if (response) {
+    res.send({ success: true, profileId: response });
+  } else {
+    res.send({ success: false, err: 'УУУпс, что-то пошло не так' });
+  }
 });
 
 module.exports = router;

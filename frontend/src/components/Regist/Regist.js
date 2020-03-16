@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { Icon } from "semantic-ui-react";
+import { useCookies } from "react-cookie";
+import { requestFetchRegist } from "../../redux/action";
 import Slider from "../slider/Slider";
 import Slider2 from "../slider/Slider2";
 import "./Regist.css";
-import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import { requestFetchRegist } from "../../redux/action";
+
 
 function Regist(props) {
-  const [cookies, setCookie] = useCookies(["userName"]);
+  const [cookies, setCookie] = useCookies(["userName", "userNickname"]);
   const [slider, setSlider] = useState();
   useEffect(() => {
     const slider = Math.floor(Math.random() * 10);
@@ -27,6 +29,7 @@ function Regist(props) {
   }
   useEffect(() => {
     if (user.id) {
+      setCookie("userNickname", user.nickname);
       setCookie("userName", user.id);
     }
   }, [user.id, setCookie]);
@@ -36,13 +39,17 @@ function Regist(props) {
       {" "}
       {slider > 5 ? <Slider /> : <Slider2 />}
       {cookies.userName ? (
-        <Redirect to="/profile" />
+        <Redirect to="/profileCreator" />
       ) : (
-        <div>
-          <form onSubmit={PutData} className="register">
-            <h1 className="segment">Create Account</h1>
+        <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
+          <form
+            onSubmit={PutData}
+            className="register"
+            style={{ alignSelf: "center" }}
+          >
+            <h1 className="segment">New Account</h1>
             <label>
-              <input name="nick" type="text" placeholder="NickName" required />
+              <input name="nick" type="text" placeholder="Nickname" required />
             </label>
             <label>
               <input
@@ -65,11 +72,11 @@ function Regist(props) {
               type="submit"
               style={{
                 color: "#FFF",
-                backgroundColor: "#0f4667",
-                textShadow: "1px 1px 1px #0f4667"
+                backgroundColor: "rgb(124, 42, 255)",
+                textShadow: "1px 1px 1px rgb(124, 42, 255)"
               }}
             >
-              Create
+              Create <Icon name="add user" />
             </button>
             <div style={{ color: "red", textAlign: "center" }}>{err.title}</div>
             <br />
@@ -77,12 +84,12 @@ function Regist(props) {
               <button
                 className="green"
                 style={{
-                  color: "#0f4667",
+                  color: "rgb(124, 42, 255)",
                   backgroundColor: "#FFF",
                   textShadow: "none"
                 }}
               >
-                LogIn
+                Login <Icon name="sign-in" />
               </button>
             </Link>
           </form>

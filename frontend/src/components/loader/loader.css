@@ -1,0 +1,83 @@
+.social a img {
+  height: 1.5em;
+  color: "transparent";
+}
+
+.contentLoader {
+  text-align: center;
+  width: 100%;
+}
+
+svg {
+  max-width: 500px;
+  margin-top: 50px;
+}
+
+#background {
+  animation: turn 8s forwards infinite;
+  transform-origin: center;
+}
+
+#left {
+  animation: turn 2s linear alternate infinite;
+  transform-origin: center;
+}
+#right {
+  animation: turn_l 2s linear alternate infinite;
+  transform-origin: center;
+}
+
+#right_foam {
+  animation: foam_l 2s ease-in-out alternate infinite;
+  transform-origin: bottom;
+}
+#left_foam {
+  animation: foam 2s ease-in-out alternate infinite;
+  transform-origin: bottom;
+}
+
+.window {
+  animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  100% {
+    fill: transparent;
+  }
+}
+
+@keyframes turn {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(20deg);
+  }
+}
+
+@keyframes turn_l {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-20deg);
+  }
+}
+
+@keyframes foam_l {
+  0% {
+    transform: skewX(0);
+  }
+  100% {
+    transform: skewX(15deg);
+  }
+}
+
+@keyframes foam {
+  0% {
+    transform: skewX(0);
+  }
+  100% {
+    transform: skewX(-15deg);
+  }
+}

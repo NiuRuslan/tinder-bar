@@ -1,0 +1,19 @@
+nav {
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+.navlist {
+  display: flex;
+  justify-content: space-around;
+}
+.listLi {
+  list-style: none;
+  transition: 1s;
+  margin-left: 0%;
+}
+
+.listLi:hover {
+  transform: scale(1.3);
+}

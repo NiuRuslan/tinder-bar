@@ -1,0 +1,229 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+#plate {
+  position: relative;
+  margin: 0 auto;
+  height: 250px;
+  width: 250px;
+  border-bottom: solid 5px #b4b4b4;
+  border-radius: 0 0 10px 10px / 5px;
+}
+#plate:after {
+  position: absolute;
+  bottom: -10px;
+  content: " ";
+  margin: 0 25px;
+  width: 200px;
+  height: 5px;
+  background-color: #ddd;
+  border-radius: 0 0 5px 5px;
+}
+
+#bottle {
+  position: absolute;
+  width: 50px;
+  bottom: 0;
+  left: 100px;
+  z-index: 10;
+}
+#bottle .cork {
+  position: relative;
+  margin: 0 auto;
+  background-color: #8e1b1c;
+  width: 20px;
+  height: 40px;
+  border-radius: 2px 2px 0 0;
+  border-bottom: solid 3px #fbc85f;
+}
+#bottle .cork:before {
+  position: absolute;
+  top: 5px;
+  left: -2px;
+  display: block;
+  content: " ";
+  background-color: #8e1b10;
+  border-top: solid 1px #9a2a1f;
+  border-bottom: solid 1px #9a2a1f;
+
+  width: 24px;
+  height: 10px;
+  border-radius: 2px;
+}
+#bottle .neck {
+  margin: 0 auto;
+  background-color: rgba(41, 105, 70, 0.9);
+  width: 20px;
+  height: 10px;
+}
+#bottle .body {
+  position: relative;
+  margin: 0 auto;
+  padding-top: 30px;
+  background-color: rgba(41, 105, 70, 0.9);
+  width: 50px;
+  height: 110px;
+  border-radius: 20px 20px 5px 5px;
+}
+/*
+    #bottle .body:before {
+        position: absolute;
+        display: block;
+        content: " ";
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 0px 0px 5px 5px; 
+    }
+*/
+#bottle .label {
+  position: relative;
+  background-color: #f2eab9;
+  height: 30px;
+  border: solid 2px #cfc89b;
+  z-index: 25;
+  animation: spinning-label 3s linear infinite;
+}
+#bottle .label-shadow {
+  position: absolute;
+  height: 34px;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 30px;
+  z-index: 20;
+  animation: spinning-shadow 3s linear infinite;
+}
+
+@keyframes spinning-label {
+  0% {
+    margin-left: 0%;
+    border-left-width: 0px;
+    margin-right: 100%;
+    border-right-width: 2px;
+  }
+  49% {
+    border-left-width: 0px;
+    border-right-width: 2px;
+  }
+  50% {
+    margin-left: 0%;
+    border-left-width: 2px;
+    margin-right: 0%;
+    border-right-width: 0px;
+  }
+  98% {
+    border-left-width: 2px;
+  }
+  99% {
+    margin-left: 100%;
+    border-left-width: 0px;
+    margin-right: 0%;
+    border-right-width: 0px;
+  }
+  100% {
+    margin-left: 0%;
+    border-left-width: 0px;
+    margin-right: 100%;
+    border-right-width: 0px;
+  }
+}
+
+@keyframes spinning-shadow {
+  0% {
+    left: 0;
+    width: 50px;
+    margin-left: 0px;
+  }
+  50% {
+    left: 0;
+    width: 0px;
+    margin-left: 0px;
+  }
+  51% {
+    margin-left: 50px;
+  }
+  100% {
+    width: 50px;
+    margin-left: 0;
+  }
+}
+
+#glass {
+  position: absolute;
+  width: 40px;
+  bottom: 0;
+  left: 100px;
+
+  animation: spinning-glass 3s ease-in-out infinite;
+}
+@keyframes spinning-glass {
+  0% {
+    left: 25px;
+    z-index: 20;
+  }
+  50% {
+    left: 185px;
+    z-index: 20;
+  }
+  51% {
+    z-index: 0;
+  }
+  100% {
+    left: 25px;
+    z-index: 0;
+  }
+}
+#glass .bowl {
+  background-color: rgba(190, 190, 190, 0.5);
+  padding-top: 10px;
+  width: 40px;
+  height: 30px;
+  border-radius: 5px 5px 20px 20px / 20px;
+}
+
+#glass .bowl .wine {
+  background-color: #8e1b1c;
+  margin: 0 auto;
+  width: 30px;
+  height: 25px;
+  border-radius: 4px 4px 20px 20px / 20px;
+}
+#glass .stem {
+  margin: 0 auto;
+  background-color: rgba(190, 190, 190, 0.5);
+  width: 5px;
+  height: 30px;
+}
+#glass .foot {
+  background-color: rgba(190, 190, 190, 0.5);
+  width: 40px;
+  height: 5px;
+  border-radius: 20px 20px 0 0 / 5px;
+}
+
+#cork {
+  position: absolute;
+  height: 25px;
+  width: 15px;
+  bottom: 0;
+  background-color: #f2eab9;
+  border-top: solid 2px #8e1b1c;
+
+  animation: spinning-cork 3s ease-in-out infinite;
+}
+@keyframes spinning-cork {
+  0% {
+    left: 150px;
+    z-index: 0;
+  }
+  50% {
+    left: 85px;
+    z-index: 0;
+  }
+  51% {
+    z-index: 20;
+  }
+  100% {
+    left: 150px;
+    z-index: 20;
+  }
+}
