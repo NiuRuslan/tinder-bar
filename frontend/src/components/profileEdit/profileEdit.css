@@ -64,3 +64,6 @@ input[type="file"] {
 .exit:hover {
   transform: scale(1.3);
 }
+.profileInput {
+  color: rgb(124, 42, 255);
+}

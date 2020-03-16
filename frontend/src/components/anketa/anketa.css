@@ -1,49 +1,8 @@
-body,
-p,
-input,
-select,
-textarea,
-button {
-  font-family: "Montserrat", sans-serif;
-  letter-spacing: -0.2px;
-  font-size: 20px;
-  text-decoration-line: none;
-}
-
-.btn-primary {
-  background-color: #762BFF ;
-}
-
-.btn-secondary {
-  background-color: #FFB472;
-  text-shadow: none;
-}
-
-.btn-success {
-  background-color: #e01b3c;
-}
-
-a {
-  text-decoration-line: none;
-}
-
 /* div, p {
 	color: #BABECC;
   text-shadow: 1px 1px 1px #FFF;
 
 } */
-.date {
-  color: rgb(124, 42, 255);
-}
-.anketa {
-  opacity: 0.4;
-  transition: 1s;
-  padding-top: 5%;
-  color: white;
-}
-.anketa:hover {
-  opacity: 1;
-}
 
 form {
   border-radius: 2%;
@@ -57,11 +16,6 @@ form {
   margin: 0 auto;
 }
 
-.segment {
-  padding: 32px 0;
-  text-align: center;
-}
-
 button {
   border: 0;
   outline: 0;
@@ -69,127 +23,8 @@ button {
   text-align: center;
 }
 
-label {
-  display: block;
-  margin-bottom: 24px;
-  width: 100%;
-}
-
-input {
-  text-align: center;
-  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
-  width: 100%;
-  font-size: 1.2rem;
-  box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
-  appearance: none;
-  padding: 10px;
-  border: 1px solid #aaaaaa;
-  -webkit-appearance: none;
-}
-
-input:focus {
-  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
-}
-
-button {
-  color: #fff;
-  font-weight: bold;
-  /* box-shadow: -5px -5px 20px #fff, 5px 5px 20px #babecc; */
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-button:hover {
-  box-shadow: -2px -2px 5px #fff, 2px 2px 5px #babecc;
-}
-
-button:active {
-  box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #fff;
-}
-
-button .icon {
-  margin-right: 8px;
-}
-
-button.unit {
-  border-radius: 8px;
-  line-height: 0;
-  width: 48px;
-  height: 48px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 8px;
-  font-size: 19.2px;
-}
-
-button.unit .icon {
-  margin-right: 0;
-}
-
-button.red {
-  display: block;
-  width: 100%;
-  color: #ae1100;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.input-group label {
-  margin: 0;
-  flex: 1;
-}
 /* --------------------------- Stepper--------------------*/
 
-/* Style the form */
-#regForm {
-  background-color: #ffffff;
-  margin: 100px auto;
-  padding: 40px;
-  width: 70%;
-  min-width: 300px;
-}
-
-/* Style the input fields */
-
-
-/* Mark input boxes that gets an error on validation: */
-input.invalid {
-  background-color: #ffdddd;
-}
-
-/* Hide all steps by default: */
-.tab {
-  display: none;
-}
-
-/* Make circles that indicate the steps of the form: */
-.step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
-}
-
-/* Mark the active step: */
-.step.active {
-  opacity: 1;
-}
-
-/* Mark the steps that are finished and valid: */
-.step.finish {
-  background-color: #4caf50;
-}
 /*------------------------------------------slider---------------------*/
 .slideshow {
   margin-top: 0;

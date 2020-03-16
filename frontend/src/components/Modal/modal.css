@@ -10,9 +10,13 @@
 .mini {
   margin: auto;
   width: 150px;
-  height: 150px; 
+  height: 150px;
+
   border-radius: 50%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+.avatar {
+  border: 1px solid rgb(124, 42, 255);
 }

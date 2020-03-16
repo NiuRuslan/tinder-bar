@@ -1,52 +1,54 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
-import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
-import { database } from "../../firebase";
-import Message from "./Message";
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
+import { database } from '../../firebase';
+import Message from './Message';
 
-import "./chatForm.css";
+import './chatForm.css';
 
 function Chat(props) {
-  const [cookies] = useCookies(["userName", "userNickname"]);
-  const [msg, setMsg] = useState("");
+  const [cookies] = useCookies(['userName', 'userNickname']);
+  const [msg, setMsg] = useState('');
   const [messages, setMessages] = useState({});
-  const { chats, url, urlFriend, name, friend } = props.location.state;
+  const {
+    chats, url, urlFriend, name, friend,
+  } = props.location.state;
   const chatRoom = database.ref().child(`${chats}`);
   const pushRoom = database.ref().child(`${friend}`);
 
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+    messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
   };
   useEffect(scrollToBottom, [messages]);
   useEffect(() => {
-    const handleNewMessages = snap => {
+    const handleNewMessages = (snap) => {
       if (snap.val()) {
         setMessages(snap.val());
       }
     };
-    chatRoom.on("value", handleNewMessages);
+    chatRoom.on('value', handleNewMessages);
     return () => {
-      chatRoom.off("value", handleNewMessages);
+      chatRoom.off('value', handleNewMessages);
     };
   }, [setMessages]);
-  const handleMsgChange = e => setMsg(e.target.value);
-  const handleKeyDown = e => {
+  const handleMsgChange = (e) => setMsg(e.target.value);
+  const handleKeyDown = () => {
     pushRoom.push({
       friend: cookies.userName,
       url,
       name: cookies.userNickname,
-      date: Date.now()
+      date: Date.now(),
     });
     chatRoom.push({
       nickname: cookies.userNickname,
       msg,
       dateTime: new Date().toLocaleTimeString(),
       dateDay: new Date().toLocaleDateString(),
-      date: Date.now()
+      date: Date.now(),
     });
-    setMsg("");
+    setMsg('');
   };
   return (
     <>
@@ -59,21 +61,20 @@ function Chat(props) {
             <div id="stars4" />
           </div>
         </div>
-        <div className="header">
+        <div className="headerChat">
           <Link to="/allChats" className="chatbar">
-            <img src="./imgs/back.png" />
+            <img src="./imgs/back.png" alt="back" />
           </Link>
-
           <h2 className="h2">{name}</h2>
           <div
-            style={{ backgroundImage: `url(${urlFriend || "./imgs/info.png"}` }}
+            style={{ backgroundImage: `url(${urlFriend || './imgs/info.png'}` }}
             className="img"
-          ></div>
+          />
         </div>
         <div className="window">
           <div className="chats">
             <Message />
-            {Object.keys(messages).map(message => (
+            {Object.keys(messages).map((message) => (
               <>
                 <Message
                   key={messages[message].dateTime}
@@ -88,8 +89,8 @@ function Chat(props) {
           <div
             className="to-bottom"
             ref={messagesEndRef}
-            style={{ marginBottom: "50px" }}
-          ></div>
+            style={{ marginBottom: '50px' }}
+          />
         </div>
 
         <div className="sendButton">
@@ -101,15 +102,15 @@ function Chat(props) {
             onChange={handleMsgChange}
             value={msg}
           />
-          {msg !== "" ? (
+          {msg !== '' ? (
             <button id="send" onClick={handleKeyDown} className="chatButton">
               Send
             </button>
           ) : (
-            <button id="send" className="chatButton">
-              Send
+              <button id="send" className="chatButton">
+                Send
             </button>
-          )}
+            )}
         </div>
       </div>
     </>
