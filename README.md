@@ -42,7 +42,7 @@ Server will be available on http://localhost:4000/ by default
 
 * Registration and login
 * User profile creation and editing
-* Geolocation detection and search users within a selected radius
+* Geolocation detection and search users within a selected radius with display on the map
 * Сhat between users with notifications on Home page
 
 ### Team
@@ -54,7 +54,23 @@ Server will be available on http://localhost:4000/ by default
 
 [Our Presentation](https://docs.google.com/presentation/d/e/2PACX-1vRPHVy0f6A0jrzonY7Xnq7z-uUChlAuCofMcldwGUzqLZ1sTEsqsgugWMVPWCaRBzRBLqRO81iLh157/pub?start=false&loop=false&delayms=5000)
 
+### Next steps
+* transfer photos to chat rooms
+* adding redux for transferring information between components (for chat)
+* user database transfer to firebase from mongodb
 
->
+### По-русски
 
 Веб приложение для поиска собеседника по интересам и геолокации.
+
+### Функциональность
+
+* Регистрация и вход в систему 
+* Создание и редактирование профилей пользователей
+* Обнаружение текущей геолокации и поиск пользователей в пределах выбранного радиуса с отображением на карте
+* Чат между пользователями с уведомлениями на главной странице
+
+### В планах
+* отображение фотографий в чате
+* внедрение REDUX для передачи информации между компонентами, в частности чата
+* перенос базы данных пользователей на firebase с mongodb
