@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useCookies } from "react-cookie";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import Navbar from "../navbar/Navbar";
-import { profileInit } from "../../redux/action";
-import { storage } from "../../firebase";
-import "../snow/snow.css";
-import "./profileEdit.css";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Navbar from '../navbar/Navbar';
+import { profileInit } from '../../redux/action';
+import { storage } from '../../firebase';
+import '../snow/snow.css';
+import './profileEdit.css';
 
 function ProfileEdit(props) {
   const [cookies, setCookies, removeCookies] = useCookies([
-    "userName",
-    "userNickname"
+    'userName',
+    'userNickname',
   ]);
-  const [activity, setActivity] = useState("");
-  const [drinks, setDrinks] = useState("");
-  const [topics, setTopics] = useState("");
-  const [about, setAbout] = useState("");
-  const [url, setUrl] = useState("./imgs/userphoto.svg");
-  const [save, setSave] = useState("");
+  const [activity, setActivity] = useState('');
+  const [drinks, setDrinks] = useState('');
+  const [topics, setTopics] = useState('');
+  const [about, setAbout] = useState('');
+  const [url, setUrl] = useState('./imgs/userphoto.svg');
+  const [save, setSave] = useState('');
   const id = cookies.userName;
   const { profileInit, user } = props;
   const [image, setImage] = useState(null);
@@ -27,41 +27,41 @@ function ProfileEdit(props) {
   function patchData(event) {
     event.preventDefault();
     axios
-      .patch("/users/profile", {
+      .patch('/users/profile', {
         activity,
         drinks,
         topics,
         about,
-        id
+        id,
       })
       .then(({ data }) => {
         if (data.sucsses) {
-          setSave("Changes were saved");
+          setSave('Changes were saved');
         } else {
           setSave(data.err);
         }
       });
     const uploadTask = storage
-      .ref(`images/${cookies.userName || "./imgs/info.png"}`)
+      .ref(`images/${cookies.userName || './imgs/info.png'}`)
       .put(image);
-    uploadTask.on("state_changed", undefined, undefined, () => {
-      uploadTask.snapshot.ref.getDownloadURL().then(url => {
+    uploadTask.on('state_changed', undefined, undefined, () => {
+      uploadTask.snapshot.ref.getDownloadURL().then((url) => {
         setUrl(url);
       });
     });
     if (setUrl !== null || setUrl == null) {
       axios
-        .patch("/users/profile", {
+        .patch('/users/profile', {
           activity,
           drinks,
           topics,
           about,
           id,
-          avatar: url
+          avatar: url,
         })
         .then(({ data }) => {
           if (data.sucsses) {
-            setSave("Сохранено");
+            setSave('Сохранено');
           } else {
             setSave(data.err);
           }
@@ -87,20 +87,20 @@ function ProfileEdit(props) {
   }
   function LogOut() {
     user.id = null;
-    removeCookies("userName");
-    removeCookies("userNickname");
+    removeCookies('userName');
+    removeCookies('userNickname');
   }
 
   useEffect(() => {
     storage
       .ref(`images/${cookies.userName}`)
       .getDownloadURL()
-      .then(url => {
+      .then((url) => {
         setUrl(url);
       });
     axios
-      .post("/users/profileEdit", {
-        id
+      .post('/users/profileEdit', {
+        id,
       })
       .then(({ data }) => {
         setActivity(data.profileId.activity);
@@ -117,23 +117,23 @@ function ProfileEdit(props) {
       setImage(image);
       const uploadTask = storage.ref(`images/${cookies.userName}`).put(image);
       uploadTask.on(
-        "state_changed",
-        snapshot => {
-          setUrl("./loader.gif");
+        'state_changed',
+        (snapshot) => {
+          setUrl('./loader.gif');
         },
-        error => {
-          console.log(error);
+        (error) => {
+          // console.log(error);
         },
         () => {
           storage
-            .ref("images")
+            .ref('images')
             .child(cookies.userName)
             .getDownloadURL()
-            .then(url => {
+            .then((url) => {
               setUrl(url);
-              console.log(url);
+              // console.log(url);
             });
-        }
+        },
       );
     }
   }
@@ -150,7 +150,7 @@ function ProfileEdit(props) {
       </div>
       <Navbar />
       <div className="profile-container">
-        <div style={{ alignSelf: "center" }}>
+        <div style={{ alignSelf: 'center' }}>
           <label htmlFor="file-input">
             <div
               className="avatar"
@@ -162,10 +162,10 @@ function ProfileEdit(props) {
         <form onSubmit={patchData} className="edit">
           <span
             style={{
-              textShadow: "none",
-              marginBottom: "8px",
-              marginTop: "0px",
-              color: "#fff"
+              textShadow: 'none',
+              marginBottom: '8px',
+              marginTop: '0px',
+              color: '#fff',
             }}
           >
             Activity:
@@ -174,7 +174,6 @@ function ProfileEdit(props) {
             <input
               value={activity}
               onChange={handleChangeActivity}
-              className="form-control"
               type="text"
               name="activity"
               onInput="this.className"
@@ -183,7 +182,7 @@ function ProfileEdit(props) {
             />
           </label>
           <span
-            style={{ textShadow: "none", marginBottom: "8px", color: "#fff" }}
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
           >
             Topics:
           </span>
@@ -191,17 +190,15 @@ function ProfileEdit(props) {
             <input
               value={topics}
               onChange={handleChangeTopics}
-              className="form-control"
               type="text"
               name="topics"
               onInput="this.className"
               required
               className="profileInput"
             />
-            />
           </label>
           <span
-            style={{ textShadow: "none", marginBottom: "8px", color: "#fff" }}
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
           >
             About:
           </span>
@@ -209,7 +206,6 @@ function ProfileEdit(props) {
             <input
               value={about}
               onChange={handleChangeAbout}
-              className="form-control"
               type="text"
               name="about"
               onInput="this.className"
@@ -218,7 +214,7 @@ function ProfileEdit(props) {
             />
           </label>
           <span
-            style={{ textShadow: "none", marginBottom: "8px", color: "#fff" }}
+            style={{ textShadow: 'none', marginBottom: '8px', color: '#fff' }}
           >
             Drinks:
           </span>
@@ -226,7 +222,6 @@ function ProfileEdit(props) {
             <input
               value={drinks}
               onChange={handleChangeDrinks}
-              className="form-control"
               type="text"
               name="drinks"
               onInput="this.className"
@@ -236,19 +231,23 @@ function ProfileEdit(props) {
           </label>
           <button
             style={{
-              margin: "0 auto",
-              width: "95%",
-              height: "100%"
+              margin: '0 auto',
+              width: '95%',
+              height: '100%',
             }}
             className="chatButton"
           >
-            {" "}
-            Save changes{" "}
+            {' '}
+            Save changes
+            {' '}
           </button>
-          <div style={{ marginTop: "15px", color: "#fff" }}> {save}</div>
+          <div style={{ marginTop: '15px', color: '#fff' }}>
+            {' '}
+            {save}
+          </div>
         </form>
-        <div className="exit" style={{ margin: "0" }}>
-          <Link to="/login" onClick={LogOut} style={{ position: "relative" }}>
+        <div className="exit" style={{ margin: '0' }}>
+          <Link to="/login" onClick={LogOut} style={{ position: 'relative' }}>
             <img src="./navbar/exit-door.png" alt="Logout" title="Logout" />
           </Link>
         </div>
@@ -257,13 +256,13 @@ function ProfileEdit(props) {
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profileId: state.user.profileId,
   user: state.user,
-  err: state.error
+  err: state.error,
 });
-const mapDispatchToProps = dispatch => ({
-  profileInit: profileId => dispatch(profileInit(profileId))
+const mapDispatchToProps = (dispatch) => ({
+  profileInit: (profileId) => dispatch(profileInit(profileId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileEdit);

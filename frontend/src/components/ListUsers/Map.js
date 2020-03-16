@@ -14,14 +14,13 @@ import {
 import styles from "./GoogleMapStyles.json";
 
 const Map = ({
-  googleMapURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyD1nvf5ES5KOcnyTJy8JKYPnL2wzmssyDE&v=3.exp&libraries=geometry,drawing,places",
+  googleMapURL = process.env.REACT_APP_GOOGLE_MAP_URI,
   latitude,
   longitude,
   list,
   radius,
   url
 }) => {
-  console.log(url);
   const [cookies] = useCookies(["userName"]);
 
   function sendRequest(id) {

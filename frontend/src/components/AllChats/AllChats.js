@@ -1,50 +1,48 @@
-import React, { useState, useEffect } from "react";
-import { useCookies } from "react-cookie";
-import axios from "axios";
-import ButtonChat from "./ButtonChat";
-import Navbar from "../navbar/Navbar";
-import { database } from "../../firebase";
-import Loader from "../loader/Loader";
+import React, { useState, useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import ButtonChat from './ButtonChat';
+import Navbar from '../navbar/Navbar';
+import { database } from '../../firebase';
+import Loader from '../loader/Loader';
+
 function AllChats() {
-  const [cookies] = useCookies(["userName", "chacked"]);
+  const [cookies] = useCookies(['userName', 'chacked']);
   const [chats, setChat] = useState(null);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/database/${cookies.userName}`)
-
+      .get(`/database/${cookies.userName}`)
       .then(async ({ data }) => {
         await Promise.all(
-          data.chats.map(async el => {
+          data.chats.map(async (el) => {
             const snapshot = await database
               .ref(`${el.chat}`)
               .limitToLast(1)
-              .once("value");
-            snapshot.forEach(function(childSnapshot) {
+              .once('value');
+            snapshot.forEach((childSnapshot) => {
               const {
                 nickname,
                 dateDay,
                 dateTime,
                 msg,
-                date
+                date,
               } = childSnapshot.val();
               el.date = date;
               el.nickname = nickname;
               el.lastMessage = msg;
             });
-          })
+          }),
         );
-        data.chats.sort((a, b) => {
-          return b.date - a.date;
-        });
+        data.chats.sort((a, b) => b.date - a.date);
         setChat(data.chats);
       });
   }, [setChat]);
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh"
+        width: '100vw',
+        height: '100vh',
       }}
     >
       <div className="full-wh">
@@ -55,20 +53,18 @@ function AllChats() {
           <div id="stars4" />
         </div>
       </div>
-      <div style={{ width: "100%" }} className="main-cont">
+      <div style={{ width: '100%' }} className="main-cont">
         <Navbar />
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column"
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
           }}
           className="button-chat"
         >
           {chats ? (
-            chats.map((el, index) => {
-              return <ButtonChat key={el._id} chats={el} />;
-            })
+            chats.map((el, index) => <ButtonChat key={el._id} chats={el} />)
           ) : (
             <Loader />
           )}
