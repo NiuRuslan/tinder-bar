@@ -3,7 +3,7 @@
 
 Web-based geolocation buddy finder application
 
-![Example](readme-assets/example.gif)
+![Example](readme-assets/exmpl.gif)
 
 ### Installing
 
