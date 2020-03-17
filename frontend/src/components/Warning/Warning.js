@@ -1,18 +1,18 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import "./Warning.css";
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import './Warning.css';
 
 function Warning() {
-  const [cookies, setCookie] = useCookies(["userName", "chacked"]);
+  const [cookies, setCookie] = useCookies(['userName', 'checked']);
 
   function checkYes(event) {
     event.preventDefault();
-    setCookie("chacked", true);
+    setCookie('checked', true);
   }
   function checkNo(event) {
     event.preventDefault();
-    setCookie("chacked", false);
+    setCookie('checked', false);
   }
 
   return (
@@ -29,8 +29,8 @@ function Warning() {
               </div>
             </div>
             <div>
-              {cookies.chacked ? (
-                cookies.chacked === "true" ? (
+              {cookies.checked ? (
+                cookies.checked === 'true' ? (
                   cookies.userName ? (
                     <Redirect from="warning" to="/" />
                   ) : (
@@ -45,9 +45,9 @@ function Warning() {
                   <form onSubmit={checkYes}>
                     <button
                       style={{
-                        backgroundColor: "#FFF",
-                        color: "#0f4567",
-                        textShadow: "none"
+                        backgroundColor: '#FFF',
+                        color: '#0f4567',
+                        textShadow: 'none',
                       }}
                       type="submit"
                     >
@@ -58,9 +58,9 @@ function Warning() {
                     <button
                       type="submit"
                       style={{
-                        color: "#FFF",
-                        backgroundColor: "transparent",
-                        textShadow: "none"
+                        color: '#FFF',
+                        backgroundColor: 'transparent',
+                        textShadow: 'none',
                       }}
                     >
                       No
