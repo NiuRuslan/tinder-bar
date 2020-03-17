@@ -21,11 +21,11 @@ import Message from "./components/Chat/Message";
 
 function App() {
   const history = createBrowserHistory();
-  const [cookies] = useCookies(["userName", "chacked"]);
+  const [cookies] = useCookies(["userName", "checked"]);
   return (
     <>
       <Router history={history}>
-        {cookies.chacked === "true" ? (
+        {cookies.checked === "true" ? (
           cookies.userName ? null : (
             <Redirect to="/login" />
           )

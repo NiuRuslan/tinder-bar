@@ -7,7 +7,7 @@ import { database } from '../../firebase';
 import Loader from '../loader/Loader';
 
 function AllChats() {
-  const [cookies] = useCookies(['userName', 'chacked']);
+  const [cookies] = useCookies(['userName', 'checked']);
   const [chats, setChat] = useState(null);
 
   useEffect(() => {
