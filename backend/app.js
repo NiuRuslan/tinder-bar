@@ -19,7 +19,7 @@ const usersRouter = require('./routes/users');
 const listRouter = require('./routes/list'); // add A.I.
 const databaseRouter = require('./routes/database');
 
-const publicPath = path.join(__dirname, 'build');
+const publicPath = path.join(__dirname, 'frontend/build');
 
 const app = express();
 app.use(cors());
@@ -41,7 +41,7 @@ app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
 app.use('/list', listRouter); // add A.I.
 
-app.get('/', (res) => {
+app.get('*', (res) => {
   res.sendfile(path.join(publicPath, 'index.html'));
 });
 
