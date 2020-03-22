@@ -36,14 +36,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(publicPath));
 
+app.get('*', (res) => {
+  res.sendfile(path.join(publicPath, 'index.html'));
+});
+
 // app.use("/", indexRouter);
 app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
 app.use('/list', listRouter); // add A.I.
 
-app.get('*', (res) => {
-  res.sendfile(path.join(publicPath, 'index.html'));
-});
+
 
 
 // catch 404 and forward to error handler
