@@ -41,10 +41,9 @@ app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
 app.use('/list', listRouter); // add A.I.
 
-app.get('/', (res) => {
+app.get('*', (req, res) => {
   res.sendfile(path.join(publicPath, 'index.html'));
 });
-
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
